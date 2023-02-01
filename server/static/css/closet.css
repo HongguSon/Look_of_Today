@@ -6,8 +6,8 @@
 @media screen and (max-width: 768px){
   .img_container{ max-width: 760px; }
   .clothes {
-    width: 46vw;
-    height: 46vw !important;
+    width: 45vw;
+    height: 45vw !important;
   }
 }
 
