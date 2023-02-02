@@ -1,33 +1,99 @@
+@import "reset.css";
+
 :root {
-    --background: #6496FF;
-    --white: white;
-    --gray: gray;
-    --main-border: 1px solid var(--gray1);
+  --background: #6496ff;
+  --white: white;
+  --gray: gray;
+  --main-border: 1px solid var(—gray1);
 }
 
 nav {
-    background-color: var(--white);
+  background-color: var(--white);
 }
 
 footer {
-    background-color: var(--white);
+  background-color: var(--white);
 }
 
-.title{
-    color: black;
-    font-size: 2rem;
-    text-decoration: none;
+.title {
+  color: black;
+  font-size: 2rem;
+  text-decoration: none;
 }
 
-.form-control{
-    margin-right: 1rem;
+.form-control {
+  margin-right: 1rem;
 }
 
-.scb{
-    font-size: 1.2rem;
+.scb {
+  font-size: 1.2rem;
 }
 
-.small_menu:hover{
+.small_menu:hover {
   color: var(--gray) !important;
 }
+/* community css */
+#banner {
+  height: 200px;
+  text-align: center;
+}
 
+.right {
+  border-right: 1px solid black;
+  height: 100%;
+}
+
+.col-3 {
+  border-left: 5rem;
+}
+
+.con {
+  border: 2px;
+  width: 200px;
+  padding: 8px;
+  border-radius: 10px;
+}
+
+.con div span {
+  margin-left: 30px;
+}
+
+#user-img {
+  width: 100px;
+  height: 100px;
+}
+
+.menu {
+  margin-top: 10px;
+}
+
+.menu div {
+  margin-left: 10px;
+}
+
+.menu hr {
+  width: 200px;
+}
+
+.ootd {
+  padding-right: 20px;
+}
+
+.com-title {
+  font-size: 20px;
+  margin-left: 20px;
+}
+
+.content img {
+  width: 150px;
+  height: 150px;
+}
+
+.content {
+  text-align: center;
+}
+
+.content div {
+  text-align: left;
+  margin-left: 57px;
+}

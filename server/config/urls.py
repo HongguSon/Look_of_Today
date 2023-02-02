@@ -8,7 +8,7 @@ urlpatterns = [
     #path('', include("server.apps.main.urls")),
     #path('', include("server.apps.user.urls")),
     path('', include("server.apps.closet.urls")),
-    #path('', include("server.apps.community.urls")),
+    path('community/', include("server.apps.community.urls")),
 ]
 
 if settings.DEBUG:
