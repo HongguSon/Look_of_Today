@@ -13,7 +13,9 @@ image:
 {%endif%}
 <br />
 코디한 룩북:
-일단 보인다고 치고...
+{%for clothes in post.clothes.all%}
+<img src="{{clothes.img.url}}">
+{%endfor%}
 <div>{{post.author}}</div>
 
 <form action="{% url 'community:likes' post.pk %}" method='POST'>
