@@ -1,0 +1,29 @@
+{% extends 'community/base.html'%}
+{% block extrahead %}
+<title>new community</title>
+{% endblock %}
+
+
+{% block content %}
+
+<form action="{%url 'community:post_create' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    Title:
+    <input name="title" placeholder="Title" />
+    <br />
+    image:
+    <input type="file" name="main_img" />
+    <br />
+
+    코디한 룩북:
+    <select name="clothes" id="clothes">
+        <option value="" selected>-------</option>
+        {% for clothes in clothes_list %}
+        <option value="{{ clothes.id }}" name="clothes">{{ clothes.id }}</option>
+        {% endfor %}
+    </select>
+    <div>
+        <input type="submit" , value="SUBMIT" />
+    </div>
+</form>
+{% endblock %}
