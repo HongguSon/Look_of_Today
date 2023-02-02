@@ -1,4 +1,4 @@
-{% extends 'community/base.html'%}
+{% extends 'main/base.html'%}
 {% block extrahead %}
 <title>community</title>
 {% endblock %}
@@ -42,7 +42,7 @@
                 <img src="{{post.main_img.url}}">
                 {%endif%}
               </P>
-              <div>{{post.title}}</div>
+              <p><a href="{% url 'community:detail' post.pk%}">{{post.title}}</a></p>
               <div>{{post.author}}</div>
             </div>
             {%endfor%}

@@ -1,0 +1,32 @@
+{% extends 'main/base.html'%}
+{% block extrahead %}
+<title>post details</title>
+{% endblock %}
+
+
+{% block content %}
+Title: {{post.title}}
+<br />
+image:
+{%if post.main_img %}
+<img src="{{post.main_img.url}}">
+{%endif%}
+<br />
+코디한 룩북:
+일단 보인다고 치고...
+<div>{{post.author}}</div>
+
+
+<div class="button-box">
+    <button>
+        <a href="{% url 'community:update' post.pk%}" style="color:black; text-decoration:none;">수정하기</a>
+    </button>
+    <button>
+        <a href="{% url 'community:community_main' %}" style="color:black; text-decoration:none;">목록</a>
+    </button>
+    <form action="{% url 'community:delete' post.pk%}" method="post">
+        {% csrf_token %}
+        <input type="submit" , value="삭제하기" />
+    </form>
+</div>
+{% endblock %}

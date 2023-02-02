@@ -8,6 +8,14 @@ def community_main(request):
         'post_list':post_list
         }   
     return render(request,'community\community.html',context=context)
+def detail(request,pk):
+    post = Post.objects.get(id=pk)
+    print(post)
+    context={
+        "post": post,
+    }
+    return render(request,'community\detail.html',context=context)
+
 
 def post_create(request:HttpRequest,*args, **kwargs):
     clothes_list=Clothes.objects.all()
@@ -24,3 +32,12 @@ def post_create(request:HttpRequest,*args, **kwargs):
         "clothes_list": clothes_list,
     }
     return render(request, 'community\post_create.html',context=context)
+
+def update(request:HttpRequest,*args, **kwargs):
+    return render(request, 'community\post_create.html')
+
+def delete(request:HttpRequest, pk, *args, **kwargs):
+    if request.method == "POST":
+        post = Post.objects.get(id=pk)
+        post.delete()
+    return redirect("/")
