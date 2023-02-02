@@ -18,7 +18,7 @@ image:
 
 <form action="{% url 'community:likes' post.pk %}" method='POST'>
     {% csrf_token %}
-    {% if post in user.likes.all %}
+    {% if user in post.likes.all %}
     <button class="btn btn-link text-danger">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-suit-heart-fill"
             viewBox="0 0 16 16">

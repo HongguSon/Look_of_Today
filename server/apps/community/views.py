@@ -5,6 +5,7 @@ from django.http import Http404
 from django.shortcuts import render, get_object_or_404
 from django.http.request import HttpRequest
 from django.views.generic import CreateView, UpdateView
+from django.core.exceptions import PermissionDenied
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 # Create your views here.
 def community_main(request):
@@ -28,24 +29,20 @@ def delete(request:HttpRequest, pk, *args, **kwargs):
         post.delete()
     return redirect("/")
 
-    
-
-def update(request:HttpRequest,*args, **kwargs):
-    return render(request, 'community\post_create.html')
-
 @require_POST
 def likes(request, pk):
     if request.user.is_authenticated:
         article = get_object_or_404(Post, pk=pk)
-
-        if article.likes.filter(pk=request.user.pk).exists():
+        users=article.likes.all()
+        if users.filter(pk=request.user.pk).exists():
             article.likes.remove(request.user)
         else:
             article.likes.add(request.user)
         return redirect('community:community_main')
-    # return redirect('accouts:login')
+        
+        # return redirect('accouts:login')위에거 대신 이거 떠야함! 나중에 로그인 합치고!!
     return render(request, 'community\community.html')
-  
+
 class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
   model = Post
   fields = ['main_img', 'title', 'clothes']
@@ -62,3 +59,15 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
       return super(PostCreate, self).form_valid(form)
     else:
       return redirect('community:community_main')
+
+class update(LoginRequiredMixin,UpdateView):
+  model = Post
+  fields = ['main_img', 'title', 'clothes']
+  
+  template_name = 'community/update.html'
+
+  def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user == self.get_object().author:
+            return super(update, self).dispatch(request, *args, **kwargs)
+        else:
+            raise PermissionDenied

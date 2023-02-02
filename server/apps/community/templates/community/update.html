@@ -1,16 +1,15 @@
 {% extends 'main/base.html'%}
 {% block extrahead %}
-<title>new community</title>
+<title>post update</title>
 {% endblock %}
-
 
 {% block content %}
 
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <table>
-        {{form | crispy}}
         {{ form.media }}
+        {{ form.as_p }}
     </table>
     <button type="submit" class="btn btn-primary float-right">Submit</button>
 </form>
