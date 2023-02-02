@@ -15,7 +15,12 @@ def signup(request):
         email=request.POST['email'],
       )
       auth.login(request, user)
-      return redirect('/')
-    #이거 나중에 프로필 생성화면으로 가야함, + url로 처리
+      return redirect('closet:closet_main')
+    #이거 나중에 프로필 생성화면으로 가야함
+    
     return render(request, 'user/signup.html')
   return render(request, 'user/signup.html')
+
+def logout(request):
+  auth.logout(request)
+  return redirect('closet:closet_main')

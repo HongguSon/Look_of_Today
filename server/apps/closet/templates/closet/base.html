@@ -42,9 +42,18 @@
             <li class="nav-item">
               <a class="nav-link text-secondary" href="#">문의</a>
             </li>
+            {% if user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link text-secondary" href="#">로그인</a>
+              <a class="nav-link text-secondary" href="{% url 'user:logout' %}">로그아웃</a>
             </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link text-secondary" href="{% url 'user:signup' %}">회원가입</a>
+            </li>
+            {% comment %} <li class="nav-item">
+              <a class="nav-link text-secondary" href="">로그인</a>
+            </li> {% endcomment %}
+            {% endif %}
           </ul>
         </div>
       </div>
