@@ -1,0 +1,23 @@
+{% extends 'main/base.html' %}
+{% block content %}
+<div class="wrapper" style="text-align: center;">
+  <br>
+  <h1>로그인</h1>
+  <form method="POST">
+    {% csrf_token %}
+    아이디: <br>
+    <input name="username" type="text">
+    <br>
+    비밀번호: <br>   
+    <input name="password" type="password">
+    <br>
+    {% if msg %}
+    {{ msg }}
+    {% endif %}
+    <br>
+    <input type="submit" class="btn btn-primary" value="Log In">
+    <br>
+  </form>
+  <br>
+</div>
+{% endblock %}
