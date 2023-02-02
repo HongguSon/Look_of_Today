@@ -1,138 +1,54 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'community/base.html'%}
+{% block extrahead %}
+<title>community</title>
+{% endblock %}
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="{% static 'css/main4.css' %}">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <!-- CSS only -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
 
-    body {
-      font-family: 'Do Hyeon', sans-serif;
-    }
-  </style>
-  <title>Document</title>
-</head>
+{% block content %}
 
 <body>
   <div class="main">
-    <nav class="navbar navbar-expand-lg navbar-light text-white">
-      <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03"
-          aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active text-light" aria-current="page" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-light" href="#">나만의 옷장</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-light" href="#">게시판</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-light" href="#">문의</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-light" href="#">로그인</a>
-            </li>
-          </ul>
-          <div class="nav">
-            <div class="title text-light">오늘 뭐입지?</div>
-          </div>
-          <form class="d-flex">
-            <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-light" type="submit" id="sbtn">
-              <p class="scb">Search</p>
-            </button>
-          </form>
-        </div>
-      </div>
-    </nav>
-  </div>
-
-
-  <div class="title" id="banner">
-    <p>배너 칸... C O M M U N I T Y</p>
-  </div>
-  <hr>
-
-  <div class="row">
-    <div class="col-3 right" style="padding-left: 100px;">
-      <div class="con border border-gray 10px">
-        <img class="img-circle" id="user-img" src="오은영 박사님.jpg" />
-        <span>닉네임</span>
-        <div><a href="#">내가 쓴 글 보기</a><span>3개</span></div>
-        <div><a href="#">내가 쓴 댓글 보기</a><span>3개</span></div>
-        <button class="btn btn-primary">게시글 작성</button>
-      </div>
-      <div class="menu">
-        <div style="margin-left: 60px">게시판 목록</div>
-        <hr>
-        <div><a href="#">OOTD</a></div>
-        <div><a href="#">같이 공구해요~</a></div>
-        <div><a href="#">수다방</a></div>
-        <div><a href="#">동행 (오픈런 등등)</a></div>
-      </div>
+    <div class="title" id="banner">
+      <p>배너 칸... C O M M U N I T Y</p>
     </div>
-    <div class="col-9">
-      <div class="ootd">
-        <div class="com-title">OOTD</div>
-        <div class="row">
-          <div class="content col">
-            <img class="img-thumbnail" src="오은영 박사님.jpg" />
-            <div>게시글 제목..</div>
-            <div>게시글 작성자..</div>
-          </div>
-          <div class="content col">
-            <img class="img-thumbnail" src="오은영 박사님.jpg" />
-            <div>게시글 제목..</div>
-            <div>게시글 작성자..</div>
-          </div>
-          <div class="content col">
-            <img class="img-thumbnail" src="오은영 박사님.jpg" />
-            <div>게시글 제목..</div>
-            <div>게시글 작성자..</div>
-          </div>
-          <div class="content col">
-            <img class="img-thumbnail" src="오은영 박사님.jpg" />
-            <div>게시글 제목..</div>
-            <div>게시글 작성자..</div>
-          </div>
+    <hr>
+
+    <div class="row">
+      <div class="col-3 right" style="padding-left: 100px;">
+        <div class="con border border-gray 10px">
+          <img class="img-circle" id="user-img" src="오은영 박사님.jpg" />
+          <span>닉네임</span>
+          <div><a href="#">내가 쓴 글 보기</a><span>3개</span></div>
+          <div><a href="#">내가 쓴 댓글 보기</a><span>3개</span></div>
+          <a href="{% url 'community:post_create' %}"><button class="btn btn-primary">게시글 작성</button></a>
         </div>
-        <div class="row">
-          <div class="content col">
-            <img class="img-thumbnail" src="오은영 박사님.jpg" />
-            <div>게시글 제목..</div>
-            <div>게시글 작성자..</div>
-          </div>
-          <div class="content col">
-            <img class="img-thumbnail" src="오은영 박사님.jpg" />
-            <div>게시글 제목..</div>
-            <div>게시글 작성자..</div>
-          </div>
-          <div class="content col">
-            <img class="img-thumbnail" src="오은영 박사님.jpg" />
-            <div>게시글 제목..</div>
-            <div>게시글 작성자..</div>
-          </div>
-          <div class="content col">
-            <img class="img-thumbnail" src="오은영 박사님.jpg" />
-            <div>게시글 제목..</div>
-            <div>게시글 작성자..</div>
+        <div class="menu">
+          <div style="margin-left: 60px">게시판 목록</div>
+          <hr>
+          <div><a href="#">OOTD</a></div>
+          <div><a href="#">같이 공구해요~</a></div>
+          <div><a href="#">수다방</a></div>
+          <div><a href="#">동행 (오픈런 등등)</a></div>
+        </div>
+      </div>
+      <div class="col-9">
+        <div class="ootd">
+          <div class="com-title">OOTD</div>
+          <div class="row">
+            {%for post in post_list%}
+            <div class="content col">
+              <P>
+                {%if post.main_img %}
+                <img src="{{post.main_img.url}}">
+                {%endif%}
+              </P>
+              <div>{{post.title}}</div>
+              <div>{{post.author}}</div>
+            </div>
+            {%endfor%}
           </div>
         </div>
       </div>
     </div>
-  </div>
 </body>
+{% endblock %}
