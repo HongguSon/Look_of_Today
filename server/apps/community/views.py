@@ -1,5 +1,8 @@
 from django.shortcuts import render,redirect
 from server.apps.main.models import Post,Clothes
+from django.views.decorators.http import require_POST
+from django.http import Http404
+from django.shortcuts import render, get_object_or_404
 from django.http.request import HttpRequest
 # Create your views here.
 def community_main(request):
@@ -8,6 +11,7 @@ def community_main(request):
         'post_list':post_list
         }   
     return render(request,'community\community.html',context=context)
+
 def detail(request,pk):
     post = Post.objects.get(id=pk)
     print(post)
@@ -16,6 +20,11 @@ def detail(request,pk):
     }
     return render(request,'community\detail.html',context=context)
 
+def delete(request:HttpRequest, pk, *args, **kwargs):
+    if request.method == "POST":
+        post = Post.objects.get(id=pk)
+        post.delete()
+    return redirect("/")
 
 def post_create(request:HttpRequest,*args, **kwargs):
     clothes_list=Clothes.objects.all()
@@ -36,8 +45,15 @@ def post_create(request:HttpRequest,*args, **kwargs):
 def update(request:HttpRequest,*args, **kwargs):
     return render(request, 'community\post_create.html')
 
-def delete(request:HttpRequest, pk, *args, **kwargs):
-    if request.method == "POST":
-        post = Post.objects.get(id=pk)
-        post.delete()
-    return redirect("/")
+@require_POST
+def likes(request, pk):
+    if request.user.is_authenticated:
+        article = get_object_or_404(Post, pk=pk)
+
+        if article.likes.filter(pk=request.user.pk).exists():
+            article.likes.remove(request.user)
+        else:
+            article.likes.add(request.user)
+        return redirect('community:community_main')
+    # return redirect('accouts:login')
+    return render(request, 'community\community.html')
