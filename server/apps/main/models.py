@@ -32,6 +32,10 @@ class Post(models.Model):
   def __str__(self):
     return f'{self.pk}: {self.title}'
   
+  def get_absolute_url(self):
+    return f'/community/'
+  #이거 나중에 detail page로 바꿔주세요
+  
 class Comment(models.Model):
   post = models.ForeignKey(Post, on_delete=models.CASCADE)
   author = models.ForeignKey(User, on_delete=models.CASCADE)

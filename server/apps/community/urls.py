@@ -5,5 +5,5 @@ app_name = "community"
 
 urlpatterns = [
   path("", views.community_main, name="community_main"),
-  path("create",views.post_create,name="post_create")
+  path("create",views.PostCreate.as_view(),name="post_create")
 ]
