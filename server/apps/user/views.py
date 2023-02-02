@@ -24,3 +24,17 @@ def signup(request):
 def logout(request):
   auth.logout(request)
   return redirect('closet:closet_main')
+
+def log_in(request):
+  if request.method == 'POST':
+    username=request.POST['username']
+    password=request.POST['password']
+    user = authenticate(username=username, password=password)
+    if user:
+      login(request, user)
+      return redirect('main:main')
+    else:
+      context={'msg':'로그인 정보가 맞지 않습니다! 아이디 또는 비밀번호를 확인해주세요',}
+      return render(request, 'user/login.html',context=context)
+  return render(request, 'user/login.html')
+      
