@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect
-from server.apps.main.models import Post,Clothes
-from django.views.decorators.http import require_POST
-from django.http import Http404
-from django.shortcuts import render, get_object_or_404
-from django.http.request import HttpRequest
+import json
+from server.apps.main.models import Post, Clothes, Comment
 from django.views.generic import CreateView, UpdateView
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+
 # Create your views here.
 def community_main(request):
     post_list = Post.objects.all() 
@@ -64,6 +64,25 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
       return super(PostCreate, self).form_valid(form)
     else:
       return redirect('community:community_main')
+@csrf_exempt
+def comment_ajax(request, *args, **kwargs):
+    data = json.loads(request.body)
+    post = Post.objects.get(id=data["post_id"])
+    
+    comment = Comment.objects.create(
+        post = post,
+        author = request.user,
+        content = data.get('content'),)
+    comment.save()
+
+    context = {
+        'author' : str(comment.author),
+        'post_id' : post.id,
+        'content' : comment.content,
+        'comment_id' : comment.id,
+    }
+    
+    return JsonResponse(context)
 
 class update(LoginRequiredMixin,UpdateView):
   model = Post
