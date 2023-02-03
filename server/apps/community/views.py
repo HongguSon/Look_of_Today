@@ -28,7 +28,7 @@ def community_main(request):
         'post_list':post_list,
         'post_count':b
         }   
-    return render(request,'community\community.html',context=context)
+    return render(request,'community/community.html',context=context)
 
 def detail(request,pk):
     post = Post.objects.get(id=pk)
@@ -36,7 +36,7 @@ def detail(request,pk):
     context={
         "post": post,
     }
-    return render(request,'community\post_detail.html',context=context)
+    return render(request,'community/post_detail.html',context=context)
 
 def delete(request:HttpRequest, pk, *args, **kwargs):
     if request.method == "POST":
