@@ -1,6 +1,8 @@
-{% extends 'main/base.html'%}
+{% extends 'community/base.html'%}
+{% load static %}
 {% block extrahead %}
-<title>new community</title>
+    <link rel="stylesheet" href="{% static 'css/post_create.css' %}">
+    <title>new community</title>
 {% endblock %}
 
 
@@ -10,7 +12,7 @@
     {% csrf_token %}
     <table>
         {{form}}
-        {{ form.media }}
+        {{form.media }}
     </table>
     <button type="submit" class="btn btn-primary float-right">Submit</button>
 </form>
