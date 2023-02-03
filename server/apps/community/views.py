@@ -10,8 +10,13 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 # Create your views here.
 def community_main(request):
     post_list = Post.objects.all() 
+    b=0
+    for a in post_list:
+        if a.author == request.user:
+            b+=1
     context={
-        'post_list':post_list
+        'post_list':post_list,
+        'post_count':b
         }   
     return render(request,'community\community.html',context=context)
 
@@ -41,7 +46,7 @@ def likes(request, pk):
         return redirect('community:community_main')
         
         # return redirect('accouts:login')위에거 대신 이거 떠야함! 나중에 로그인 합치고!!
-    return render(request, 'community\community.html')
+    return render(request, 'community:detail.html')
 
 class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
   model = Post
