@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # from django.http import JsonResponse
 # from django.shortcuts import render
 # from server.apps.main.models import Comment
@@ -33,10 +34,16 @@
     
 #     return JsonResponse(context);
 =======
+=======
+>>>>>>> garden
 from django.shortcuts import render, redirect
-from server.apps.main.models import Post,Clothes
+import json
+from server.apps.main.models import Post, Clothes, Comment
 from django.views.generic import CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+
 # Create your views here.
 def community_main(request):
     post_list = Post.objects.all() 
@@ -44,22 +51,6 @@ def community_main(request):
         'post_list':post_list
         }   
     return render(request,'community\community.html',context=context)
-
-# def post_create(request:HttpRequest,*args, **kwargs):
-#     clothes_list=Clothes.objects.all()
-    
-#     if request.method == "POST":
-#         clothes_id = request.POST["clothes"] 
-#         Post.objects.create(
-#             title=request.POST["title"],
-#             author=request.user,
-#             clothes=Clothes.objects.get(id=clothes_id),
-#             main_img=request.FILES["main_img"],
-#     )
-#     context={
-#         "clothes_list": clothes_list,
-#     }
-#     return render(request, 'community\post_create.html',context=context)
   
 class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
   model = Post
@@ -77,4 +68,37 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
       return super(PostCreate, self).form_valid(form)
     else:
       return redirect('community:community_main')
+<<<<<<< HEAD
+>>>>>>> garden
+=======
+
+def post_create(request):
+    return render(request, 'community/post_create.html')
+
+def post_detail(request, pk, *args, **kwargs):
+    post = Post.objects.get(pk=pk)
+    context = {
+        'post' : post,
+    }
+    return render(request, 'community/post_detail.html', context=context)
+
+@csrf_exempt
+def comment_ajax(request, *args, **kwargs):
+    data = json.loads(request.body)
+    post = Post.objects.get(id=data["post_id"])
+    
+    comment = Comment.objects.create(
+        post = post,
+        author = request.user,
+        content = data.get('content'),)
+    comment.save()
+
+    context = {
+        'author' : str(comment.author),
+        'post_id' : post.id,
+        'content' : comment.content,
+        'comment_id' : comment.id,
+    }
+    
+    return JsonResponse(context)
 >>>>>>> garden
