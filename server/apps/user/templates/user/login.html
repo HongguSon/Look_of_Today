@@ -20,4 +20,59 @@
   </form>
   <br>
 </div>
+
+{% load static %}
+{% static 'img/naver_login.png' as naver_button %}
+{% static 'img/google_login.png' as google_button %}
+
+
+<!--소셜로그인 기능 불러오기.-->
+{% load i18n %}
+{% load account socialaccount %}
+{% get_providers as socialaccount_providers %}
+
+<div class="panel-heading">
+    소셜로그인
+</div>
+<div class="panel-body text-center">
+
+</div>
+<ul class="socialaccount_providers">
+<!--  프로바이더의 순서는 settings.py에 지정한 순서인 듯하다.  -->
+{% for provider in socialaccount_providers %}
+{% if provider.id == "openid" %}
+{% for brand in provider.get_brands %}
+<li>
+  <a title="{{brand.name}}"
+     class="socialaccount_provider {{provider.id}} {{brand.id}}"
+     href="{% provider_login_url provider.id openid=brand.openid_url process=process %}"
+     >{{brand.name}}</a>
+</li>
+{% endfor %}
+{% endif %}
+
+    <!--제공자에 따라 만들어짐.-->
+{% if provider.name == "Naver" %}
+  <div class="pull-left">
+    <a href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">
+      <img src="{{ naver_button }}" onmouseleave="this.src='{{ naver_button }}'"height="34">
+    </a>  
+  </div>
+    
+{% elif provider.name == "Google" %}
+  <div class="pull-left">
+    <a href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">
+      <img src="{{ google_button }}" onmouseleave="this.src='{{ google_button }}'"height="34">
+    </a>
+  </div>
+        
+{% else %}
+<li>
+  <a title="{{provider.name}}" class="socialaccount_provider {{provider.id}}"
+     href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">{{provider.name}}</a>
+</li>
+
+{% endif %}
+{% endfor %}
 {% endblock %}
+
