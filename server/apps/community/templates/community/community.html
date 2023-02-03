@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,6 +56,19 @@
 
 
     <div class= "title" id = "banner">
+=======
+{% extends 'main/base.html'%}
+{% block extrahead %}
+<title>community</title>
+{% endblock %}
+
+
+{% block content %}
+
+<body>
+  <div class="main">
+    <div class="title" id="banner">
+>>>>>>> chaewon
       <p>배너 칸... C O M M U N I T Y</p>
     </div>
     <hr>
@@ -62,6 +76,7 @@
     <div class="row">
       <div class="col-3 right" style="padding-left: 100px;">
         <div class="con border border-gray 10px">
+<<<<<<< HEAD
           <img class="img-circle" id = "user-img" src="오은영 박사님.jpg" />
           <span>닉네임</span>
           <div><a href="#">내가 쓴 글 보기</a><span>3개</span></div>
@@ -70,6 +85,17 @@
         </div>
         <div class="menu">
           <div style="margin-left: 60px">게시판 목록</div> <hr>
+=======
+          <img class="img-circle" id="user-img" src="오은영 박사님.jpg" />
+          <span>{{user}}</span>
+          <div><a href="#">내가 쓴 글 보기</a><span>{{post_count}}개</span></div>
+          <div><a href="#">내가 쓴 댓글 보기</a><span>3개</span></div>
+          <a href="{% url 'community:post_create' %}"><button class="btn btn-primary">게시글 작성</button></a>
+        </div>
+        <div class="menu">
+          <div style="margin-left: 60px">게시판 목록</div>
+          <hr>
+>>>>>>> chaewon
           <div><a href="#">OOTD</a></div>
           <div><a href="#">같이 공구해요~</a></div>
           <div><a href="#">수다방</a></div>
@@ -80,6 +106,7 @@
         <div class="ootd">
           <div class="com-title">OOTD</div>
           <div class="row">
+<<<<<<< HEAD
           <div class="content col">
             <img class="img-thumbnail" src="오은영 박사님.jpg" />
             <div>게시글 제목..</div>
@@ -123,7 +150,25 @@
               <div>게시글 작성자..</div>
             </div> 
             </div>
+=======
+            {%for post in post_list%}
+            <div class="content col">
+              <a href="{% url 'community:detail' post.pk%}">
+                {%if post.main_img %}
+                <img src="{{post.main_img.url}}">
+                {%endif%}
+              </a>
+              <p><a href="{% url 'community:detail' post.pk%}">{{post.title}}</a></p>
+              <div>{{post.author}}</div>
+            </div>
+            {%endfor%}
+          </div>
+>>>>>>> chaewon
         </div>
       </div>
     </div>
 </body>
+<<<<<<< HEAD
+=======
+{% endblock %}
+>>>>>>> chaewon
