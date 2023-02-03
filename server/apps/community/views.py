@@ -1,11 +1,21 @@
-from django.shortcuts import render, redirect
 import json
-from server.apps.main.models import Post, Clothes, Comment
+from django.shortcuts import render, redirect
+from server.apps.main.models import Post,Clothes,Comment
+from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import csrf_exempt
+from django.http import Http404
+from django.http import JsonResponse
+from django.shortcuts import render, get_object_or_404
+from django.http.request import HttpRequest
 from django.views.generic import CreateView, UpdateView
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.views.decorators.csrf import csrf_exempt
-from django.http import JsonResponse
+
+
+
+
+
+
 
 # Create your views here.
 def community_main(request):
@@ -26,7 +36,7 @@ def detail(request,pk):
     context={
         "post": post,
     }
-    return render(request,'community\detail.html',context=context)
+    return render(request,'community\post_detail.html',context=context)
 
 def delete(request:HttpRequest, pk, *args, **kwargs):
     if request.method == "POST":

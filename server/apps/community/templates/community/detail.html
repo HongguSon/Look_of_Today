@@ -40,15 +40,19 @@ image:
 </form>
 
 <div class="button-box">
+    {%if user == post.author%}
     <button>
         <a href="{% url 'community:update' post.pk%}" style="color:black; text-decoration:none;">수정하기</a>
-    </button>
-    <button>
-        <a href="{% url 'community:community_main' %}" style="color:black; text-decoration:none;">목록</a>
     </button>
     <form action="{% url 'community:delete' post.pk%}" method="post">
         {% csrf_token %}
         <input type="submit" , value="삭제하기" />
     </form>
+    {%endif%}
+    <button>
+        <a href="{% url 'community:community_main' %}" style="color:black; text-decoration:none;">목록</a>
+    </button>
 </div>
+
+
 {% endblock %}
