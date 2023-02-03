@@ -1,4 +1,4 @@
-{% extends 'main/base.html'%}
+{% extends 'community/base.html'%}
 {% block extrahead %}
 <title>new community</title>
 {% endblock %}
@@ -9,8 +9,8 @@
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <table>
-        {{form}}
         {{ form.media }}
+        {{ form.as_p }}
     </table>
     <button type="submit" class="btn btn-primary float-right">Submit</button>
 </form>

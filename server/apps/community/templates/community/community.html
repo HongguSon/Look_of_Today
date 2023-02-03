@@ -1,4 +1,4 @@
-{% extends 'main/base.html'%}
+{% extends 'community/base.html'%}
 {% block extrahead %}
 <title>community</title>
 {% endblock %}
@@ -17,8 +17,8 @@
       <div class="col-3 right" style="padding-left: 100px;">
         <div class="con border border-gray 10px">
           <img class="img-circle" id="user-img" src="오은영 박사님.jpg" />
-          <span>{{user}}</span>
-          <div><a href="#">내가 쓴 글 보기</a><span>{{post_count}}개</span></div>
+          <span>닉네임</span>
+          <div><a href="#">내가 쓴 글 보기</a><span>3개</span></div>
           <div><a href="#">내가 쓴 댓글 보기</a><span>3개</span></div>
           <a href="{% url 'community:post_create' %}"><button class="btn btn-primary">게시글 작성</button></a>
         </div>
@@ -37,12 +37,12 @@
           <div class="row">
             {%for post in post_list%}
             <div class="content col">
-              <a href="{% url 'community:detail' post.pk%}">
+              <P>
                 {%if post.main_img %}
                 <img src="{{post.main_img.url}}">
                 {%endif%}
-              </a>
-              <p><a href="{% url 'community:detail' post.pk%}">{{post.title}}</a></p>
+              </P>
+              <div>{{post.title}}</div>
               <div>{{post.author}}</div>
             </div>
             {%endfor%}
