@@ -1,0 +1,19 @@
+{% extends 'community/base.html'%}
+{% load static %}
+{% block extrahead %}
+    <link rel="stylesheet" href="{% static 'css/post_create.css' %}">
+    <title>new community</title>
+{% endblock %}
+
+
+{% block content %}
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table>
+        {{form}}
+        {{form.media }}
+    </table>
+    <button type="submit" class="btn btn-primary float-right">Submit</button>
+</form>
+{% endblock %}
