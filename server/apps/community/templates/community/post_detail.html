@@ -1,0 +1,54 @@
+{% extends 'community/base.html' %}
+
+{% block content %}
+    {{post.title}}
+    {{post.author}}
+    <div class="d-flex  justify-content-between align-items-center">
+        <i class="fa-regular fa-face-smile fa-2x m-2"></i>
+        <input id="comment-input-{{post.pk}}" class="comment-input" type="text" placeholder="댓글 달기..." >
+        <div class="comment-btn btn" id="comment-btn-{{post.pk}}"
+        onclick="onClickCommenet({{post.id}})">게시</div>
+    </div>
+
+<script>
+    const requestComment = new XMLHttpRequest();
+
+    const onClickCommenet = (id) => {
+        const url = "/community/comment/";
+        requestComment.open("POST", url, true);
+        requestComment.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        let content = document.querySelector(`#comment-input-${id}`).value;
+        let data = {
+            user : '{{user.username}}',
+            post_id : id,
+            content : content,
+        }
+        requestComment.send(JSON.stringify(data));
+    }
+
+    requestComment.onreadystatechange = () => {
+      if(requestComment.readyState === XMLHttpRequest.DONE) {
+        if(requestComment.status < 400) {
+          const {author, post_id, content, comment_id} = JSON.parse(requestComment.response);
+          document.querySelector(`#comment-input-${post_id}`).value = "";
+          const element = document.querySelector(`#comment-list-${post_id}`);
+          let temp = document.createElement("p");
+          temp.classList.add("m-2", `comment-${comment_id}`);
+          let temp2 = document.createElement("b");
+          let temptext2 = document.createTextNode(`${author}`);
+          temp2.appendChild( temptext2 );
+          let temptext = document.createTextNode(`  ${content}`);
+          temp.appendChild( temp2 );
+          temp.appendChild( temptext );
+          let delbtn = document.createElement("span");
+          let deltext = document.createTextNode( '삭제' );
+          delbtn.appendChild( deltext );
+          delbtn.classList.add("btn", "btn-danger", `comment-btn-${comment_id}`);
+          delbtn.setAttribute("onclick", `onClickDelete(${comment_id})`);
+          temp.appendChild(delbtn);
+          element.appendChild(temp);
+        } 
+      }
+    }
+</script>
+{% endblock %}
