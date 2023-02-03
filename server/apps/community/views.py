@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 # from django.http import JsonResponse
 # from django.shortcuts import render
 # from server.apps.main.models import Comment
@@ -39,10 +40,25 @@
 from django.shortcuts import render, redirect
 import json
 from server.apps.main.models import Post, Clothes, Comment
+=======
+import json
+from django.shortcuts import render, redirect
+from server.apps.main.models import Post,Clothes,Comment
+from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import csrf_exempt
+from django.http import Http404
+from django.http import JsonResponse
+from django.shortcuts import render, get_object_or_404
+from django.http.request import HttpRequest
+>>>>>>> chaewon
 from django.views.generic import CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.views.decorators.csrf import csrf_exempt
-from django.http import JsonResponse
+
+
+
+
+
+
 
 # Create your views here.
 def community_main(request):
@@ -51,7 +67,39 @@ def community_main(request):
         'post_list':post_list
         }   
     return render(request,'community\community.html',context=context)
+<<<<<<< HEAD
   
+=======
+
+def detail(request,pk):
+    post = Post.objects.get(id=pk)
+    print(post)
+    context={
+        "post": post,
+    }
+    return render(request,'community\post_detail.html',context=context)
+
+def delete(request:HttpRequest, pk, *args, **kwargs):
+    if request.method == "POST":
+        post = Post.objects.get(id=pk)
+        post.delete()
+    return redirect("/")
+
+@require_POST
+def likes(request, pk):
+    if request.user.is_authenticated:
+        article = get_object_or_404(Post, pk=pk)
+        users=article.likes.all()
+        if users.filter(pk=request.user.pk).exists():
+            article.likes.remove(request.user)
+        else:
+            article.likes.add(request.user)
+        return redirect('community:community_main')
+        
+        # return redirect('accouts:login')위에거 대신 이거 떠야함! 나중에 로그인 합치고!!
+    return render(request, 'community:detail.html')
+
+>>>>>>> chaewon
 class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
   model = Post
   fields = ['main_img', 'title', 'clothes']
@@ -69,6 +117,7 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     else:
       return redirect('community:community_main')
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> garden
 =======
 
@@ -82,6 +131,8 @@ def post_detail(request, pk, *args, **kwargs):
     }
     return render(request, 'community/post_detail.html', context=context)
 
+=======
+>>>>>>> chaewon
 @csrf_exempt
 def comment_ajax(request, *args, **kwargs):
     data = json.loads(request.body)
@@ -101,4 +152,19 @@ def comment_ajax(request, *args, **kwargs):
     }
     
     return JsonResponse(context)
+<<<<<<< HEAD
 >>>>>>> garden
+=======
+
+class update(LoginRequiredMixin,UpdateView):
+  model = Post
+  fields = ['main_img', 'title', 'clothes']
+  
+  template_name = 'community/update.html'
+
+  def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user == self.get_object().author:
+            return super(update, self).dispatch(request, *args, **kwargs)
+        else:
+            raise PermissionDenied
+>>>>>>> chaewon
