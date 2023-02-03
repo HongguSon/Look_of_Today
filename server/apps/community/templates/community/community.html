@@ -37,11 +37,13 @@
           <div class="row">
             {%for post in post_list%}
             <div class="content col">
-              <P>
+              
+              <a href="{% url 'community:detail' post.pk%}">
                 {%if post.main_img %}
                 <img src="{{post.main_img.url}}">
                 {%endif%}
-              </P>
+              </a>
+              
               <div>{{post.title}}</div>
               <div>{{post.author}}</div>
             </div>
