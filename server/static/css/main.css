@@ -1,9 +1,3 @@
-.main{
-    position: sticky;
-    top: 0;
-    z-index: 500%;
-}
-
 .nav{
     padding-right: 350px;
 }
@@ -29,8 +23,8 @@
 }
 
 .nopost{
-    display: flex;
-    flex-direction: row;
+   display: flex;
+   flex-direction: row;
 }
 
 .nopost > img{
@@ -135,16 +129,21 @@
     color: white;
 }
 
-.main-menu{
+.main_menu{
     text-align: center;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     font-size: 25px;
     padding-right: 12px;
+
 }
 
-.menu > a{
+.content {
+    text-align: center;
+  }
+  
+.main_menu > a{
     text-decoration: none;
 }
 
