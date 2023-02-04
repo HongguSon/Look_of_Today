@@ -13,4 +13,6 @@ urlpatterns = [
   path("<int:pk>/likes/", views.likes, name='likes'),
   path("create",views.PostCreate.as_view(),name="post_create"),
   path("<int:pk>", views.detail, name='detail'),
+  # path("commu/", views.commu, name="commu"),
+
 ]

@@ -107,3 +107,5 @@ class update(LoginRequiredMixin,UpdateView):
             return super(update, self).dispatch(request, *args, **kwargs)
         else:
             raise PermissionDenied
+
+    
