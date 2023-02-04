@@ -1,0 +1,91 @@
+{% extends "main/base.html" %}
+{% block content %}
+
+<div class="text-center my-1">{{user}}님이 로그인중!</div>
+<div class="text-center my-1">회원 정보🧢</div>
+<br>
+<form action="{% url 'user:mypage_update' %}" method="post"  enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="d-flex flex-column align-items-center my-1">
+    <div class="d-flex">
+      <div class="mx-2">프로필 이미지 : </div>
+      {% if profile_image %}
+        <p>
+          현재 프로필 : {{ profile_image.url }}
+          <small style="">삭제하기</small>
+          <input type="checkbox" name="check1" />
+        </p>
+        <input type="file" name="image" />
+      {% else %}
+        <input type="file" name="image" />
+      {% endif %}
+    </div>
+    
+
+    <div class="d-flex">
+      <div class="mx-2">핸드폰 번호 : </div>
+      {% if phone_num %}
+      <input name="phone_num" placeholder="핸드폰 번호" value="{{ phone_num }}" />
+      {% else %}
+      <input name="phone_num" placeholder="핸드폰 번호" value="" />
+      {% endif %}
+    </div>
+    
+
+    <div class="d-flex">
+      <div class="mx-2">키 : </div>
+      {% if height %}
+      <input name="height" placeholder="키" value="{{ height }}" />
+      {% else %}
+      <input name="height" placeholder="키" value="" />
+      {% endif %}
+    </div>
+
+    <div class="d-flex">
+      <div class="mx-2">몸무게 : </div>
+      {% if weight %}
+      <input name="weight" placeholder="몸무게" value="{{ weight }}" />
+      {% else %}
+      <input name="weight" placeholder="몸무게" value="" />
+      {% endif %}
+    </div>
+
+    <div class="d-flex">
+      <div class="mx-2">나이 : </div>
+      {% if age %}
+      <input name="age" placeholder="나이" value="{{ age }}" />
+      {% else %}
+      <input name="age" placeholder="나이" value="" />
+      {% endif %}
+    </div>
+
+    <div class="d-flex">
+      <div class="mx-2">생년월일 : </div>
+      {% if birth_date %}
+      <input name="birth_date" placeholder="생년월일" value="{{ birth_date }}" />
+      {% else %}
+      <input name="birth_date" placeholder="생년월일" value="" />
+      {% endif %}
+    </div>
+
+    <div class="d-flex">
+      <div class="mx-2">팔로잉 : </div>
+      {% if str_following != 'auth.User.None' %}
+      <div>팔로잉 목록</div>
+      {% for follow in following %}
+      <div>{{ follow }}</div>
+      <small style="color:white">팔로우 취소</small>
+      <input type="checkbox" name="check2" />
+      {% endfor %}
+      {% else %}
+      <div>팔로잉을 아직 아무도 하지 않았어요!</div>
+      {% endif %}
+    </div>
+    <br>
+    <input class="btn btn-secondary" type="submit", value="저장하기" />
+    <br>
+  </div>
+</form>
+
+
+{% endblock %}
