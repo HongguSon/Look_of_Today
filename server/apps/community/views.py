@@ -23,6 +23,17 @@ def community_main(request):
         'post_list':post_list
         }   
     return render(request,'community/community.html',context=context)
+<<<<<<< HEAD
+=======
+
+def detail(request,pk):
+    post = Post.objects.get(id=pk)
+    print(post)
+    context={
+        "post": post,
+    }
+    return render(request,'community/post_detail.html',context=context)
+>>>>>>> gokun
 
 def delete(request:HttpRequest, pk, *args, **kwargs):
     if request.method == "POST":
