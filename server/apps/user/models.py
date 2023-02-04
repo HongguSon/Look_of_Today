@@ -5,7 +5,7 @@ from django.db.models.signals import post_save
 
 # Create your models here.
 class Profile(models.Model):
-  user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile_user")
+  user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
   profile_image = models.ImageField(null=True, blank=True, upload_to='user/images/profile/%Y/%m/%d')
   # phone_num = PhoneNumberField(unique=True, null=True, blank=True)
   phone_num = models.IntegerField(unique=True, null=True, blank=True)
