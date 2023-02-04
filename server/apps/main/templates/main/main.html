@@ -1,0 +1,62 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+  <div class="nopost">
+  <img src="{% static 'img/clothes.png' %}" alt="">
+  <div class="postex">
+      아직 옷장에 등록된 옷이 없어요! <br>
+      당신만의 멋진 착장을 등록해주세요! <br>
+      <button class="startbtn"> 시작하기 </button>
+  </div>
+  </div>
+  <br>
+  <div class="main_menu">
+    <div class="week">Weekly</div>
+    <a href="main3.html"><div class="hot2">Hot</div></a>
+    <a href="main4.html"><div class="best2">Best</div></a>
+  </div>
+
+  <div class="best">
+  Weekly  
+  <br>
+  <p>이번주 가장 많은 좋아요를 받은 착장이에요!</p>
+  </div>
+  <div class="model">
+      <p>
+      <img class="model1" src="model1.jpeg" alt=""> <br>
+      @ophen28 <br>
+      모자와 코디할 수 있는 겨울 남친룩
+      </p>
+      <p>
+      <img class="model1" src="model2.jpeg" alt="" style="height: 370px;"> <br>
+      @skawngur <br>
+      크로스백을 사용해 코디해보자!
+      </p>
+      <p>
+      <img class="model1" src="model3.jpg" alt="" style="height: 370px;"> <br>
+      @dlwlrma <br>
+      다가오는 개강, 백팩과 함께하는 새내기들을 위한 착장!
+      </p>
+  </div>
+  <div class="model2">
+    <p>
+    <img class="model1" src="model4.jpg" alt="" style="height: 370px;"> <br>
+    @hyemhyemu <br>
+    여름 옷? 미리 준비 안하면 예쁜건 다 품절돼!
+    </p>
+    <p>
+    <img class="model1" src="model5.jpeg" alt="" style="height: 370px; width: 400px"> <br>
+    @noodle.zip <br>
+    색감있는 니트를 코디하는법
+    </p>
+    <p>
+    <img class="model1" src="model6.jpeg" alt="" style="height: 370px;"> <br>
+    @dangerousmanleebyeonggeon <br>
+    아빠정장 그만! 정장으로 간지나게 코디하자!
+    </p>
+</div>
+<div class="vote">
+  착장 더 보러가기  
+  <button class="votebtn"> 여기를 누르세요! </button>
+</div>
+{% endblock %}
