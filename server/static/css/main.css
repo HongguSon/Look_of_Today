@@ -1,8 +1,11 @@
 .main{
-    background-color: #6496FF;
     position: sticky;
     top: 0;
-    z-index: 500%;
+}
+
+hr{
+    position: sticky;
+    top: 0;
 }
 
 .nav{
