@@ -3,9 +3,10 @@
 }
 
 #comment-con{
+  width: 100%;
   margin-top: 50px;
-  margin-bottom: 30px;
-  justify-content:center;
+  margin-bottom: 6rem;
+  justify-content: center;  
 }
 
 .comment-input {
@@ -24,4 +25,12 @@
   margin-left: 15.7%;
   margin-right: 10%;
   margin-bottom: 50px;
+}
+
+.post_title-c{
+  font-size: 2rem;
+}
+
+.con {
+  margin-top: 4rem;
 }

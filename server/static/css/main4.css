@@ -32,6 +32,7 @@ footer {
 .small_menu:hover {
   color: var(--gray) !important;
 }
+
 /* community css */
 #banner {
   height: 200px;

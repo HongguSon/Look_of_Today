@@ -1,4 +1,4 @@
-{% extends 'community/base.html'%}
+{% extends 'main/base.html'%}
 {% load static %}
 {% block extrahead %}
     <link rel="stylesheet" href="{% static 'css/post_create.css' %}">
@@ -6,18 +6,19 @@
 {% endblock %}
 
 {% block content %}
-Title: {{post.title}}
-<br />
-image:
-{%if post.main_img %}
-<img src="{{post.main_img.url}}">
-{%endif%}
-<br />
-코디한 룩북:
-{%for clothes in post.clothes.all%}
-<img src="{{clothes.img.url}}">
-{%endfor%}
-<div>{{post.author}}</div>
+<div class="container con">
+  <div class="post_title-c">{{post.title}}</div>
+  <div>{{post.author}}</div>
+  <br />
+  image:
+  {%if post.main_img %}
+  <img class = "img-fluid" src="{{post.main_img.url}}">
+  {%endif%}
+  <br />
+  코디한 룩북:
+  {%for clothes in post.clothes.all%}
+  <img class = "img-fluid" src="{{clothes.img.url}}">
+  {%endfor%}  
 
 <form action="{% url 'community:likes' post.pk %}" method='POST'>
   {% csrf_token %}
@@ -45,7 +46,7 @@ image:
   <button>
     <a href="{% url 'community:update' post.pk%}" style="color:black; text-decoration:none;">수정하기</a>
   </button>
-  <form action="{% url 'community:delete' post.pk%}" method="post">
+  <form action="{% url 'community:delete' post.pk%}" method="post" style="display: inline";>
     {% csrf_token %}
     <input type="submit" , value="삭제하기" />
   </form>
@@ -54,15 +55,14 @@ image:
     <a href="{% url 'community:community_main' %}" style="color:black; text-decoration:none;">목록</a>
   </button>
 </div>
-
+</div>
 <hr>
 <div id="comment-list-{{post.pk}}">
 
 </div>
 
-<div id="comment-con" class="d-flex   align-items-center">
-  <i class="fa-regular fa-face-smile fa-2x m-2"></i>
-  <input id="comment-input-{{post.pk}}" class="comment-input" type="text" placeholder="댓글 달기...">
+<div id="comment-con" class="container d-flex align-items-center">
+  <textarea id="comment-input-{{post.pk}}" class="comment-input" type="text" placeholder="댓글 달기..."></textarea>
   <div class="comment-btn btn btn-secondary" id="comment-btn-{{post.pk}}" onclick="onClickCommenet({{post.id}})">게시</div>
 </div>
 
