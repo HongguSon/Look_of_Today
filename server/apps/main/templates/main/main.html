@@ -1,7 +1,8 @@
 {% extends 'main/base.html' %}
+{% load static %}
 {% block content %}
   <div class="nopost">
-  <img src="clothes.png" alt="">
+  <img src="{% static 'img/clothes.png' %}" alt="">
   <div class="postex">
       아직 옷장에 등록된 옷이 없어요! <br>
       당신만의 멋진 착장을 등록해주세요! <br>
