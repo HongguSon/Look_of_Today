@@ -62,20 +62,10 @@
   </button>
   {% endif %}
 </form>
-<<<<<<< Updated upstream
-
-
-</div>
-
-<div id="comment-con" class="d-flex  justify-content-between align-items-center">
-  <i class="fa-regular fa-face-smile fa-2x m-2"></i>
-  <input id="comment-input-{{post.pk}}" class="comment-input" type="text" placeholder="댓글 달기...">
-=======
 <div id="comment-con" class="d-flex justify-content-between align-items-center">
   <form>
   <textarea rows="4" cols="100" id="comment-input-{{post.pk}}" class="comment-input" type="text" placeholder="댓글 달기..."></textarea>
   </form>
->>>>>>> Stashed changes
   <div class="comment-btn btn" id="comment-btn-{{post.pk}}" onclick="onClickCommenet({{post.id}})">
     <input type="submit" , value="게시" , class="delbtn"/>
   </div>

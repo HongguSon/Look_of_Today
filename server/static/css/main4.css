@@ -32,19 +32,5 @@ footer {
 .small_menu:hover {
   color: var(--gray) !important;
 }
-<<<<<<< HEAD
-
-/* community css */
-#banner {
-  height: 200px;
-  text-align: center;
-}
-
-.right {
-  border-right: 1px solid black;
-  height: 100%;
-}
-=======
->>>>>>> gokun
 
 
