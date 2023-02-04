@@ -73,6 +73,7 @@
     padding-right: 100px;
     padding-bottom: 70px;
     transition: 0.2s;
+    resize: none;
 }
 
 
@@ -96,3 +97,5 @@ form svg{
     background-color: #E0E0E0;
     color: white;
 }
+
+
