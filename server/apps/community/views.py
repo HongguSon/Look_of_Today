@@ -24,14 +24,6 @@ def community_main(request):
         }   
     return render(request,'community/community.html',context=context)
 
-def detail(request,pk):
-    post = Post.objects.get(id=pk)
-    print(post)
-    context={
-        "post": post,
-    }
-    return render(request,'community/post_detail.html',context=context)
-
 def delete(request:HttpRequest, pk, *args, **kwargs):
     if request.method == "POST":
         post = Post.objects.get(id=pk)
@@ -47,10 +39,10 @@ def likes(request, pk):
             article.likes.remove(request.user)
         else:
             article.likes.add(request.user)
-        return redirect('community:community_main')
+        return redirect('community:post_detail')
         
         # return redirect('accouts:login')위에거 대신 이거 떠야함! 나중에 로그인 합치고!!
-    return render(request, 'community:detail.html')
+    return render(request, 'community:post_detail.html')
 
 class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
   model = Post
