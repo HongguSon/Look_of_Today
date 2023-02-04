@@ -1,4 +1,9 @@
-{% extends 'community/base.html' %}
+{% extends 'main/base.html'%}
+{% load static %}
+{% block extrahead %}
+    <link rel="stylesheet" href="{% static 'css/post_create.css' %}">
+    <title>community</title>
+{% endblock %}
 
 {% block content %}
 Title: {{post.title}}
@@ -51,7 +56,7 @@ image:
 </div>
 
 
-<div class="d-flex  justify-content-between align-items-center">
+<div id="comment-con" class="d-flex  justify-content-between align-items-center">
   <i class="fa-regular fa-face-smile fa-2x m-2"></i>
   <input id="comment-input-{{post.pk}}" class="comment-input" type="text" placeholder="댓글 달기...">
   <div class="comment-btn btn" id="comment-btn-{{post.pk}}" onclick="onClickCommenet({{post.id}})">게시</div>

@@ -17,7 +17,7 @@ def signup(request, *args, **kwargs):
         password=request.POST['password1'],
         email=request.POST['email'],
       )
-      auth.login(request, user)
+      auth.login(request, user, backend='django.contrib.auth.backends.ModelBackend')
       return redirect('user:profile_update')
     #이거 나중에 프로필 생성화면으로 가야함
     
@@ -26,7 +26,7 @@ def signup(request, *args, **kwargs):
 
 def logout(request, *args, **kwargs):
   auth.logout(request)
-  return redirect('closet:closet_main')
+  return redirect('main:main')
 
 def log_in(request):
   if request.method == 'POST':
@@ -40,6 +40,13 @@ def log_in(request):
       context={'msg':'로그인 정보가 맞지 않습니다! 아이디 또는 비밀번호를 확인해주세요',}
       return render(request, 'user/login.html',context=context)
   return render(request, 'user/login.html')
+
+def mypage(request):
+  # form = ProfileUpdateForm(instance=request.user.profile)
+  # context = {
+  #   'form': form,
+  # }
+  return render(request, 'user/mypage.html')
       
 
 # class PostUpdate(LoginRequiredMixin, UpdateView):
@@ -53,18 +60,18 @@ def log_in(request):
 #       return super(PostUpdate, self).dispatch(request, *args, **kwargs)
 #     else:
 #       raise PermissionDenied
+
 def profile_update(request):
   if request.method == 'POST':
     form = ProfileUpdateForm(request.POST,request.FILES,instance=request.user.profile)
     if  form.is_valid():
       form.save()
-      messages.success(request, f'Your account has been updated!')
-      return redirect('closet:closet_main') # Redirect back to profile page
+      messages.success(request, f'Your account has been updated!!!!!')
+      return redirect('main:main') # Redirect back to profile page
   else:
     form = ProfileUpdateForm(instance=request.user.profile)
 
   context = {
     'form': form,
   }
-
   return render(request, 'user/profile_update.html', context=context)

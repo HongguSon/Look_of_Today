@@ -11,12 +11,6 @@ from django.views.generic import CreateView, UpdateView
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
-
-
-
-
-
-
 # Create your views here.
 def community_main(request):
     post_list = Post.objects.all() 
@@ -74,6 +68,14 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
       return super(PostCreate, self).form_valid(form)
     else:
       return redirect('community:community_main')
+
+def post_detail(request, pk, *args, **kwargs):
+    post = Post.objects.get(pk=pk)
+    context = {
+        'post' : post,
+    }
+    return render(request, 'community/post_detail.html', context=context)
+
 @csrf_exempt
 def comment_ajax(request, *args, **kwargs):
     data = json.loads(request.body)
