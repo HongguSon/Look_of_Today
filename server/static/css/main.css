@@ -1,11 +1,5 @@
-.main {
-  position: sticky;
-  top: 0;
-  z-index: 500%;
-}
-
-.nav {
-  padding-right: 350px;
+.nav{
+    padding-right: 350px;
 }
 
 .title {
@@ -135,17 +129,22 @@
   color: white;
 }
 
-.menu {
-  text-align: center;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  font-size: 25px;
-  padding-right: 12px;
+.main_menu{
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    font-size: 25px;
+    padding-right: 12px;
+
 }
 
-.menu > a {
-  text-decoration: none;
+.content {
+    text-align: center;
+  }
+  
+.main_menu > a{
+    text-decoration: none;
 }
 
 .week {
