@@ -63,7 +63,7 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
   def form_valid(self, form):
     current_user = self.request.user
-    if current_user.is_authenticated and (current_user.is_superuser or current_user.is_staff):
+    if current_user.is_authenticated:
       form.instance.author = current_user
       return super(PostCreate, self).form_valid(form)
     else:
