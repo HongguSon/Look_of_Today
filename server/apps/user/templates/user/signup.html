@@ -5,19 +5,27 @@
   <h1>회원가입</h1>
   <form method="POST">
     {% csrf_token %}
-    아이디: <br>
-    <input name="username" type="text">
-    <br>
-    비밀번호: <br>
-    <input name="password1" type="password">
-    <br>
-    비밀번호 확인: <br>
-    <input name="password2" type="password">
-    <br>
-    이메일: <br>
-    <input name="email" type="email">
-    <br><br>
-    <input type="submit" class="btn btn-primary" value="Sign Up">
+    <div class="">
+      아이디<br>
+      <input name="username" type="text" placeholder="ID">
+      <br>
+      비밀번호<br>
+      <input name="password1" type="password" placeholder="PW">
+      <br>
+      비밀번호<br>
+      <input name="password2" type="password" placeholder="PW CHECK">
+      <br>
+      이메일<br>
+      <input name="email" type="email" placeholder="EMAIL">
+      <br><br>
+      <input type="submit" class="btn btn-primary" value="Sign Up">
+      <br>
+      <br>
+      <div>
+        또는
+      </div>
+      <br>
+    </div>
   </form>
   <br>
 </div>

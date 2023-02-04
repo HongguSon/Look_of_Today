@@ -10,12 +10,6 @@ from django.http.request import HttpRequest
 from django.views.generic import CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
-
-
-
-
-
-
 # Create your views here.
 def community_main(request):
     post_list = Post.objects.all() 
@@ -61,19 +55,13 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
     template_name = 'community/post_create.html'
 
-    def test_func(self):
-        return self.request.user.is_superuser or self.request.user.is_staff
-
-    def form_valid(self, form):
-        current_user = self.request.user
-        if current_user.is_authenticated and (current_user.is_superuser or current_user.is_staff):
-            form.instance.author = current_user
-            return super(PostCreate, self).form_valid(form)
-        else:
-            return redirect('community:community_main')
-
-def post_create(request):
-    return render(request, 'community/post_create.html')
+  def form_valid(self, form):
+    current_user = self.request.user
+    if current_user.is_authenticated and (current_user.is_superuser or current_user.is_staff):
+      form.instance.author = current_user
+      return super(PostCreate, self).form_valid(form)
+    else:
+      return redirect('community:community_main')
 
 def post_detail(request, pk, *args, **kwargs):
     post = Post.objects.get(pk=pk)
@@ -81,7 +69,6 @@ def post_detail(request, pk, *args, **kwargs):
         'post' : post,
     }
     return render(request, 'community/post_detail.html', context=context)
-
 
 @csrf_exempt
 def comment_ajax(request, *args, **kwargs):

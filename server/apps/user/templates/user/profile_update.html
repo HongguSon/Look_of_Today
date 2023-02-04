@@ -1,19 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <form method="post" enctype="multipart/form-data">
+{% extends 'main/base.html' %}
+{% block content %}
+<div class="my-5 text-center">
+  <form method="post" enctype="multipart/form-data" class="d-flex flex-column justify-content-center align-items-center">
+    <h3>추가 정보 작성</h3>
+    <div>추가 프로필 작성란이에요! 원하지 않는다면 작성하지 않아도 괜찮아요</div>
+    
+    <br>
     {% csrf_token %}
     <table>
       {{ form.media }}
-      {{ form.as_p }}
+      <div class="d-flex flex-column justify-content-center align-items-start">{{ form.as_p }}</div>
     </table>
-    <button type="submit" class="btn btn-primary float-right">Submit</button>
+    <button type="submit" class="btn btn-primary float-right" style="width: 380px;">Submit</button>
+    <br>
+    <div class="text-secondary">추가 프로필 정보는 필터링을 통해 회원님 체형에 맞는 착장을 추천하는 역할로만 사용됩니다.</div>
   </form>
-</body>
-</html>
+</div>
+{% endblock %}
