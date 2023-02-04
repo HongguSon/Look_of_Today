@@ -1,0 +1,26 @@
+form{
+    padding-left: 580px;
+}
+
+label{
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 15px;
+}
+
+#subbtn{
+    margin-left: 110px;
+    margin-bottom: 30px;
+}
+
+#id_clothes{
+    width: 165px;
+}
+
+#id_main_img{
+    padding-left: 40px;
+}
+
+#id_title{
+    margin-left: 20px;
+}
