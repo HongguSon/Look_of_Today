@@ -1,3 +1,41 @@
+<<<<<<< HEAD
+.button-box{
+  margin-bottom: 30px;
+}
+
+#comment-con{
+  width: 100%;
+  margin-top: 50px;
+  margin-bottom: 6rem;
+  justify-content: center;  
+}
+
+.comment-input {
+  width: 60%;
+  height: 100px;
+  border-width: 1px;
+  border-radius: 5px;
+}
+
+#comment-btn-1{
+  margin-left: 5%;
+}
+
+
+#comment-list-1{
+  margin-left: 15.7%;
+  margin-right: 10%;
+  margin-bottom: 50px;
+}
+
+.post_title-c{
+  font-size: 2rem;
+}
+
+.con {
+  margin-top: 4rem;
+}
+=======
 .post_title{
     font-size: xx-large;
     padding-left: 100px;
@@ -96,3 +134,4 @@ form svg{
     background-color: #E0E0E0;
     color: white;
 }
+>>>>>>> gokun
