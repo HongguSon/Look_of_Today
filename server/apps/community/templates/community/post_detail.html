@@ -35,6 +35,13 @@
 <img src="{{clothes.img.url}}" class = "post_img">
 {%endfor%}
 
+<hr>  
+<div class="comment-sum">
+
+<div id="comment-list-{{post.pk}}" class="comment-list">
+
+</div>
+
 <form action="{% url 'community:likes' post.pk %}" method='POST'>
   {% csrf_token %}
   {% if user in post.likes.all %}
@@ -55,16 +62,15 @@
   </button>
   {% endif %}
 </form>
-
-
-
-<div id="comment-con" class="d-flex  justify-content-between align-items-center">
-  <input id="comment-input-{{post.pk}}" class="comment-textarea" type="text" placeholder="댓글 달기..."></textarea>
+<div id="comment-con" class="d-flex justify-content-between align-items-center">
+  <form>
+  <textarea rows="4" cols="100" id="comment-input-{{post.pk}}" class="comment-input" type="text" placeholder="댓글 달기..."></textarea>
+  </form>
   <div class="comment-btn btn" id="comment-btn-{{post.pk}}" onclick="onClickCommenet({{post.id}})">
     <input type="submit" , value="게시" , class="delbtn"/>
   </div>
 </div>
-<div id="comment-list-{{post.pk}}">
+
 </div>
 <script>
   const requestComment = new XMLHttpRequest();
@@ -89,10 +95,11 @@
         document.querySelector(`#comment-input-${post_id}`).value = "";
         const element = document.querySelector(`#comment-list-${post_id}`);
         let temp = document.createElement("p");
-        temp.classList.add("m-2", `comment-${comment_id}`);
         let temptext = document.createTextNode(`  ${content}`);
         temp.appendChild(temptext);
         element.appendChild(temp);
+        let h = document.createElement("hr");
+        element.appendChild(h);
       }
     }
   }

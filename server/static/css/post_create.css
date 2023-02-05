@@ -52,6 +52,7 @@
     font-size: 15px;
     margin-left: 10px;
     margin-right: 10px;
+    margin-top: 2px;
     transition: 0.2s;
 }
 
@@ -59,8 +60,18 @@
     background-color: #E0E0E0;
 }
 
+.comment-list{
+    margin-bottom: 5rem;
+    margin-left: 6rem;
+}
 
+.comment-list hr{
+    width: 67%;
+}
 
+.comment-list p{
+    margin-top: 1rem;
+}
 
 #comment-con{
     margin-left: 100px;
@@ -70,13 +81,13 @@
 .comment-input{
     border: 2px solid black;
     border-radius: 10px;
-    padding-right: 100px;
-    padding-bottom: 70px;
     transition: 0.2s;
     resize: none;
 }
 
-
+.comment-sum{
+    margin-left: 19rem;
+}
 
 form svg{
     width: 30px;
@@ -84,11 +95,8 @@ form svg{
     margin-left: 30px;
 }
 
-
-
-
 #listbtn{
-    margin-top: 2px;
+    margin-top: 1px;
     height: 30px;
     transition: 0.2s;
 }
