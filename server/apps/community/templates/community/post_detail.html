@@ -7,7 +7,7 @@
 
 {% block content %}
 <div class = "post_title">{{post.title}}</div>
-<div class = "post_author">{{post.author}}
+<div class = "post_author">{{post.author}}</div>
 
 <div class="button-box">
   {%if user == post.author%}
@@ -23,17 +23,26 @@
     <a href="{% url 'community:community_main' %}" style="color:black; text-decoration:none;">목록</a>
   </button>
 </div>
-</div>
-
-{%if post.main_img %}
-<img src="{{post.main_img.url}}" class = "post_img">
-{%endif%}
+</div> <br />
 <br />
+<div class="postimgs">
+{%if post.main_img %}
+<img src="{{post.main_img.url}}" class = "post_img1"> <br />
+{%endif%}
 
+<div class = "post_cody">코디한 룩북 <br>
 {%for clothes in post.clothes.all%}
-<div class = "post_cody">코디한 룩북</div>
 <img src="{{clothes.img.url}}" class = "post_img">
 {%endfor%}
+</div> 
+</div>
+</div>
+<hr>  
+<div class="comment-sum">
+
+<div id="comment-list-{{post.pk}}" class="comment-list">
+
+</div>
 
 <form action="{% url 'community:likes' post.pk %}" method='POST'>
   {% csrf_token %}
@@ -55,17 +64,14 @@
   </button>
   {% endif %}
 </form>
-
-
-
-<div id="comment-con" class="d-flex  justify-content-between align-items-center">
-  <i class="fa-regular fa-face-smile fa-2x m-2"></i>
-  <input id="comment-input-{{post.pk}}" class="comment-input" type="text" placeholder="댓글 달기...">
+<div id="comment-con" class="d-flex justify-content-between align-items-center">
+  <form>
+  <textarea rows="4" cols="100" id="comment-input-{{post.pk}}" class="comment-input" type="text" placeholder="댓글 달기..."></textarea>
+  </form>
   <div class="comment-btn btn" id="comment-btn-{{post.pk}}" onclick="onClickCommenet({{post.id}})">
     <input type="submit" , value="게시" , class="delbtn"/>
   </div>
 </div>
-<div id="comment-list-{{post.pk}}">
 
 </div>
 <script>
@@ -83,7 +89,7 @@
     }
     requestComment.send(JSON.stringify(data));
   }
-
+  
   requestComment.onreadystatechange = () => {
     if (requestComment.readyState === XMLHttpRequest.DONE) {
       if (requestComment.status < 400) {
@@ -91,10 +97,11 @@
         document.querySelector(`#comment-input-${post_id}`).value = "";
         const element = document.querySelector(`#comment-list-${post_id}`);
         let temp = document.createElement("p");
-        temp.classList.add("m-2", `comment-${comment_id}`);
         let temptext = document.createTextNode(`  ${content}`);
         temp.appendChild(temptext);
         element.appendChild(temp);
+        let h = document.createElement("hr");
+        element.appendChild(h);
       }
     }
   }
