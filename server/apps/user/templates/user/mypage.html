@@ -1,6 +1,77 @@
 {% extends 'main/base.html' %}
 {% block content %}
+<div class="text-center my-1">{{user}}님이 로그인중!</div>
+<div class="text-center my-1">회원 정보🧢</div>
+<br>
+<div class="d-flex flex-column align-items-center my-1">
+  <div class="d-flex">
+    <div class="mx-2">프로필 이미지 : </div>
+    {% if profile_image %}
+    <img src="{{ profile_image.url }}" style="width:100px; height:100px">
+    {% else %}
+    <div>프로필 사진을 등록하지 않았어요!</div>
+    {% endif %}
+  </div>
+  
 
-<h2 class="text-center my-5">이제 여기에 form 정보 불러오고 수정버튼 만들면 될 듯</h2>
+  <div class="d-flex">
+    <div class="mx-2">핸드폰 번호 : </div>
+    {% if phone_num %}
+    {{phone_num}}
+    {% else %}
+    <div>핸드폰 번호를 입력하지 않았어요!</div>
+    {% endif %}
+  </div>
+  
+
+  <div class="d-flex">
+    <div class="mx-2">키 : </div>
+    {% if height %}
+    {{height}}cm
+    {% else %}
+    <div>키 정보를 입력하지 않았어요!</div>
+    {% endif %}
+  </div>
+
+  <div class="d-flex">
+    <div class="mx-2">몸무게 : </div>
+    {% if weight %}
+    {{weight}}kg
+    {% else %}
+    <div>몸무게 정보를 입력하지 않았어요!</div>
+    {% endif %}
+  </div>
+
+  <div class="d-flex">
+    <div class="mx-2">나이 : </div>
+    {% if age %}
+    {{age}}세
+    {% else %}
+    <div>나이 정보를 입력하지 않았어요!</div>
+    {% endif %}
+  </div>
+
+  <div class="d-flex">
+    <div class="mx-2">생년월일 : </div>
+    {% if birth_date %}
+    {{birth_date}}
+    {% else %}
+    <div>생년월일 정보를 입력하지 않았어요!</div>
+    {% endif %}
+  </div>
+
+  <div class="d-flex">
+    <div class="mx-2">팔로잉 : </div>
+    {% if str_following != 'auth.User.None' %}
+    {{following}}
+    {% else %}
+    <div>팔로잉을 아직 아무도 하지 않았어요!</div>
+    {% endif %}
+  </div>
+  <br>
+  <a class="btn btn-secondary" href="{% url 'user:mypage_update' %}">개인정보 작성/수정</a>
+  <br>
+</div>
+
 
 {% endblock %}
