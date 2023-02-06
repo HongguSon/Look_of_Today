@@ -14,14 +14,22 @@ class Clothes(models.Model):
   ]
   category = models.IntegerField(default=0,choices=CATEGORYS)
   img = models.ImageField(upload_to='main/images/clothes/%Y/%m/%d')
-  save = models.ManyToManyField(User, related_name='Save', blank=True)
-  author = models.ForeignKey(User, on_delete=models.CASCADE)
-  # author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+  like = models.ManyToManyField(User, related_name='Like', blank=True)
+  CATEGORYS =(
+    ('top', 'top'), #상의
+    ('bottom', 'bottom'), #하의
+    ('outter', 'outter'), #아우터
+    ('shose', 'shose'), #신발
+    ('accessory', 'accessory'), #악세사리
+  )
+  category = models.CharField(max_length=20, choices=CATEGORYS)
   buying = models.TextField(null=True, blank=True)
   
   def __str__(self):
     return f'{self.pk}: {self.category}'
-    #pk가 존재하지 않는것 같음. 
+  
+  def get_absolute_url(self):
+    return f'/closet/'
 
 # class Closet(models.Model):
   
