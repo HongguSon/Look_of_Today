@@ -12,34 +12,27 @@ from django.core.exceptions import PermissionDenied
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 # Create your views here.
-def community_main(request):
+def community_main(request, *args, **kwargs):
     post_list = Post.objects.all() 
-    b=0
-    for a in post_list:
-        if a.author == request.user:
-            b+=1
+    # b=0
+    # for a in post_list:
+    #     if a.author == request.user:
+    #         b+=1
+    post_count = Post.objects.filter(author=request.user).count()
     context={
-        'post_list':post_list,
-        'post_count':b
+        'post_list' : post_list,
+        'post_count': post_count
         }   
     return render(request,'community/community.html',context=context)
 
-def detail(request,pk):
-    post = Post.objects.get(id=pk)
-    print(post)
-    context={
-        "post": post,
-    }
-    return render(request,'community/post_detail.html',context=context)
-
-def delete(request:HttpRequest, pk, *args, **kwargs):
+def post_delete(request:HttpRequest, pk, *args, **kwargs):
     if request.method == "POST":
-        post = Post.objects.get(id=pk)
+        post = Post.objects.get(pk=pk)
         post.delete()
     return redirect("/")
 
 @require_POST
-def likes(request, pk):
+def post_likes(request, pk, *args, **kwargs):
     if request.user.is_authenticated:
         article = get_object_or_404(Post, pk=pk)
         users=article.likes.all()
@@ -96,7 +89,7 @@ def comment_ajax(request, *args, **kwargs):
     
     return JsonResponse(context)
 
-class update(LoginRequiredMixin,UpdateView):
+class PostUpdate(LoginRequiredMixin,UpdateView):
   model = Post
   fields = ['main_img', 'title', 'clothes']
   

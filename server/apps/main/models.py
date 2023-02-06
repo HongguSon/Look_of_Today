@@ -48,3 +48,21 @@ class Comment(models.Model):
   
   def __str__(self):
     return f'({self.author}) {self.post.title} :  {self.content}'
+
+class Talk(models.Model):
+  Talk_CHOICES = (
+      ('buying', 'buying'), #공동구매
+    ('openrun', 'openrun'), #오픈런
+    ('question', 'question'), #고민방
+  )
+  category = models.CharField(max_length=20, choices=Talk_CHOICES)
+  img = models.ImageField(upload_to='main/images/commu/%Y/%m/%d', null=True, blank=True)
+  title = models.CharField(max_length=100)
+  content = models.TextField()
+  author = models.ForeignKey(User, on_delete=models.CASCADE)
+  
+  def __str__(self):
+    return f'{self.pk}: {self.title}'
+  
+  def get_absolute_url(self):
+    return f'/community/talk/'

@@ -9,9 +9,10 @@ def closet_main(request):
     b=0
     for a in clothes_list:
         b+=1
+    clothes_count = Clothes.objects.all().count()
     context={
-        'clothes_list':clothes_list,
-        'clothes_count':b
+        'clothes_list' : clothes_list,
+        'clothes_count' : b,
         }   
     return render(request,'closet/closet_main.html',context=context)
 
@@ -23,23 +24,6 @@ def closet_main2(request):
         'post_list':post_list,
         }   
     return render(request,'closet/closet_main2.html',context=context)
-
-class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
-  model = Post
-  fields = ['main_img', 'title', 'clothes']
-  
-  template_name = 'closet/post_create.html'
-
-  def test_func(self):
-    return self.request.user.is_superuser or self.request.user.is_staff
-
-  def form_valid(self, form):
-    current_user = self.request.user
-    if current_user.is_authenticated and (current_user.is_superuser or current_user.is_staff):
-      form.instance.author = current_user
-      return super(PostCreate, self).form_valid(form)
-    else:
-      return redirect('closet:closet_main')
 
 class ClothesCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
   model = Clothes
