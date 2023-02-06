@@ -47,7 +47,7 @@ def likes(request, pk):
             article.likes.remove(request.user)
         else:
             article.likes.add(request.user)
-        return redirect('community:community_main')
+        return redirect('community:detail',pk)
         
         # return redirect('accouts:login')위에거 대신 이거 떠야함! 나중에 로그인 합치고!!
     return render(request, 'community:detail.html')
@@ -69,12 +69,12 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     else:
       return redirect('community:community_main')
 
-def post_detail(request, pk, *args, **kwargs):
-    post = Post.objects.get(pk=pk)
-    context = {
-        'post' : post,
-    }
-    return render(request, 'community/post_detail.html', context=context)
+# def post_detail(request, pk, *args, **kwargs):
+#     post = Post.objects.get(pk=pk)
+#     context = {
+#         'post' : post,
+#     }
+#     return render(request, 'community/post_detail.html', context=context)
 
 @csrf_exempt
 def comment_ajax(request, *args, **kwargs):
@@ -107,3 +107,5 @@ class update(LoginRequiredMixin,UpdateView):
             return super(update, self).dispatch(request, *args, **kwargs)
         else:
             raise PermissionDenied
+
+    

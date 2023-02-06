@@ -13,7 +13,7 @@ class Profile(models.Model):
   weight = models.FloatField(null=True, blank=True)
   age = models.IntegerField(null=True, blank=True)
   birth_date = models.DateField(null=True, blank=True)
-  following = models.ManyToManyField(User, related_name='following',null=True, blank=True)
+  following = models.ManyToManyField(User, related_name='following', blank=True)
   
   def __str__(self):
     return self.user.username
