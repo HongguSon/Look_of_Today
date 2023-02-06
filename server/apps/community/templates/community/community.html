@@ -40,12 +40,12 @@
             <div class="content">
             {%for post in post_list%}
               <div>
-                <a href="{% url 'community:detail' post.pk%}">
+                <a href="{% url 'community:post_detail' post.pk%}">
                   {%if post.main_img %}
                   <img src="{{post.main_img.url}}">
                   {%endif%}
                 </a>
-                <p><a href="{% url 'community:detail' post.pk%}">{{post.title}}</a></p>
+                <p><a href="{% url 'community:post_detail' post.pk%}">{{post.title}}</a></p>
                 <div class="postauthor">{{post.author}}</div>
               </div>
             {%endfor%}

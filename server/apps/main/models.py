@@ -59,14 +59,14 @@ class Comment(models.Model):
   
   def __str__(self):
     return f'({self.author}) {self.post.title} :  {self.content}'
-  
-class Commu(models.Model):
-  COMMU_CHOICES = [
-    ('buying', 'buying'), #공동구매
+
+class Talk(models.Model):
+  Talk_CHOICES = (
+      ('buying', 'buying'), #공동구매
     ('openrun', 'openrun'), #오픈런
     ('question', 'question'), #고민방
-  ]
-  category = models.CharField(max_length=20, choices=COMMU_CHOICES)
+  )
+  category = models.CharField(max_length=20, choices=Talk_CHOICES)
   img = models.ImageField(upload_to='main/images/commu/%Y/%m/%d', null=True, blank=True)
   title = models.CharField(max_length=100)
   content = models.TextField()
@@ -76,4 +76,4 @@ class Commu(models.Model):
     return f'{self.pk}: {self.title}'
   
   def get_absolute_url(self):
-    return f'/community/commu'
+    return f'/community/talk/'
