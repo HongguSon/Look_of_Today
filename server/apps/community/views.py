@@ -59,7 +59,7 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
   template_name = 'community/post_create.html'
 
   def test_func(self):
-    return self.request.user.is_superuser or self.request.user.is_staff
+    return self.request.user
 
   def form_valid(self, form):
     current_user = self.request.user

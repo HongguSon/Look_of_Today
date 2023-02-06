@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from server.apps.main.models import Post,Clothes,Comment
+from server.apps.main.models import Post, Clothes, Comment
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import CreateView, UpdateView
 
@@ -43,7 +43,7 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
 class ClothesCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
   model = Clothes
-  fields = ['img', 'category']
+  fields = ['img', 'category', 'buying']
   
   template_name = 'closet/clothes_create.html'
 
@@ -53,7 +53,7 @@ class ClothesCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
   def form_valid(self, form):
     current_user = self.request.user
     if current_user.is_authenticated:
-      #form.instance.author = current_user
+      form.instance.author = current_user
       return super(ClothesCreate, self).form_valid(form)
     else:
       return redirect('closet:closet_main')
