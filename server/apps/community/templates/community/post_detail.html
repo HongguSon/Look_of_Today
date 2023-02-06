@@ -23,18 +23,20 @@
     <a href="{% url 'community:community_main' %}" style="color:black; text-decoration:none;">목록</a>
   </button>
 </div>
-</div>
-
-{%if post.main_img %}
-<img src="{{post.main_img.url}}" class = "post_img">
-{%endif%}
+</div> <br />
 <br />
+<div class="postimgs">
+{%if post.main_img %}
+<img src="{{post.main_img.url}}" class = "post_img1"> <br />
+{%endif%}
 
+<div class = "post_cody">코디한 룩북 <br>
 {%for clothes in post.clothes.all%}
-<div class = "post_cody">코디한 룩북</div>
 <img src="{{clothes.img.url}}" class = "post_img">
 {%endfor%}
-
+</div> 
+</div>
+</div>
 <hr>  
 <div class="comment-sum">
 
@@ -87,7 +89,7 @@
     }
     requestComment.send(JSON.stringify(data));
   }
-
+  
   requestComment.onreadystatechange = () => {
     if (requestComment.readyState === XMLHttpRequest.DONE) {
       if (requestComment.status < 400) {

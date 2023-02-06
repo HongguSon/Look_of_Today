@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# AUTH_USER_MODEL = 'auth.User'
+# #내가 추가함
 
 # Application definition
 
