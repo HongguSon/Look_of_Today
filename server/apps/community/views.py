@@ -18,10 +18,16 @@ def community_main(request, *args, **kwargs):
     # for a in post_list:
     #     if a.author == request.user:
     #         b+=1
-    post_count = Post.objects.filter(author=request.user).count()
+    if request.user.is_authenticated:
+      post_count = Post.objects.filter(author=request.user).count()
+      comment_count = Comment.objects.filter(author=request.user).count()
+    else:
+      post_count = 0
+      comment_count = 0
     context={
         'post_list' : post_list,
-        'post_count': post_count
+        'post_count': post_count,
+        'comment_count': comment_count,
         }   
     return render(request,'community/community.html',context=context)
 
@@ -64,8 +70,10 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
 def post_detail(request, pk, *args, **kwargs):
     post = Post.objects.get(pk=pk)
+    comments = Comment.objects.filter(post=pk)
     context = {
         'post' : post,
+        'comments' : comments,
     }
     return render(request, 'community/post_detail.html', context=context)
 
@@ -97,6 +105,6 @@ class PostUpdate(LoginRequiredMixin,UpdateView):
 
   def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated and request.user == self.get_object().author:
-            return super(update, self).dispatch(request, *args, **kwargs)
+            return super(PostUpdate, self).dispatch(request, *args, **kwargs)
         else:
             raise PermissionDenied

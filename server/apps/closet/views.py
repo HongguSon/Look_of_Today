@@ -6,13 +6,13 @@ from django.views.generic import CreateView, UpdateView
 # Create your views here.
 def closet_main(request):
     clothes_list = Clothes.objects.all() 
-    b=0
-    for a in clothes_list:
-        b+=1
+    # b=0
+    # for a in clothes_list:
+    #     b+=1
     clothes_count = Clothes.objects.all().count()
     context={
         'clothes_list' : clothes_list,
-        'clothes_count' : b,
+        'clothes_count' : clothes_count,
         }   
     return render(request,'closet/closet_main.html',context=context)
 
