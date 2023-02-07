@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
   
 
 class Top(models.Model):
+  author = models.ForeignKey(User, on_delete=models.CASCADE)
   img = models.ImageField(upload_to='main/images/clothes/%Y/%m/%d')
   title = models.CharField(max_length=100,unique=True)
   like = models.ManyToManyField(User, related_name='TopLike', blank=True)
