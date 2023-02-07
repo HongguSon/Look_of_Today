@@ -34,7 +34,7 @@ class Bottom(models.Model):
 class Outer(models.Model):
   img = models.ImageField(upload_to='main/images/clothes/%Y/%m/%d')
   title = models.CharField(max_length=100,unique=True)
-  like = models.ManyToManyField(User, related_name='OutterLike', blank=True)
+  like = models.ManyToManyField(User, related_name='OuterLike', blank=True)
   buying = models.TextField(null=True, blank=True)
   author = models.ForeignKey(User, on_delete=models.CASCADE)
   
@@ -79,8 +79,8 @@ class Post(models.Model):
   top = models.ManyToManyField(Top, related_name='Top', blank=True)
   bottom = models.ManyToManyField(Bottom,  related_name='Bottom', blank=True)
   acc = models.ManyToManyField(Acc, related_name='Acc', blank=True)
-  outer= models.ManyToManyField(Outer, related_name='Outter', blank=True)
-  shoes= models.ManyToManyField(Shoes, related_name='Shose', blank=True)
+  outer = models.ManyToManyField(Outer, related_name='Outer', blank=True)
+  shoes = models.ManyToManyField(Shoes, related_name='Shoes', blank=True)
 
   likes = models.ManyToManyField(User, related_name='Likes', blank=True)
   open = models.BooleanField(default=False)
