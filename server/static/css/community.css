@@ -16,6 +16,7 @@
   border: 2px;
   width: 200px;
   padding: 8px;
+  margin-top: 2rem;
   border-radius: 10px;
 }
 
@@ -108,3 +109,4 @@ p{
 textarea{
   resize: none;
 }
+
