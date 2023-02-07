@@ -1,45 +1,67 @@
-#banner {
-    height: 200px;
-    text-align: center;
-  }
-  
-.right {
-  border-right: 1px solid black;
+.nolog{
+  text-align: center;
+}
+
+.info{
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #DADBDB;
   height: 100%;
 }
-  
-.col-3 {
-  border-left: 5rem;
+
+.name{
+  display: flex;
+  align-items: center;
+}
+
+.nobtn{
+  margin-top: 0.6rem;
+}
+
+.main{
+  display: flex;
+  flex-direction: row;
+}
+
+.right {
+  border-right: 1px solid #DADBDB;
+  height: 100%;
+  padding-bottom: 4rem;
 }
   
 .con {
-  border: 2px;
-  width: 200px;
+  border-color: #DADBDB;
   padding: 8px;
   margin-top: 2rem;
+  margin-bottom: 2rem; 
   border-radius: 10px;
 }
 
 .con > div{
-  margin-top: 0.6rem;
+  justify-content: space-around;
+  display: flex;
+}
+
+.cre_btn{
+  display: inline;
+  justify-content: center;
 }
 
 .post_count{
-  margin-left: 20px;
+  margin-left: 1.4rem;
 }
 
 .comment_count{
-  margin-left: 8px;
+  margin-left: 0.4rem;
 }
 
-  
 #user-img {
   width: 100px;
   height: 100px;
 }
   
 .menu {
-  margin-top: 1.875rem;
+  padding-bottom: 4rem; 
 }
   
 .menu div {
