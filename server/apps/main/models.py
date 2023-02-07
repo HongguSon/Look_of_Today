@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 # Create your models here.
   
 
@@ -97,25 +98,43 @@ class Comment(models.Model):
   author = models.ForeignKey(User, on_delete=models.CASCADE)
   content = models.TextField()
   create_date = models.DateTimeField(auto_now_add=True)
-  update_date = models.DateTimeField(auto_now_add=True)
+  update_date = models.DateTimeField(auto_now=True)
   
   def __str__(self):
     return f'({self.author}) {self.post.title} :  {self.content}'
 
 class Talk(models.Model):
   Talk_CHOICES = (
-    (0, '공동 구매'), #공동구매
-    (1, '오픈런'), #오픈런
-    (2, '고민방'), #고민방
+    ('공동 구매', '공동 구매'), #공동구매
+    ('오픈런', '오픈런'), #오픈런
+    ('고민방', '고민방'), #고민방
   )
-  category = models.CharField(max_length=20, choices=Talk_CHOICES)
+  category = models.CharField( max_length=5,choices=Talk_CHOICES)
   img = models.ImageField(upload_to='main/images/commu/%Y/%m/%d', null=True, blank=True)
   title = models.CharField(max_length=100)
   content = models.TextField()
   author = models.ForeignKey(User, on_delete=models.CASCADE)
-  
+  create_date = models.DateTimeField(auto_now_add=True)
+  # update_date = models.DateTimeField(auto_now=True)
+  likes = models.ManyToManyField(User, related_name='Talk_Likes', blank=True)
+
+
   def __str__(self):
     return f'{self.pk}: {self.title}'
-  
+
+  def total_likes(self):
+        return self.likes.count()
+
   def get_absolute_url(self):
-    return f'/community/talk/'
+    return f'/community/'
+
+
+class Comment_Talk(models.Model):
+  talk = models.ForeignKey(Talk, on_delete=models.CASCADE)
+  author = models.ForeignKey(User, on_delete=models.CASCADE)
+  content = models.TextField()
+  create_date = models.DateTimeField(auto_now_add=True)
+  update_date = models.DateTimeField(auto_now=True)
+  
+  def __str__(self):
+    return f'({self.author}) {self.talk.title} :  {self.content}'

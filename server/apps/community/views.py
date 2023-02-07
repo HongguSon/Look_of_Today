@@ -3,7 +3,6 @@ from django.shortcuts import render, redirect
 from server.apps.main.models import *
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
-from django.http import Http404
 from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.http.request import HttpRequest
@@ -13,13 +12,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 # Create your views here.
 def community_main(request, *args, **kwargs):
-    post_list = Post.objects.all() 
-    # b=0
-    # for a in post_list:
-    #     if a.author == request.user:
-    #         b+=1
+    post_list = Talk.objects.all() 
     if request.user.is_authenticated:
-      post_count = Post.objects.filter(author=request.user).count()
+      post_count = Talk.objects.filter(author=request.user).count()
       comment_count = Comment.objects.filter(author=request.user).count()
     else:
       post_count = 0
@@ -31,30 +26,9 @@ def community_main(request, *args, **kwargs):
         }   
     return render(request,'community/community.html',context=context)
 
-def post_delete(request:HttpRequest, pk, *args, **kwargs):
-    if request.method == "POST":
-        post = Post.objects.get(pk=pk)
-        post.delete()
-    return redirect("/")
-
-@require_POST
-def post_likes(request, pk, *args, **kwargs):
-    if request.user.is_authenticated:
-        article = get_object_or_404(Post, pk=pk)
-        users=article.likes.all()
-        if users.filter(pk=request.user.pk).exists():
-            article.likes.remove(request.user)
-        else:
-            article.likes.add(request.user)
-        return redirect('community:community_main')
-        
-        # return redirect('accouts:login')위에거 대신 이거 떠야함! 나중에 로그인 합치고!!
-    return render(request, 'community:detail.html')
-
 class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
-  model = Post
-  fields = ['main_img', 'title','open', 'top','bottom','acc','outter','shose']
-  
+  model = Talk
+  fields = ['category','img','title', 'content']
   template_name = 'community/post_create.html'
 
   def test_func(self):
@@ -68,14 +42,33 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     else:
       return redirect('community:community_main')
 
+def post_delete(request:HttpRequest, pk, *args, **kwargs):
+    if request.method == "POST":
+        post = Talk.objects.get(pk=pk)
+        post.delete()
+    return redirect("/")
+
 def post_detail(request, pk, *args, **kwargs):
-    post = Post.objects.get(pk=pk)
+    post = Talk.objects.get(pk=pk)
     comments = Comment.objects.filter(post=pk)
     context = {
         'post' : post,
         'comments' : comments,
     }
     return render(request, 'community/post_detail.html', context=context)
+
+@require_POST
+def post_likes(request, pk, *args, **kwargs):
+    if request.user.is_authenticated:
+        article = get_object_or_404(Talk, pk=pk)
+        users=article.likes.all()
+        if users.filter(pk=request.user.pk).exists():
+            article.likes.remove(request.user)
+        else:
+            article.likes.add(request.user)
+        return redirect('community:post_detail',pk)
+        # return redirect('accouts:login')위에거 대신 이거 떠야함! 나중에 로그인 합치고!!
+    return render(request, 'community:detail.html')
 
 @csrf_exempt
 def comment_ajax(request, *args, **kwargs):
