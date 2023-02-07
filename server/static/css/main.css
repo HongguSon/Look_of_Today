@@ -1,27 +1,3 @@
-.nav{
-    padding-right: 350px;
-}
-
-.title{
-    color: black;
-    font-size: 30px;
-    text-decoration: none;
-}
-
-.d-flex{
-    width: 300px;
-    padding-right: 30px;
-    height: 30px;
-}
-
-.form-control{
-    margin-right: 20px;
-}
-
-.scb{
-    font-size: 12px;
-}
-
 .nopost{
    display: flex;
    flex-direction: row;
@@ -174,4 +150,3 @@
 .best2:hover{
     color: black;
 }
-

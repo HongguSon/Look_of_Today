@@ -12,26 +12,28 @@
   <li><a href="" class="small_menu text-black fs-5">하의</a></li>
   <li><a href="" class="small_menu text-black fs-5">신발</a></li>
   <li><a href="" class="small_menu text-black fs-5">액세서리</a></li>
-  <li><a href="{% url 'closet:clothes_create' %}" class="small_menu text-black fs-5">옷 추가</a></li>
-  <li><a href="{% url 'closet:closet_main2' %}" class="small_menu text-black fs-5">내 착장</a></li>
+  <li><a href="{% url 'community:post_create' %}" class="small_menu text-black fs-5">착장 추가</a></li>
+  <li><a href="{% url 'closet:closet_main' %}" class="small_menu text-black fs-5">내 옷장</a></li>
+
 </ul>
 <hr/>
-{%for Clothes in clothes_list%}
+{%for Post in post_list%}
   <a>
-    {%if Clothes.img %}
-    <img src="{{Clothes.img.url}}">
+    {%if Post.main_img %}
+    <img src="{{Post.main_img.url}}">
     {%endif%}
   </a>
 {%endfor%}
 
 
-<!-- <div class="my-3 mx-2 img_container">
-  <img src="{% static 'img/1.jpeg' %}" class="img-fluid img-thumbnail clothes" alt="">
+
+<!-- <div class="my-3 mx-2 img_container"> -->
+  <!-- <img src="{% static 'img/1.jpeg' %}" class="img-fluid img-thumbnail clothes" alt="">
   <img src="{% static 'img/2.jpeg' %}" class="img-fluid img-thumbnail clothes" alt="">
   <img src="{% static 'img/3.jpeg' %}" class="img-fluid img-thumbnail clothes" alt="">
   <img src="{% static 'img/4.jpeg' %}" class="img-fluid img-thumbnail clothes" alt="">
   <img src="{% static 'img/5.jpeg' %}" class="img-fluid img-thumbnail clothes" alt="">
   <img src="{% static 'img/6.jpeg' %}" class="img-fluid img-thumbnail clothes" alt="">
-  <img src="{% static 'img/7.jpeg' %}" class="img-fluid img-thumbnail clothes" alt="">
-</div> -->
+  <img src="{% static 'img/7.jpeg' %}" class="img-fluid img-thumbnail clothes" alt=""> -->
+<!-- </div> -->
 {% endblock %}

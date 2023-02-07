@@ -34,7 +34,7 @@ def log_in(request):
     password=request.POST['password']
     user = authenticate(username=username, password=password)
     if user:
-      login(request, user)
+      login(request, user, backend='django.contrib.auth.backends.ModelBackend')
       return redirect('main:main')
     else:
       context={'msg':'로그인 정보가 맞지 않습니다! 아이디 또는 비밀번호를 확인해주세요',}
@@ -42,12 +42,65 @@ def log_in(request):
   return render(request, 'user/login.html')
 
 def mypage(request):
-  # form = ProfileUpdateForm(instance=request.user.profile)
-  # context = {
-  #   'form': form,
-  # }
-  return render(request, 'user/mypage.html')
-      
+  user = request.user
+  profile_image = user.profile.profile_image
+  phone_num = user.profile.phone_num
+  height = user.profile.height
+  weight = user.profile.weight
+  age = user.profile.age
+  birth_date = user.profile.birth_date
+  following = user.profile.following
+  context = {'user':user,
+             'profile_image':profile_image,
+             'phone_num':phone_num,
+             'height':height,
+             'weight':weight,
+             'age':age,
+             'birth_date':birth_date,
+             'following': following,
+             'str_following': str(following)}
+  return render(request, 'user/mypage.html', context=context)
+
+def mypage_update(request):
+  user = request.user
+  profile_image = user.profile.profile_image
+  phone_num = user.profile.phone_num
+  height = user.profile.height
+  weight = user.profile.weight
+  age = user.profile.age
+  birth_date = user.profile.birth_date
+  following = user.profile.following
+  context = {'user':user,
+             'profile_image':profile_image,
+             'phone_num':phone_num,
+             'height':height,
+             'weight':weight,
+             'age':age,
+             'birth_date':birth_date,
+             'following': following,
+             'str_following': str(following)}
+  
+  if request.method == "POST":
+    if request.FILES.get("image"):
+      user.profile.profile_image=request.FILES["image"]
+    if request.POST.get("check1"):
+      user.profile_user.profile_image = None
+    user.profile.phone_num = request.POST["phone_num"]
+    user.profile.height = request.POST["height"]
+    user.profile.weight = request.POST["weight"]
+    user.profile.age = request.POST["age"]
+    
+    '1999년 8월 30일'
+    x = request.POST["birth_date"]
+    year = x.split('년')[0]
+    month = x.split('년')[1].split('월')[0].strip()
+    date = x.split('년')[1].split('월')[1].split('일')[0].strip()
+    user.profile.birth_date = year+'-'+month+'-'+date
+    #following도 처리해줘야함
+    user.profile.save()
+    return redirect("user:mypage")
+  
+  return render(request, "user/mypage_update.html",context=context)
 
 # class PostUpdate(LoginRequiredMixin, UpdateView):
 #   model = Profile
