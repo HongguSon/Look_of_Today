@@ -1,5 +1,5 @@
 #banner {
-    height: 200px;
+    height: 12.5rem;
     text-align: center;
   }
   
@@ -13,11 +13,11 @@
 }
   
 .con {
-  border: 2px;
-  width: 200px;
-  padding: 8px;
+  border: 0.125rem;
+  width: 12.5rem;
+  padding: 0.5rem;
   margin-top: 2rem;
-  border-radius: 10px;
+  border-radius: 0.625rem;
 }
 
 .con > div{
@@ -25,21 +25,22 @@
 }
 
 .post_count{
-  margin-left: 20px;
+  margin-left: 1.25rem;
 }
 
 .comment_count{
-  margin-left: 8px;
+  margin-left: 0.5rem;
 }
 
   
 #user-img {
-  width: 100px;
-  height: 100px;
+  width: 6.25rem;
+  height: 6.25rem;
 }
   
 .menu {
   margin-top: 1.875rem;
+  margin-bottom: 2.5rem;
 }
   
 .menu div {
@@ -48,24 +49,24 @@
 }
   
 .menu hr {
-  width: 200px;
+  width: 12.5rem;
 }
   
 .ootd {
-  padding-right: 20px;
+  padding-right: 1.25rem;
 }
   
 .com-title {
-  padding-top: 20px;
-  padding-bottom: 20px;
-  font-size: 50px;
-  margin-left: 20px;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  font-size: 3.125rem;
+  margin-left: 1.25rem;
 }
   
 .content img {
-  border-radius: 15px;
-  width: 250px;
-  height: 250px;
+  border-radius: 0.938rem;
+  width: 15.625rem;
+  height: 15.625rem;
   opacity: 1;
   -webkit-transform: scale(1);
 	transform: scale(1);
@@ -80,9 +81,9 @@
 }
   
 .content{
-    padding-top: 30px;
-    padding-left: 100px;
-    padding-bottom: 50px;
+    padding-top: 1.875rem;
+    padding-left: 6.25rem;
+    padding-bottom: 3.125rem;
     text-align:start;
     display: flex;
     flex-wrap: wrap;
@@ -100,10 +101,10 @@ p{
 }
 
 .com-title {
-    padding-top: 20px;
-    padding-bottom: 20px;
-    font-size: 50px;
-    margin-left: 20px;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+    font-size: 3.125rem;
+    margin-left: 1.25rem;
   }
 
 textarea{

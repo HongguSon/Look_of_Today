@@ -1,61 +1,58 @@
 .post_title{
-    font-size: 40px;
-    padding-left: 100px;
-    padding-top: 20px;
+    font-size: 2.5rem;
+    padding-left: 6.25rem;
+    padding-top: 2.5rem;
 }
 
 .post_img{
     margin: auto;
     display: block;
-    width: 300px;
-    border-radius: 10px;
-    margin-bottom: 40px;
-    margin-top: 20px;
+    width: 25.75rem;
+    border-radius: 0.625rem;
+    margin-bottom: 2.5rem;
+    margin-top: 1.25rem;
 }
 
 .cody_img{
     margin: auto;
     display: block;
-    width: 300px;
-    border-radius: 10px;
-    margin-top: 20px;
+    width: 18.75rem;
+    border-radius: 0.625rem;
+    margin-top: 1.25rem;
 }
 
 
-.postimgs{
-    text-align: center;
-    margin-bottom: 100px;
-}
 
 .postimgs > img{
     height: 25vw;
-    border-radius: 15px;
+    border-radius: 0.938rem;
 }
 
 .cody_list{
-    font-size: 20px;
+    font-size: 1.25rem;
     text-align: center;
 }
 
 .clothes_list{
-    font-size: 20px;
+    font-size: 1.25rem;
     text-align: center;
 }
 
 .post_author{
-    font-size: 20px;
-    padding-left: 105px;
+    font-size: 1.25rem;
+    padding-left: 6.563rem;
 }
 
 .post_time{
     color:#b4b4b4;
-    font-size: 17px;
-    padding-left: 105px;
+    font-size: 1.063rem;
+    padding-left: 6.563rem;
 }
 
 .post_content{
-    font-size: 20px;
+    font-size: 1.05rem;
     padding-left: 6.563rem;
+    padding-bottom: 2rem;
 }
 
 .button-box{
@@ -63,16 +60,16 @@
     flex-direction: row;
     justify-content: space-around;
     float: right;
-    padding-right: 20px;
+    padding-right: 1.25rem;
 }
 
 .button-box > button {
     background-color: white;
     border: 2px solid black;
-    border-radius: 10px;
-    font-size: 15px;
-    height: 28px;
-    margin-top: 3px;
+    border-radius: 0.625rem;
+    font-size: 0.938rem;
+    height: 1.75rem;
+    margin-top: 0.188rem;
     transition: 0.2s;
 }
 
@@ -84,11 +81,11 @@
 .delbtn{
     background-color: white;
     border: 2px solid black;
-    border-radius: 10px;
-    font-size: 15px;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-top: 2px;
+    border-radius: 0.625rem;
+    font-size: 0.938rem;
+    margin-left: 0.625rem;
+    margin-right: 0.625rem;
+    margin-top: 0.125rem;
     transition: 0.2s;
 }
 
@@ -110,31 +107,31 @@
 }
 
 #comment-con{
-    margin-left: 100px;
+    margin-left: 6.25rem;
     margin-right: 12.5rem;
-    margin-bottom: 50px;
+    margin-bottom: 3.125rem;
 }
 
 .comment-input{
     border: 2px solid black;
-    border-radius: 10px;
+    border-radius: 0.625rem;
     transition: 0.2s;
     resize: none;
 }
 
 .comment-sum{
-    margin-left: 16.125rem;
+    margin-left: 12.25rem;
 }
 
 form svg{
-    width: 30px;
-    height: 30px;
-    margin-left: 30px;
+    width: 1.875rem;
+    height: 1.875rem;
+    margin-left: 1.875rem;
 }
 
 #listbtn{
     margin-top: 1px;
-    height: 30px;
+    height: 1.875rem;
     transition: 0.2s;
 }
 
