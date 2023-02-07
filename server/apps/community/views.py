@@ -18,7 +18,10 @@ def community_main(request, *args, **kwargs):
     # for a in post_list:
     #     if a.author == request.user:
     #         b+=1
-    post_count = Post.objects.filter(author=request.user).count()
+    if request.user.is_authenticated:
+      post_count = Post.objects.filter(author=request.user).count()
+    else:
+      post_count = 0
     context={
         'post_list' : post_list,
         'post_count': post_count
@@ -40,7 +43,7 @@ def post_likes(request, pk, *args, **kwargs):
             article.likes.remove(request.user)
         else:
             article.likes.add(request.user)
-        return redirect('community:detail',pk)
+        return redirect('community:community_main')
         
         # return redirect('accouts:login')위에거 대신 이거 떠야함! 나중에 로그인 합치고!!
     return render(request, 'community:detail.html')
@@ -62,12 +65,13 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     else:
       return redirect('community:community_main')
 
-# def post_detail(request, pk, *args, **kwargs):
-#     post = Post.objects.get(pk=pk)
-#     context = {
-#         'post' : post,
-#     }
-#     return render(request, 'community/post_detail.html', context=context)
+def post_detail(request, pk, *args, **kwargs):
+    post = Post.objects.get(pk=pk)
+    
+    context = {
+        'post' : post,
+    }
+    return render(request, 'community/post_detail.html', context=context)
 
 @csrf_exempt
 def comment_ajax(request, *args, **kwargs):
@@ -97,8 +101,6 @@ class PostUpdate(LoginRequiredMixin,UpdateView):
 
   def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated and request.user == self.get_object().author:
-            return super(update, self).dispatch(request, *args, **kwargs)
+            return super(PostUpdate, self).dispatch(request, *args, **kwargs)
         else:
             raise PermissionDenied
-
-    
