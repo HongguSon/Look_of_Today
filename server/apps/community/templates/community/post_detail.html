@@ -35,14 +35,20 @@
 
 <hr>
 <div class="comment-sum">
-  <div id="comment-list-{{post.pk}}" class="comment-list">
-    {% for comment in comments %}
-    <div class="d-flex align-items-center m-0 p-4">
-      <i class="fa-solid fa-user m-3"></i>
-      <div>
-        <div>{{comment.author.username}}</div>
-        <div>{{comment.content}}</div>
-        <!-- 추가로 댓글 수정 삭제를 넣어볼까 생각중 -->
+
+    <div id="comment-list-{{post.pk}}" class="comment-list">
+      <div class="comm">
+        {% for comment in comments %}
+            <div class="d-flex align-items-center m-0 p-4">
+                <i class="fa-solid fa-user m-3"></i>  
+                <div>
+                    <div>{{comment.author.username}}</div>
+                    <div>{{comment.content}}</div>
+                    <!-- 추가로 댓글 수정 삭제를 넣어볼까 생각중 -->
+                </div>
+            </div>
+            <hr>
+        {% endfor %}
       </div>
     </div>
     <hr>
@@ -107,12 +113,17 @@
         const { author, post_id, content, comment_id } = JSON.parse(requestComment.response);
         document.querySelector(`#comment-input-${post_id}`).value = "";
         const element = document.querySelector(`#comment-list-${post_id}`);
-        let temp = document.createElement("p");
-        let temptext = document.createTextNode(`  ${content}`);
-        temp.appendChild(temptext);
-        element.appendChild(temp);
+        const comm = document.querySelector(`.comm`);
+        const newComment = document.createElement('div');
+        newComment.className = "d-flex align-items-center m-0 p-4";
+        newComment.innerHTML = `<i class="fa-solid fa-user m-3"></i>  
+                <div>
+                    <div>${author}</div>
+                    <div>${content}</div>
+                </div>`;
+        comm.appendChild(newComment);
         let h = document.createElement("hr");
-        element.appendChild(h);
+        comm.appendChild(h);
       }
     }
   }

@@ -1,46 +1,68 @@
-#banner {
-    height: 12.5rem;
-    text-align: center;
-  }
-  
-.right {
-  border-right: 1px solid black;
-  height: 100%;
-}
-  
-.col-3 {
-  border-left: 5rem;
-}
-  
-.con {
-  border: 0.125rem;
-  width: 12.5rem;
-  padding: 0.5rem;
-  margin-top: 2rem;
-  border-radius: 0.625rem;
+.nolog{
+  text-align: center;
 }
 
-.con > div{
+.info{
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #DADBDB;
+  height: 100%;
+}
+
+.name{
+  display: flex;
+  align-items: center;
+}
+
+.nobtn{
   margin-top: 0.6rem;
 }
 
+.main{
+  display: flex;
+  flex-direction: row;
+  height: 30rem;
+}
+
+.right {
+  border-right: 1px solid #DADBDB;
+  height: 100%;
+  padding-bottom: 4rem;
+}
+  
+.con {
+  border-color: #DADBDB;
+  padding: 8px;
+  margin-top: 2rem;
+  margin-bottom: 2rem; 
+  border-radius: 10px;
+}
+
+.con > div{
+  justify-content: space-around;
+  display: flex;
+}
+
+.cre_btn{
+  display: inline;
+  justify-content: center;
+}
+
 .post_count{
-  margin-left: 1.25rem;
+  margin-left: 1.4rem;
 }
 
 .comment_count{
-  margin-left: 0.5rem;
+  margin-left: 0.4rem;
 }
 
-  
 #user-img {
   width: 6.25rem;
   height: 6.25rem;
 }
   
 .menu {
-  margin-top: 1.875rem;
-  margin-bottom: 2.5rem;
+  padding-bottom: 4rem; 
 }
   
 .menu div {
