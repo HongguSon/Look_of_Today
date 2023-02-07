@@ -1,6 +1,6 @@
 import json
 from django.shortcuts import render, redirect
-from server.apps.main.models import Post,Clothes,Comment
+from server.apps.main.models import *
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 from django.http import Http404
@@ -53,7 +53,7 @@ def post_likes(request, pk, *args, **kwargs):
 
 class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
   model = Post
-  fields = ['main_img', 'title', 'clothes']
+  fields = ['main_img', 'title','open', 'top','bottom','acc','outter','shose']
   
   template_name = 'community/post_create.html'
 
@@ -99,7 +99,7 @@ def comment_ajax(request, *args, **kwargs):
 
 class PostUpdate(LoginRequiredMixin,UpdateView):
   model = Post
-  fields = ['main_img', 'title', 'clothes']
+  fields = ['main_img', 'title','open',  'top','bottom','acc','outter','shose']
   
   template_name = 'community/update.html'
 
