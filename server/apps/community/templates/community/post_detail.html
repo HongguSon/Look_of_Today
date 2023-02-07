@@ -22,18 +22,19 @@
   <button id="listbtn">
     <a href="{% url 'community:community_main' %}" style="color:black; text-decoration:none;">목록</a>
   </button>
-</div>
-<br /><br />
-<div class="postimgs">
+</div> 
+<br />
+<br />
+  <div class="clothes_list"> 착장 </div>
     {%if post.main_img %}
-    <img src="{{post.main_img.url}}" class = "post_img1"> <br />
+    <img src="{{post.main_img.url}}" class = "post_img"> 
     {%endif%}
-
-    <div class = "post_cody">코디한 룩북 <br>
+    <br />
+    <div class="cody_list"> 코디한 룩북 </div>
+    <div class="postimgs">
     {%for clothes in post.clothes.all%}
-    <img src="{{clothes.img.url}}" class = "post_img">
+    <img src="{{clothes.img.url}}" class = "cody_img">
     {%endfor%}
-    </div> 
 </div>
 <hr>  
 <div class="comment-sum">
