@@ -110,3 +110,12 @@ textarea{
   resize: none;
 }
 
+.post_all{
+  font-size: x-large;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.post-box{
+  margin-top: 1rem;
+}

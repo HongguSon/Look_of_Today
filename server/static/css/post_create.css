@@ -1,5 +1,5 @@
 .post_title{
-    font-size: xx-large;
+    font-size: 40px;
     padding-left: 100px;
     padding-top: 20px;
 }
@@ -13,10 +13,6 @@
     margin-top: 20px;
 }
 
-.postimgs > img{
-    height: 25vw;
-}
-
 .cody_img{
     margin: auto;
     display: block;
@@ -27,9 +23,13 @@
 
 
 .postimgs{
-    display: flex;
-    flex-wrap: wrap;
+    text-align: center;
     margin-bottom: 100px;
+}
+
+.postimgs > img{
+    height: 25vw;
+    border-radius: 15px;
 }
 
 .cody_list{
@@ -42,11 +42,20 @@
     text-align: center;
 }
 
-
-
 .post_author{
     font-size: 20px;
     padding-left: 105px;
+}
+
+.post_time{
+    color:#b4b4b4;
+    font-size: 17px;
+    padding-left: 105px;
+}
+
+.post_content{
+    font-size: 20px;
+    padding-left: 6.563rem;
 }
 
 .button-box{

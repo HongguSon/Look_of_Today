@@ -37,7 +37,7 @@
         </div>
       </div>
       <div class="col-9 post-all">
-        모든 게시글 모아보기
+        <div class="post_all">모든 게시글 모아보기</div>
         {%for post in post_list%}
         <div class="post-box">
           {{post.category}} | <a href="{% url 'community:post_detail' post.pk%}">{{post.title}} </a> | 댓글 수 구현 전 |

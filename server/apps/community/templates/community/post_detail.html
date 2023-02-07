@@ -8,6 +8,7 @@
 {% block content %}
 <div class="post_title">{{post.title}}</div>
 <div class="post_author">{{post.author}}</div>
+<div class="post_time">{{post.create_date}}</div>
 
 <div class="button-box">
   {%if user == post.author%}
@@ -22,23 +23,17 @@
   <button id="listbtn">
     <a href="{% url 'community:community_main' %}" style="color:black; text-decoration:none;">목록</a>
   </button>
-</div> 
-<br />
-<br />
-  <div class="clothes_list"> 착장 </div>
-    {%if post.main_img %}
-    <img src="{{post.main_img.url}}" class = "post_img"> 
-    {%endif%}
-    <br />
-    <div class="cody_list"> 코디한 룩북 </div>
-    <div class="postimgs">
-    {%for clothes in post.clothes.all%}
-    <img src="{{clothes.img.url}}" class = "cody_img">
-    {%endfor%}
 </div>
-작성 내용 : {{post.content}}
-<br />
-작성일 : {{post.create_date}}
+<br /><br />
+<div class="post_content">
+  {{post.content}}
+  </div> <br />  
+
+<div class="postimgs">
+  {%if post.img %}
+  <img src="{{post.img.url}}" class="post_img1"> <br />
+  {%endif%}
+</div>
 
 <hr>
 <div class="comment-sum">
