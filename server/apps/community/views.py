@@ -15,7 +15,7 @@ def community_main(request, *args, **kwargs):
     post_list = Talk.objects.all() 
     if request.user.is_authenticated:
       post_count = Talk.objects.filter(author=request.user).count()
-      comment_count = Comment.objects.filter(author=request.user).count()
+      comment_count = Comment_Talk.objects.filter(author=request.user).count()
     else:
       post_count = 0
       comment_count = 0
@@ -27,8 +27,8 @@ def community_main(request, *args, **kwargs):
     return render(request,'community/community.html',context=context)
 
 class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
-  model = Talk
-  fields = ['category','img','title', 'content']
+  model = Post
+  fields = ['main_img', 'title', 'open', 'top', 'bottom', 'acc', 'outer', 'shoes']
   template_name = 'community/post_create.html'
 
   def test_func(self):
@@ -40,16 +40,16 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
       form.instance.author = current_user
       return super(PostCreate, self).form_valid(form)
     else:
-      return redirect('community:community_main')
+      return redirect('closet:our_closet')
 
 def post_delete(request:HttpRequest, pk, *args, **kwargs):
     if request.method == "POST":
-        post = Talk.objects.get(pk=pk)
+        post = Post.objects.get(pk=pk)
         post.delete()
     return redirect("/")
 
 def post_detail(request, pk, *args, **kwargs):
-    post = Talk.objects.get(pk=pk)
+    post = Post.objects.get(pk=pk)
     comments = Comment.objects.filter(post=pk)
     context = {
         'post' : post,

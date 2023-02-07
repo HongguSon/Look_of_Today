@@ -11,12 +11,12 @@
   <li><a href="" class="small_menu text-black fs-5">하의</a></li>
   <li><a href="" class="small_menu text-black fs-5">액세서리</a></li>
   <li><a href="" class="small_menu text-black fs-5">신발</a></li>
+  <li><a href="" class="small_menu text-black fs-5">액세서리</a></li>
   <li><a href="" class="small_menu text-black fs-5">옷 추가</a></li>
   <li><a href="{% url 'closet:closet_main2' %}" class="small_menu text-black fs-5">내 착장</a></li>
 </ul>
 <hr/>
-<div class="closet_list">
-{%for Clothes in clothes_list%}
+{% for Clothes in clothes_list %}
   <a>
     {%if Clothes.img %}
     <img src="{{Clothes.img.url}}" class="img-fluid closet_list2">
