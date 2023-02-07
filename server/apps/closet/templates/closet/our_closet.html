@@ -17,7 +17,7 @@
           <div class="">
             <div class="content">
             {%for post in post_list%}
-              <div>
+              <div class="post_info">
                 <a href="{% url 'community:post_detail' post.pk%}">
                   <img src="{{post.main_img.url}}">
                 </a>

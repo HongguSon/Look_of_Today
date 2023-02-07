@@ -14,7 +14,7 @@
   
 .title > p{
   margin-left: 6.25rem;
-  margin-top: 5rem !important;
+  margin-top: 3rem !important;
   text-align: left;
 }
 
@@ -93,6 +93,11 @@
     display: flex;
     flex-wrap: wrap;
     gap: 5rem;
+}
+
+.post_info > p {
+  margin-top: 0.5rem !important;
+  margin-bottom: 0 !important;
 }
 
 
