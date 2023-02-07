@@ -94,6 +94,9 @@
         const { author, post_id, content, comment_id } = JSON.parse(requestComment.response);
         document.querySelector(`#comment-input-${post_id}`).value = "";
         const element = document.querySelector(`#comment-list-${post_id}`);
+        let jak = document.createElement("p");
+        jak.append(`${author}`);
+        element.appendChild(jak);
         let temp = document.createElement("p");
         let temptext = document.createTextNode(`  ${content}`);
         temp.appendChild(temptext);
