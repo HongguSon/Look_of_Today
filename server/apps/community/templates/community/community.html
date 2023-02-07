@@ -5,6 +5,7 @@
     <title>community</title>
 {% endblock %}
 
+
 {% block content %}
 
 <body>
@@ -17,11 +18,15 @@
     <div class="row">
       <div class="col-3 right" style="padding-left: 100px;">
         <div class="con border border-gray 10px">
-          <img class="img-circle" id="user-img" src="오은영 박사님.jpg" />
+          {% if user.is_authenticated %}
+          <img class="img-circle" id="user-img" src="니트.jpg" />
           <span>{{user}}</span>
           <div><a href="#">내가 쓴 글 보기</a><span class="post_count">{{post_count}}개</span></div>
-          <div><a href="#">내가 쓴 댓글 보기</a><span class="comment_count">3개</span></div> <br>
+          <div><a href="#">내가 쓴 댓글 보기</a><span class="comment_count">{{comment_count}}개</span></div> <br>
           <a href="{% url 'community:post_create' %}"><button class="btn btn-primary">게시글 작성</button></a>
+          {% else %}
+          <a href="#">로그인을 하세요</a>
+          {% endif %}
         </div>
         <div class="menu">
           <div style="margin-left: 60px">게시판 목록</div>
@@ -39,12 +44,12 @@
             <div class="content">
             {%for post in post_list%}
               <div>
-                <a href="{% url 'community:detail' post.pk%}">
+                <a href="{% url 'community:post_detail' post.pk%}">
                   {%if post.main_img %}
                   <img src="{{post.main_img.url}}">
                   {%endif%}
                 </a>
-                <p><a href="{% url 'community:detail' post.pk%}">{{post.title}}</a></p>
+                <p><a href="{% url 'community:post_detail' post.pk%}">{{post.title}}</a></p>
                 <div class="postauthor">{{post.author}}</div>
               </div>
             {%endfor%}

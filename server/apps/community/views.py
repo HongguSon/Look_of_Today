@@ -12,34 +12,33 @@ from django.core.exceptions import PermissionDenied
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 # Create your views here.
-def community_main(request):
+def community_main(request, *args, **kwargs):
     post_list = Post.objects.all() 
-    b=0
-    for a in post_list:
-        if a.author == request.user:
-            b+=1
+    # b=0
+    # for a in post_list:
+    #     if a.author == request.user:
+    #         b+=1
+    if request.user.is_authenticated:
+      post_count = Post.objects.filter(author=request.user).count()
+      comment_count = Comment.objects.filter(author=request.user).count()
+    else:
+      post_count = 0
+      comment_count = 0
     context={
-        'post_list':post_list,
-        'post_count':b
+        'post_list' : post_list,
+        'post_count': post_count,
+        'comment_count': comment_count,
         }   
     return render(request,'community/community.html',context=context)
 
-def detail(request,pk):
-    post = Post.objects.get(id=pk)
-    print(post)
-    context={
-        "post": post,
-    }
-    return render(request,'community/post_detail.html',context=context)
-
-def delete(request:HttpRequest, pk, *args, **kwargs):
+def post_delete(request:HttpRequest, pk, *args, **kwargs):
     if request.method == "POST":
-        post = Post.objects.get(id=pk)
+        post = Post.objects.get(pk=pk)
         post.delete()
     return redirect("/")
 
 @require_POST
-def likes(request, pk):
+def post_likes(request, pk, *args, **kwargs):
     if request.user.is_authenticated:
         article = get_object_or_404(Post, pk=pk)
         users=article.likes.all()
@@ -59,7 +58,7 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
   template_name = 'community/post_create.html'
 
   def test_func(self):
-    return self.request.user.is_superuser or self.request.user.is_staff
+    return self.request.user
 
   def form_valid(self, form):
     current_user = self.request.user
@@ -71,8 +70,10 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
 def post_detail(request, pk, *args, **kwargs):
     post = Post.objects.get(pk=pk)
+    comments = Comment.objects.filter(post=pk)
     context = {
         'post' : post,
+        'comments' : comments,
     }
     return render(request, 'community/post_detail.html', context=context)
 
@@ -96,7 +97,7 @@ def comment_ajax(request, *args, **kwargs):
     
     return JsonResponse(context)
 
-class update(LoginRequiredMixin,UpdateView):
+class PostUpdate(LoginRequiredMixin,UpdateView):
   model = Post
   fields = ['main_img', 'title', 'clothes']
   
@@ -104,6 +105,6 @@ class update(LoginRequiredMixin,UpdateView):
 
   def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated and request.user == self.get_object().author:
-            return super(update, self).dispatch(request, *args, **kwargs)
+            return super(PostUpdate, self).dispatch(request, *args, **kwargs)
         else:
             raise PermissionDenied
