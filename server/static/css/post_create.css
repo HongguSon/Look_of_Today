@@ -1,43 +1,61 @@
 .post_title{
-    font-size: xx-large;
+    font-size: 40px;
     padding-left: 100px;
     padding-top: 20px;
 }
 
 .post_img{
+    margin: auto;
+    display: block;
     width: 300px;
     border-radius: 10px;
-    margin-right: 100px;
+    margin-bottom: 40px;
+    margin-top: 20px;
 }
 
-.post_img1{
+.cody_img{
+    margin: auto;
+    display: block;
     width: 300px;
     border-radius: 10px;
-    margin-top: 70px;
-    margin-bottom: 100px;
-    margin-left: 175px;
+    margin-top: 20px;
 }
-
 
 
 .postimgs{
-    display: flex;
-    flex-direction: row;
+    text-align: center;
+    margin-bottom: 100px;
 }
 
-.post_cody{
-    width: 300px;
-    height: 0;
-    padding-top: 40px;
+.postimgs > img{
+    height: 25vw;
+    border-radius: 15px;
+}
+
+.cody_list{
     font-size: 20px;
     text-align: center;
-    margin-left: 500px;
+}
+
+.clothes_list{
+    font-size: 20px;
     text-align: center;
 }
 
 .post_author{
     font-size: 20px;
     padding-left: 105px;
+}
+
+.post_time{
+    color:#b4b4b4;
+    font-size: 17px;
+    padding-left: 105px;
+}
+
+.post_content{
+    font-size: 20px;
+    padding-left: 6.563rem;
 }
 
 .button-box{
@@ -84,7 +102,7 @@
 }
 
 .comment-list hr{
-    width: 67%;
+    width: 71.5%;
 }
 
 .comment-list p{
@@ -93,6 +111,7 @@
 
 #comment-con{
     margin-left: 100px;
+    margin-right: 12.5rem;
     margin-bottom: 50px;
 }
 

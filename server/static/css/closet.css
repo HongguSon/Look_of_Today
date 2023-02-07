@@ -3,11 +3,61 @@
   height: 24vw !important;
 }
 
+.img_container {
+  display: flex;
+  /* justify-content: center; */
+  flex-wrap: wrap;
+}
+
+img{
+  width: 25vw !important;
+  height: 25vw !important;
+  border-radius: 15px;
+  opacity: 1;
+  -webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: .2s ease-in-out;
+	transition: .2s ease-in-out;
+}
+
+img:hover{
+  -webkit-transform: scale(1.03);
+	transform: scale(1.03);
+  opacity: .8;
+
+}
+
+.closet_list{
+  display: flex;
+  margin-top: 2.5rem;
+  margin-left: 8.5rem;
+  margin-bottom: 3rem;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: start;
+  gap: 3rem;
+}
+
 @media screen and (max-width: 768px){
   .img_container{ max-width: 760px; }
   .clothes {
     width: 45vw;
     height: 45vw !important;
+  }
+  img{
+    width: 35vw !important;
+    height: 35vw !important;
+    border-radius: 15px;
+  }
+  .closet_list{
+    display: flex;
+    margin-top: 1.5rem;
+    margin-left: 2.5rem;
+    margin-bottom: 40px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: start;
+    gap: 3rem;
   }
 }
 
@@ -16,8 +66,3 @@
   justify-content: center;
 }
 
-.img_container {
-  display: flex;
-  /* justify-content: center; */
-  flex-wrap: wrap;
-}

@@ -4,25 +4,26 @@
 <link rel="stylesheet" href="{% static 'css/closet.css' %}">
 {% endblock %}
 {% block content %}
-<div class="my-1 text-center fs-5">나만의 옷장</div>
-<hr/>
-<ul class="my-0 px-0 mx-3 d-flex justify-content-around">
+<div class="my-1 text-center fs-4 mt-2 mb-4">나만의 옷장</div>
+<ul class="my-2 px-0 mx-3 d-flex justify-content-around">
   <li><a href="" class="small_menu text-black fs-5">아우터</a></li>
   <li><a href="" class="small_menu text-black fs-5">상의</a></li>
   <li><a href="" class="small_menu text-black fs-5">하의</a></li>
-  <li><a href="" class="small_menu text-black fs-5">신발</a></li>
   <li><a href="" class="small_menu text-black fs-5">액세서리</a></li>
-  <li><a href="{% url 'closet:clothes_create' %}" class="small_menu text-black fs-5">옷 추가</a></li>
+  <li><a href="" class="small_menu text-black fs-5">신발</a></li>
+  <li><a href="" class="small_menu text-black fs-5">옷 추가</a></li>
   <li><a href="{% url 'closet:closet_main2' %}" class="small_menu text-black fs-5">내 착장</a></li>
 </ul>
 <hr/>
+<div class="closet_list">
 {%for Clothes in clothes_list%}
   <a>
     {%if Clothes.img %}
-    <img src="{{Clothes.img.url}}">
+    <img src="{{Clothes.img.url}}" class="img-fluid closet_list2">
     {%endif%}
   </a>
 {%endfor%}
+</div>
 
 
 <!-- <div class="my-3 mx-2 img_container">

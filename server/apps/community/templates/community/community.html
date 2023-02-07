@@ -1,8 +1,8 @@
 {% extends 'main/base.html'%}
 {% load static %}
 {% block extrahead %}
-    <link rel="stylesheet" href="{% static 'css/community.css' %}">
-    <title>community</title>
+<link rel="stylesheet" href="{% static 'css/community.css' %}">
+<title>community</title>
 {% endblock %}
 
 
@@ -31,31 +31,19 @@
         <div class="menu">
           <div style="margin-left: 60px">게시판 목록</div>
           <hr>
-          <div><a href="#">OOTD</a></div>
           <div><a href="#">같이 공구해요~</a></div>
           <div><a href="#">수다방</a></div>
           <div><a href="#">동행 (오픈런 등등)</a></div>
         </div>
       </div>
-      <div class="col-9">
-        <div class="ootd">
-          <div class="com-title">OOTD</div>
-          <div class="">
-            <div class="content">
-            {%for post in post_list%}
-              <div>
-                <a href="{% url 'community:post_detail' post.pk%}">
-                  {%if post.main_img %}
-                  <img src="{{post.main_img.url}}">
-                  {%endif%}
-                </a>
-                <p><a href="{% url 'community:post_detail' post.pk%}">{{post.title}}</a></p>
-                <div class="postauthor">{{post.author}}</div>
-              </div>
-            {%endfor%}
-          </div>
-          </div>
+      <div class="col-9 post-all">
+        <div class="post_all">모든 게시글 모아보기</div>
+        {%for post in post_list%}
+        <div class="post-box">
+          {{post.category}} | <a href="{% url 'community:post_detail' post.pk%}">{{post.title}} </a> | 댓글 수 구현 전 |
+          {{post.create_date}} | {{post.total_likes}}
         </div>
+        {%endfor%}
       </div>
     </div>
 </body>
