@@ -11,7 +11,7 @@ class Top(models.Model):
   like = models.ManyToManyField(User, related_name='TopLike', blank=True)
   buying = models.TextField(null=True, blank=True)
   author = models.ForeignKey(User, on_delete=models.CASCADE)
-
+  
   def __str__(self):
     return f'{self.title}'
   
@@ -24,7 +24,7 @@ class Bottom(models.Model):
   like = models.ManyToManyField(User, related_name='BottomLike', blank=True)
   buying = models.TextField(null=True, blank=True)
   author = models.ForeignKey(User, on_delete=models.CASCADE)
-
+  
   def __str__(self):
     return f'{self.title}'
   
@@ -37,7 +37,7 @@ class Outer(models.Model):
   like = models.ManyToManyField(User, related_name='OutterLike', blank=True)
   buying = models.TextField(null=True, blank=True)
   author = models.ForeignKey(User, on_delete=models.CASCADE)
-
+  
   def __str__(self):
     return f'{self.title}'
   
@@ -50,7 +50,7 @@ class Shoes(models.Model):
   like = models.ManyToManyField(User, related_name='ShoesLike', blank=True)
   buying = models.TextField(null=True, blank=True)
   author = models.ForeignKey(User, on_delete=models.CASCADE)
-
+  
   def __str__(self):
     return f'{self.title}'
   
@@ -63,7 +63,7 @@ class Acc(models.Model):
   like = models.ManyToManyField(User, related_name='AccLike', blank=True)
   buying = models.TextField(null=True, blank=True)
   author = models.ForeignKey(User, on_delete=models.CASCADE)
-
+  
   def __str__(self):
     return f'{self.title}'
   
