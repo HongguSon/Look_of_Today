@@ -134,7 +134,8 @@ textarea{
 }
 
 .post_all{
-  font-size: x-large;
+  font-size: large;
+  padding-left: 4.3rem;
   margin-top: 2rem;
   margin-bottom: 2rem;
 }

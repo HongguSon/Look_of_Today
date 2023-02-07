@@ -10,25 +10,6 @@
 
 <body>
   <div class="main">
-    <div class="info px-5">
-      <div class="con border">
-        {% if user.is_authenticated %}
-        <div class="nobtn"><img class="img-circle" id="user-img" src="니트.jpg" /> <span class="name">{{user}}</span></div>
-        <div class="nobtn"><a href="#">내가 쓴 글 보기</a><span class="post_count">{{post_count}}개</span></div>
-        <div class="nobtn"><a href="#">내가 쓴 댓글 보기</a><span class="comment_count">{{comment_count}}개</span></div> <br>
-        <div><a href="{% url 'community:post_create' %}"><button class="cre_btn btn btn-primary">게시글 작성</button></a></div>
-        {% else %}
-        <div class="nolog"><a href="{% url 'user:login' %}">로그인을 하세요</a></div>
-        {% endif %}
-      </div>
-      <div class="menu">
-        <div style="margin-left: 60px">게시판 목록</div>
-        <hr>
-        <div><a href="#">같이 공구해요~</a></div>
-        <div><a href="#">수다방</a></div>
-        <div><a href="#">동행 (오픈런 등등)</a></div>
-      </div>
-    </div>
     <div class="post-all px-5">
       <div class="post_all">모든 게시글 모아보기</div>
       
