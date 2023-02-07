@@ -33,4 +33,6 @@ footer {
   color: var(--gray) !important;
 }
 
-
+#mini-menu{
+  font-size: 0.875rem;
+}
