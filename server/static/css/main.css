@@ -1,0 +1,152 @@
+.nopost{
+   display: flex;
+   flex-direction: row;
+}
+
+.nopost > img{
+    width: 250px;
+    margin-left: 300px;
+    padding-top: 50px;
+}
+
+.postex{
+    padding-top: 100px;
+    padding-left: 120px;
+    font-size: 20px;
+}
+
+.startbtn{
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-left: 70px;
+    transition: all 0.5s;
+}
+
+.startbtn:hover{
+    background-color:#4169E1;
+    color:white;
+}
+
+.best{
+    text-align: center;
+    font-size: 30px;
+    padding-top: 200px;
+}
+
+.best > p{
+    font-size: 17px;
+}
+
+.model{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.model > img{
+    transition: all 0.2s linear;
+}
+
+.model1{
+    width: 300px;
+    border-radius: 20px;
+}
+
+.model > p{
+    text-align: center ;
+}
+
+.model2{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.model1{
+    width: 300px;
+    border-radius: 20px;
+}
+
+.model2 > p{
+    text-align: center ;
+}
+
+.vote{
+    padding-top: 100px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.hot{
+        text-align: center;
+        font-size: 30px;
+        padding-top: 200px;
+}
+
+.hot > p{
+    font-size: 17px;
+}
+
+.vote{
+    padding-bottom: 500px;
+}
+
+.votebtn{
+    margin-left: 10px;
+    background-color: white;
+    border-radius: 10px;
+    transition: 0.2s;
+}
+
+.votebtn:hover{
+    background-color: #4169E1;
+    color: white;
+}
+
+.main_menu{
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    font-size: 25px;
+    padding-right: 12px;
+
+}
+
+.content {
+    text-align: center;
+  }
+  
+.main_menu > a{
+    text-decoration: none;
+}
+
+.week{
+    border-bottom: 1px solid black;
+    width: 200px;
+}
+
+.hot2{
+    border-bottom: 1px solid black;
+    width: 200px;
+    color: gray;
+    text-decoration: none;
+    transition: all 0.5s;
+}
+
+.hot2:hover{
+    color: black;
+}
+
+.best2{
+    border-bottom: 1px solid black;
+    width: 200px;
+    color:gray;
+    transition: all 0.5s;
+}
+
+.best2:hover{
+    color: black;
+}

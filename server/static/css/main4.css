@@ -1,0 +1,61 @@
+@import "reset.css";
+
+:root {
+  --background: #6496ff;
+  --white: white;
+  --gray: gray;
+  --main-border: 1px solid var(—gray1);
+}
+
+nav {
+  background-color: var(--white);
+}
+
+footer {
+  background-color: var(--white);
+}
+
+.title {
+  color: black;
+  font-size: 2rem;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 768px){
+  .title {
+    font-size: 1.5rem;
+  }
+}
+
+.form-control {
+  margin-right: 1rem;
+}
+
+.scb {
+  font-size: 1.2rem;
+}
+
+.small_menu:hover {
+  color: var(--gray) !important;
+}
+
+.filebox label {
+  display: inline-block;
+  padding: 10px 20px;
+  color: #fff;
+  vertical-align: middle;
+  background-color: #999999;
+  cursor: pointer;
+  height: 40px;
+  margin-left: 10px;
+  border-radius: 20px;
+}
+
+.filebox input[type="file"] {
+  position: absolute;
+  width: 0;
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+}

@@ -1,0 +1,93 @@
+#banner {
+    height: 200px;
+    text-align: center;
+  }
+  
+.right {
+  border-right: 1px solid black;
+  height: 100%;
+}
+  
+.col-3 {
+  border-left: 5rem;
+}
+  
+.con {
+  border: 2px;
+  width: 200px;
+  padding: 8px;
+  border-radius: 10px;
+}
+
+.post_count{
+  margin-left: 20px;
+}
+
+.comment_count{
+  margin-left: 8px;
+}
+
+  
+#user-img {
+  width: 100px;
+  height: 100px;
+}
+  
+.menu {
+  margin-top: 10px;
+}
+  
+.menu div {
+  margin-left: 10px;
+}
+  
+.menu hr {
+  width: 200px;
+}
+  
+.ootd {
+  padding-right: 20px;
+}
+  
+.com-title {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size: 50px;
+  margin-left: 20px;
+}
+  
+.content img {
+  border-radius: 15px;
+  width: 250px;
+  height: 250px;
+}
+  
+  
+.content{
+    padding-top: 30px;
+    padding-left: 100px;
+    padding-bottom: 50px;
+    text-align:start;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5rem;
+}
+
+p{
+    text-align: left;
+}
+
+.content div{
+    margin-left: 0;
+}
+
+.com-title {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 50px;
+    margin-left: 20px;
+  }
+
+textarea{
+  resize: none;
+}
