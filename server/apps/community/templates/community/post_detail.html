@@ -39,9 +39,19 @@
 <div class="comment-sum">
 
     <div id="comment-list-{{post.pk}}" class="comment-list">
-        
+        {% for comment in comments %}
+            <div class="d-flex align-items-center m-0 p-4">
+                <i class="fa-solid fa-user m-3"></i>
+                <div>
+                    <div>{{comment.author.username}}</div>
+                    <div>{{comment.content}}</div>
+                    <!-- 추가로 댓글 수정 삭제를 넣어볼까 생각중 -->
+                </div>
+            </div>
+            <hr>
+        {% endfor %}
     </div>
-
+{% if user.is_authenticated %}
 <form action="{% url 'community:likes' post.pk %}" method='POST'>
   {% csrf_token %}
   {% if user in post.likes.all %}
@@ -70,7 +80,11 @@
     <input type="submit" , value="게시" , class="delbtn"/>
   </div>
 </div>
-
+{% else%}
+<div>댓글을 작성하려면 로그인어쩌구 잘 꾸며주세요 프론트 쏘리...
+    누르면 그 로그인 하라는거 뜨도록 하면 좋을거 같기도하고 모르겠따
+</div>
+{% endif %}
 </div>
 <script>
   const requestComment = new XMLHttpRequest();

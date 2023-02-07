@@ -20,11 +20,14 @@ def community_main(request, *args, **kwargs):
     #         b+=1
     if request.user.is_authenticated:
       post_count = Post.objects.filter(author=request.user).count()
+      comment_count = Comment.objects.filter(author=request.user).count()
     else:
       post_count = 0
+      comment_count = 0
     context={
         'post_list' : post_list,
-        'post_count': post_count
+        'post_count': post_count,
+        'comment_count': comment_count,
         }   
     return render(request,'community/community.html',context=context)
 
@@ -67,9 +70,10 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
 def post_detail(request, pk, *args, **kwargs):
     post = Post.objects.get(pk=pk)
-    
+    comments = Comment.objects.filter(post=pk)
     context = {
         'post' : post,
+        'comments' : comments,
     }
     return render(request, 'community/post_detail.html', context=context)
 
