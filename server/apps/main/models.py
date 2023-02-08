@@ -3,29 +3,33 @@ from django.contrib.auth.models import User
 
 
 # Create your models here.
-  
+
+# REVIEW : 각 모델의 속성이 많이 중복되므로, BaseClass 추상화시 코드 중복 제거 가능
 
 class Top(models.Model):
+  author = models.ForeignKey(User, on_delete=models.CASCADE)
   img = models.ImageField(upload_to='main/images/clothes/%Y/%m/%d')
   title = models.CharField(max_length=100,unique=True)
   like = models.ManyToManyField(User, related_name='TopLike', blank=True)
   buying = models.TextField(null=True, blank=True)
-  
+  author = models.ForeignKey(User, on_delete=models.CASCADE)
+
   def __str__(self):
     return f'{self.title}'
-  
+
   def get_absolute_url(self):
     return f'/closet/'
-  
+
 class Bottom(models.Model):
   img = models.ImageField(upload_to='main/images/clothes/%Y/%m/%d')
   title = models.CharField(max_length=100,unique=True)
   like = models.ManyToManyField(User, related_name='BottomLike', blank=True)
   buying = models.TextField(null=True, blank=True)
-  
+  author = models.ForeignKey(User, on_delete=models.CASCADE)
+
   def __str__(self):
     return f'{self.title}'
-  
+
   def get_absolute_url(self):
     return f'/closet/'
 
@@ -34,10 +38,11 @@ class Outer(models.Model):
   title = models.CharField(max_length=100,unique=True)
   like = models.ManyToManyField(User, related_name='OuterLike', blank=True)
   buying = models.TextField(null=True, blank=True)
-  
+  author = models.ForeignKey(User, on_delete=models.CASCADE)
+
   def __str__(self):
     return f'{self.title}'
-  
+
   def get_absolute_url(self):
     return f'/closet/'
 
@@ -46,10 +51,11 @@ class Shoes(models.Model):
   title = models.CharField(max_length=100,unique=True)
   like = models.ManyToManyField(User, related_name='ShoesLike', blank=True)
   buying = models.TextField(null=True, blank=True)
-  
+  author = models.ForeignKey(User, on_delete=models.CASCADE)
+
   def __str__(self):
     return f'{self.title}'
-  
+
   def get_absolute_url(self):
     return f'/closet/'
 
@@ -58,13 +64,14 @@ class Acc(models.Model):
   title = models.CharField(max_length=100,unique=True)
   like = models.ManyToManyField(User, related_name='AccLike', blank=True)
   buying = models.TextField(null=True, blank=True)
-  
+  author = models.ForeignKey(User, on_delete=models.CASCADE)
+
   def __str__(self):
     return f'{self.title}'
-  
+
   def get_absolute_url(self):
     return f'/closet/'
-  
+
 
 class Post(models.Model):
   main_img = models.ImageField(upload_to='main/images/post/%Y/%m/%d')
@@ -79,14 +86,14 @@ class Post(models.Model):
 
   likes = models.ManyToManyField(User, related_name='Likes', blank=True)
   open = models.BooleanField(default=False)
-  
+
   def __str__(self):
     return f'{self.pk}: {self.title}'
-  
+
   def get_absolute_url(self):
     return f'/community/'
   #이거 나중에 detail page로 바꿔주세요
-  
+
 
 class Comment(models.Model):
   post = models.ForeignKey(Post, on_delete=models.CASCADE)
@@ -94,7 +101,7 @@ class Comment(models.Model):
   content = models.TextField()
   create_date = models.DateTimeField(auto_now_add=True)
   update_date = models.DateTimeField(auto_now=True)
-  
+
   def __str__(self):
     return f'({self.author}) {self.post.title} :  {self.content}'
 
@@ -130,6 +137,6 @@ class Comment_Talk(models.Model):
   content = models.TextField()
   create_date = models.DateTimeField(auto_now_add=True)
   update_date = models.DateTimeField(auto_now=True)
-  
+
   def __str__(self):
     return f'({self.author}) {self.talk.title} :  {self.content}'

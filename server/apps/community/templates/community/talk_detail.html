@@ -12,11 +12,11 @@
 <div class="button-box">
   {%if user == post.author%}
   <button>
-    <a href="{% url 'community:update' post.pk%}" style="color:black; text-decoration:none;">수정하기</a>
+    <a href="{% url 'community:talk_update' post.pk%}" style="color:black; text-decoration:none;">수정하기</a>
   </button>
-  <form action="{% url 'community:delete' post.pk%}" method="post">
+  <form action="{% url 'community:talk_delete' post.pk%}" method="post">
     {% csrf_token %}
-    <input type="submit" , value="삭제하기" , class="delbtn" />
+    <input type="submit" value="삭제하기" class="delbtn" />
   </form>
   {%endif%}
   <button id="listbtn">
@@ -25,31 +25,35 @@
 </div>
 <br /><br />
 <div class="postimgs">
-  {%if post.main_img %}
+  {%if post.img %}
   <img src="{{post.img.url}}" class="post_img1"> <br />
   {%endif%}
 </div>
 작성 내용 : {{post.content}}
 <br />
-작성일 : {{post.create_date}}
 
+작성일 : {{post.create_date}}
+<br />
+게시판 : {{post.category}}
 <hr>
 <div class="comment-sum">
   <div id="comment-list-{{post.pk}}" class="comment-list">
-    {% for comment in comments %}
-    <div class="d-flex align-items-center m-0 p-4">
-      <i class="fa-solid fa-user m-3"></i>
-      <div>
-        <div>{{comment.author.username}}</div>
-        <div>{{comment.content}}</div>
-        <!-- 추가로 댓글 수정 삭제를 넣어볼까 생각중 -->
+    <div class="comm">
+      {% for comment in comments %}
+      <div class="d-flex align-items-center m-0 p-4">
+        <i class="fa-solid fa-user m-3"></i>
+        <div>
+          <div>{{comment.author.username}}</div>
+          <div>{{comment.content}}</div>
+          <!-- 추가로 댓글 수정 삭제를 넣어볼까 생각중 -->
+        </div>
       </div>
+      <hr>
+      {% endfor %}
     </div>
-    <hr>
-    {% endfor %}
   </div>
   {% if user.is_authenticated %}
-  <form action="{% url 'community:likes' post.pk %}" method='POST'>
+  <form action="{% url 'community:talk_likes' post.pk %}" method='POST'>
     {% csrf_token %}
     {% if user in post.likes.all %}
     <button class="btn btn-link text-danger" id="like">
@@ -89,7 +93,7 @@
   const requestComment = new XMLHttpRequest();
 
   const onClickCommenet = (id) => {
-    const url = "/community/comment/";
+    const url = "/community/comment_talk/";
     requestComment.open("POST", url, true);
     requestComment.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     let content = document.querySelector(`#comment-input-${id}`).value;
@@ -107,12 +111,17 @@
         const { author, post_id, content, comment_id } = JSON.parse(requestComment.response);
         document.querySelector(`#comment-input-${post_id}`).value = "";
         const element = document.querySelector(`#comment-list-${post_id}`);
-        let temp = document.createElement("p");
-        let temptext = document.createTextNode(`  ${content}`);
-        temp.appendChild(temptext);
-        element.appendChild(temp);
+        const comm = document.querySelector(`.comm`);
+        const newComment = document.createElement('div');
+        newComment.className = "d-flex align-items-center m-0 p-4";
+        newComment.innerHTML = `<i class="fa-solid fa-user m-3"></i>  
+                <div>
+                    <div>${author}</div>
+                    <div>${content}</div>
+                </div>`;
+        comm.appendChild(newComment);
         let h = document.createElement("hr");
-        element.appendChild(h);
+        comm.appendChild(h);
       }
     }
   }
