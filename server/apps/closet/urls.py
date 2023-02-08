@@ -7,6 +7,8 @@ urlpatterns = [
   path("", views.closet_main, name="closet_main"),
   path("our_closet/", views.our_closet, name="our_closet"),
   path("2/", views.closet_main2, name="closet_main2"),
+  # REVIEW : 아래 리스트 함수 5개는 모델만 다르지, 로직은 모두 동일
+  # REVIEW : 따로 model 변수를 입력받아 함수 통일해 코드 중복 제거 가능
   path("outer/", views.outer_list, name="outer_list"),
   path("top/", views.top_list, name="top_list"),
   path("bottom/", views.bottom_list, name="bottom_list"),

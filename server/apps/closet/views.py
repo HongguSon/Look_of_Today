@@ -5,7 +5,13 @@ from django.views.generic import CreateView, UpdateView
 from itertools import chain
 
 # Create your views here.
+# REVIEW : mysql 파일 삭제 요망
 def closet_main(request):
+    # REVIEW : qs1, qs2 보다 의미있는 변수명 필요
+    # REVIEW : 변수명 의미가 없다면, 각각 따로 정의할 필요없이 아래 처럼 코딩 가능
+    # clothe_set = set()
+    # for Model in [Outer, Top, Bottom, Shoes, Acc]:
+    #     chothe_set = clothe_set.union(Model.objects.filter(author=request.user))
     qs1 = Outer.objects.filter(author=request.user)
     qs2 = Top.objects.filter(author=request.user)
     qs3 = Bottom.objects.filter(author=request.user)
@@ -20,12 +26,13 @@ def closet_main(request):
     return render(request,'closet/closet_main.html', context=context)
 
 def closet_main2(request):
+    # REVIEW : this_user를 따로 정의하는 이유는?
     this_user = request.user
-    # post_list = Post.objects.all() 
+    # post_list = Post.objects.all()
 
     context={
         # 'post_list':post_list,
-        }   
+        }
     return render(request,'closet/closet_main2.html',context=context)
 
 
@@ -46,13 +53,13 @@ def our_closet(request, *args, **kwargs):
 
     context={
         'post_list' : post_list,
-        }   
+        }
     return render(request,'closet/our_closet.html',context=context)
 
 class TopCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
   model = Top
   fields = ['img', 'title', 'buying']
-  
+
   template_name = 'closet/clothes_create.html'
 
   def test_func(self):
@@ -65,11 +72,11 @@ class TopCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
       return super(TopCreate, self).form_valid(form)
     else:
       return redirect('closet:closet_main')
-    
+
 class BottomCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
   model = Bottom
   fields = ['img', 'title', 'buying']
-  
+
   template_name = 'closet/clothes_create.html'
 
   def test_func(self):
@@ -82,11 +89,11 @@ class BottomCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
       return super(BottomCreate, self).form_valid(form)
     else:
       return redirect('closet:closet_main')
-    
+
 class OuterCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
   model = Outer
   fields = ['img', 'title', 'buying']
-  
+
   template_name = 'closet/clothes_create.html'
 
   def test_func(self):
@@ -99,11 +106,11 @@ class OuterCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
       return super(OuterCreate, self).form_valid(form)
     else:
       return redirect('closet:closet_main')
-    
+
 class AccCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
   model = Acc
   fields = ['img', 'title', 'buying']
-  
+
   template_name = 'closet/clothes_create.html'
 
   def test_func(self):
@@ -116,11 +123,11 @@ class AccCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
       return super(AccCreate, self).form_valid(form)
     else:
       return redirect('closet:closet_main')
-    
+
 class ShoesCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
   model = Shoes
   fields = ['img', 'title', 'buying']
-  
+
   template_name = 'closet/clothes_create.html'
 
   def test_func(self):
@@ -196,4 +203,3 @@ def acc_list(request):
         {
             'clothes_list': clothes_list,
         })
-
