@@ -12,15 +12,15 @@
   <li><a href="{% url 'closet:bottom_list' %}" class="small_menu text-black fs-5">하의</a></li>
   <li><a href="{% url 'closet:shoes_list' %}" class="small_menu text-black fs-5">신발</a></li>
   <li><a href="{% url 'closet:acc_list' %}" class="small_menu text-black fs-5">액세서리</a></li>
-  <li><a href="{% url 'closet:closet_main2' %}" class="small_menu text-black fs-5">내 착장</a></li>
+  <li><a href="{% url 'closet:closet_all' %}" class="small_menu text-black fs-5">내 착장</a></li>
 </ul>
 <hr/>
-{% for p in clothes_list %}
+{% for clothes in clothes_list %}
   
-    {{p.title}}
-    <img src="{{p.img.url}}">
+    {{clothes.title}}
+    <img src="{{clothes.img.url}}">
   
-{%endfor%}
+{% endfor %}
 
 <!-- <div class="my-3 mx-2 img_container">
   <img src="{% static 'img/1.jpeg' %}" class="img-fluid img-thumbnail clothes" alt="">

@@ -15,18 +15,17 @@
     </div>
     <hr>
         <div class="ootd">
-          <div class="com-title">OOTD</div>
           <div class="">
             <div class="content">
-            {%for post in post_list%}
+            {% for post in post_list %}
               <div>
-                <a href="{% url 'community:post_detail' post.pk%}">
+                <a href="{% url 'community:post_detail' post.pk %}">
                   <img src="{{post.main_img.url}}">
                 </a>
-                <p><a href="{% url 'community:post_detail' post.pk%}">{{post.title}}</a></p>
+                <p><a href="{% url 'community:post_detail' post.pk %}">{{post.title}}</a></p>
                 <div class="postauthor">{{post.author}}</div>
               </div>
-            {%endfor%}
+            {% endfor %}
           </div>
           </div>
         </div>
