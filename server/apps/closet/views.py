@@ -210,13 +210,16 @@ class ShoesCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 #     # }
 #     # return render(request, "closet/closet_main.html",context=context)
 
+
+# 누끼 개발중
 def clothes_remimg(request, pk, *args, **kwargs):
   if request.user.is_authenticated:
     clothes_list = Clothes.objects.filter(author=request.user)
     clothes = Clothes.objects.get(pk=pk)
     clothes_url=clothes.img.url
     new_url_print=clothes_url #출력을 위한 경로
-    basic_url = r'C:\Users\yj418\OneDrive\바탕 화면\피로그래밍\final\Look_of_Today\server'
+    # basic_url = r'C:\Users\yj418\OneDrive\바탕 화면\피로그래밍\final\Look_of_Today\server'
+    basic_url = '/Users/hongguson/Desktop/Look_of_Today/Look_of_Today/server'
     clothes_url= basic_url + clothes_url
     input=Image.open(clothes_url)
     output=remove(input)

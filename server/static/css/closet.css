@@ -38,7 +38,7 @@ img:hover{
   gap: 3rem;
 }
 
-@media screen and (max-width: 48rem){
+@media screen and (max-width: 768px){
   .img_container{ max-width: 47.5rem; }
   .clothes {
     width: 45vw;
@@ -48,6 +48,10 @@ img:hover{
     width: 35vw !important;
     height: 35vw !important;
     border-radius: 0.938rem;
+  }
+  .closet_icon {
+    width: 3rem !important;
+    height: 3rem !important;
   }
   .closet_list{
     display: flex;
@@ -83,7 +87,11 @@ img:hover{
   margin-left: 6.313rem;
 }
 
-
+.closet_icon_container {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
 
 
 .accmain2 > span{
