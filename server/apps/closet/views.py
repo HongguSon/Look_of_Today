@@ -1,11 +1,13 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from server.apps.main.models import *
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import CreateView, UpdateView
+from django.views.decorators.http import require_POST
 from itertools import chain
 from rembg import remove
 from PIL import Image
 import os
+
 
 # Create your views here.
 # REVIEW : mysql 파일 삭제 요망
@@ -164,6 +166,19 @@ class ShoesCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
       return super(ShoesCreate, self).form_valid(form)
     else:
       return redirect('closet:closet_main')
+
+@require_POST
+def clothes_likes(request, pk, *args, **kwargs):
+  if request.user.is_authenticated:
+    clothes = get_object_or_404(Clothes, pk=pk)
+    users = clothes.likes.all()
+    if users.filter(pk=request.user.pk).exists():
+      clothes.likes.remove(request.user)
+    else:
+      clothes.likes.add(request.user)
+    return redirect('closet:closet_main')
+    # return redirect('accouts:login')위에거 대신 이거 떠야함! 나중에 로그인 합치고!!
+  return render(request, 'closet/our_closet.html')
 
 # class ClothesCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 #   context_object_name = 'clothes'
