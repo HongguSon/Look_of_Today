@@ -66,3 +66,48 @@ img:hover{
   justify-content: center;
 }
 
+.accordion{
+  margin: auto;
+  display: block;
+  background-color: white;
+  margin-bottom: 1.875rem;
+  width: 17.188rem;
+}
+
+
+.accmain{
+  margin-left: 5.625rem;
+}
+
+.accmain1{
+  margin-left: 6.313rem;
+}
+
+
+
+
+.accmain2 > span{
+  font-size: 0.813rem;
+  margin-left: 0.719rem;
+}
+
+.accmain2> hr{
+  width: 17.125rem;
+}
+
+.accmain3 > img{
+  margin-left: 3.563rem;
+  margin-top: 0.625rem;
+  margin-bottom: 0.625rem;
+  width: 3.125rem !important;
+  height: 3.125rem !important;
+}
+
+.acccody{
+  margin-bottom: 0.625rem;
+}
+
+.acccody > span{
+  font-size: 1.125rem;
+  margin-left: 2.938rem;
+}

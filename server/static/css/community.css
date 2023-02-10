@@ -32,10 +32,10 @@
   
 .con {
   border-color: #DADBDB;
-  padding: 8px;
+  padding: 0.5rem;
   margin-top: 2rem;
   margin-bottom: 2rem; 
-  border-radius: 10px;
+  border-radius: 0.625rem;
 }
 
 .con > div{
