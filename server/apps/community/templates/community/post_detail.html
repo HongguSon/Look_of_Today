@@ -11,11 +11,11 @@
 <div class="post_time">{{post.create_date}}</div>
 
 <div class="button-box">
-  {% if user == talk.author %}
+  {% if user == post.author %}
   <button>
-    <a href="{% url 'community:update' talk.pk%}" style="color:black; text-decoration:none;">수정하기</a>
+    <a href="{% url 'community:update' post.pk %}" style="color:black; text-decoration:none;">수정하기</a>
   </button>
-  <form action="{% url 'community:delete' talk.pk%}" method="post">
+  <form action="{% url 'community:delete' post.pk%}" method="post">
     {% csrf_token %}
     <input type="submit" , value="삭제하기" , class="delbtn" />
   </form>
@@ -25,41 +25,18 @@
   </button>
 </div>
 <br /><br />
-<<<<<<< HEAD:server/apps/community/templates/community/talk_detail.html
-<div class="postimgs">
-  {% if talk.img %}
-    <img src="{{talk.img.url}}" class="post_img1"> <br />
-  {% endif %}
-</div>
-작성 내용 : {{post.content}}
-<br />
-=======
 <div class="post_content">
   {{post.content}}
   </div> <br />  
 
-  {%if post.img %}
-  <img src="{{post.img.url}}" class="post_img"> <br />
-  {%endif%}
->>>>>>> gokun2:server/apps/community/templates/community/post_detail.html
+<div class="postimgs">
+  {% if post.img %}
+    <img src="{{post.img.url}}" class="post_img1"> <br />
+  {% endif %}
+</div>
 
-작성일 : {{post.create_date}}
-<br />
-게시판 : {{post.category}}
 <hr>
 <div class="comment-sum">
-<<<<<<< HEAD:server/apps/community/templates/community/talk_detail.html
-  <div id="comment-list-{{post.pk}}" class="comment-list">
-    <div class="comm">
-      {% for comment in comments %}
-      <div class="d-flex align-items-center m-0 p-4">
-        <i class="fa-solid fa-user m-3"></i>
-        <div>
-          <div>{{comment.author.username}}</div>
-          <div>{{comment.content}}</div>
-          <!-- 추가로 댓글 수정 삭제를 넣어볼까 생각중 -->
-        </div>
-=======
 
     <div id="comment-list-{{post.pk}}" class="comment-list">
       <div class="comm">
@@ -69,20 +46,24 @@
                 <div>
                     <div>{{comment.author.username}}</div>
                     <div>{{comment.content}}</div>
-                    <!-- 추가로 댓글 수정 삭제를 넣어볼까 생각중 -->
+                    {% if user == comment.author %}
+                    <form action="{% url 'community:delete_comment' comment.pk %}" method="post">
+                      {% csrf_token %}
+                      <input type="submit" , value="삭제하기" , class="delbtn" />
+                    </form>
+                    {% endif %}
                 </div>
             </div>
             <hr>
         {% endfor %}
->>>>>>> gokun2:server/apps/community/templates/community/post_detail.html
       </div>
     </div>
     <hr>
   </div>
   {% if user.is_authenticated %}
-  <form action="{% url 'community:talk_likes' talk.pk %}" method='POST'>
+  <form action="{% url 'community:likes' post.pk %}" method='POST'>
     {% csrf_token %}
-    {% if user in talk.likes.all %}
+    {% if user in post.likes.all %}
     <button class="btn btn-link text-danger" id="like">
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-suit-heart-fill"
         viewBox="0 0 16 16">
@@ -102,10 +83,10 @@
   </form>
   <div id="comment-con" class="d-flex justify-content-between align-items-center">
     <form>
-      <textarea rows="4" cols="100" id="comment-input-{{talk.pk}}" class="comment-input" type="text"
+      <textarea rows="4" cols="100" id="comment-input-{{post.pk}}" class="comment-input" type="text"
         placeholder="댓글 달기..."></textarea>
     </form>
-    <div class="comment-btn btn" id="comment-btn-{{talk.pk}}" onclick="onClickCommenet({{talk.id}})">
+    <div class="comment-btn btn" id="comment-btn-{{post.pk}}" onclick="onClickCommenet({{post.id}})">
       <input type="submit" , value="게시" , class="delbtn" />
     </div>
   </div>
@@ -120,13 +101,13 @@
   const requestComment = new XMLHttpRequest();
 
   const onClickCommenet = (id) => {
-    const url = "/community/talk-comment/";
+    const url = "/community/comment/";
     requestComment.open("POST", url, true);
     requestComment.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     let content = document.querySelector(`#comment-input-${id}`).value;
     let data = {
       user: '{{user.username}}',
-      talk_id: id,
+      post_id: id,
       content: content,
     }
     requestComment.send(JSON.stringify(data));
@@ -135,9 +116,9 @@
   requestComment.onreadystatechange = () => {
     if (requestComment.readyState === XMLHttpRequest.DONE) {
       if (requestComment.status < 400) {
-        const { author, talk_id, content, comment_id } = JSON.parse(requestComment.response);
-        document.querySelector(`#comment-input-${talk_id}`).value = "";
-        const element = document.querySelector(`#comment-list-${talk_id}`);
+        const { author, post_id, content, comment_id } = JSON.parse(requestComment.response);
+        document.querySelector(`#comment-input-${post_id}`).value = "";
+        const element = document.querySelector(`#comment-list-${post_id}`);
         const comm = document.querySelector(`.comm`);
         const newComment = document.createElement('div');
         newComment.className = "d-flex align-items-center m-0 p-4";

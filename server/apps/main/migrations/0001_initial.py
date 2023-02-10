@@ -107,6 +107,7 @@ class Migration(migrations.Migration):
                     ),
                 ),
             ],
+            bases=('main.clothes',),
         ),
         migrations.CreateModel(
             name="Top",
@@ -137,6 +138,7 @@ class Migration(migrations.Migration):
                     ),
                 ),
             ],
+            bases=('main.clothes',),
         ),
         migrations.CreateModel(
             name="Talk",
@@ -304,6 +306,7 @@ class Migration(migrations.Migration):
                     ),
                 ),
             ],
+            bases=('main.comment',),
         ),
         migrations.CreateModel(
             name="Comment",
@@ -334,5 +337,6 @@ class Migration(migrations.Migration):
                     ),
                 ),
             ],
+            bases=('main.comment',),
         ),
     ]
