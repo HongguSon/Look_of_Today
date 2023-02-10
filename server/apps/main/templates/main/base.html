@@ -50,10 +50,7 @@
             <li class="nav-item">
               <a class="nav-link text-secondary" href="{% url 'community:community_main' %}">커뮤니티</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link text-secondary" href="">문의</a>
-            </li>
-            {% if user.is_authenticated %}
+            
             <li class="nav-item">
               <a class="nav-link text-secondary" aria-current="page" href="{% url 'user:mypage' %}">마이페이지</a>
             </li>
@@ -61,9 +58,6 @@
               <a class="nav-link text-secondary" href="{% url 'user:logout' %}">로그아웃</a>
             </li>
             {% else %}
-            {% comment %} <li class="nav-item">
-              <a class="nav-link text-secondary" href="{% url 'user:signup' %}">회원가입</a>
-            </li> {% endcomment %}
             <li class="nav-item">
               <a class="nav-link text-secondary" href="{% url 'user:login' %}">로그인</a>
             </li>
