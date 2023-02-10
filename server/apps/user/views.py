@@ -33,7 +33,7 @@ def logout(request, *args, **kwargs):
   auth.logout(request)
   return redirect('main:main')
 
-def log_in(request):
+def log_in(request, *args, **kwargs):
   if request.method == 'POST':
     username=request.POST['username']
     password=request.POST['password']
@@ -46,7 +46,7 @@ def log_in(request):
       return render(request, 'user/login.html',context=context)
   return render(request, 'user/login.html')
 
-def mypage(request):
+def mypage(request, *args, **kwargs):
   user = request.user
   profile_image = user.profile.profile_image
   phone_num = user.profile.phone_num
@@ -74,7 +74,7 @@ def mypage(request):
              'gender':gender}
   return render(request, 'user/mypage.html', context=context)
 
-def mypage_update(request):
+def mypage_update(request, *args, **kwargs):
   user = request.user
   profile_image = user.profile.profile_image
   phone_num = user.profile.phone_num
@@ -147,7 +147,7 @@ def mypage_update(request):
 #     else:
 #       raise PermissionDenied
 
-def profile_update(request):
+def profile_update(request, *args, **kwargs):
   if request.method == 'POST':
     form = ProfileUpdateForm(request.POST,request.FILES,instance=request.user.profile)
     if  form.is_valid():

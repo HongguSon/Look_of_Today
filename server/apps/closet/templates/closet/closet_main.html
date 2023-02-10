@@ -15,10 +15,27 @@
   <li><a href="{% url 'closet:closet_all' %}" class="small_menu text-black fs-5">내 착장</a></li>
 </ul>
 <hr/>
+{% comment %} {% for clothes in clothes_list %}
+  
+    {{clothes.title}}
+    {% if clothes.rem_img %}
+    <img src="{{clothes.rem_img.url}}">
+    {% else %}
+    <img src="{{clothes.img.url}}">
+    <a class="btn btn-secondary modify_btn" href="{% url 'closet:rembg' clothes.pk  %}">누끼</a>
+    {% endif %}
+  
+{% endfor %} {% endcomment %}
+
 {% for clothes in clothes_list %}
   
     {{clothes.title}}
+    {% if new_url %}
+    <img src="{{new_url}}">
+    {% else %}
     <img src="{{clothes.img.url}}">
+    <a class="btn btn-secondary modify_btn" href="{% url 'closet:rembg' clothes.pk  %}">누끼</a>
+    {% endif %}
   
 {% endfor %}
 

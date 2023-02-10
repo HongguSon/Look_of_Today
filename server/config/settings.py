@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.naver',
     'allauth.socialaccount.providers.google',
     'phonenumber_field',
+    'rembg',
 ]
 
 MIDDLEWARE = [
