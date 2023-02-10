@@ -8,6 +8,7 @@
 {% block content %}
 <div class="post_title">{{post.title}}</div>
 <div class="post_author">{{post.author}}</div>
+<div class="post_time">{{post.create_date}}</div>
 
 <div class="button-box">
   {%if user == post.author%}
@@ -24,6 +25,7 @@
   </button>
 </div>
 <br /><br />
+<<<<<<< HEAD:server/apps/community/templates/community/talk_detail.html
 <div class="postimgs">
   {%if post.img %}
   <img src="{{post.img.url}}" class="post_img1"> <br />
@@ -31,12 +33,22 @@
 </div>
 작성 내용 : {{post.content}}
 <br />
+=======
+<div class="post_content">
+  {{post.content}}
+  </div> <br />  
+
+  {%if post.img %}
+  <img src="{{post.img.url}}" class="post_img"> <br />
+  {%endif%}
+>>>>>>> gokun2:server/apps/community/templates/community/post_detail.html
 
 작성일 : {{post.create_date}}
 <br />
 게시판 : {{post.category}}
 <hr>
 <div class="comment-sum">
+<<<<<<< HEAD:server/apps/community/templates/community/talk_detail.html
   <div id="comment-list-{{post.pk}}" class="comment-list">
     <div class="comm">
       {% for comment in comments %}
@@ -47,6 +59,22 @@
           <div>{{comment.content}}</div>
           <!-- 추가로 댓글 수정 삭제를 넣어볼까 생각중 -->
         </div>
+=======
+
+    <div id="comment-list-{{post.pk}}" class="comment-list">
+      <div class="comm">
+        {% for comment in comments %}
+            <div class="d-flex align-items-center m-0 p-4">
+                <i class="fa-solid fa-user m-3"></i>  
+                <div>
+                    <div>{{comment.author.username}}</div>
+                    <div>{{comment.content}}</div>
+                    <!-- 추가로 댓글 수정 삭제를 넣어볼까 생각중 -->
+                </div>
+            </div>
+            <hr>
+        {% endfor %}
+>>>>>>> gokun2:server/apps/community/templates/community/post_detail.html
       </div>
       <hr>
       {% endfor %}
