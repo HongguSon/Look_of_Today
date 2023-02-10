@@ -3,6 +3,8 @@ from server.apps.main.models import *
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import CreateView, UpdateView
 from itertools import chain
+from rembg import remove
+from PIL import Image
 
 # Create your views here.
 # REVIEW : mysql 파일 삭제 요망
@@ -90,6 +92,9 @@ class TopCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     current_user = self.request.user
     if current_user.is_authenticated:
       form.instance.author = current_user
+      input = Image.open(form.instance.img.url)
+      output = remove(input)
+      output.save(form.instance.rem_img)
       return super(TopCreate, self).form_valid(form)
     else:
       return redirect('closet:closet_main')

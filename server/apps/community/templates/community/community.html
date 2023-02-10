@@ -21,13 +21,14 @@
         <div class="menu">
           <div style="margin-left: 60px">게시판 목록</div>
           <hr>
-          <div><a href="{% url 'community:buying'%}">같이 공구해요~</a></div>
-          <div><a href="{% url 'community:other'%}">수다방</a></div>
-          <div><a href="{% url 'community:openrun'%}">동행 (오픈런 등등)</a></div>
+          <div><a href="{% url 'community:community_main' %}">전체 게시판</a></div>
+          <div><a href="{% url 'community:buying' %}">같이 공구해요~</a></div>
+          <div><a href="{% url 'community:other' %}">수다방</a></div>
+          <div><a href="{% url 'community:openrun' %}">동행 (오픈런 등등)</a></div>
         </div>
       </div>
       <div class="col-9 post-all">
-        모든 게시글 모아보기
+        {{title}}
         {% for talk in talk_list %}
         <div class="post-box">
           {{talk.category}} | <a href="{% url 'community:talk_detail' talk.pk%}">{{talk.title}} </a> | 댓글 수 구현 전 |

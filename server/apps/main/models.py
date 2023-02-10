@@ -11,6 +11,7 @@ class Clothes(models.Model):
   title = models.CharField(max_length=100, unique=True)
   like = models.ManyToManyField(User, related_name = "%(class)sLike", blank=True)
   buying = models.TextField(null=True, blank=True)
+  rem_img = models.ImageField(upload_to='main/images/remclothes/%Y/%m/%d', null=True, blank=True)
   
   def __str__(self):
     return f'{self.title}'
@@ -57,11 +58,11 @@ class Post(models.Model):
 
 class Talk(models.Model):
   Talk_CHOICES = (
-    ('공동 구매', '공동 구매'), #공동구매
-    ('오픈런', '오픈런'), #오픈런
-    ('고민방', '고민방'), #고민방
+    ('buying', '공동 구매'), #공동구매
+    ('openrun', '오픈런'), #오픈런
+    ('other', '고민방'), #고민방
   )
-  category = models.CharField( max_length=5,choices=Talk_CHOICES)
+  category = models.CharField(max_length=10 ,choices=Talk_CHOICES)
   img = models.ImageField(upload_to='main/images/commu/%Y/%m/%d', null=True, blank=True)
   title = models.CharField(max_length=100)
   content = models.TextField()

@@ -55,6 +55,15 @@ def comment_ajax(request, *args, **kwargs):
     }
     return JsonResponse(context)
 
+def delete_pcomment(request, pk, *args, **kwargs):
+    comment = get_object_or_404(PostComment, pk=pk)
+    post = comment.post
+    if request.user.is_authenticated and request.user == comment.author:
+        comment.delete()
+        return redirect('community:post_detail', post.pk)
+    else:
+        PermissionDenied
+
 class PostUpdate(LoginRequiredMixin,UpdateView):
   model = Post
   fields = ['main_img', 'title','open',  'top','bottom','acc','outter','shose']
@@ -135,6 +144,15 @@ def comment_talk_ajax(request, *args, **kwargs):
     
     return JsonResponse(context)
 
+def delete_tcomment(request, pk, *args, **kwargs):
+    tcomment = get_object_or_404(TalkComment, pk=pk)
+    talk = tcomment.talk
+    if request.user.is_authenticated and request.user == tcomment.author:
+        tcomment.delete()
+        return redirect('community:talk_detail', talk.pk)
+    else:
+        PermissionDenied
+
 class TalkUpdate(LoginRequiredMixin,UpdateView):
     model = Talk
     fields = ['category','img','title', 'content']
@@ -169,9 +187,11 @@ def talk_likes(request, pk, *args, **kwargs):
 # -----------------------------------------------------------
 
 def community_main(request, *args, **kwargs):
-    talk_list = Talk.objects.all() 
+    talk_list = Talk.objects.all()
+    title = "모든 게시물" 
     context={
         'talk_list' : talk_list,
+        'title' : title,
         }   
     return render(request,'community/community.html',context=context)
 

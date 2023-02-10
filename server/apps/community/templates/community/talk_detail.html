@@ -47,7 +47,12 @@
                 <div>
                     <div>{{comment.author.username}}</div>
                     <div>{{comment.content}}</div>
-                    <!-- 추가로 댓글 수정 삭제를 넣어볼까 생각중 -->
+                    {% if user == comment.author %}
+                    <form action="{% url 'community:delete_tcomment' comment.pk %}" method="post">
+                      {% csrf_token %}
+                      <input type="submit" , value="삭제하기" , class="delbtn" />
+                    </form>
+                    {% endif %}
                 </div>
             </div>
             <hr>
