@@ -9,7 +9,7 @@
   flex-wrap: wrap;
 }
 
-img{
+.post_icon{
   width: 25vw !important;
   height: 25vw !important;
   border-radius: 0.938rem;
@@ -38,14 +38,28 @@ img:hover{
   gap: 3rem;
 }
 
-@media screen and (max-width: 768px){
-  .img_container{ max-width: 47.5rem; }
+.closet_icon{
+  margin-top: 0.625rem;
+  margin-bottom: 0.625rem;
+  width: 3.125rem !important;
+  height: 3.125rem !important;
+}
+
+.accmain3 {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+
+
+@media screen and (max-width: 48px){
+  .img_container{ max-width: 47.5px;}
   .clothes {
     width: 45vw;
     height: 45vw !important;
   }
-  img{
-    width: 35vw !important;
+  .closet_icon{
+    width: 55vw !important;
     height: 35vw !important;
     border-radius: 0.938rem;
   }
@@ -65,10 +79,6 @@ img:hover{
   }
 }
 
-.imgs_container {
-  display: flex;
-  justify-content: center;
-}
 
 .accordion{
   margin: auto;
@@ -87,13 +97,6 @@ img:hover{
   margin-left: 6.313rem;
 }
 
-.closet_icon_container {
-  display: flex;
-  justify-content: center;
-  align-content: center;
-}
-
-
 .accmain2 > span{
   font-size: 0.813rem;
   margin-left: 0.719rem;
@@ -103,19 +106,10 @@ img:hover{
   width: 17.125rem;
 }
 
-.accmain3 > img{
-  margin-left: 3.563rem;
-  margin-top: 0.625rem;
-  margin-bottom: 0.625rem;
-  width: 3.125rem !important;
-  height: 3.125rem !important;
-}
-
 .acccody{
+  display: flex;
+  justify-content: space-evenly;
   margin-bottom: 0.625rem;
+  font-size: 1.125rem;
 }
 
-.acccody > span{
-  font-size: 1.125rem;
-  margin-left: 2.938rem;
-}
