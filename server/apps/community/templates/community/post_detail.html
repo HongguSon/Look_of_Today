@@ -13,11 +13,11 @@
 <div class="button-box">
   {%if user == post.author%}
   <button>
-    <a href="{% url 'community:talk_update' post.pk%}" style="color:black; text-decoration:none;">수정하기</a>
+    <a href="{% url 'community:update' post.pk%}" style="color:black; text-decoration:none;">수정하기</a>
   </button>
-  <form action="{% url 'community:talk_delete' post.pk%}" method="post">
+  <form action="{% url 'community:delete' post.pk%}" method="post">
     {% csrf_token %}
-    <input type="submit" value="삭제하기" class="delbtn" />
+    <input type="submit" , value="삭제하기" , class="delbtn" />
   </form>
   {%endif%}
   <button id="listbtn">
@@ -29,23 +29,12 @@
   {{post.content}}
   </div> <br />  
 
-<div class="postimgs">
   {%if post.img %}
-  <img src="{{post.img.url}}" class="post_img1"> <br />
+  <img src="{{post.img.url}}" class="post_img"> <br />
   {%endif%}
-</div>
-<<<<<<< HEAD:server/apps/community/templates/community/post_detail.html
-=======
-작성 내용 : {{post.content}}
-<br />
->>>>>>> garden2:server/apps/community/templates/community/talk_detail.html
 
-작성일 : {{post.create_date}}
-<br />
-게시판 : {{post.category}}
 <hr>
 <div class="comment-sum">
-<<<<<<< HEAD:server/apps/community/templates/community/post_detail.html
 
     <div id="comment-list-{{post.pk}}" class="comment-list">
       <div class="comm">
@@ -60,25 +49,13 @@
             </div>
             <hr>
         {% endfor %}
-=======
-  <div id="comment-list-{{post.pk}}" class="comment-list">
-    <div class="comm">
-      {% for comment in comments %}
-      <div class="d-flex align-items-center m-0 p-4">
-        <i class="fa-solid fa-user m-3"></i>
-        <div>
-          <div>{{comment.author.username}}</div>
-          <div>{{comment.content}}</div>
-          <!-- 추가로 댓글 수정 삭제를 넣어볼까 생각중 -->
-        </div>
->>>>>>> garden2:server/apps/community/templates/community/talk_detail.html
       </div>
-      <hr>
-      {% endfor %}
     </div>
+    <hr>
+    {% endfor %}
   </div>
   {% if user.is_authenticated %}
-  <form action="{% url 'community:talk_likes' post.pk %}" method='POST'>
+  <form action="{% url 'community:likes' post.pk %}" method='POST'>
     {% csrf_token %}
     {% if user in post.likes.all %}
     <button class="btn btn-link text-danger" id="like">
@@ -118,7 +95,7 @@
   const requestComment = new XMLHttpRequest();
 
   const onClickCommenet = (id) => {
-    const url = "/community/comment_talk/";
+    const url = "/community/comment/";
     requestComment.open("POST", url, true);
     requestComment.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     let content = document.querySelector(`#comment-input-${id}`).value;

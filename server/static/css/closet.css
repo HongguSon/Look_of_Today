@@ -12,7 +12,7 @@
 img{
   width: 25vw !important;
   height: 25vw !important;
-  border-radius: 15px;
+  border-radius: 0.938rem;
   opacity: 1;
   -webkit-transform: scale(1);
 	transform: scale(1);
@@ -38,8 +38,8 @@ img:hover{
   gap: 3rem;
 }
 
-@media screen and (max-width: 768px){
-  .img_container{ max-width: 760px; }
+@media screen and (max-width: 48rem){
+  .img_container{ max-width: 47.5rem; }
   .clothes {
     width: 45vw;
     height: 45vw !important;
@@ -47,13 +47,13 @@ img:hover{
   img{
     width: 35vw !important;
     height: 35vw !important;
-    border-radius: 15px;
+    border-radius: 0.938rem;
   }
   .closet_list{
     display: flex;
     margin-top: 1.5rem;
     margin-left: 2.5rem;
-    margin-bottom: 40px;
+    margin-bottom: 2.5rem;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: start;
@@ -66,3 +66,48 @@ img:hover{
   justify-content: center;
 }
 
+.accordion{
+  margin: auto;
+  display: block;
+  background-color: white;
+  margin-bottom: 1.875rem;
+  width: 17.188rem;
+}
+
+
+.accmain{
+  margin-left: 5.625rem;
+}
+
+.accmain1{
+  margin-left: 6.313rem;
+}
+
+
+
+
+.accmain2 > span{
+  font-size: 0.813rem;
+  margin-left: 0.719rem;
+}
+
+.accmain2> hr{
+  width: 17.125rem;
+}
+
+.accmain3 > img{
+  margin-left: 3.563rem;
+  margin-top: 0.625rem;
+  margin-bottom: 0.625rem;
+  width: 3.125rem !important;
+  height: 3.125rem !important;
+}
+
+.acccody{
+  margin-bottom: 0.625rem;
+}
+
+.acccody > span{
+  font-size: 1.125rem;
+  margin-left: 2.938rem;
+}

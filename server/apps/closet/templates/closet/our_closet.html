@@ -1,7 +1,7 @@
 {% extends 'main/base.html'%}
 {% load static %}
 {% block extrahead %}
-    <link rel="stylesheet" href="{% static 'css/community.css' %}">
+    <link rel="stylesheet" href="{% static 'css/our_closet.css' %}">
     <title>community</title>
 {% endblock %}
 
@@ -13,13 +13,11 @@
     <div class="title" id="banner">
       <p>모두의 옷장</p>
     </div>
-    <hr>
         <div class="ootd">
-          <div class="com-title">OOTD</div>
           <div class="">
             <div class="content">
             {%for post in post_list%}
-              <div>
+              <div class="post_info">
                 <a href="{% url 'community:post_detail' post.pk%}">
                   <img src="{{post.main_img.url}}">
                 </a>

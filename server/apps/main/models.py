@@ -6,12 +6,10 @@ from django.contrib.auth.models import User
   
 
 class Top(models.Model):
-  author = models.ForeignKey(User, on_delete=models.CASCADE)
   img = models.ImageField(upload_to='main/images/clothes/%Y/%m/%d')
   title = models.CharField(max_length=100,unique=True)
   like = models.ManyToManyField(User, related_name='TopLike', blank=True)
   buying = models.TextField(null=True, blank=True)
-  author = models.ForeignKey(User, on_delete=models.CASCADE)
   
   def __str__(self):
     return f'{self.title}'
@@ -24,7 +22,6 @@ class Bottom(models.Model):
   title = models.CharField(max_length=100,unique=True)
   like = models.ManyToManyField(User, related_name='BottomLike', blank=True)
   buying = models.TextField(null=True, blank=True)
-  author = models.ForeignKey(User, on_delete=models.CASCADE)
   
   def __str__(self):
     return f'{self.title}'
@@ -37,7 +34,6 @@ class Outer(models.Model):
   title = models.CharField(max_length=100,unique=True)
   like = models.ManyToManyField(User, related_name='OuterLike', blank=True)
   buying = models.TextField(null=True, blank=True)
-  author = models.ForeignKey(User, on_delete=models.CASCADE)
   
   def __str__(self):
     return f'{self.title}'
@@ -50,7 +46,6 @@ class Shoes(models.Model):
   title = models.CharField(max_length=100,unique=True)
   like = models.ManyToManyField(User, related_name='ShoesLike', blank=True)
   buying = models.TextField(null=True, blank=True)
-  author = models.ForeignKey(User, on_delete=models.CASCADE)
   
   def __str__(self):
     return f'{self.title}'
@@ -63,7 +58,6 @@ class Acc(models.Model):
   title = models.CharField(max_length=100,unique=True)
   like = models.ManyToManyField(User, related_name='AccLike', blank=True)
   buying = models.TextField(null=True, blank=True)
-  author = models.ForeignKey(User, on_delete=models.CASCADE)
   
   def __str__(self):
     return f'{self.title}'
