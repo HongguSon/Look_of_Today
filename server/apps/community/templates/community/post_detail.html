@@ -29,11 +29,9 @@
   {{post.content}}
   </div> <br />  
 
-<div class="postimgs">
-  {% if post.img %}
-    <img src="{{post.img.url}}" class="post_img1"> <br />
-  {% endif %}
-</div>
+  {%if post.img %}
+  <img src="{{post.img.url}}" class="post_img"> <br />
+  {%endif%}
 
 <hr>
 <div class="comment-sum">
@@ -46,12 +44,7 @@
                 <div>
                     <div>{{comment.author.username}}</div>
                     <div>{{comment.content}}</div>
-                    {% if user == comment.author %}
-                    <form action="{% url 'community:delete_comment' comment.pk %}" method="post">
-                      {% csrf_token %}
-                      <input type="submit" , value="삭제하기" , class="delbtn" />
-                    </form>
-                    {% endif %}
+                    <!-- 추가로 댓글 수정 삭제를 넣어볼까 생각중 -->
                 </div>
             </div>
             <hr>

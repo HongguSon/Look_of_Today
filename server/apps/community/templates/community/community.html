@@ -10,32 +10,16 @@
 
 <body>
   <div class="main">
-    <div class="title" id="banner">
-      <p>C O M M U N I T Y</p>
-    </div>
-    <hr>
-
-    <div class="row">
-      <div class="col-3 right" style="padding-left: 100px;">
-
-        <div class="menu">
-          <div style="margin-left: 60px">게시판 목록</div>
-          <hr>
-          <div><a href="{% url 'community:community_main' %}">전체 게시판</a></div>
-          <div><a href="{% url 'community:buying' %}">같이 공구해요~</a></div>
-          <div><a href="{% url 'community:other' %}">수다방</a></div>
-          <div><a href="{% url 'community:openrun' %}">동행 (오픈런 등등)</a></div>
-        </div>
+    <div class="post-all px-5">
+      <div class="post_all">모든 게시글 모아보기</div>
+      
+      {%for post in post_list%}
+      <div class="post-box">
+        {{post.category}} | <a href="{% url 'community:post_detail' post.pk%}">{{post.title}} </a> | 댓글 수 구현 전 |
+        {{post.create_date}} | {{post.total_likes}}
       </div>
-      <div class="col-9 post-all">
-        {{title}}
-        {% for talk in talk_list %}
-        <div class="post-box">
-          {{talk.category}} | <a href="{% url 'community:talk_detail' talk.pk%}">{{talk.title}} </a> | 댓글 수 구현 전 |
-          {{talk.create_date}} | {{talk.total_likes}}
-        </div>
-        {% endfor %}
-      </div>
+      {%endfor%}
     </div>
+  </div>
 </body>
 {% endblock %}

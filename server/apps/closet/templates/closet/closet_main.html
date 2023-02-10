@@ -4,28 +4,68 @@
 <link rel="stylesheet" href="{% static 'css/closet.css' %}">
 {% endblock %}
 {% block content %}
-<div class="my-1 text-center fs-5">나만의 옷장</div>
-<hr/>
-<ul class="my-0 px-0 mx-3 d-flex justify-content-around">
-  <li><a href="{% url 'closet:outer_list' %}" class="small_menu text-black fs-5">아우터</a></li>
-  <li><a href="{% url 'closet:top_list' %}" class="small_menu text-black fs-5">상의</a></li>
-  <li><a href="{% url 'closet:bottom_list' %}" class="small_menu text-black fs-5">하의</a></li>
-  <li><a href="{% url 'closet:shoes_list' %}" class="small_menu text-black fs-5">신발</a></li>
-  <li><a href="{% url 'closet:acc_list' %}" class="small_menu text-black fs-5">액세서리</a></li>
-  <li><a href="{% url 'closet:closet_all' %}" class="small_menu text-black fs-5">내 착장</a></li>
+<div class="my-1 text-center fs-4 mt-2 mb-4">나만의 옷장</div>
+
+<!--아코디언-->
+<div class="accordion" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        <div class="accmain">
+          Clothes
+        </div>
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne">
+      <p>
+        <div class="accmain2">
+        <span>Outer</span>
+        <span>Top</span>
+        <span>Bottom</span>
+        <span>Shoes</span>
+        <span>accessory</span>
+      </p>  
+        <hr>
+      </div>
+        <div class="accmain3">
+        <img src="/static/img/plus.png">
+        <img src="/static/img/heart.png">
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion" id="accordionExample">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingOne">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne2" aria-expanded="true" aria-controls="collapseOne">
+          <div class="accmain1">Cody</div>
+        </button>
+      </h2>
+      <div id="collapseOne2" class="accordion-collapse collapse show" aria-labelledby="headingOne">
+        <p>
+          <div class="accmain2">
+        </p> 
+        <div class="acccody"> 
+        <span>My Cody</span>
+        <span>My List</span>
+        </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  
+  
+<ul class="my-2 px-0 mx-3 d-flex justify-content-around">
 </ul>
-<hr/>
-{% comment %} {% for clothes in clothes_list %}
-  
-    {{clothes.title}}
-    {% if clothes.rem_img %}
-    <img src="{{clothes.rem_img.url}}">
-    {% else %}
-    <img src="{{clothes.img.url}}">
-    <a class="btn btn-secondary modify_btn" href="{% url 'closet:rembg' clothes.pk  %}">누끼</a>
-    {% endif %}
-  
-{% endfor %} {% endcomment %}
+{% for Clothes in clothes_list %}
+  <a>
+    {%if Clothes.img %}
+    <img src="{{Clothes.img.url}}" class="img-fluid closet_list2">
+    {%endif%}
+  </a>
+{%endfor%}
+</div>
 
 {% for clothes in clothes_list %}
   
