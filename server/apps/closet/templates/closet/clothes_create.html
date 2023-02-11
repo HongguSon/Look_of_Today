@@ -2,16 +2,26 @@
 {% load static %}
 {% block extrahead %}
     <link rel="stylesheet" href="{% static 'css/create.css' %}">
-    <title>new community</title>
+    <title>new clothes</title>
 {% endblock %}
 {% block content %}
 
-<form method="post" enctype="multipart/form-data">
+<form action="{% url 'closet:clothes_create' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    <table>
-        {{form}}
-        {{form.media }}
-    </table>
+    <p>등록하실 옷의 종류를 구분해주세요?!?! 멘트 모르겠다</p>
+    <input type="radio" name="clothes" value="outer">Outer
+    <input type="radio" name="clothes" value="top">Top
+    <input type="radio" name="clothes" value="bottom">Bottom
+    <input type="radio" name="clothes" value="shoes">Shoes
+    <input type="radio" name="clothes" value="acc">Acc
+    <hr />
+    <div class="filebox">
+        <label for="file" >img</label> 
+        <input type="file" name="image" id="file">
+    </div>
+    <p>title: <input name="title" /></p>
+    <p>buying: <textarea name="buying" cols="70" rows="5"></textarea></p>
     <button type="submit" class="btn btn-primary float-right" id="subbtn">Submit</button>
 </form>
+
 {% endblock %}

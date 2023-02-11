@@ -15,11 +15,6 @@ urlpatterns = [
   path("bottom/", views.bottom_list, name="bottom_list"),
   path("shoes/", views.shoes_list, name="shoes_list"),
   path("acc/", views.acc_list, name="acc_list"),
-  path("create/top/",views.TopCreate.as_view(),name="top_create"),
-  path("create/bottom/",views.BottomCreate.as_view(),name="bottom_create"),
-  path("create/outer/",views.OuterCreate.as_view(),name="outer_create"),
-  path("create/acc/",views.AccCreate.as_view(),name="acc_create"),
-  path("create/shoes/",views.ShoesCreate.as_view(),name="shoes_create"),
+  path("create/clothes/",views.create_clothes,name="clothes_create"),
   path("clothes-likes/<int:pk>/", views.clothes_likes, name='clothes_likes'),
-  path("remimg/<int:pk>/", views.clothes_remimg, name="rembg"),
 ]
