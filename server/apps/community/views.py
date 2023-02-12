@@ -1,10 +1,9 @@
 import json
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from server.apps.main.models import *
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
-from django.shortcuts import render, get_object_or_404
 from django.http.request import HttpRequest
 from django.views.generic import CreateView, UpdateView
 from django.core.exceptions import PermissionDenied
@@ -93,7 +92,7 @@ def post_likes(request, pk, *args, **kwargs):
             article.likes.add(request.user)
         return redirect('community:post_detail',pk)
         # return redirect('accouts:login')위에거 대신 이거 떠야함! 나중에 로그인 합치고!!
-    return render(request, 'community:detail.html')
+    return render(request, 'community/post_detail.html')
 
 
 # 여기까지가 옷장이고

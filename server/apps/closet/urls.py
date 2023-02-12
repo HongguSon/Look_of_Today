@@ -20,5 +20,6 @@ urlpatterns = [
   path("create/outer/",views.OuterCreate.as_view(),name="outer_create"),
   path("create/acc/",views.AccCreate.as_view(),name="acc_create"),
   path("create/shoes/",views.ShoesCreate.as_view(),name="shoes_create"),
+  path("clothes-likes/<int:pk>/", views.clothes_likes, name='clothes_likes'),
   path("remimg/<int:pk>/", views.clothes_remimg, name="rembg"),
 ]
