@@ -79,7 +79,7 @@ class Post(models.Model):
     return f'{self.pk}: {self.title}'
 
   def get_absolute_url(self):
-    return f'/community/'
+    return f'/community/detail/{self.pk}/'
   #이거 나중에 detail page로 바꿔주세요
 
 class Talk(models.Model):
@@ -102,7 +102,7 @@ class Talk(models.Model):
     return f'{self.pk}: {self.title}'
 
   def total_likes(self):
-        return self.likes.count()
+    return self.likes.count()
 
   def get_absolute_url(self):
     return f'/community/'

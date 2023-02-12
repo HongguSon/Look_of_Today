@@ -24,7 +24,7 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
             form.instance.author = current_user
             return super(PostCreate, self).form_valid(form)
         else:
-            return redirect('closet:our_closet')
+            return redirect('closet:closet_all')
 
 def post_detail(request, pk, *args, **kwargs):
     post = Post.objects.get(pk=pk)
@@ -65,9 +65,9 @@ def delete_pcomment(request, pk, *args, **kwargs):
 
 class PostUpdate(LoginRequiredMixin,UpdateView):
   model = Post
-  fields = ['main_img', 'title','open',  'top','bottom','acc','outter','shose']
+  fields = ['main_img', 'title', 'open', 'top', 'bottom', 'acc', 'outer', 'shoes']
   
-  template_name = 'community/update.html'
+  template_name = 'community/post_update.html'
 
   def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated and request.user == self.get_object().author:
@@ -154,8 +154,8 @@ def delete_tcomment(request, pk, *args, **kwargs):
 
 class TalkUpdate(LoginRequiredMixin,UpdateView):
     model = Talk
-    fields = ['category','img','title', 'content']
-    template_name = 'community/post_update.html'
+    fields = ['category', 'img', 'title', 'content']
+    template_name = 'community/talk_update.html'
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated and request.user == self.get_object().author:

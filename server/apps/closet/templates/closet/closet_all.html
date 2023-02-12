@@ -17,11 +17,11 @@
 
 </ul>
 <hr/>
-{%for Post in post_list%}
+{%for post in post_list%}
   <a>
-    {%if Post.main_img %}
-    <img src="{{Post.main_img.url}}">
-    {%endif%}
+    <a href="{% url 'community:post_detail' post.pk %}">
+      <img src="{{post.main_img.url}}">
+    </a>
   </a>
 {%endfor%}
 
