@@ -16,5 +16,7 @@ urlpatterns = [
   path("shoes/", views.shoes_list, name="shoes_list"),
   path("acc/", views.acc_list, name="acc_list"),
   path("create/clothes/",views.create_clothes,name="clothes_create"),
+  # path("delete/clothes/<int:pk>/",views.create_clothes,name="clothes_create"),
+  # path("detail/clothes/<int:pk>/",views.create_clothes,name="clothes_create"),
   path("clothes-likes/<int:pk>/", views.clothes_likes, name='clothes_likes'),
 ]

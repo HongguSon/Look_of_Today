@@ -203,7 +203,7 @@ def community_main(request, *args, **kwargs):
 #     return render(request,'community/community.html',context=context)
 
 def openrun(request,*args, **kwargs):
-    talk_list = Talk.objects.filter(category='오픈런')
+    talk_list = Talk.objects.filter(category='openrun')
     title = "오픈런"
     context={
         'talk_list' : talk_list,
@@ -212,8 +212,8 @@ def openrun(request,*args, **kwargs):
     return render(request,'community/community.html',context=context)
 
 def other(request,*args, **kwargs):
-    talk_list = Talk.objects.filter(category='고민방')
-    title = "고민방"
+    talk_list = Talk.objects.filter(category='other')
+    title = "잡담방"
     context={
         'talk_list' : talk_list,
         'title' : title,

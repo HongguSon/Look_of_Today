@@ -4,26 +4,75 @@
 <link rel="stylesheet" href="{% static 'css/closet.css' %}">
 {% endblock %}
 {% block content %}
-<div class="my-1 text-center fs-5">나만의 옷장</div>
-<hr/>
-<ul class="my-0 px-0 mx-3 d-flex justify-content-around">
-  <li><a href="" class="small_menu text-black fs-5">아우터</a></li>
-  <li><a href="" class="small_menu text-black fs-5">상의</a></li>
-  <li><a href="" class="small_menu text-black fs-5">하의</a></li>
-  <li><a href="" class="small_menu text-black fs-5">신발</a></li>
-  <li><a href="" class="small_menu text-black fs-5">액세서리</a></li>
-  <li><a href="{% url 'community:post_create' %}" class="small_menu text-black fs-5">착장 추가</a></li>
-  <li><a href="{% url 'closet:closet_main' %}" class="small_menu text-black fs-5">내 옷장</a></li>
+<br />
+<!--아코디언-->
+<div class="accordion" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        <div class="accmain">
+          Clothes
+        </div>
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne">
+      <p>
+        <div class="accmain2">
+        <a href="{% url 'closet:closet_main' %}">All</a>
+        <a href="{% url 'closet:outer_list' %}">Outer</a>
+        <a href="{% url 'closet:top_list' %}"> Top </a>
+        <a href="{% url 'closet:bottom_list' %}">Bottom</a>
+        <a href="{% url 'closet:shoes_list' %}">Shoes</a>
+        <a href="{% url 'closet:acc_list' %}">Accessory</a>
+      </p>  
+        <hr>
+      </div>
+        <div class="accmain3">
+          <a href="{% url 'closet:clothes_create' %}">
+            <img class="closet_icon" src="/static/img/plus.png">
+          </a>
+        <img class="closet_icon" src="/static/img/heart.png">
+      </div>
+      </div>
+    </div>
+  </div>
 
-</ul>
-<hr/>
-{%for post in post_list%}
-  <a>
-    <a href="{% url 'community:post_detail' post.pk %}">
-      <img src="{{post.main_img.url}}">
-    </a>
+  <div class="accordion" id="accordionExample">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingOne">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne2" aria-expanded="true" aria-controls="collapseOne">
+          <div class="accmain1">Cody</div>
+        </button>
+      </h2>
+      <div id="collapseOne2" class="accordion-collapse collapse show" aria-labelledby="headingOne">
+        <p>
+          <div class="accmain2">
+        </p> 
+        <div class="acccody">
+          <a href="{% url 'closet:closet_all' %}"> 
+            <span>My Cody</span>
+          </a>
+          <a href="{% url 'closet:clothes_create' %}"> 
+            <span>My List</span>
+          </a>
+        </div>
+        </div>
+        </div>
+      </div>
+    </div>
+<!--아코디언 끝-->
+
+{% for post in post_list %}
+  <a href="{% url 'community:post_detail' post.pk %}">
+    <img src="{{post.main_img.url}}">
   </a>
-{%endfor%}
+  {{post.title}}
+  {% if post.open %}
+    <i class="fa-solid fa-lock-open">전제공개</i>
+  {% else %}
+    <i class="fa-solid fa-lock">비공개</i>
+  {% endif %}
+{% endfor %}
 </div>
 
 
