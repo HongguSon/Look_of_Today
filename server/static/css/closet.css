@@ -93,8 +93,12 @@ img:hover{
   margin-left: 6.313rem;
 }
 
+.accmain2{
+  text-align: center;
+}
+
 .accmain2 > a{
-  font-size: 0.813rem;
+  font-size: 1rem;
   margin-left: 0.719rem;
 }
 
