@@ -29,9 +29,41 @@
   {{post.content}}
   </div> <br />  
 
-  {%if post.img %}
-  <img src="{{post.img.url}}" class="post_img"> <br />
-  {%endif%}
+<div class="postimgs">
+  <img src="{{post.main_img.url}}" class="post_img1"> <br />
+</div>
+
+<div>
+  <p>착장 정보</p>
+  <p>Outer
+    <!-- {% if not post.outer %}
+    : 없음 이거 왜 안먹히지.. 뭐지
+    {% endif %} -->
+  </p>
+  {% for outer in post.outer.iterator %}
+    <img src="{{outer.img.url}}" class="post_img1"> <br />
+  {% endfor %}
+  <p>Top
+  </p>
+  {% for top in post.top.iterator %}
+    <img src="{{top.img.url}}" class="post_img1"> <br />
+  {% endfor %}
+  <p>Bottom
+  </p>
+  {% for bottom in post.bottom.iterator %}
+    <img src="{{bottom.img.url}}" class="post_img1"> <br />
+  {% endfor %}
+  <p>Shoes
+  </p>
+  {% for shoes in post.shoes.iterator %}
+    <img src="{{shoes.img.url}}" class="post_img1"> <br />
+  {% endfor %}
+  <p>Acc
+  </p>
+  {% for acc in post.acc.iterator %}
+    <img src="{{acc.img.url}}" class="post_img1"> <br />
+  {% endfor %}
+</div>
 
 <hr>
 <div class="comment-sum">
