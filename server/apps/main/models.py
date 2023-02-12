@@ -1,6 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.core.files.uploadedfile import InMemoryUploadedFile
+from rembg import remove
+from PIL import Image
+from io import BytesIO
+import sys
 
 # Create your models here.
 
@@ -18,6 +22,28 @@ class Clothes(models.Model):
   
   def get_absolute_url(self):
     return f'/closet/'
+  
+  def save(self, *args, **kwargs):
+    self.remove_img()
+    super(Clothes, self).save(*args, **kwargs)
+    
+  def remove_img(self, *args, **kwargs):
+    image_converted = convert_test(self.img)
+    self.rem_img = InMemoryUploadedFile(file=image_converted, field_name="ImageField", name=self.img.name,
+                                                content_type='image/jpeg', size=sys.getsizeof(image_converted), charset=None)
+        
+def convert_test(img):
+  img = Image.open(img)
+  output = remove(img)
+  img = output.convert('RGB')
+  img = img.resize((300, 300), Image.ANTIALIAS)
+  return image_to_bytes(img)
+
+def image_to_bytes(img):
+  output = BytesIO()
+  img.save(output, format='PNG')
+  output.seek(0)
+  return output
 
 class Top(Clothes):
   pass
