@@ -1,68 +1,51 @@
-.nolog{
-  text-align: center;
-}
-
-.info{
-  display: flex;
-  flex-direction: column;
-  border-right: 1px solid #DADBDB;
-  height: 100%;
-}
-
-.name{
-  display: flex;
-  align-items: center;
-}
-
-.nobtn{
-  margin-top: 0.6rem;
-}
-
-.main{
-  display: flex;
-  flex-direction: row;
-  height: 30rem;
-}
-
+#banner {
+    height: 6.375rem;
+    text-align: center;
+  }
+  
 .right {
-  border-right: 1px solid #DADBDB;
+  border-right: 1px solid black;
   height: 100%;
-  padding-bottom: 4rem;
 }
   
+.col-3 {
+  border-left: 5rem;
+}
+  
+.title > p{
+  margin-left: 6.25rem;
+  margin-top: 3rem !important;
+  text-align: left;
+}
+
 .con {
-  border-color: #DADBDB;
+  border: 0.125rem;
+  width: 12.5rem;
   padding: 0.5rem;
-  margin-top: 2rem;
-  margin-bottom: 2rem; 
+  margin-top: 0.125rem;
   border-radius: 0.625rem;
 }
 
 .con > div{
-  justify-content: space-around;
-  display: flex;
-}
-
-.cre_btn{
-  display: inline;
-  justify-content: center;
+  margin-top: 0.6rem;
 }
 
 .post_count{
-  margin-left: 1.4rem;
+  margin-left: 1.25rem;
 }
 
 .comment_count{
-  margin-left: 0.4rem;
+  margin-left: 0.5rem;
 }
 
+  
 #user-img {
   width: 6.25rem;
   height: 6.25rem;
 }
   
 .menu {
-  padding-bottom: 4rem; 
+  margin-top: 1.875rem;
 }
   
 .menu div {
@@ -97,8 +80,8 @@
 }
 
 .content img:hover{
-  -webkit-transform: scale(1.08);
-	transform: scale(1.08);
+  -webkit-transform: scale(1.02);
+	transform: scale(1.02);
   opacity: .75;
 }
   
@@ -112,11 +95,11 @@
     gap: 5rem;
 }
 
-p{
-    margin-bottom: 0 !important;
-    margin-top: 1rem !important;
-    text-align: left;
+.post_info > p {
+  margin-top: 0.5rem !important;
+  margin-bottom: 0 !important;
 }
+
 
 .content div{
     margin-left: 0;
@@ -134,8 +117,7 @@ textarea{
 }
 
 .post_all{
-  font-size: large;
-  padding-left: 4.3rem;
+  font-size: x-large;
   margin-top: 2rem;
   margin-bottom: 2rem;
 }

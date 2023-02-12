@@ -1,26 +1,26 @@
 form{
-    padding-left: 580px;
+    padding-left: 36.25rem;
 }
 
 label{
-    padding-top: 50px;
-    padding-bottom: 50px;
-    padding-right: 15px;
+    padding-top: 3.125rem;
+    padding-bottom: 3.125rem;
+    padding-right: 0.938rem;
 }
 
 #subbtn{
-    margin-left: 110px;
-    margin-bottom: 30px;
+    margin-left: 6.875rem;
+    margin-bottom: 1.875rem;
 }
 
 #id_clothes{
-    width: 165px;
+    width: 10.313rem;
 }
 
 #id_main_img{
-    padding-left: 40px;
+    padding-left: 2.5rem;
 }
 
 #id_title{
-    margin-left: 20px;
+    margin-left: 1.25rem;
 }

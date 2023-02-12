@@ -41,27 +41,37 @@
     {% endif %} -->
   </p>
   {% for outer in post.outer.iterator %}
-    <img src="{{outer.img.url}}" class="post_img1"> <br />
+  {% if outer.rem_img %}
+  <img src="{{outer.rem_img.url}}" class="post_img1"> <br />
+  {% endif %}
   {% endfor %}
   <p>Top
   </p>
   {% for top in post.top.iterator %}
-    <img src="{{top.img.url}}" class="post_img1"> <br />
+  {% if top.rem_img %}
+  <img src="{{top.rem_img.url}}" class="post_img1"> <br />
+  {% endif %}
   {% endfor %}
   <p>Bottom
   </p>
   {% for bottom in post.bottom.iterator %}
-    <img src="{{bottom.img.url}}" class="post_img1"> <br />
+    {% if bottom.rem_img %}
+    <img src="{{bottom.rem_img.url}}" class="post_img1"> <br />
+    {% endif %}
   {% endfor %}
   <p>Shoes
   </p>
   {% for shoes in post.shoes.iterator %}
-    <img src="{{shoes.img.url}}" class="post_img1"> <br />
+    {% if shoes.rem_img %}
+    <img src="{{shoes.rem_img.url}}" class="post_img1"> <br />
+    {% endif %}
   {% endfor %}
   <p>Acc
   </p>
   {% for acc in post.acc.iterator %}
-    <img src="{{acc.img.url}}" class="post_img1"> <br />
+    {% if acc.rem_img %}
+    <img src="{{acc.rem_img.url}}" class="post_img1"> <br />
+    {% endif %}
   {% endfor %}
 </div>
 
