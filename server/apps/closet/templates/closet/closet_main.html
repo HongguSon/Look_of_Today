@@ -18,6 +18,7 @@
     <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne">
       <p>
         <div class="accmain2">
+        <a href="{% url 'closet:closet_main' %}">All</a>
         <a href="{% url 'closet:outer_list' %}">Outer</a>
         <a href="{% url 'closet:top_list' %}"> Top </a>
         <a href="{% url 'closet:bottom_list' %}">Bottom</a>
@@ -27,7 +28,9 @@
         <hr>
       </div>
         <div class="accmain3">
-        <img class="closet_icon" src="/static/img/plus.png">
+          <a href="{% url 'closet:clothes_create' %}">
+            <img class="closet_icon" src="/static/img/plus.png">
+          </a>
         <img class="closet_icon" src="/static/img/heart.png">
       </div>
       </div>
@@ -45,9 +48,13 @@
         <p>
           <div class="accmain2">
         </p> 
-        <div class="acccody"> 
-        <span>My Cody</span>
-        <span>My List</span>
+        <div class="acccody">
+          <a href="{% url 'closet:closet_all' %}"> 
+            <span>My Cody</span>
+          </a>
+          <a href="{% url 'closet:clothes_create' %}"> 
+            <span>My List</span>
+          </a>
         </div>
         </div>
         </div>

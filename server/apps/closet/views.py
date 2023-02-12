@@ -16,7 +16,7 @@ def closet_main(request, *args, **kwargs):
   return render(request,'closet/closet_main.html', context=context)
 
 def closet_all(request, *args, **kwargs):
-  post_list = Post.objects.all() 
+  post_list = Post.objects.filter(author=request.user) 
   context={
       'post_list':post_list,
   }   

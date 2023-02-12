@@ -84,9 +84,9 @@ class Post(models.Model):
 
 class Talk(models.Model):
   Talk_CHOICES = (
-    ('buying', '공동 구매'), #공동구매
-    ('openrun', '오픈런'), #오픈런
-    ('other', '고민방'), #고민방
+    ('공동 구매', '공동 구매'), #공동구매
+    ('오픈런', '오픈런'), #오픈런
+    ('잡담방', '잡담방'), #고민방
   )
   category = models.CharField(max_length=10 ,choices=Talk_CHOICES)
   img = models.ImageField(upload_to='main/images/commu/%Y/%m/%d', null=True, blank=True)
