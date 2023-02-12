@@ -93,7 +93,7 @@ img:hover{
   margin-left: 6.313rem;
 }
 
-.accmain2 > span{
+.accmain2 > a{
   font-size: 0.813rem;
   margin-left: 0.719rem;
 }
@@ -109,3 +109,16 @@ img:hover{
   font-size: 1.125rem;
 }
 
+.mycloset_img{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.mycloset_img > img{
+  width: 200px;
+  margin-left: 40px;
+  border-radius: 15px;
+  margin-right: 20px;
+  margin-bottom: 70px;
+}
