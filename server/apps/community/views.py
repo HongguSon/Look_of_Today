@@ -116,7 +116,7 @@ class TalkCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
 def talk_detail(request, pk, *args, **kwargs):
     talk = Talk.objects.get(pk=pk)
-    t_comments = TalkComment.objects.filter(talk=pk)
+    t_comments = TalkComment.objects.filter(post=pk)
     context = {
         'talk' : talk,
         't_comments' : t_comments,
@@ -129,7 +129,7 @@ def comment_talk_ajax(request, *args, **kwargs):
     talk = Talk.objects.get(id=data["talk_id"])
     
     comment = TalkComment.objects.create(
-        talk = talk,
+        post = talk,
         author = request.user,
         content = data.get('content'),)
     comment.save()
@@ -145,7 +145,7 @@ def comment_talk_ajax(request, *args, **kwargs):
 
 def delete_tcomment(request, pk, *args, **kwargs):
     tcomment = get_object_or_404(TalkComment, pk=pk)
-    talk = tcomment.talk
+    talk = tcomment.post
     if request.user.is_authenticated and request.user == tcomment.author:
         tcomment.delete()
         return redirect('community:talk_detail', talk.pk)
@@ -155,7 +155,7 @@ def delete_tcomment(request, pk, *args, **kwargs):
 class TalkUpdate(LoginRequiredMixin,UpdateView):
     model = Talk
     fields = ['category', 'img', 'title', 'content']
-    template_name = 'community/talk_update.html'
+    template_name = 'community/update.html'
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated and request.user == self.get_object().author:
@@ -187,11 +187,23 @@ def talk_likes(request, pk, *args, **kwargs):
 
 def community_main(request, *args, **kwargs):
     talk_list = Talk.objects.all()
+    t_comments=TalkComment.objects.all()
     title = "모든 게시물" 
+    for i in talk_list:
+        talk_pk=i.pk
+    comments_count=[0 for i in range(talk_pk)]
+    comments_count.append(0)
+    for t_comment in t_comments:
+        for talk in talk_list:
+            if talk.pk == t_comment.post.pk:
+                comments_count[talk.pk]+=1
+            print(talk.pk)
     context={
         'talk_list' : talk_list,
         'title' : title,
+        'comments_count' : comments_count,
         }   
+    print(comments_count)
     return render(request,'community/community.html',context=context)
 
 # def community_kind(request, category, *args, **kwargs):
