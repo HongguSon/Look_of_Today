@@ -35,7 +35,7 @@ class Clothes(models.Model):
 def convert_test(img):
   img = Image.open(img)
   output = remove(img)
-  img = output.convert('RGB')
+  img = output.convert('RGBA')
   img = img.resize((300, 300), Image.ANTIALIAS)
   return image_to_bytes(img)
 
