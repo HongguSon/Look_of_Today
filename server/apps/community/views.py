@@ -3,6 +3,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from server.apps.main.models import *
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import render
+from django.core.paginator import Paginator, PageNotAnInteger , EmptyPage
 from django.http import JsonResponse
 from django.http.request import HttpRequest
 from django.views.generic import CreateView, UpdateView
@@ -184,11 +186,22 @@ def talk_likes(request, pk, *args, **kwargs):
 
 
 # -----------------------------------------------------------
+#페이지네이션 코드
+def paginations(request,talk_list):
+    page=request.GET.get('page')
+    paginator=Paginator(talk_list,2) #2개씩 보기
+    try:
+        page_obj=paginator.page(page)
+    except PageNotAnInteger:
+        page=1
+        page_obj=paginator.page(page)
+    except EmptyPage:
+        page=paginator.num_pages
+        page_obj=paginator.page(page)
+    return page_obj ,paginator
 
-def community_main(request, *args, **kwargs):
-    talk_list = Talk.objects.all()
-    t_comments=TalkComment.objects.all()
-    title = "모든 게시물" 
+#댓글 수 세기 코드
+def count_comments(talk_list,t_comments):
     for i in talk_list:
         talk_pk=i.pk
     comments_count=[0 for i in range(talk_pk)]
@@ -197,46 +210,48 @@ def community_main(request, *args, **kwargs):
         for talk in talk_list:
             if talk.pk == t_comment.talk.pk:
                 comments_count[talk.pk]+=1
-            print(talk.pk)
+    return comments_count
+
+def community_main(request, *args, **kwargs):
+    title = "모든 게시물" 
+    talk_list = Talk.objects.all()
+    t_comments=TalkComment.objects.all()
+    page_obj ,paginator = paginations(request,talk_list)
+    comments_count = count_comments(talk_list,t_comments)
     context={
-        'talk_list' : talk_list,
-        'title' : title,
-        'comments_count' : comments_count,
+        'talk_list' : talk_list,'title' : title,'comments_count' : comments_count,'page_obj':page_obj,'paginator':paginator,
         }   
-    print(comments_count)
     return render(request,'community/community.html',context=context)
 
-# def community_kind(request, category, *args, **kwargs):
-#     talk_list = Talk.objects.filter(category=category)
-#     context={
-#         'talk_list' : talk_list,
-#         'category' : category,
-#     }   
-#     return render(request,'community/community.html',context=context)
-
 def openrun(request,*args, **kwargs):
-    talk_list = Talk.objects.filter(category='오픈런')
+    talk_list = Talk.objects.filter(category="오픈런")
     title = "오픈런"
+    t_comments=TalkComment.objects.all()
+    page_obj ,paginator = paginations(request,talk_list)
+    comments_count = count_comments(talk_list,t_comments)
     context={
-        'talk_list' : talk_list,
-        'title' : title,
+        'talk_list' : talk_list,'title' : title,'comments_count' : comments_count,'page_obj':page_obj,'paginator':paginator,
         }   
     return render(request,'community/community.html',context=context)
 
 def other(request,*args, **kwargs):
     talk_list = Talk.objects.filter(category='잡담방')
     title = "잡담방"
+    t_comments=TalkComment.objects.all()
+    page_obj ,paginator = paginations(request,talk_list)
+    comments_count = count_comments(talk_list,t_comments)
     context={
-        'talk_list' : talk_list,
-        'title' : title,
+        'talk_list' : talk_list,'title' : title,'comments_count' : comments_count,'page_obj':page_obj,'paginator':paginator,
         }   
     return render(request,'community/community.html',context=context)
 
 def buying(request,*args, **kwargs):
     talk_list = Talk.objects.filter(category='공동 구매')
-    title = "공구방"
+    title = "공동 구매"
+    t_comments=TalkComment.objects.all()
+    page_obj ,paginator = paginations(request,talk_list)
+    comments_count = count_comments(talk_list,t_comments)
     context={
-        'talk_list' : talk_list,
-        'title' : title,
+        'talk_list' : talk_list,'title' : title,'comments_count' : comments_count,'page_obj':page_obj,'paginator':paginator,
         }   
     return render(request,'community/community.html',context=context)

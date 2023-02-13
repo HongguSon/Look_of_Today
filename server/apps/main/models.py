@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.files.uploadedfile import InMemoryUploadedFile
+from datetime import datetime, timedelta
+from pytz import timezone
 from rembg import remove
 from PIL import Image
 from io import BytesIO
@@ -84,9 +86,9 @@ class Post(models.Model):
 
 class Talk(models.Model):
   Talk_CHOICES = (
-    ('공동 구매', '공동 구매'), #공동구매
-    ('오픈런', '오픈런'), #오픈런
-    ('잡담방', '잡담방'), #고민방
+    ('공동 구매','공동 구매'), #공동구매
+    ('오픈런','오픈런'), #오픈런
+    ('잡담방','잡담방'), #고민방
   )
   category = models.CharField(max_length=10 ,choices=Talk_CHOICES)
   img = models.ImageField(upload_to='main/images/commu/%Y/%m/%d', null=True, blank=True)
@@ -97,7 +99,6 @@ class Talk(models.Model):
   # update_date = models.DateTimeField(auto_now=True)
   likes = models.ManyToManyField(User, related_name='Talk_Likes', blank=True)
 
-
   def __str__(self):
     return f'{self.pk}: {self.title}'
 
@@ -106,6 +107,22 @@ class Talk(models.Model):
 
   def get_absolute_url(self):
     return f'/community/'
+
+  @property
+  def created_string(self):
+    time = datetime.now(timezone('Asia/Seoul')) - self.create_date
+
+    if time < timedelta(minutes=1):
+          return '방금 전'
+    elif time < timedelta(hours=1):
+        return str(int(time.seconds / 60)) + '분 전'
+    elif time < timedelta(days=1):
+        return str(int(time.seconds / 3600)) + '시간 전'
+    elif time < timedelta(days=7):
+        time = datetime.now(timezone('Asia/Seoul')).date() - self.create_date.date()
+        return str(time.days) + '일 전'
+    else:
+        return False
 
 class Comment(models.Model):
   author = models.ForeignKey(User, on_delete=models.CASCADE)
