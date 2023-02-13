@@ -2,9 +2,10 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from rembg import remove
-from PIL import Image
+from PIL import Image,ImageOps,ImageFilter
 from io import BytesIO
 import sys
+
 
 # Create your models here.
 
@@ -35,7 +36,7 @@ class Clothes(models.Model):
 def convert_test(img):
   img = Image.open(img)
   output = remove(img)
-  img = output.convert('RGB')
+  img = output.convert('RGBA')
   img = img.resize((300, 300), Image.ANTIALIAS)
   return image_to_bytes(img)
 
@@ -120,4 +121,4 @@ class PostComment(Comment):
   post = models.ForeignKey(Post, on_delete=models.CASCADE)
 
 class TalkComment(Comment):
-  talk = models.ForeignKey(Talk, on_delete=models.CASCADE)
+  post = models.ForeignKey(Talk, on_delete=models.CASCADE)
