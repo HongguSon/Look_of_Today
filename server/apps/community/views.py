@@ -64,12 +64,12 @@ def delete_pcomment(request, pk, *args, **kwargs):
         PermissionDenied
 
 class PostUpdate(LoginRequiredMixin,UpdateView):
-  model = Post
-  fields = ['main_img', 'title', 'open', 'top', 'bottom', 'acc', 'outer', 'shoes']
-  
-  template_name = 'community/post_update.html'
+    model = Post
+    fields = ['main_img', 'title', 'open', 'top', 'bottom', 'acc', 'outer', 'shoes']
+    
+    template_name = 'community/post_update.html'
 
-  def dispatch(self, request, *args, **kwargs):
+    def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated and request.user == self.get_object().author:
             return super(PostUpdate, self).dispatch(request, *args, **kwargs)
         else:
@@ -129,7 +129,7 @@ def comment_talk_ajax(request, *args, **kwargs):
     talk = Talk.objects.get(id=data["talk_id"])
     
     comment = TalkComment.objects.create(
-        talk = talk,
+        post = talk,
         author = request.user,
         content = data.get('content'),)
     comment.save()
@@ -145,7 +145,7 @@ def comment_talk_ajax(request, *args, **kwargs):
 
 def delete_tcomment(request, pk, *args, **kwargs):
     tcomment = get_object_or_404(TalkComment, pk=pk)
-    talk = tcomment.talk
+    talk = tcomment.post
     if request.user.is_authenticated and request.user == tcomment.author:
         tcomment.delete()
         return redirect('community:talk_detail', talk.pk)
@@ -155,7 +155,7 @@ def delete_tcomment(request, pk, *args, **kwargs):
 class TalkUpdate(LoginRequiredMixin,UpdateView):
     model = Talk
     fields = ['category', 'img', 'title', 'content']
-    template_name = 'community/update.html'
+    template_name = 'community/post_update.html'
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated and request.user == self.get_object().author:
@@ -187,10 +187,13 @@ def talk_likes(request, pk, *args, **kwargs):
 
 def community_main(request, *args, **kwargs):
     talk_list = Talk.objects.all()
-    t_comments=TalkComment.objects.all()
+    t_comments = TalkComment.objects.all()
     title = "모든 게시물" 
-    for i in talk_list:
-        talk_pk=i.pk
+    if talk_list:
+        for i in talk_list:
+            talk_pk = i.pk
+    else:
+        talk_pk = 0
     comments_count=[0 for i in range(talk_pk)]
     comments_count.append(0)
     for t_comment in t_comments:

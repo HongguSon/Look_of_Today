@@ -2,9 +2,10 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from rembg import remove
-from PIL import Image
+from PIL import Image,ImageOps,ImageFilter
 from io import BytesIO
 import sys
+
 
 # Create your models here.
 
@@ -105,7 +106,7 @@ class Talk(models.Model):
     return self.likes.count()
 
   def get_absolute_url(self):
-    return f'/community/'
+    return f'/community/talk-detail/{self.pk}/'
 
 class Comment(models.Model):
   author = models.ForeignKey(User, on_delete=models.CASCADE)
