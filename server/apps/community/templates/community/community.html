@@ -13,7 +13,7 @@
     <div class="post-all px-5">
       <div class="post_all">{{title}}</div>
       <a href="{% url 'community:talk_create' %}">글 작성</a>
-      
+
       <a href="{% url 'community:community_main' %}">모든 게시판</a>
       <a href="{% url 'community:buying' %}">공동구매</a>
       <a href="{% url 'community:openrun' %}">오픈런</a>
@@ -21,9 +21,16 @@
 
       {%for talk in talk_list%}
       <div class="post-box">
-        {{talk.category}} | <a href="{% url 'community:talk_detail' talk.pk %}">{{talk.title}} </a> | 댓글 수 구현 전 |
-        {{talk.create_date}} | {{talk.total_likes}}
+        <div> 커뮤니티 종류 : {{talk.category}} </div>
+        <div> 게시글 이름 : <a href="{% url 'community:talk_detail' talk.pk %}">{{talk.title}} </a> </div>
+        <div> 댓글 수: {%for count in comments_count%}
+          {%if forloop.counter0 == talk.pk %} {{count}}
+          {%endif%}{%endfor%} </div>
+        <div>생성일 : {{talk.create_date}}</div>
+        <div> 좋아요 수: {{talk.total_likes}}</div>
+        <hr>
       </div>
+
       {%endfor%}
     </div>
   </div>

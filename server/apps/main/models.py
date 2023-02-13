@@ -112,12 +112,15 @@ class Comment(models.Model):
   content = models.TextField()
   create_date = models.DateTimeField(auto_now_add=True)
   update_date = models.DateTimeField(auto_now=True)
-
-  def __str__(self):
-    return f'({self.author}) {self.post.title} :  {self.content}'
   
 class PostComment(Comment):
   post = models.ForeignKey(Post, on_delete=models.CASCADE)
+  
+  def __str__(self):
+    return f'({self.author}) {self.post.title} :  {self.content}'
 
 class TalkComment(Comment):
   talk = models.ForeignKey(Talk, on_delete=models.CASCADE)
+  
+  def __str__(self):
+    return f'({self.author}) {self.talk.title} :  {self.content}'
