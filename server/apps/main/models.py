@@ -106,7 +106,7 @@ class Talk(models.Model):
     return self.likes.count()
 
   def get_absolute_url(self):
-    return f'/community/'
+    return f'/community/talk-detail/{self.pk}/'
 
 class Comment(models.Model):
   author = models.ForeignKey(User, on_delete=models.CASCADE)
