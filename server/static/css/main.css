@@ -1,84 +1,18 @@
 .nopost{
    display: flex;
    flex-direction: row;
+   justify-content: center;
 }
 
-.nopost > img{
+#main_icon{
     width: 6.625rem;
-    margin-left: 23.2rem;
     padding-top: 3.125rem;
     height: 10rem;
 }
 
-@media screen and (max-width: 48rem){
-    .nopost{ 
-        max-width: 47.5rem; 
-    }
-
-    .postex{
-        padding-top: 2.25rem !important;
-        padding-left: 3.5rem !important;
-    }
-
-    img{
-      width: 18vw !important;
-      height: 18vw !important;
-      padding-top: 0 !important;
-      margin-left: 2rem !important;
-      margin-top: 1rem;
-    }
-
-    .startbtn{
-        width: 20vw !important;
-        height: 7vw !important;
-        margin-left: -0.3rem !important;
-    }
-
-    .votebtn{
-        width: 33vw !important;
-        height: 9vw !important;
-        font-size: 0.938rem;
-    }
-
-    .main_menu{
-        margin-left: 0.75rem !important;
-        font-size: 1.2rem !important;
-    }
-
-    .week{
-        width: 5.313rem !important;
-    }
-
-    .hot2{
-        width: 5.313rem !important;
-    }
-
-    .best2{
-        width: 5.313rem !important;
-    }
-}
-
-:root {
-    --font-size-lg: 5vw;
-    --font-size-md: 3.7vw;
-    --font-size-sm: 3vw;
-  }
-
-@media (max-width: 48rem) {
-    .post_text{
-        font-size: var(--font-size-sm);
-    }
-
-    .vote_text{
-        font-size: var(--font-size-md); 
-    }
-
-}
-  
-
 .postex{
     padding-top: 6.25rem;
-    padding-left: 8.2rem;
+    padding-left: 3.2rem;
     font-size: 1rem;
 }
 

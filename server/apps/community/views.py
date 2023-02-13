@@ -1,10 +1,9 @@
 import json
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from server.apps.main.models import *
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
-from django.shortcuts import render, get_object_or_404
 from django.http.request import HttpRequest
 from django.views.generic import CreateView, UpdateView
 from django.core.exceptions import PermissionDenied
@@ -25,7 +24,7 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
             form.instance.author = current_user
             return super(PostCreate, self).form_valid(form)
         else:
-            return redirect('closet:our_closet')
+            return redirect('closet:closet_all')
 
 def post_detail(request, pk, *args, **kwargs):
     post = Post.objects.get(pk=pk)
@@ -65,12 +64,12 @@ def delete_pcomment(request, pk, *args, **kwargs):
         PermissionDenied
 
 class PostUpdate(LoginRequiredMixin,UpdateView):
-  model = Post
-  fields = ['main_img', 'title','open',  'top','bottom','acc','outter','shose']
-  
-  template_name = 'community/update.html'
+    model = Post
+    fields = ['main_img', 'title', 'open', 'top', 'bottom', 'acc', 'outer', 'shoes']
+    
+    template_name = 'community/post_update.html'
 
-  def dispatch(self, request, *args, **kwargs):
+    def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated and request.user == self.get_object().author:
             return super(PostUpdate, self).dispatch(request, *args, **kwargs)
         else:
@@ -93,7 +92,7 @@ def post_likes(request, pk, *args, **kwargs):
             article.likes.add(request.user)
         return redirect('community:post_detail',pk)
         # return redirect('accouts:login')위에거 대신 이거 떠야함! 나중에 로그인 합치고!!
-    return render(request, 'community:detail.html')
+    return render(request, 'community/post_detail.html')
 
 
 # 여기까지가 옷장이고
@@ -130,7 +129,7 @@ def comment_talk_ajax(request, *args, **kwargs):
     talk = Talk.objects.get(id=data["talk_id"])
     
     comment = TalkComment.objects.create(
-        talk = talk,
+        post = talk,
         author = request.user,
         content = data.get('content'),)
     comment.save()
@@ -146,7 +145,7 @@ def comment_talk_ajax(request, *args, **kwargs):
 
 def delete_tcomment(request, pk, *args, **kwargs):
     tcomment = get_object_or_404(TalkComment, pk=pk)
-    talk = tcomment.talk
+    talk = tcomment.post
     if request.user.is_authenticated and request.user == tcomment.author:
         tcomment.delete()
         return redirect('community:talk_detail', talk.pk)
@@ -155,7 +154,7 @@ def delete_tcomment(request, pk, *args, **kwargs):
 
 class TalkUpdate(LoginRequiredMixin,UpdateView):
     model = Talk
-    fields = ['category','img','title', 'content']
+    fields = ['category', 'img', 'title', 'content']
     template_name = 'community/post_update.html'
 
     def dispatch(self, request, *args, **kwargs):
@@ -188,11 +187,26 @@ def talk_likes(request, pk, *args, **kwargs):
 
 def community_main(request, *args, **kwargs):
     talk_list = Talk.objects.all()
+    t_comments = TalkComment.objects.all()
     title = "모든 게시물" 
+    if talk_list:
+        for i in talk_list:
+            talk_pk = i.pk
+    else:
+        talk_pk = 0
+    comments_count=[0 for i in range(talk_pk)]
+    comments_count.append(0)
+    for t_comment in t_comments:
+        for talk in talk_list:
+            if talk.pk == t_comment.talk.pk:
+                comments_count[talk.pk]+=1
+            print(talk.pk)
     context={
         'talk_list' : talk_list,
         'title' : title,
+        'comments_count' : comments_count,
         }   
+    print(comments_count)
     return render(request,'community/community.html',context=context)
 
 # def community_kind(request, category, *args, **kwargs):
@@ -213,8 +227,8 @@ def openrun(request,*args, **kwargs):
     return render(request,'community/community.html',context=context)
 
 def other(request,*args, **kwargs):
-    talk_list = Talk.objects.filter(category='고민방')
-    title = "고민방"
+    talk_list = Talk.objects.filter(category='잡담방')
+    title = "잡담방"
     context={
         'talk_list' : talk_list,
         'title' : title,

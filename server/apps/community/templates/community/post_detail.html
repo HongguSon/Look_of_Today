@@ -29,9 +29,51 @@
   {{post.content}}
   </div> <br />  
 
-  {%if post.img %}
-  <img src="{{post.img.url}}" class="post_img"> <br />
-  {%endif%}
+<div class="postimgs">
+  <img src="{{post.main_img.url}}" class="post_img1"> <br />
+</div>
+
+<div>
+  <p>착장 정보</p>
+  <p>Outer
+    <!-- {% if not post.outer %}
+    : 없음 이거 왜 안먹히지.. 뭐지
+    {% endif %} -->
+  </p>
+  {% for outer in post.outer.iterator %}
+  {% if outer.rem_img %}
+  <img src="{{outer.rem_img.url}}" class="post_img1"> <br />
+  {% endif %}
+  {% endfor %}
+  <p>Top
+  </p>
+  {% for top in post.top.iterator %}
+  {% if top.rem_img %}
+  <img src="{{top.rem_img.url}}" class="post_img1"> <br />
+  {% endif %}
+  {% endfor %}
+  <p>Bottom
+  </p>
+  {% for bottom in post.bottom.iterator %}
+    {% if bottom.rem_img %}
+    <img src="{{bottom.rem_img.url}}" class="post_img1"> <br />
+    {% endif %}
+  {% endfor %}
+  <p>Shoes
+  </p>
+  {% for shoes in post.shoes.iterator %}
+    {% if shoes.rem_img %}
+    <img src="{{shoes.rem_img.url}}" class="post_img1"> <br />
+    {% endif %}
+  {% endfor %}
+  <p>Acc
+  </p>
+  {% for acc in post.acc.iterator %}
+    {% if acc.rem_img %}
+    <img src="{{acc.rem_img.url}}" class="post_img1"> <br />
+    {% endif %}
+  {% endfor %}
+</div>
 
 <hr>
 <div class="comment-sum">
@@ -44,7 +86,12 @@
                 <div>
                     <div>{{comment.author.username}}</div>
                     <div>{{comment.content}}</div>
-                    <!-- 추가로 댓글 수정 삭제를 넣어볼까 생각중 -->
+                    {% if user == comment.author %}
+                    <form action="{% url 'community:delete_comment' comment.pk %}" method="post">
+                      {% csrf_token %}
+                      <input type="submit" , value="삭제하기" , class="delbtn" />
+                    </form>
+                    {% endif %}
                 </div>
             </div>
             <hr>
