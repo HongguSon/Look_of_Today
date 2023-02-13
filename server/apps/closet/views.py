@@ -23,19 +23,19 @@ def closet_all(request, *args, **kwargs):
   }   
   return render(request,'closet/closet_main.html',context=context)
 
-def clothes_list(request, Clothes, *args, **kwargs):
-  clothes_mapping = {
-    'top': Top,
-    'bottom': Bottom,
-    'outer': Outer,
-    'shoes': Shoes,
-    'acc': Acc,
-  }
-  clothes_list = clothes_mapping.get(Clothes).objects.filter(author=request.user)
-  context={
-    'clothes_list': clothes_list,
-    }   
-  return render(request,'closet/closet_main.html',context=context)
+# def clothes_list(request, Clothes, *args, **kwargs):
+#   clothes_mapping = {
+#     'top': Top,
+#     'bottom': Bottom,
+#     'outer': Outer,
+#     'shoes': Shoes,
+#     'acc': Acc,
+#   }
+#   clothes_list = clothes_mapping.get(Clothes).objects.filter(author=request.user)
+#   context={
+#     'clothes_list': clothes_list,
+#     }   
+#   return render(request,'closet/closet_main.html',context=context)
   
 def outer_list(request, *args, **kwargs):
   clothes_list = Outer.objects.filter(author=request.user)
