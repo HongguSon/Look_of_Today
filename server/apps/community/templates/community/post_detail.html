@@ -77,7 +77,6 @@
 
 <hr>
 <div class="comment-sum">
-
     <div id="comment-list-{{post.pk}}" class="comment-list">
       <div class="comm">
         {% for comment in comments %}
@@ -87,14 +86,14 @@
                     <div>{{comment.author.username}}</div>
                     <div>{{comment.content}}</div>
                     {% if user == comment.author %}
-                    <form action="{% url 'community:delete_comment' comment.pk %}" method="post">
+                    <form action="{% url 'community:delete_comment' comment.pk %}" method="post" class="comment_detail">
                       {% csrf_token %}
                       <input type="submit" , value="삭제하기" , class="delbtn" />
+                      <hr>
                     </form>
                     {% endif %}
                 </div>
             </div>
-            <hr>
         {% endfor %}
       </div>
     </div>
