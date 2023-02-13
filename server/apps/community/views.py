@@ -116,7 +116,7 @@ class TalkCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
 def talk_detail(request, pk, *args, **kwargs):
     talk = Talk.objects.get(pk=pk)
-    t_comments = TalkComment.objects.filter(post=pk)
+    t_comments = TalkComment.objects.filter(talk=pk)
     context = {
         'talk' : talk,
         't_comments' : t_comments,
@@ -129,7 +129,7 @@ def comment_talk_ajax(request, *args, **kwargs):
     talk = Talk.objects.get(id=data["talk_id"])
     
     comment = TalkComment.objects.create(
-        post = talk,
+        talk = talk,
         author = request.user,
         content = data.get('content'),)
     comment.save()
@@ -145,7 +145,7 @@ def comment_talk_ajax(request, *args, **kwargs):
 
 def delete_tcomment(request, pk, *args, **kwargs):
     tcomment = get_object_or_404(TalkComment, pk=pk)
-    talk = tcomment.post
+    talk = tcomment.talk
     if request.user.is_authenticated and request.user == tcomment.author:
         tcomment.delete()
         return redirect('community:talk_detail', talk.pk)
@@ -195,7 +195,7 @@ def community_main(request, *args, **kwargs):
     comments_count.append(0)
     for t_comment in t_comments:
         for talk in talk_list:
-            if talk.pk == t_comment.post.pk:
+            if talk.pk == t_comment.talk.pk:
                 comments_count[talk.pk]+=1
             print(talk.pk)
     context={
@@ -215,7 +215,7 @@ def community_main(request, *args, **kwargs):
 #     return render(request,'community/community.html',context=context)
 
 def openrun(request,*args, **kwargs):
-    talk_list = Talk.objects.filter(category='openrun')
+    talk_list = Talk.objects.filter(category='오픈런')
     title = "오픈런"
     context={
         'talk_list' : talk_list,
@@ -224,7 +224,7 @@ def openrun(request,*args, **kwargs):
     return render(request,'community/community.html',context=context)
 
 def other(request,*args, **kwargs):
-    talk_list = Talk.objects.filter(category='other')
+    talk_list = Talk.objects.filter(category='잡담방')
     title = "잡담방"
     context={
         'talk_list' : talk_list,
