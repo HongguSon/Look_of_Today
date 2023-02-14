@@ -12,8 +12,28 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 # Create your views here.
 class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Post
-    fields = ['main_img', 'title', 'open', 'top', 'bottom', 'acc', 'outer', 'shoes']
+    fields = ['main_img', 'title', 'open', 'outer', 'top', 'bottom', 'shoes', 'acc']
     template_name = 'community/post_create.html'
+    
+    # self.fields['outer'].queryset = Outer.objects.filter(author=user)
+    # self.fields['top'].queryset = Top.objects.filter(author=user)
+    # self.fields['bottom'].queryset = Bottom.objects.filter(author=user)
+    # self.fields['shoes'].queryset = Shoes.objects.filter(author=user)
+    # self.fields['acc'].queryset = Acc.objects.filter(author=user)
+    # self.fields['outer'].queryset = Outer.objects.filter(author=author)
+    #         self.fields['top'].queryset = Top.objects.filter(author=user)
+    #         self.fields['bottom'].queryset = Bottom.objects.filter(author=user)
+    #         self.fields['shoes'].queryset = Shoes.objects.filter(author=user)
+    #         self.fields['acc'].queryset = Acc.objects.filter(author=user)
+    def get_queryset(self):
+    #     super(PostCreate, self).__init__(*args, **kwargs)
+        # self.fields['outer'].queryset = Outer.objects.filter(author=self.request.user)
+        # self.fields['top'].queryset = Top.objects.filter(author=user)
+        # self.fields['bottom'].queryset = Bottom.objects.filter(author=user)
+        # self.fields['shoes'].queryset = Shoes.objects.filter(author=user)
+        # self.fields['acc'].queryset = Acc.objects.filter(author=user)
+        queryset = super ().get_queryset()
+        return queryset.filter (author=self.request.user)
 
     def test_func(self):
         return self.request.user
@@ -75,6 +95,40 @@ class PostUpdate(LoginRequiredMixin,UpdateView):
         else:
             raise PermissionDenied
         
+def post_create(request, *args, **kwargs):
+    outer_list = Outer.objects.filter(author=request.user)
+    top_list = Top.objects.filter(author=request.user)
+    bottom_list = Bottom.objects.filter(author=request.user)
+    shoes_list = Shoes.objects.filter(author=request.user)
+    acc_list = Acc.objects.filter(author=request.user)
+    
+    if request.method == "POST":
+        # outer_str = request.POST.getlist('outer')
+        # outer_map = map(int, outer_str)
+        # outer_int = list(outer_map)
+        Post.objects.create(
+            title=request.POST["title"],
+            main_img=request.FILES.get("image"),
+            author=request.user,
+            # outer=self.course_set.set([request.POST.getlist('outer')]),
+            # top=request.POST.getlist('top'),
+            # bottom=request.POST.getlist('bottom'),
+            # shoes=request.POST.getlist('shoes'),
+            # acc=request.POST.getlist('acc'),
+            open=request.POST["open"],
+        )
+        return redirect('community:post_create')
+    
+    context = {
+        'outer_list' : outer_list,
+        'top_list' : top_list,
+        'bottom_list' : bottom_list,
+        'shoes_list' : shoes_list,
+        'acc_list' : acc_list,
+    }
+    
+    return render(request, "community/post_create.html", context=context)
+        
 def post_delete(request:HttpRequest, pk, *args, **kwargs):
     if request.method == "POST":
         post = Post.objects.get(pk=pk)
@@ -129,7 +183,7 @@ def comment_talk_ajax(request, *args, **kwargs):
     talk = Talk.objects.get(id=data["talk_id"])
     
     comment = TalkComment.objects.create(
-        post = talk,
+        talk = talk,
         author = request.user,
         content = data.get('content'),)
     comment.save()
