@@ -1,57 +1,44 @@
 {% extends 'main/base.html'%}
 {% load static %}
 {% block extrahead %}
-    <link rel="stylesheet" href="{% static 'css/post_create.css' %}">
-    <title>community</title>
+<link rel="stylesheet" href="{% static 'css/community.css' %}">
+<title>community</title>
 {% endblock %}
+
 
 {% block content %}
 
 <body>
   <div class="main">
-    <div class="title" id="banner">
-      <p>배너 칸... C O M M U N I T Y</p>
-    </div>
-    <hr>
-
-    <div class="row">
-      <div class="col-3 right" style="padding-left: 100px;">
-        <div class="con border border-gray 10px">
-          <img class="img-circle" id="user-img" src="오은영 박사님.jpg" />
-          <span>닉네임</span>
-          <div><a href="#">내가 쓴 글 보기</a><span>3개</span></div>
-          <div><a href="#">내가 쓴 댓글 보기</a><span>3개</span></div>
-          <a href="{% url 'community:post_create' %}"><button class="btn btn-primary">게시글 작성</button></a>
-        </div>
-        <div class="menu">
-          <div style="margin-left: 60px">게시판 목록</div>
-          <hr>
-          <div><a href="#">OOTD</a></div>
-          <div><a href="#">같이 공구해요~</a></div>
-          <div><a href="#">수다방</a></div>
-          <div><a href="#">동행 (오픈런 등등)</a></div>
-        </div>
+    <div class="post-all px-5">
+      <div class="post_all">{{title}}
+        <p class="new_post">  <a href="{% url 'community:talk_create' %}">게시글 작성</a>
+        <a href="{% url 'community:talk_create' %}"><i class="fa-regular fa-pen-to-square"></i></a>
+        </p>
       </div>
-      <div class="col-9">
-        <div class="ootd">
-          <div class="com-title">OOTD</div>
-          <div class="row">
-            {%for post in post_list%}
-            <div class="content col">
-              
-              <a href="{% url 'community:detail' post.pk%}">
-                {%if post.main_img %}
-                <img src="{{post.main_img.url}}">
-                {%endif%}
-              </a>
-              
-              <div>{{post.title}}</div>
-              <div>{{post.author}}</div>
-            </div>
-            {%endfor%}
-          </div>
-        </div>
+      <div class="com_list">
+      <a href="{% url 'community:community_main' %}">ALL</a>
+      <a href="{% url 'community:buying' %}">공구해요</a>
+      <a href="{% url 'community:openrun' %}">오픈런</a>
+      <a href="{% url 'community:other' %}">잡담방</a>
       </div>
+      <div class="compost_list">
+      {%for talk in talk_list%}
+      <div class="post-box">
+        <div  class="commain_title"><a href="{% url 'community:talk_detail' talk.pk %}">{{talk.title}} </a> </div>
+        <div> {{talk.category}} </div>
+        <div> <i class="fa-regular fa-heart" id></i> {{talk.total_likes}} 
+          <i class="fa-regular fa-comment" style="margin-left:10px;"></i>
+          {%for count in comments_count%}
+          {%if forloop.counter0 == talk.pk %} {{count}}
+          {%endif%}
+          {%endfor%} 
+        </div>
+        <div>{{talk.create_date}}</div>
+      </div>
+      {%endfor%}
     </div>
+    </div>
+  </div>
 </body>
 {% endblock %}

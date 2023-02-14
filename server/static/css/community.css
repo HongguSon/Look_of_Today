@@ -1,0 +1,46 @@
+.post_all{
+    font-size: 50px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.post_all > a{
+    float: right;
+}
+
+.com_list{
+    margin-bottom: 100px;
+    margin-left: 8px;
+}
+
+.com_list > a{
+    margin-right: 30px;
+}
+
+.new_post{
+    float: right;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.new_post > a{
+    margin-left: 4px;
+}
+
+
+.compost_list{
+    margin-left: 58px;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    gap: 11rem;
+    margin-bottom: 80px;
+}
+
+.commain_title{
+    font-size: 24px;
+}
+
+.post-box{
+    font-size: 14px;
+}

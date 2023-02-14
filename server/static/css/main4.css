@@ -17,8 +17,14 @@ footer {
 
 .title {
   color: black;
-  font-size: 2rem;
+  font-size: 1.375rem;
   text-decoration: none;
+}
+
+@media screen and (max-width: 768px){
+  .title {
+    font-size: 0.9rem;
+  }
 }
 
 .form-control {
@@ -32,68 +38,59 @@ footer {
 .small_menu:hover {
   color: var(--gray) !important;
 }
-/* community css */
-#banner {
-  height: 200px;
-  text-align: center;
+
+#mini-menu{
+  font-size: 0.875rem;
 }
 
-.right {
-  border-right: 1px solid black;
-  height: 100%;
+/* The side navigation menu */
+.sidenav {
+  height: 100%; /* 100% Full-height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  background-color: #111; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
 }
 
-.col-3 {
-  border-left: 5rem;
+/* 모바일 메뉴 */
+
+/* The navigation menu links */
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
 }
 
-.con {
-  border: 2px;
-  width: 200px;
-  padding: 8px;
-  border-radius: 10px;
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+  color: #f1f1f1;
 }
 
-.con div span {
-  margin-left: 30px;
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
 }
 
-#user-img {
-  width: 100px;
-  height: 100px;
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+  transition: margin-left .5s;
+  padding: 20px;
 }
 
-.menu {
-  margin-top: 10px;
-}
-
-.menu div {
-  margin-left: 10px;
-}
-
-.menu hr {
-  width: 200px;
-}
-
-.ootd {
-  padding-right: 20px;
-}
-
-.com-title {
-  font-size: 20px;
-  margin-left: 20px;
-}
-
-.content img {
-  width: 150px;
-  height: 150px;
-}
-
-.content {
-  text-align: center;
-}
-
-.content div {
-  text-align: left;
-  margin-left: 57px;
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
 }
