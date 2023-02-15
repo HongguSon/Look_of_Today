@@ -10,7 +10,8 @@ urlpatterns = [
   path("other/", views.other, name='other'),
   path("buying/", views.buying, name='buying'),
   
-  path("create/",views.PostCreate.as_view(),name="post_create"),
+  # path("create/",views.PostCreate.as_view(),name="post_create"),
+  path("create/",views.post_create,name="post_create"),
   path("detail/<int:pk>/",views.post_detail,name="post_detail"),
   path('comment/', views.comment_ajax, name='comment'),
   path('delete-comment/<int:pk>/', views.delete_pcomment, name='delete_comment'),

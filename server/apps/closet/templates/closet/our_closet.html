@@ -15,6 +15,12 @@
       {% if user.is_authenticated %}
       <a href="{% url 'community:post_create' %}">착장 추가</a>
       {% endif %}
+      <select id="sort-select" onchange="location = this.value;">
+        <option class="sort-pk" value="/">--정렬기준--</option>
+        <option class="sort-new" value="?sort=new">최신순</option>
+        <option class="sort-old" value="?sort=old">오래된순</option>
+        <option class="sort-like" value="?sort=like">인기순</option>
+      </select>
     </div>
     
     <hr>

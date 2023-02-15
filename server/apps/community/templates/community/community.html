@@ -30,9 +30,10 @@
         <div> <i class="fa-regular fa-heart" id></i> {{talk.total_likes}} 
           <i class="fa-regular fa-comment" style="margin-left:10px;"></i>
           {%for count in comments_count%}
-          {%if forloop.counter0 == talk.pk %} {{count}}
+          {%if forloop.counter0 == talk.pk %} 
+            {{count}}
           {%endif%}
-          {%endfor%} 
+        {%endfor%} 
         </div>
         <div>{{talk.create_date}}</div>
       </div>

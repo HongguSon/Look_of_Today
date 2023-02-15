@@ -6,12 +6,57 @@
 {% endblock %}
 {% block content %}
 
-<form method="post" enctype="multipart/form-data">
+{% comment %} <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <table>
         {{form}}
         {{form.media }}
     </table>
     <button type="submit" class="btn btn-primary float-right" id="subbtn">Submit</button>
+</form> {% endcomment %}
+<form action="{% url 'community:post_create' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p>title :</p>
+    <input name="title" />
+    <p>Main img :</p>
+    <input type="file" name="image" />
+    
+    <p>Outer :</p>
+    <select name="outer" id="outer" multiple="" style="width:200px;">
+        {% for outer in outer_list %}
+        <option value="{{ outer.id }}" name="outer"
+            style="background-image: url({{outer.rem_img.url}}); background-size: contain; background-repeat: no-repeat; height:40px; background-position: right center;">{{ outer.title }}
+        </option>
+        {% endfor %}
+    </select>
+    <p>Top :</p>
+    <select name="top" id="top" multiple="">
+        {% for top in top_list %}
+        <option value="{{ top.id }}" name="top">{{ top.title }}</option>
+        {% endfor %}
+    </select>
+    <p>Bottom :</p>
+    <select name="bottom" id="bottom" multiple="">
+        {% for bottom in bottom_list %}
+        <option value="{{ bottom.id }}" name="bottom">{{ bottom.title }}</option>
+        {% endfor %}
+    </select>
+    <p>Shoes :</p>
+    <select name="shoes" id="shoes" multiple="">
+        {% for shoes in shoes_list %}
+        <option value="{{ shoes.id }}" name="shoes">{{ shoes.title }}</option>
+        {% endfor %}
+    </select>
+    <p>Acc :</p>
+    <select name="acc" id="acc" multiple="">
+        {% for acc in acc_list %}
+        <option value="{{ acc.id }}" name="acc">{{ acc.title }}</option>
+        {% endfor %}
+    </select>
+    <p>
+        public<input type="radio" name="open" value="True" checked="checked">
+        private<input type="radio" name="open" value="False">
+    </p>
+    <input type="submit", value="저장하기" class="btn btn-secondary" />
 </form>
 {% endblock %}
