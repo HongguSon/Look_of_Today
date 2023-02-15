@@ -1,5 +1,5 @@
 .post_all{
-    font-size: 50px;
+    font-size: 35px;
     margin-top: 30px;
     margin-bottom: 20px;
 }
@@ -10,7 +10,7 @@
 
 .com_list{
     margin-bottom: 100px;
-    margin-left: 8px;
+    margin-left: 4px;
 }
 
 .com_list > a{

@@ -1,0 +1,23 @@
+@media screen and (max-width: 375px){
+    #banner{
+        margin-bottom: 35px !important;
+    }
+    .ourcloset_title > p{
+        font-size: 1.5rem !important;
+    }
+    .ourcloset_newpost1{
+        font-size: 0.8rem;
+    }
+    .ourcloset_newpost2{
+        font-size: 0.8rem;
+    }
+    .ourcloset_title > h5{
+        font-size: 0.688rem;
+        margin-left: 0.125rem !important;
+    }
+    .content{
+        padding-left: 4.1rem !important;
+    }
+}
+
+
