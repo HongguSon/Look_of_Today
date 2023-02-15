@@ -1,0 +1,16 @@
+@media screen and (max-width: 375px){
+    .post_all{
+        font-size: 1.5rem !important;
+    }
+    .new_post > a{
+        font-size: 0.8rem;
+    }
+    .com_list{
+        display: grid;
+    }
+    .com_list > a{
+        margin-bottom: 10px;
+    }
+}
+
+

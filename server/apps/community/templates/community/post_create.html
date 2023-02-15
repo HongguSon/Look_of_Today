@@ -5,14 +5,6 @@
 <title>new community</title>
 {% endblock %}
 {% block content %}
-<!-- <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <table>
-        {{ form.media }}
-        {{ form.as_p }}
-    </table>
-    <button type="submit" class="btn btn-primary float-right" id="subbtn">Submit</button>
-</form> -->
 <form action="{% url 'community:post_create' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <p>title :</p>

@@ -2,6 +2,7 @@
 {% load static %}
 {% block extrahead %}
 <link rel="stylesheet" href="{% static 'css/community.css' %}">
+<link rel="stylesheet" href="{% static 'css/community_react.css' %}">
 <title>community</title>
 {% endblock %}
 
@@ -10,13 +11,14 @@
 
 <body>
   <div class="main">
-    <div class="post-all px-5">
-      <div class="post_all">{{title}}
-        <p class="new_post">  <a href="{% url 'community:talk_create' %}">게시글 작성</a>
+    <div class="post-all">
+      <div class="post_all px-5">{{title}}
+        <p class="new_post">  
+        <a href="{% url 'community:talk_create' %}">게시글 작성</a>
         <a href="{% url 'community:talk_create' %}"><i class="fa-regular fa-pen-to-square"></i></a>
         </p>
       </div>
-      <div class="com_list">
+      <div class="com_list px-5">
       <a href="{% url 'community:community_main' %}">ALL</a>
       <a href="{% url 'community:buying' %}">공구해요</a>
       <a href="{% url 'community:openrun' %}">오픈런</a>
@@ -25,17 +27,28 @@
       <div class="compost_list">
       {%for talk in talk_list%}
       <div class="post-box">
-        <div  class="commain_title"><a href="{% url 'community:talk_detail' talk.pk %}">{{talk.title}} </a> </div>
-        <div> {{talk.category}} </div>
-        <div> <i class="fa-regular fa-heart" id></i> {{talk.total_likes}} 
-          <i class="fa-regular fa-comment" style="margin-left:10px;"></i>
-          {%for count in comments_count%}
-          {%if forloop.counter0 == talk.pk %} 
-            {{count}}
-          {%endif%}
-        {%endfor%} 
+        <div id="post_menu">
+          <span>게시판</span>
+          <span>제목</span>
+          <span>작성일</span>
+          <span><i class="fa-regular fa-heart" id></i></span>
         </div>
-        <div>{{talk.create_date}}</div>
+        <div  class="commain_title">
+          <span id="talk_category">{{talk.category}}</span>
+          <span id="talk_title">
+            <a href="{% url 'community:talk_detail' talk.pk %}">{{talk.title}}</a>
+            <span id="talk_comment">
+              <i class="fa-regular fa-comment"></i>
+              {%for count in comments_count%}
+              {%if forloop.counter0 == talk.pk %}
+              {{count}}
+              {%endif%}
+              {%endfor%}
+            </span>
+          </span>
+          <span id="talk_date">{{talk.create_date}}</span>
+          <span id="talk_like">{{talk.total_likes}}</span>
+        </div>
       </div>
       {%endfor%}
     </div>
