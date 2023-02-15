@@ -155,7 +155,7 @@ def post_likes(request, pk, *args, **kwargs):
 class TalkCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Talk
     fields = ['category', 'img', 'title', 'content']
-    template_name = 'community/post_create.html'
+    template_name = 'community/talk_create.html'
 
     def test_func(self):
         return self.request.user
