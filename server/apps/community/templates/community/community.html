@@ -2,6 +2,7 @@
 {% load static %}
 {% block extrahead %}
 <link rel="stylesheet" href="{% static 'css/community.css' %}">
+<link rel="stylesheet" href="{% static 'css/community_react.css' %}">
 <title>community</title>
 {% endblock %}
 
@@ -12,7 +13,8 @@
   <div class="main">
     <div class="post-all px-5">
       <div class="post_all">{{title}}
-        <p class="new_post">  <a href="{% url 'community:talk_create' %}">게시글 작성</a>
+        <p class="new_post">  
+        <a href="{% url 'community:talk_create' %}">게시글 작성</a>
         <a href="{% url 'community:talk_create' %}"><i class="fa-regular fa-pen-to-square"></i></a>
         </p>
       </div>

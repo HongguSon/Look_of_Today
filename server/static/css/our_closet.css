@@ -1,6 +1,7 @@
 #banner {
     height: 6.375rem;
     text-align: center;
+    margin-bottom: 87px;
   }
   
 .right {
@@ -11,12 +12,37 @@
 .col-3 {
   border-left: 5rem;
 }
-  
-.title > p{
-  margin-left: 6.25rem;
-  margin-top: 3rem !important;
-  text-align: left;
+
+.ourcloset_title{
+  padding-left: 3rem !important;
 }
+  
+.ourcloset_title > p{
+  margin-top: 2rem !important;
+  text-align: left;
+  font-size: 35px;
+}
+
+.ourcloset_title > h5{
+  text-align: left;
+  font-size: 14px;
+  margin-left: 4px;
+}
+
+.ourcloset_newpost1{
+  float: right;
+  font-size: 16px;
+  margin-right: 45px;
+  margin-top: 14px;
+}
+
+.ourcloset_newpost2{
+  float: right;
+  font-size: 16px;
+  margin-right: 8px;
+  margin-top: 14px;
+}
+
 
 .con {
   border: 0.125rem;
@@ -71,7 +97,7 @@
 .content img {
   border-radius: 0.938rem;
   width: 15.625rem;
-  height: 15.625rem;
+  height: 16.625rem;
   opacity: 1;
   -webkit-transform: scale(1);
 	transform: scale(1);
@@ -87,12 +113,12 @@
   
 .content{
     padding-top: 1.875rem;
-    padding-left: 6.25rem;
+    padding-left: 5.9rem;
     padding-bottom: 3.125rem;
     text-align:start;
     display: flex;
     flex-wrap: wrap;
-    gap: 5rem;
+    gap: 6rem;
 }
 
 .post_info > p {
