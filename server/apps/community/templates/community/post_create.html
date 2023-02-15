@@ -5,54 +5,80 @@
 <title>new community</title>
 {% endblock %}
 {% block content %}
-
-{% comment %} <form method="post" enctype="multipart/form-data">
+<!-- <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <table>
-        {{form}}
-        {{form.media }}
+        {{ form.media }}
+        {{ form.as_p }}
     </table>
     <button type="submit" class="btn btn-primary float-right" id="subbtn">Submit</button>
-</form> {% endcomment %}
+</form> -->
 <form action="{% url 'community:post_create' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <p>title :</p>
     <input name="title" />
     <p>Main img :</p>
     <input type="file" name="image" />
-    
-    <p>Outer :</p>
-    <select name="outer" id="outer" multiple="" style="width:200px;">
+    <div class="clothes_list_box">
+        <p>Outer: </p>
         {% for outer in outer_list %}
-        <option value="{{ outer.id }}" name="outer"
-            style="background-image: url({{outer.rem_img.url}}); background-size: contain; background-repeat: no-repeat; height:40px; background-position: right center;">{{ outer.title }}
-        </option>
+            <div class="m-3">
+                <input type="checkbox" value="{{outer.pk}}" id="{{outer.title}}" name="outer">
+                <label for="{{outer.title}}" class="d-flex flex-column">
+                    <img src="{{outer.rem_img.url}}" alt="{{outer.title}}">
+                    <span class="text-center">{{outer.title}}</span>
+                </label>
+            </div>
         {% endfor %}
-    </select>
-    <p>Top :</p>
-    <select name="top" id="top" multiple="">
+    </div>
+    <div class="clothes_list_box">
+        <p>Top: </p>
         {% for top in top_list %}
-        <option value="{{ top.id }}" name="top">{{ top.title }}</option>
+            <div class="m-3">
+                <input type="checkbox" value="{{top.pk}}" id="{{top.title}}" name="top">
+                <label for="{{top.title}}" class="d-flex flex-column">
+                    <img src="{{top.rem_img.url}}" alt="{{top.title}}">
+                    <span class="text-center">{{top.title}}</span>
+                </label>
+            </div>
         {% endfor %}
-    </select>
-    <p>Bottom :</p>
-    <select name="bottom" id="bottom" multiple="">
+    </div>
+    <div class="clothes_list_box">
+        <p>Bottom: </p>
         {% for bottom in bottom_list %}
-        <option value="{{ bottom.id }}" name="bottom">{{ bottom.title }}</option>
+            <div class="m-3">
+                <input type="checkbox" value="{{bottom.pk}}" id="{{bottom.title}}" name="bottom">
+                <label for="{{bottom.title}}" class="d-flex flex-column">
+                    <img src="{{bottom.rem_img.url}}" alt="{{bottom.title}}">
+                    <span class="text-center">{{bottom.title}}</span>
+                </label>
+            </div>
         {% endfor %}
-    </select>
-    <p>Shoes :</p>
-    <select name="shoes" id="shoes" multiple="">
+    </div>
+    <div class="clothes_list_box">
+        <p>Shoes: </p>
         {% for shoes in shoes_list %}
-        <option value="{{ shoes.id }}" name="shoes">{{ shoes.title }}</option>
+            <div class="m-3">
+                <input type="checkbox" value="{{shoes.pk}}" id="{{shoes.title}}" name="shoes">
+                <label for="{{shoes.title}}" class="d-flex flex-column">
+                    <img src="{{shoes.rem_img.url}}" alt="{{shoes.title}}">
+                    <span class="text-center">{{shoes.title}}</span>
+                </label>
+            </div>
         {% endfor %}
-    </select>
-    <p>Acc :</p>
-    <select name="acc" id="acc" multiple="">
+    </div>
+    <div class="clothes_list_box">
+        <p>Acc: </p>
         {% for acc in acc_list %}
-        <option value="{{ acc.id }}" name="acc">{{ acc.title }}</option>
+            <div class="m-3">
+                <input type="checkbox" value="{{acc.pk}}" id="{{acc.title}}" name="acc">
+                <label for="{{acc.title}}" class="d-flex flex-column">
+                    <img src="{{acc.rem_img.url}}" alt="{{acc.title}}">
+                    <span class="text-center">{{acc.title}}</span>
+                </label>
+            </div>
         {% endfor %}
-    </select>
+    </div>
     <p>
         public<input type="radio" name="open" value="True" checked="checked">
         private<input type="radio" name="open" value="False">

@@ -1,16 +1,15 @@
 {% extends 'main/base.html'%}
 {% load static %}
 {% block extrahead %}
-    <link rel="stylesheet" href="{% static 'css/create.css' %}">
-    <title>new community</title>
+<link rel="stylesheet" href="{% static 'css/create.css' %}">
+<title>new community</title>
 {% endblock %}
 {% block content %}
-
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <table>
-        {{form}}
-        {{form.media }}
+        {{ form.media }}
+        {{ form.as_p }}
     </table>
     <button type="submit" class="btn btn-primary float-right" id="subbtn">Submit</button>
 </form>

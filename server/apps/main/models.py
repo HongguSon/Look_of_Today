@@ -23,11 +23,8 @@ class Clothes(models.Model):
   def thumbnail(self):
     return format_html('<img src="{}" width="100">'.format(self.rem_img.url))
   
-  # def filename(self):
-  #   return os.path.basename(self.rem_img.name)
-
   def __str__(self):
-    return self.thumbnail()
+    return self.title
   
   def get_absolute_url(self):
     return f'/closet/'
