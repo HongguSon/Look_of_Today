@@ -72,13 +72,33 @@ def acc_list(request, *args, **kwargs):
   }   
   return render(request,'closet/closet_main.html',context=context)
 
-def our_closet(request, *args, **kwargs):
-    post_list = Post.objects.filter(open=True)
+def our_closet(request, *args, **kwargs):  
+  # sort = request.GET.get('sort','')
+  
+  # if sort == 'new':
+  #   post_list = Post.objects.filter(open=True).order_by("-pk")
+  # elif sort == 'old':
+  #   post_list = Post.objects.filter(open=True).order_by("pk")
+  # elif sort == 'like':
+  #   post_list = Post.objects.filter(open=True).order_by("")
+  # else:
+  #   post_list = Post.objects.filter(open=True).order_by("-pk")
+    
+  # page = request.GET.get('page', 1)
+  # paginator = Paginator(post_li, 4)
+  
+  # try:
+  #   posts = paginator.page(page)
+  # except PageNotAnInteger:
+  #   posts = paginator.page(1)
+  # except EmptyPage:
+  #   posts = paginator.page(paginator.num_pages)
+  post_list = Post.objects.filter(open=True).order_by("-pk")
 
-    context={
-        'post_list' : post_list,
-        }
-    return render(request,'closet/our_closet.html',context=context)
+  context={
+      'post_list' : post_list,
+      }
+  return render(request,'closet/our_closet.html',context=context)
 
 def create_clothes(request, *args, **kwargs):
   error = '아직 입력하지 않은 값이 있습니다.'
