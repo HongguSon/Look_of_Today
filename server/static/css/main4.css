@@ -47,7 +47,7 @@ footer {
   height: 100%; 
   width: 0; 
   position: fixed; 
-  z-index: 1; 
+  z-index: 1500; 
   top: 0; 
   left: 0;
   background-color: #fff; 
@@ -80,6 +80,21 @@ footer {
 #main {
   transition: margin-left .5s;
   padding: 20px;
+}
+
+#backdiv{
+  background: #000;
+  opacity: .6;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1100;
+}
+
+.no-scroll {
+  overflow: hidden;
 }
 
 @media screen and (max-height: 450px) {
