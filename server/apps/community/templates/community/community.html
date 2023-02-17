@@ -24,15 +24,17 @@
       <a href="{% url 'community:openrun' %}">오픈런</a>
       <a href="{% url 'community:other' %}">잡담방</a>
       </div>
-      <div class="compost_list">
-      {%for talk in talk_list%}
-      <div class="post-box">
-        <div id="post_menu">
-          <span>게시판</span>
-          <span>제목</span>
-          <span>작성일</span>
-          <span><i class="fa-regular fa-heart" id></i></span>
+      <div>
+        <div class="post-box">
+          <div id="post_menu">
+            <span>게시판</span>
+            <span>제목</span>
+            <span>작성일</span>
+            <span><i class="fa-regular fa-heart" id></i></span>
+          </div>
         </div>
+        <hr>
+      {%for talk in talk_list%}
         <div  class="commain_title">
           <span id="talk_category">{{talk.category}}</span>
           <span id="talk_title">
@@ -49,6 +51,7 @@
           <span id="talk_date">{{talk.create_date}}</span>
           <span id="talk_like">{{talk.total_likes}}</span>
         </div>
+        <hr>
       </div>
       {%endfor%}
     </div>

@@ -42,3 +42,29 @@
     margin-right: 5px;
 }
 
+.our_closet_create{
+    text-align: center;
+}
+.our_closet_create > select{
+    width: 300px !important;
+}
+.our_closet_create > p{
+    margin-top: 35px;
+}
+.opc_title{
+    margin-right: 42px;
+}
+.opc_img{
+    margin-left: 73px;
+}
+.opc_privstat{
+    font-size: 15px;
+}
+.opc_privstat > input{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.opc_submit{
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
