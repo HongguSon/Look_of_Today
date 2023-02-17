@@ -31,7 +31,8 @@
     <input type="submit" class="my-2 btn btn-secondary" style="width:100%" value="정확한 검색" name="exact" />
     {% if fastflag %}
       <a class="my-1 btn btn-primary" id="new_url" style="width:100%" href="{{link}}" target="_blank" clicked>다시 열기</a>
-    {% elif exactflag %}
+    {% endif %}
+    {% if exactflag %}
       <div class="exact_search_container">
         {% for cost, url, src in search_informations_list %}
         <div class="exact_search_result">
