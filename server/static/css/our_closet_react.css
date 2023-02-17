@@ -2,6 +2,9 @@
     #banner{
         margin-bottom: 35px !important;
     }
+    .ourcloset_title{
+        padding-left: 1.6rem !important;
+    }
     .ourcloset_title > p{
         font-size: 1.5rem !important;
     }
@@ -16,7 +19,20 @@
         margin-left: 0.125rem !important;
     }
     .content{
-        padding-left: 4.1rem !important;
+        display: inline-flex !important;
+        flex-wrap: wrap !important;
+        gap: 1.8rem;
+        padding-left: 1.5rem !important;
+    }
+    .content img{
+        width: 90px !important;
+        height: 95px !important;
+    }
+    .post_info > p{
+        font-size: 10px;
+    }
+    .postauthor{
+        font-size: 12px;
     }
 }
 

@@ -30,7 +30,7 @@
                 <a href="{% url 'community:post_detail' post.pk%}">
                   <img src="{{post.main_img.url}}" class="img-fluid">
                 </a>
-                <p><a href="{% url 'community:post_detail' post.pk %}">{{post.title}}</a></p>
+                <p><a href="{% url 'community:post_detail' post.pk %}">{{post.title |truncatechars:11 }}</a></p>
                 <div class="postauthor">{{post.author}}</div>
               </div>
             {% endfor %}

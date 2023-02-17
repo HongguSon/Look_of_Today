@@ -2,6 +2,7 @@
 {% load static %}
 {% block extrahead %}
 <link rel="stylesheet" href="{% static 'css/post_detail.css' %}">
+<link rel="stylesheet" href="{% static 'css/ourcloset_post_react.css' %}">
 <title>community</title>
 {% endblock %}
 
@@ -66,24 +67,25 @@
     <div id="comment-list-{{post.pk}}" class="comment-list">
       <div class="comm">
         {% for comment in comments %}
-            <div class="d-flex align-items-center m-0 p-4">
+            <div class="d-flex align-items-center m-0" id="user_comment_list">
                 <i class="fa-solid fa-user m-3"></i>  
-                <div>
-                    <div>{{comment.author.username}}</div>
-                    <div>{{comment.content}}</div>
-                    {% if user == comment.author %}
-                    <form action="{% url 'community:delete_comment' comment.pk %}" method="post" class="comment_detail">
-                      {% csrf_token %}
-                      <input type="submit" , value="삭제하기" , class="delbtn" />
-                      <hr>
-                    </form>
-                    {% endif %}
+                <div class="user_comment">
+                    <div class="comment_author">{{comment.author.username}}</div>
+                    <p style="margin-right: 275px;">{{comment.content}}</p>
                 </div>
             </div>
+                {% if user == comment.author %}
+                <form action="{% url 'community:delete_comment' comment.pk %}" method="post" class="comment_detail">
+                  {% csrf_token %}
+                  <div class="del_list">
+                  <input type="submit", value="삭제", class="delbtn2" />
+                  <hr />
+                  </div>
+                </form>
+                {% endif %}
         {% endfor %}
       </div>
     </div>
-    <hr>
   </div>
   {% if user.is_authenticated %}
   <form action="{% url 'community:likes' post.pk %}" method='POST'>
@@ -106,7 +108,7 @@
     </button>
     {% endif %}
   </form>
-  <div id="comment-con" class="d-flex justify-content-between align-items-center">
+<div id="comment-con" class="d-flex justify-content-between align-items-center">
     <form>
       <textarea rows="4" cols="100" id="comment-input-{{post.pk}}" class="comment-input" type="text"
         placeholder="댓글 달기..."></textarea>
@@ -146,14 +148,15 @@
         const element = document.querySelector(`#comment-list-${post_id}`);
         const comm = document.querySelector(`.comm`);
         const newComment = document.createElement('div');
-        newComment.className = "d-flex align-items-center m-0 p-4";
+        newComment.className = "d-flex align-items-center m-0";
         newComment.innerHTML = `<i class="fa-solid fa-user m-3"></i>  
-                <div>
-                    <div>${author}</div>
-                    <div>${content}</div>
+                <div class="comment_other" style="margin-right:280px;">
+                    <div class="comment_author_other">${author}</div>
+                    <div class="content_other">${content}</div>
                 </div>`;
         comm.appendChild(newComment);
-        let h = document.createElement("hr");
+        let h= document.createElement("hr");
+        h.className="comment_other_hr" 
         comm.appendChild(h);
       }
     }
