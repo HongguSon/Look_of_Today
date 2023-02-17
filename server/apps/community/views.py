@@ -100,61 +100,53 @@ class PostUpdate(LoginRequiredMixin,UpdateView):
         else:
             raise PermissionDenied
         
-# def post_update(request, *args, **kwargs):
-#     outer_list = Outer.objects.filter(author=request.user)
-#     top_list = Top.objects.filter(author=request.user)
-#     bottom_list = Bottom.objects.filter(author=request.user)
-#     shoes_list = Shoes.objects.filter(author=request.user)
-#     acc_list = Acc.objects.filter(author=request.user)
+def post_update(request, pk, *args, **kwargs):
+    post = Post.objects.get(pk=pk)
+    outer_list = Outer.objects.filter(author=request.user)
+    top_list = Top.objects.filter(author=request.user)
+    bottom_list = Bottom.objects.filter(author=request.user)
+    shoes_list = Shoes.objects.filter(author=request.user)
+    acc_list = Acc.objects.filter(author=request.user)
     
-#     if request.method == "POST":
-#         # outer_str = request.POST.getlist('outer')
-#         # outer_map = map(int, outer_str)
-#         # outer_int = list(outer_map)
-#         Post.objects.create(
-#             title=request.POST["title"],
-#             main_img=request.FILES.get("image"),
-#             author=request.user,
-#             # outer=self.course_set.set([request.POST.getlist('outer')]),
-#             # top=request.POST.getlist('top'),
-#             # bottom=request.POST.getlist('bottom'),
-#             # shoes=request.POST.getlist('shoes'),
-#             # acc=request.POST.getlist('acc'),
-#             open=request.POST["open"],
-#         )
-#         return redirect('closet:closet_main')
+    context = {
+        'post': post,
+        'outer_list' : outer_list,
+        'top_list' : top_list,
+        'bottom_list' : bottom_list,
+        'shoes_list' : shoes_list,
+        'acc_list' : acc_list,
+    }
     
-#     context = {
-#         'outer_list' : outer_list,
-#         'top_list' : top_list,
-#         'bottom_list' : bottom_list,
-#         'shoes_list' : shoes_list,
-#         'acc_list' : acc_list,
-#     }
+    if request.method == "POST":
+        post.title=request.POST["title"]
+        if request.FILES.get("image"):
+            post.main_img=request.FILES.get("image")
+        post.author=request.user 
+        post.open=request.POST["open"]
+        int_outer = list(map(int, request.POST.getlist('outer')))
+        int_top = list(map(int, request.POST.getlist('top')))
+        int_bottom = list(map(int, request.POST.getlist('bottom')))
+        int_shoes = list(map(int, request.POST.getlist('shoes')))
+        int_acc = list(map(int, request.POST.getlist('acc')))
+        post.outer.clear()
+        post.top.clear()
+        post.bottom.clear()
+        post.shoes.clear()
+        post.acc.clear()
+        for i in int_outer:
+            post.outer.add(i)
+        for i in int_top:
+            post.top.add(i)   
+        for i in int_bottom:
+            post.bottom.add(i)
+        for i in int_shoes:
+            post.shoes.add(i)
+        for i in int_acc:
+            post.acc.add(i)
+        post.save()
+        return redirect("community:post_detail", pk)
     
-#     return render(request, "community/post_create.html", context=context)
-        
-
-# def post_update(request, pk, *args, **kwargs):
-#     post = Post.objects.get(pk=pk)
-#     outer_list = Outer.objects.filter(author=request.user)
-#     top_list = Top.objects.filter(author=request.user)
-#     bottom_list = Bottom.objects.filter(author=request.user)
-#     shoes_list = Shoes.objects.filter(author=request.user)
-#     acc_list = Acc.objects.filter(author=request.user)
-    
-#     context = {
-#         'post': post,
-#         'outer_list' : outer_list,
-#         'top_list' : top_list,
-#         'bottom_list' : bottom_list,
-#         'shoes_list' : shoes_list,
-#         'acc_list' : acc_list,
-#     }
-    
-#     if request.method == "POST":
-#         return redirect("community:post_detail", pk)  
-#     return render(request, "community/post_update.html", context=context)
+    return render(request, "community/post_update.html", context=context)
     
 def post_delete(request:HttpRequest, pk, *args, **kwargs):
     if request.method == "POST":
