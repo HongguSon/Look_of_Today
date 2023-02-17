@@ -4,20 +4,15 @@
     justify-content: center;
     margin-bottom: 70px;
     margin-top: 50px;
+    text-align: center;
 }
 
 .clothes_create_p1{
-    text-align: center;
     margin-right: 71px;
 }
 
 .clothes_create_p2{
-    text-align: center;
     margin-right: 65px;
-}
-
-.filebox{
-    text-align: center;
 }
 
 .filebox > label{
@@ -31,10 +26,6 @@
 #subbtn{
     margin: auto;
     display: block;
-}
-
-.clothes_type{
-    text-align: center;
 }
 
 .clothes_type > input{
@@ -67,4 +58,14 @@
 .opc_submit{
     margin-top: 20px;
     margin-bottom: 50px;
+}
+.clothes_list_box {
+    overflow:auto; 
+    height:15rem;
+    display: flex;
+}
+
+.clothes_list_box img {
+    height: 10rem;
+    width: 8rem;
 }

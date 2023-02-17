@@ -69,13 +69,13 @@
 {% if clothes_list %}
   <div class="mycloset_list">
     {% for clothes in clothes_list %}
-    <div class="mycloset_img">
+    <div class="mycloset_img item__container cloth-id-{{clothes.id}}">
       {% if clothes.rem_img %}
       <img src="{{clothes.rem_img.url}}">
       {% else %}
       <img src="{{clothes.img.url}}">
       {% endif %}
-      <form action="{% url 'closet:clothes_likes' clothes.pk %}" method='POST' class="mycloset_form">
+      {% comment %} <form action="{% url 'closet:clothes_likes' clothes.pk %}" method='POST' class="mycloset_form">
         {{clothes.title}}
         {% csrf_token %}
         {% if user in clothes.likes.all %}
@@ -95,7 +95,16 @@
           </svg>
         </button>
         {% endif %}
-      </form>  
+      </form>   {% endcomment %}
+      {% if user in clothes.likes.all %}
+        <div class="post__dislike like_icon_position" onclick="onClickLike({{ clothes.pk }}, 'dislike', '{{clothes.rem_img.url}}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>
+      {% else %}
+        <div class="post__like like_icon_position" onclick="onClickLike({{ clothes.pk }}, 'like', '{{clothes.rem_img.url}}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>
+      {% endif %}
+
+      {% if buylink_flag %}
+        <div><a href="{% url 'closet:buylink' clothes.id %}" class="btn btn-secondary" style="width:100%" value="buylink">구매링크</a></div>
+      {% endif %}
     </div>
     {% endfor %}
   </div>
@@ -106,11 +115,11 @@
     {% for post in post_list %}
     <div class="mycloset_img">
       <a href="{% url 'community:post_detail' post.pk %}">
-        <img src="{{post.main_img.url}}">
+        <img class="width:200px; height:200px;" src="{{post.main_img.url}}">
       </a>
       {{post.title}}
       {% if post.open %}
-        <i class="fa-solid fa-lock-open">전제공개</i>
+        <i class="fa-solid fa-lock-open">전체공개</i>
       {% else %}
         <i class="fa-solid fa-lock">비공개</i>
       {% endif %}
@@ -141,5 +150,38 @@
   </div>
 {% endif %}
 
+<script>
+const strip = (string) => {
+  return string.replace(/^\s+|\s+$/g, "");
+};
+const requestLike = new XMLHttpRequest();
+const onClickLike = (id, btnType, imgUrl) => {
+  const url = "/closet/clothes-likes/" + id;
+  requestLike.open("POST", url, true)
+  requestLike.setRequestHeader(
+    "Content-Type",
+    "application/x-www-form-urlencoded"
+  );
+  requestLike.send(JSON.stringify({id: id, btnType: btnType, imgUrl: imgUrl}));
+};
 
+requestLike.onreadystatechange = () => {
+    if (requestLike.readyState === XMLHttpRequest.DONE) {
+        if (requestLike.status < 400) {
+            const { id, btnType, imgUrl } = JSON.parse(requestLike.response);
+            const elementLike = document.querySelector(`.cloth-id-${id}`);
+            const originHTML = strip(elementLike.innerHTML);
+            if (originHTML.includes('fa-solid')) {
+              elementLike.innerHTML = `<img src="${imgUrl}" class="post_img1">
+              <div class="post__like like_icon_position" onclick="onClickLike(${id}, 'like', '${imgUrl}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>`;
+              console.log(elementLike)
+            } else {
+              elementLike.innerHTML = `<img src="${imgUrl}" class="post_img1">
+              <div class="post__dislike like_icon_position" onclick="onClickLike(${id}, 'dislike', '${imgUrl}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>`;
+              console.log(elementLike)
+            };
+        }
+    }
+};
+</script>
 {% endblock %}
