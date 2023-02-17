@@ -7,30 +7,29 @@
 <div class="my-1 text-center fs-4 mt-2 mb-4">나만의 옷장</div>
 
 <!--아코디언-->
-<div class="accordion" id="accordionExample">
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="headingOne">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-        <div class="accmain">
-          Clothes
-        </div>
-      </button>
-    </h2>
-    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne">
-      <p>
-        <div class="accmain2">
-        <span>Outer</span>
-        <span>Top</span>
-        <span>Bottom</span>
-        <span>Shoes</span>
-        <span>accessory</span>
-      </p>  
-        <hr>
-      </div>
-        <div class="accmain3">
-        <img class="closet_icon" src="/static/img/plus.png">
-        <img class="closet_icon" src="/static/img/heart.png">
-      </div>
+<div class="d-flex flex-wrap">
+  <div class="accordion" id="accordionExample">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingOne">
+        <button class="accordion-button acc-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          <div class="accmain">
+            Clothes
+          </div>
+        </button>
+      </h2>
+      <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne">
+          <div class="accmain2">
+            <a href="{% url 'closet:outer_list' %}"><span>아우터</span></a>
+            <a href="{% url 'closet:top_list' %}"><span>상의</span></a>
+            <a href="{% url 'closet:bottom_list' %}"><span>하의</span></a>
+            <a href="{% url 'closet:shoes_list' %}"><span>신발</span></a>
+            <a href="{% url 'closet:acc_list' %}"><span>액세서리</span></a>
+          </div>
+          <div class="accmain3">
+            <!-- if outer or top or bottom.. 일 때 a태그 연결 따로따로 하기 -->
+            <a href="{% url 'closet:outer_create' %}"><img class="closet_icon" src="/static/img/plus.png"></a>
+            <a href=""><img class="closet_icon" src="/static/img/heart.png"></a>
+          </div>
       </div>
     </div>
   </div>
@@ -38,41 +37,39 @@
   <div class="accordion" id="accordionExample">
     <div class="accordion-item">
       <h2 class="accordion-header" id="headingOne">
-        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne2" aria-expanded="true" aria-controls="collapseOne">
+        <button class="accordion-button acc-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne2" aria-expanded="true" aria-controls="collapseOne">
           <div class="accmain1">Cody</div>
         </button>
       </h2>
       <div id="collapseOne2" class="accordion-collapse collapse show" aria-labelledby="headingOne">
-        <p>
-          <div class="accmain2">
-        </p> 
-        <div class="acccody"> 
-        <span>My Cody</span>
-        <span>My List</span>
-        </div>
-        </div>
+        <div class="accmain2">
+          <a href=""><span>내 착장</span></a>
+          <a href=""><span>찜한 착장</span></a>
         </div>
       </div>
     </div>
-  
+  </div>
+</div>
+<hr>
   
 <ul class="my-2 px-0 mx-3 d-flex justify-content-around">
 </ul>
 {% for Clothes in clothes_list %}
   <a>
     {%if Clothes.img %}
-    <img src="{{Clothes.img.url}}" class="img-fluid closet_list2">
+    <img src="{{Clothes.img.url}}" class="img-fluid closet_list2" style="width:100px; height:100px">
     {%endif%}
   </a>
 {%endfor%}
 </div>
 
+
 {% for clothes in clothes_list %}
     {{clothes.title}}
     {% if new_url %}
-    <img src="{{new_url}}">
+    <img src="{{new_url}}" style="width:100px; height:100px">
     {% else %}
-    <img src="{{clothes.img.url}}">
+    <img src="{{clothes.img.url}}" style="width:100px; height:100px">
     <a class="btn btn-secondary modify_btn" href="{% url 'closet:rembg' clothes.pk  %}">누끼</a>
     {% endif %}
 
@@ -95,7 +92,7 @@
         </svg>
       </button>
       {% endif %}
-    </form>  
+    </form> 
 {% endfor %}
 
 <!-- <div class="my-3 mx-2 img_container">

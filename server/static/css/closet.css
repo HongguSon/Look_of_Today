@@ -52,8 +52,8 @@ img:hover{
 
 
 
-@media screen and (max-width: 48px){
-  .img_container{ max-width: 47.5px;}
+@media screen and (max-width: 480px){
+  .img_container{ max-width: 475px;}
   .clothes {
     width: 45vw;
     height: 45vw !important;
@@ -64,8 +64,8 @@ img:hover{
     border-radius: 0.938rem;
   }
   .closet_icon {
-    width: 3rem !important;
-    height: 3rem !important;
+    width: 2rem !important;
+    height: 2rem !important;
   }
   .closet_list{
     display: flex;
@@ -78,7 +78,6 @@ img:hover{
     gap: 3rem;
   }
 }
-
 
 .accordion{
   margin: auto;
@@ -97,9 +96,16 @@ img:hover{
   margin-left: 6.313rem;
 }
 
-.accmain2 > span{
-  font-size: 0.813rem;
-  margin-left: 0.719rem;
+.accmain2 {
+  display: flex;
+  justify-content: space-around;
+  padding:.5rem !important
+}
+
+.accmain2 > a:link, .accmain2 > a:hover, .accmain2 > a {
+  text-decoration: none;
+  color: black;
+
 }
 
 .accmain2> hr{
@@ -109,7 +115,11 @@ img:hover{
 .acccody{
   display: flex;
   justify-content: space-evenly;
-  margin-bottom: 0.625rem;
+  margin-top: 0.4rem;
   font-size: 1.125rem;
+}
+
+.acc-btn{
+  padding:.5rem !important
 }
 
