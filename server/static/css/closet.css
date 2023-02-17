@@ -3,21 +3,189 @@
   height: 24vw !important;
 }
 
-@media screen and (max-width: 768px){
-  .img_container{ max-width: 760px; }
-  .clothes {
-    width: 45vw;
-    height: 45vw !important;
-  }
-}
-
-.imgs_container {
-  display: flex;
-  justify-content: center;
-}
-
 .img_container {
   display: flex;
   /* justify-content: center; */
   flex-wrap: wrap;
+}
+
+.post_icon{
+  width: 25vw !important;
+  height: 25vw !important;
+  border-radius: 0.938rem;
+  opacity: 1;
+  -webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: .2s ease-in-out;
+	transition: .2s ease-in-out;
+}
+
+img:hover{
+  -webkit-transform: scale(1.03);
+	transform: scale(1.03);
+  opacity: .8;
+
+}
+
+.closet_list{
+  display: flex;
+  margin-top: 2.5rem;
+  margin-left: 8.5rem;
+  margin-bottom: 3rem;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: start;
+  gap: 3rem;
+}
+
+.closet_icon{
+  margin-top: 0.625rem;
+  margin-bottom: 0.625rem;
+  width: 3.125rem !important;
+  height: 3.125rem !important;
+}
+
+.accmain3 {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+
+
+@media screen and (max-width: 480px){
+  .img_container{ max-width: 475px;}
+  .clothes {
+    width: 45vw;
+    height: 45vw !important;
+  }
+  .closet_icon{
+    width: 55vw !important;
+    height: 35vw !important;
+    border-radius: 0.938rem;
+  }
+  .closet_icon {
+    width: 2rem !important;
+    height: 2rem !important;
+  }
+  .closet_list{
+    display: flex;
+    margin-top: 1.5rem;
+    margin-left: 2.5rem;
+    margin-bottom: 2.5rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: start;
+    gap: 3rem;
+  }
+}
+
+.accordion{
+  margin: auto;
+  display: block;
+  background-color: white;
+  margin-bottom: 1.875rem;
+  width: 17.188rem;
+}
+
+
+.accmain{
+  margin-left: 5.625rem;
+}
+
+.accmain1{
+  margin-left: 6.313rem;
+}
+
+.accmain2{
+  text-align: center;
+}
+
+.accmain2 > a{
+  font-size: 1rem;
+  margin-left: 0.719rem;
+}
+
+.accmain2 > a:link, .accmain2 > a:hover, .accmain2 > a {
+  text-decoration: none;
+  color: black;
+
+}
+
+.accmain2> hr{
+  width: 17.125rem;
+}
+
+.acccody{
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 0.4rem;
+  font-size: 1.125rem;
+}
+
+.mycloset_list{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8rem;
+  margin-top: 80px;
+  margin-bottom: 70px;
+}
+
+.mycloset_img > img, .mycloset_img > * > img{
+  width: 200px;
+  border-radius: 15px;
+}
+
+.mycloset_form{
+  display: block;
+  text-align: center;
+  padding-top: 15px;
+}
+
+#mycloset_like{
+  padding-top: 1px;
+  padding-left: 5px;
+  padding-right: 0;
+}
+
+#mypostlike{
+  width: 18px !important;
+  height: 20px !important;
+}
+
+.item__container {
+  position: relative ;
+}
+
+.item__container > .like_icon_position{
+  position: absolute ;
+  top: 4px;
+  right: 4px;
+}
+
+.buylink_container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.buylink_container > img {
+  width: 400px;
+  height: 400px;
+}
+
+.buylink_container > form {
+  width: 40%;
+}
+
+
+@media screen and (max-width: 375px){
+  .buylink_container > img {
+    width: 200px;
+    height: 200px;
+  }
+  .buylink_container > form {
+    width: 90%;
+  }
 }

@@ -1,15 +1,45 @@
-label{
-    padding-left: 580px;
-    padding-right: 15px;
-    padding-top: 50px;
-    padding-bottom: 50px;
+.clothes_create{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 70px;
+    margin-top: 50px;
+    text-align: center;
+}
+
+.clothes_create_p1{
+    margin-right: 71px;
+}
+
+.clothes_create_p2{
+    margin-right: 65px;
+}
+
+.filebox > label{
+    font-size: 18px;
+}
+
+.filebox > input{
+    margin-left: 124px;
 }
 
 #subbtn{
-    margin-left: 685px;
-    margin-bottom: 30px;
+    margin: auto;
+    display: block;
 }
 
-#id_clothes{
-    width: 165px;
+.clothes_type > input{
+    margin-left: 10px;
+    margin-right: 5px;
+}
+
+.clothes_list_box {
+    overflow:auto; 
+    height:15rem;
+    display: flex;
+}
+
+.clothes_list_box img {
+    height: 10rem;
+    width: 8rem;
 }
