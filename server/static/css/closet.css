@@ -96,10 +96,13 @@ img:hover{
   margin-left: 6.313rem;
 }
 
-.accmain2 {
-  display: flex;
-  justify-content: space-around;
-  padding:.5rem !important
+.accmain2{
+  text-align: center;
+}
+
+.accmain2 > a{
+  font-size: 1rem;
+  margin-left: 0.719rem;
 }
 
 .accmain2 > a:link, .accmain2 > a:hover, .accmain2 > a {
@@ -119,7 +122,34 @@ img:hover{
   font-size: 1.125rem;
 }
 
-.acc-btn{
-  padding:.5rem !important
+.mycloset_list{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8rem;
+  margin-top: 80px;
+  margin-bottom: 70px;
+}
+
+.mycloset_img > img{
+  width: 200px;
+  border-radius: 15px;
+}
+
+.mycloset_form{
+  display: block;
+  text-align: center;
+  padding-top: 15px;
+}
+
+#mycloset_like{
+  padding-top: 1px;
+  padding-left: 5px;
+  padding-right: 0;
+}
+
+#mypostlike{
+  width: 18px !important;
+  height: 20px !important;
 }
 

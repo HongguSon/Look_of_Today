@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="{% static 'css/reset.css' %}">
   <link rel="stylesheet" href="{% static 'css/main4.css' %}">
   <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  <link rel="stylesheet" href="{% static 'css/main_react.css' %}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <script src="https://kit.fontawesome.com/f95b2ab384.js" crossorigin="anonymous"></script>
   {% block extrahead %}
@@ -32,18 +33,18 @@
   
   <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a class="nav-link text-black" aria-current="page" href="{% url 'main:main' %}">Home</a>
-    <a class="nav-link text-secondary" href="{% url 'closet:our_closet' %}">모두의 옷장</a>
+    <a aria-current="page" href="{% url 'main:main' %}">Home</a>
+    <a href="{% url 'closet:our_closet' %}">모두의 옷장</a>
     {% if user.is_authenticated %}
-    <a class="nav-link text-secondary" href="{% url 'closet:closet_main' %}">나만의 옷장</a>
-    <a class="nav-link text-secondary" href="{% url 'community:community_main' %}">커뮤니티</a>
-    <a class="nav-link text-secondary" aria-current="page" href="{% url 'user:mypage' %}">마이페이지</a>
-    <a class="nav-link text-secondary" href="{% url 'user:logout' %}">로그아웃</a>
+    <a href="{% url 'closet:closet_main' %}">나만의 옷장</a>
+    <a href="{% url 'community:community_main' %}">커뮤니티</a>
+    <a aria-current="page" href="{% url 'user:mypage' %}">마이페이지</a>
+    <a href="{% url 'user:logout' %}">로그아웃</a>
     {% else %}
     {% comment %}
-    <a class="nav-link text-secondary" href="{% url 'user:signup' %}">회원가입</a>
+    <a href="{% url 'user:signup' %}">회원가입</a>
     {% endcomment %}
-    <a class="nav-link text-secondary" href="{% url 'user:login' %}">로그인</a>
+    <a href="{% url 'user:login' %}">로그인</a>
     {% endif %}
   </div>
 
@@ -113,7 +114,7 @@
     crossorigin="anonymous"></script>  
   <script>
   function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("mySidenav").style.width = "135px";
     document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
   }
   
