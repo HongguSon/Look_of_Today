@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Clothes',
+            name="Clothes",
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('img', models.ImageField(upload_to='main/images/clothes/%Y/%m/%d')),
@@ -27,52 +27,116 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name='Comment',
+            name="Comment",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('content', models.TextField()),
-                ('create_date', models.DateTimeField(auto_now_add=True)),
-                ('update_date', models.DateTimeField(auto_now=True)),
-                ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("content", models.TextField()),
+                ("create_date", models.DateTimeField(auto_now_add=True)),
+                ("update_date", models.DateTimeField(auto_now=True)),
+                (
+                    "author",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Acc',
+            name="Acc",
             fields=[
-                ('clothes_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='main.clothes')),
+                (
+                    "clothes_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to="main.clothes",
+                    ),
+                ),
             ],
-            bases=('main.clothes',),
+            bases=("main.clothes",),
         ),
         migrations.CreateModel(
-            name='Bottom',
+            name="Bottom",
             fields=[
-                ('clothes_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='main.clothes')),
+                (
+                    "clothes_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to="main.clothes",
+                    ),
+                ),
             ],
-            bases=('main.clothes',),
+            bases=("main.clothes",),
         ),
         migrations.CreateModel(
-            name='Outer',
+            name="Outer",
             fields=[
-                ('clothes_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='main.clothes')),
+                (
+                    "clothes_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to="main.clothes",
+                    ),
+                ),
             ],
-            bases=('main.clothes',),
+            bases=("main.clothes",),
         ),
         migrations.CreateModel(
-            name='Shoes',
+            name="Shoes",
             fields=[
-                ('clothes_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='main.clothes')),
+                (
+                    "clothes_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to="main.clothes",
+                    ),
+                ),
             ],
-            bases=('main.clothes',),
+            bases=("main.clothes",),
         ),
         migrations.CreateModel(
-            name='Top',
+            name="Top",
             fields=[
-                ('clothes_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='main.clothes')),
+                (
+                    "clothes_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to="main.clothes",
+                    ),
+                ),
             ],
-            bases=('main.clothes',),
+            bases=("main.clothes",),
         ),
         migrations.CreateModel(
-            name='Talk',
+            name="Talk",
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('category', models.CharField(choices=[('공동 구매', '공동 구매'), ('오픈런', '오픈런'), ('잡담방', '잡담방')], max_length=10)),
@@ -85,7 +149,7 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name='Post',
+            name="Post",
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('main_img', models.ImageField(upload_to='main/images/post/%Y/%m/%d')),
@@ -101,19 +165,49 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name='TalkComment',
+            name="TalkComment",
             fields=[
-                ('comment_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='main.comment')),
-                ('talk', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='main.talk')),
+                (
+                    "comment_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to="main.comment",
+                    ),
+                ),
+                (
+                    "talk",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="main.talk"
+                    ),
+                ),
             ],
-            bases=('main.comment',),
+            bases=("main.comment",),
         ),
         migrations.CreateModel(
-            name='PostComment',
+            name="PostComment",
             fields=[
-                ('comment_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='main.comment')),
-                ('post', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='main.post')),
+                (
+                    "comment_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to="main.comment",
+                    ),
+                ),
+                (
+                    "post",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="main.post"
+                    ),
+                ),
             ],
-            bases=('main.comment',),
+            bases=("main.comment",),
         ),
     ]
