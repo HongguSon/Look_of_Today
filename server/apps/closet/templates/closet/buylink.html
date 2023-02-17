@@ -8,7 +8,18 @@
 {% endblock %}
 {% block content %}
 <div class="buylink_container">
-  <div class="fs-3 my-2">구매링크</div>
+  <div class="fs-3 my-2 buylink_title">
+    <div class="mx-2">구매링크</div>
+    <div class="help-tip">
+      <p>오늘뭐입지는 2가지의 방법으로 구매링크를 제공합니다.
+        <br>
+        <br>1) 빠른 검색을 통하면 5~10초 내로 새 창에서 검색 결과를 보여주지만, 브랜드가 명확한 상품 외에는 정확도가 떨어질 수 있습니다.
+        <br>
+        <br>2) 정확한 검색을 통하면 해당 기기의 사양과 인터넷 상태에 따라 약 60초 내외로 구매 링크를 제공하지만, 실제 구글 이미지 검색을 이용하기 때문에 매우 정확합니다.
+        <br>
+      </p>
+    </div>
+  </div>
   {% if cloth.rem_img %}
   <img src="{{cloth.rem_img.url}}">
   {% else %}
@@ -16,10 +27,27 @@
   {% endif %}
   <form action="{% url 'closet:buylink' cloth.id %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    <input type="submit" class="my-1 btn btn-secondary" style="width:100%" value="새 창으로 검색" name="new" />
-    <input type="submit" class="my-1 btn btn-secondary" style="width:100%" value="빠른 검색" name="fast" />
-    <input type="submit" class="my-1 btn btn-secondary" style="width:100%" value="정확한 검색" name="exact" />
+    <input type="submit" class="my-2 btn btn-secondary" style="width:100%" value="빠른 검색" name="fast" />
+    <input type="submit" class="my-2 btn btn-secondary" style="width:100%" value="정확한 검색" name="exact" />
+    {% if fastflag %}
+      <a class="my-1 btn btn-primary" id="new_url" style="width:100%" href="{{link}}" target="_blank" clicked>다시 열기</a>
+    {% elif exactflag %}
+      <div class="exact_search_container">
+        {% for cost, url, src in search_informations_list %}
+        <div class="exact_search_result">
+          <img src="{{ src }}" style="width:200px; height:200px;" alt="">
+          <div>{{ cost }}</div>
+          <a href="{{ url }}" target="_blank">구매링크</a>
+        </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    
   </form>
   <br>
 </div>
+<script>
+  document.getElementById('new_url').click();
+</script>
 {% endblock %}
