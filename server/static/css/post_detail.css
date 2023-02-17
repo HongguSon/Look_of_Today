@@ -21,11 +21,9 @@
     margin-top: 1.25rem;
 }
 
-
-
 .postimgs > img{
-    height: 25rem;
-    width: 30rem;
+    height: 35rem;
+    width: 33rem;
     border-radius: 0.938rem;
     margin: auto;
     display: block;
@@ -97,19 +95,46 @@
     background-color: #E0E0E0;
 }
 
+.delbtn2{
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 0.4rem;
+    font-size: 11px;
+    width: 36px;
+    height: 22px;
+    float: right;
+    margin-left: 0.188rem;
+    margin-right: 280px;
+    margin-top: 0.125rem;
+    margin-bottom: 15px;
+    transition: 0.2s;
+}
+
+.delbtn2:hover{
+    background-color: #E0E0E0;
+}
+
+.del_list{
+    margin-left: 39px;
+}
+
+.del_list > hr{
+    width: 840px;
+}
+
+
 .comment-list{
     margin-bottom: 5rem;
     margin-left: 6rem;
 }
 
-
-
-.comment-list p{
-    margin-top: 1rem;
+.comment_other_hr{
+    width: 838px;
+    margin-left: 39px !important;
 }
 
 #comment-con{
-    margin-left: 18.25rem;
+    margin-left: 0px !important;
     margin-right: 12.5rem;
     margin-bottom: 3.125rem;
 }
@@ -119,6 +144,7 @@
     border-radius: 0.625rem;
     transition: 0.2s;
     resize: none;
+    margin-left: 320px;
 }
 
 .comment-sum{
@@ -126,13 +152,40 @@
 }
 
 .comment-sum > hr{
-    width: 1035px;
+    width: 1026px;
+}
+
+.comment_author{
+    font-size:20px;
+}
+
+.d-flex{
+    padding-left: 3px !important;
+    padding-top: 35px;
+    padding-bottom: 20px !important;
+}
+
+.d-flex > hr{
+    width: 830px !important;
+}
+
+#like {
+    padding-left: 50px !important;
+    padding-right: 45px;
+}
+#user_comment_list{
+    padding-top: 35px;
+    padding-bottom: 2px !important;
+}
+
+.comment_author_other{
+    font-size: 20px;
 }
 
 form svg{
     width: 1.875rem;
     height: 1.875rem;
-    margin-left: 1.875rem;
+    margin-left: 12.875rem;
 }
 
 #listbtn{
@@ -147,3 +200,29 @@ form svg{
 }
 
 
+.cody_detail{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 7rem;
+    margin-bottom: 130px;
+}
+
+.cody_detail > * > img{
+    width: 200px;
+}
+
+.cody_title{
+    text-align: center;
+    font-size: 19px;
+}
+
+.item__container {
+    position: relative;
+}
+
+.cody_detail > .item__container > .like_icon_position{
+    position: absolute;
+    top: 4px;
+    right: 4px;
+}

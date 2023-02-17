@@ -9,22 +9,47 @@ from django.views.generic import CreateView, UpdateView
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
-# Create your views here.
-class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
-    model = Post
-    fields = ['main_img', 'title', 'open', 'top', 'bottom', 'acc', 'outer', 'shoes']
-    template_name = 'community/post_create.html'
-
-    def test_func(self):
-        return self.request.user
-
-    def form_valid(self, form):
-        current_user = self.request.user
-        if current_user.is_authenticated:
-            form.instance.author = current_user
-            return super(PostCreate, self).form_valid(form)
-        else:
-            return redirect('closet:closet_all')
+def post_create(request, *args, **kwargs):
+    outer_list = Outer.objects.filter(author=request.user)
+    top_list = Top.objects.filter(author=request.user)
+    bottom_list = Bottom.objects.filter(author=request.user)
+    shoes_list = Shoes.objects.filter(author=request.user)
+    acc_list = Acc.objects.filter(author=request.user)
+    
+    if request.method == "POST":
+        int_outer = list(map(int, request.POST.getlist('outer')))
+        int_top = list(map(int, request.POST.getlist('top')))
+        int_bottom = list(map(int, request.POST.getlist('bottom')))
+        int_shoes = list(map(int, request.POST.getlist('shoes')))
+        int_acc = list(map(int, request.POST.getlist('acc')))
+        new_post = Post.objects.create(
+            title=request.POST["title"],
+            main_img=request.FILES.get("image"),
+            author=request.user,
+            open=request.POST["open"],
+        )
+        for i in int_outer:
+            new_post.outer.add(i)
+        for i in int_top:
+            new_post.top.add(i)   
+        for i in int_bottom:
+            new_post.bottom.add(i)
+        for i in int_shoes:
+            new_post.shoes.add(i)
+        for i in int_acc:
+            new_post.acc.add(i)
+        new_post.save()
+        return redirect('closet:closet_main')
+    
+    context = {
+        'outer_list' : outer_list,
+        'top_list' : top_list,
+        'bottom_list' : bottom_list,
+        'shoes_list' : shoes_list,
+        'acc_list' : acc_list,
+    }
+    
+    return render(request, "community/post_create.html", context=context)
 
 def post_detail(request, pk, *args, **kwargs):
     post = Post.objects.get(pk=pk)
@@ -75,6 +100,62 @@ class PostUpdate(LoginRequiredMixin,UpdateView):
         else:
             raise PermissionDenied
         
+# def post_update(request, *args, **kwargs):
+#     outer_list = Outer.objects.filter(author=request.user)
+#     top_list = Top.objects.filter(author=request.user)
+#     bottom_list = Bottom.objects.filter(author=request.user)
+#     shoes_list = Shoes.objects.filter(author=request.user)
+#     acc_list = Acc.objects.filter(author=request.user)
+    
+#     if request.method == "POST":
+#         # outer_str = request.POST.getlist('outer')
+#         # outer_map = map(int, outer_str)
+#         # outer_int = list(outer_map)
+#         Post.objects.create(
+#             title=request.POST["title"],
+#             main_img=request.FILES.get("image"),
+#             author=request.user,
+#             # outer=self.course_set.set([request.POST.getlist('outer')]),
+#             # top=request.POST.getlist('top'),
+#             # bottom=request.POST.getlist('bottom'),
+#             # shoes=request.POST.getlist('shoes'),
+#             # acc=request.POST.getlist('acc'),
+#             open=request.POST["open"],
+#         )
+#         return redirect('closet:closet_main')
+    
+#     context = {
+#         'outer_list' : outer_list,
+#         'top_list' : top_list,
+#         'bottom_list' : bottom_list,
+#         'shoes_list' : shoes_list,
+#         'acc_list' : acc_list,
+#     }
+    
+#     return render(request, "community/post_create.html", context=context)
+        
+
+# def post_update(request, pk, *args, **kwargs):
+#     post = Post.objects.get(pk=pk)
+#     outer_list = Outer.objects.filter(author=request.user)
+#     top_list = Top.objects.filter(author=request.user)
+#     bottom_list = Bottom.objects.filter(author=request.user)
+#     shoes_list = Shoes.objects.filter(author=request.user)
+#     acc_list = Acc.objects.filter(author=request.user)
+    
+#     context = {
+#         'post': post,
+#         'outer_list' : outer_list,
+#         'top_list' : top_list,
+#         'bottom_list' : bottom_list,
+#         'shoes_list' : shoes_list,
+#         'acc_list' : acc_list,
+#     }
+    
+#     if request.method == "POST":
+#         return redirect("community:post_detail", pk)  
+#     return render(request, "community/post_update.html", context=context)
+    
 def post_delete(request:HttpRequest, pk, *args, **kwargs):
     if request.method == "POST":
         post = Post.objects.get(pk=pk)
@@ -102,7 +183,7 @@ def post_likes(request, pk, *args, **kwargs):
 class TalkCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Talk
     fields = ['category', 'img', 'title', 'content']
-    template_name = 'community/post_create.html'
+    template_name = 'community/talk_create.html'
 
     def test_func(self):
         return self.request.user
@@ -130,7 +211,7 @@ def comment_talk_ajax(request, *args, **kwargs):
     talk = Talk.objects.get(id=data["talk_id"])
     
     comment = TalkComment.objects.create(
-        post = talk,
+        talk = talk,
         author = request.user,
         content = data.get('content'),)
     comment.save()

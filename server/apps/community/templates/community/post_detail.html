@@ -1,7 +1,8 @@
 {% extends 'main/base.html'%}
 {% load static %}
 {% block extrahead %}
-<link rel="stylesheet" href="{% static 'css/post_create.css' %}">
+<link rel="stylesheet" href="{% static 'css/post_detail.css' %}">
+<link rel="stylesheet" href="{% static 'css/ourcloset_post_react.css' %}">
 <title>community</title>
 {% endblock %}
 
@@ -32,45 +33,76 @@
 <div class="postimgs">
   <img src="{{post.main_img.url}}" class="post_img1"> <br />
 </div>
+<p class="cody_title">어떤 아이템을 사용했나요?</p>
+<div class="cody_detail">
 
-<div>
-  <p>착장 정보</p>
-  <p>Outer
-    <!-- {% if not post.outer %}
-    : 없음 이거 왜 안먹히지.. 뭐지
-    {% endif %} -->
-  </p>
+
   {% for outer in post.outer.iterator %}
   {% if outer.rem_img %}
-  <img src="{{outer.rem_img.url}}" class="post_img1"> <br />
+  <div class="item__container cloth-id-{{outer.id}}">
+    <img src="{{outer.rem_img.url}}" class="post_img1">
+    {% if user in outer.likes.all %}
+      <div class="post__dislike like_icon_position" onclick="onClickLike({{ outer.pk }}, 'dislike', '{{outer.rem_img.url}}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>
+    {% else %}
+      <div class="post__like like_icon_position" onclick="onClickLike({{ outer.pk }}, 'like', '{{outer.rem_img.url}}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>
+    {% endif %}
+  </div>
   {% endif %}
   {% endfor %}
-  <p>Top
-  </p>
+
+
   {% for top in post.top.iterator %}
   {% if top.rem_img %}
-  <img src="{{top.rem_img.url}}" class="post_img1"> <br />
+  <div class="item__container cloth-id-{{top.id}}">
+    <img src="{{top.rem_img.url}}" class="post_img1">
+    {% if user in top.likes.all %}
+      <div class="post__dislike like_icon_position" onclick="onClickLike({{ top.pk }}, 'dislike', '{{top.rem_img.url}}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>
+    {% else %}
+      <div class="post__like like_icon_position" onclick="onClickLike({{ top.pk }}, 'like', '{{top.rem_img.url}}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>
+    {% endif %}
+  </div>
   {% endif %}
   {% endfor %}
-  <p>Bottom
-  </p>
+
+
   {% for bottom in post.bottom.iterator %}
     {% if bottom.rem_img %}
-    <img src="{{bottom.rem_img.url}}" class="post_img1"> <br />
+    <div class="item__container cloth-id-{{bottom.id}}">
+      <img src="{{bottom.rem_img.url}}" class="post_img1">
+      {% if user in bottom.likes.all %}
+        <div class="post__dislike like_icon_position" onclick="onClickLike({{ bottom.pk }}, 'dislike', '{{bottom.rem_img.url}}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>
+      {% else %}
+        <div class="post__like like_icon_position" onclick="onClickLike({{ bottom.pk }}, 'like', '{{bottom.rem_img.url}}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>
+      {% endif %}
+    </div>
     {% endif %}
   {% endfor %}
-  <p>Shoes
-  </p>
+
+
   {% for shoes in post.shoes.iterator %}
     {% if shoes.rem_img %}
-    <img src="{{shoes.rem_img.url}}" class="post_img1"> <br />
+    <div class="item__container cloth-id-{{shoes.id}}">
+      <img src="{{shoes.rem_img.url}}" class="post_img1">
+      {% if user in shoes.likes.all %}
+        <div class="post__dislike like_icon_position" onclick="onClickLike({{ shoes.pk }}, 'dislike', '{{shoes.rem_img.url}}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>
+      {% else %}
+        <div class="post__like like_icon_position" onclick="onClickLike({{ shoes.pk }}, 'like', '{{shoes.rem_img.url}}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>
+      {% endif %}
+    </div>
     {% endif %}
   {% endfor %}
-  <p>Acc
-  </p>
+
+
   {% for acc in post.acc.iterator %}
     {% if acc.rem_img %}
-    <img src="{{acc.rem_img.url}}" class="post_img1"> <br />
+    <div class="item__container cloth-id-{{acc.id}}">
+      <img src="{{acc.rem_img.url}}" class="post_img1">
+      {% if user in acc.likes.all %}
+        <div class="post__dislike like_icon_position" onclick="onClickLike({{ acc.pk }}, 'dislike', '{{acc.rem_img.url}}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>
+      {% else %}
+        <div class="post__like like_icon_position" onclick="onClickLike({{ acc.pk }}, 'like', '{{acc.rem_img.url}}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>
+      {% endif %}
+    </div>
     {% endif %}
   {% endfor %}
 </div>
@@ -80,24 +112,25 @@
     <div id="comment-list-{{post.pk}}" class="comment-list">
       <div class="comm">
         {% for comment in comments %}
-            <div class="d-flex align-items-center m-0 p-4">
+            <div class="d-flex align-items-center m-0" id="user_comment_list">
                 <i class="fa-solid fa-user m-3"></i>  
-                <div>
-                    <div>{{comment.author.username}}</div>
-                    <div>{{comment.content}}</div>
-                    {% if user == comment.author %}
-                    <form action="{% url 'community:delete_comment' comment.pk %}" method="post" class="comment_detail">
-                      {% csrf_token %}
-                      <input type="submit" , value="삭제하기" , class="delbtn" />
-                      <hr>
-                    </form>
-                    {% endif %}
+                <div class="user_comment">
+                    <div class="comment_author">{{comment.author.username}}</div>
+                    <p style="margin-right: 275px;">{{comment.content}}</p>
                 </div>
             </div>
+                {% if user == comment.author %}
+                <form action="{% url 'community:delete_comment' comment.pk %}" method="post" class="comment_detail">
+                  {% csrf_token %}
+                  <div class="del_list">
+                  <input type="submit", value="삭제", class="delbtn2" />
+                  <hr />
+                  </div>
+                </form>
+                {% endif %}
         {% endfor %}
       </div>
     </div>
-    <hr>
   </div>
   {% if user.is_authenticated %}
   <form action="{% url 'community:likes' post.pk %}" method='POST'>
@@ -120,7 +153,7 @@
     </button>
     {% endif %}
   </form>
-  <div id="comment-con" class="d-flex justify-content-between align-items-center">
+<div id="comment-con" class="d-flex justify-content-between align-items-center">
     <form>
       <textarea rows="4" cols="100" id="comment-input-{{post.pk}}" class="comment-input" type="text"
         placeholder="댓글 달기..."></textarea>
@@ -160,17 +193,52 @@
         const element = document.querySelector(`#comment-list-${post_id}`);
         const comm = document.querySelector(`.comm`);
         const newComment = document.createElement('div');
-        newComment.className = "d-flex align-items-center m-0 p-4";
+        newComment.className = "d-flex align-items-center m-0";
         newComment.innerHTML = `<i class="fa-solid fa-user m-3"></i>  
-                <div>
-                    <div>${author}</div>
-                    <div>${content}</div>
+                <div class="comment_other" style="margin-right:280px;">
+                    <div class="comment_author_other">${author}</div>
+                    <div class="content_other">${content}</div>
                 </div>`;
         comm.appendChild(newComment);
-        let h = document.createElement("hr");
+        let h= document.createElement("hr");
+        h.className="comment_other_hr" 
         comm.appendChild(h);
       }
     }
   }
+
+
+  const strip = (string) => {
+    return string.replace(/^\s+|\s+$/g, "");
+  };
+  const requestLike = new XMLHttpRequest();
+  const onClickLike = (id, btnType, imgUrl) => {
+    const url = "/closet/clothes-likes/" + id;
+    requestLike.open("POST", url, true)
+    requestLike.setRequestHeader(
+      "Content-Type",
+      "application/x-www-form-urlencoded"
+    );
+    requestLike.send(JSON.stringify({id: id, btnType: btnType, imgUrl: imgUrl}));
+  };
+
+  requestLike.onreadystatechange = () => {
+      if (requestLike.readyState === XMLHttpRequest.DONE) {
+          if (requestLike.status < 400) {
+              const { id, btnType, imgUrl } = JSON.parse(requestLike.response);
+              const elementLike = document.querySelector(`.cloth-id-${id}`);
+              const originHTML = strip(elementLike.innerHTML);
+              if (originHTML.includes('fa-solid')) {
+                elementLike.innerHTML = `<img src="${imgUrl}" class="post_img1">
+                <div class="post__like like_icon_position" onclick="onClickLike(${id}, 'like', '${imgUrl}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>`;
+                console.log(elementLike)
+              } else {
+                elementLike.innerHTML = `<img src="${imgUrl}" class="post_img1">
+                <div class="post__dislike like_icon_position" onclick="onClickLike(${id}, 'dislike', '${imgUrl}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>`;
+                console.log(elementLike)
+              };
+          }
+      }
+  };
 </script>
 {% endblock %}
