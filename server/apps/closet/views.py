@@ -5,6 +5,16 @@ from django.views.generic import CreateView, UpdateView
 from django.views.decorators.http import require_POST
 from itertools import chain
 from django.utils.datastructures import MultiValueDictKeyError
+from django.views.decorators.csrf import csrf_exempt
+import json
+from django.http import JsonResponse
+from GoogleSearch import Search
+import selenium
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 # Create your views here.
@@ -131,23 +141,41 @@ def create_clothes(request, *args, **kwargs):
   return render(request, "closet/clothes_create.html") 
 
 @require_POST
+@csrf_exempt
 def clothes_likes(request, pk, *args, **kwargs):
-  if request.user.is_authenticated:
+  user = request.user
+  if user.is_authenticated:
+    req = json.loads(request.body)
     clothes = get_object_or_404(Clothes, pk=pk)
-    users = clothes.likes.all()
-    if users.filter(pk=request.user.pk).exists():
-      clothes.likes.remove(request.user)
+    clothes_id = req['id']
+    btnType = req['btnType']
+    imgUrl = req['imgUrl']
+    if btnType == 'like':
+      clothes.likes.add(user)
+      print(clothes.likes.all())
     else:
-      clothes.likes.add(request.user)
-    return redirect('closet:closet_main')
-    # return redirect('accouts:login')위에거 대신 이거 떠야함! 나중에 로그인 합치고!!
-  return render(request, 'closet/our_closet.html')
+      clothes.likes.remove(user)
+      print(clothes.likes.all())
+    clothes.save()
+    return JsonResponse({'id' : clothes_id, 'btnType': btnType, 'imgUrl':imgUrl})
+  # if request.user.is_authenticated:
+  #   clothes = get_object_or_404(Clothes, pk=pk)
+  #   users = clothes.likes.all()
+  #   if users.filter(pk=request.user.pk).exists():
+  #     clothes.likes.remove(request.user)
+  #   else:
+  #     clothes.likes.add(request.user)
+  #   return redirect('closet:closet_main')
+  #   # return redirect('accouts:login')위에거 대신 이거 떠야함! 나중에 로그인 합치고!!
+  # return render(request, 'closet/our_closet.html')
+  
 
 def clothes_like_list(request, *args, **kwargs):
   user = User.objects.get(username=request.user)
   clothes_list = Clothes.objects.filter(likes=user)
   context={
     'clothes_list': clothes_list,
+    'buylink_flag' : True,
   }   
   return render(request,'closet/closet_main.html',context=context)
   
@@ -159,3 +187,19 @@ def post_like_list(request, *args, **kwargs):
   }   
   return render(request,'closet/closet_main.html',context=context)
   
+def buylink(request, pk, *args, **kwargs):
+  flag=False
+  cloth = Clothes.objects.filter(id=pk)
+  url = cloth[0].img.path
+  context = {
+    'cloth' : cloth[0],
+  }
+  # if flag:
+  #   output = Search(file_path=url)['similar']
+  #   context['output'] = output
+  # # else:
+  # if request.method == "POST":
+  #   choice = request.POST
+    
+    
+  return render(request,'closet/buylink.html', context=context)

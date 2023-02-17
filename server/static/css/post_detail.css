@@ -208,11 +208,21 @@ form svg{
     margin-bottom: 130px;
 }
 
-.cody_detail > img{
+.cody_detail > * > img{
     width: 200px;
 }
 
 .cody_title{
     text-align: center;
     font-size: 19px;
+}
+
+.item__container {
+    position: relative;
+}
+
+.cody_detail > .item__container > .like_icon_position{
+    position: absolute;
+    top: 4px;
+    right: 4px;
 }

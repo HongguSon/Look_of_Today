@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from server.apps.closet.views import *
 
 app_name = "community"
 
@@ -17,7 +18,7 @@ urlpatterns = [
   path("update/<int:pk>/", views.PostUpdate.as_view(), name='update'),
   path("delete/<int:pk>/", views.post_delete,name='delete'),
   path("likes/<int:pk>/", views.post_likes, name='likes'),
-
+  
   path("talk-create/",views.TalkCreate.as_view(),name="talk_create"),
   path("talk-detail/<int:pk>/",views.talk_detail,name="talk_detail"),
   path('talk-comment/', views.comment_talk_ajax, name='talk_comment'),

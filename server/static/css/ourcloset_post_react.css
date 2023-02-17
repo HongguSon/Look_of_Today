@@ -79,7 +79,7 @@
         margin-bottom: 130px;
         margin-top: 70px;
     }
-    .cody_detail > img{
+    .cody_detail > .item__container > img{
         width: 110px;
     }
     .comment_author_other{

@@ -1,0 +1,25 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block extrahead %}
+<link rel="stylesheet" href="{% static 'css/post_detail.css' %}">
+<link rel="stylesheet" href="{% static 'css/ourcloset_post_react.css' %}">
+<link rel="stylesheet" href="{% static 'css/closet.css' %}">
+<title>구매링크</title>
+{% endblock %}
+{% block content %}
+<div class="buylink_container">
+  <div class="fs-3 my-2">구매링크</div>
+  {% if cloth.rem_img %}
+  <img src="{{cloth.rem_img.url}}">
+  {% else %}
+  <img src="{{cloth.img.url}}">
+  {% endif %}
+  <form action="{% url 'closet:buylink' cloth.id %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="submit" class="my-1 btn btn-secondary" style="width:100%" value="새 창으로 검색" name="new" />
+    <input type="submit" class="my-1 btn btn-secondary" style="width:100%" value="빠른 검색" name="fast" />
+    <input type="submit" class="my-1 btn btn-secondary" style="width:100%" value="정확한 검색" name="exact" />
+  </form>
+  <br>
+</div>
+{% endblock %}

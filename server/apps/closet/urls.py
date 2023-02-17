@@ -18,7 +18,11 @@ urlpatterns = [
   path("create/clothes/",views.create_clothes,name="clothes_create"),
   # path("delete/clothes/<int:pk>/",views.create_clothes,name="clothes_create"),
   # path("detail/clothes/<int:pk>/",views.create_clothes,name="clothes_create"),
-  path("clothes-likes/<int:pk>/", views.clothes_likes, name='clothes_likes'),
+  
+  path("clothes-likes/<int:pk>", views.clothes_likes, name='clothes_likes'),
   path("clothes-like-list/", views.clothes_like_list, name='clothes_like_list'),
   path("post-like-list/", views.post_like_list, name='post_like_list'),
+  
+  path("buylink/<int:pk>",views.buylink,name="buylink"),
 ]
+
