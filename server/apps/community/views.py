@@ -3,6 +3,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from server.apps.main.models import *
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import render
+from django.core.paginator import Paginator, PageNotAnInteger , EmptyPage
 from django.http import JsonResponse
 from django.http.request import HttpRequest
 from django.views.generic import CreateView, UpdateView
@@ -10,41 +12,47 @@ from django.core.exceptions import PermissionDenied
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 # Create your views here.
-class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
-    model = Post
-    fields = ['main_img', 'title', 'open', 'outer', 'top', 'bottom', 'shoes', 'acc']
-    template_name = 'community/post_create.html'
+def post_create(request, *args, **kwargs):
+    outer_list = Outer.objects.filter(author=request.user)
+    top_list = Top.objects.filter(author=request.user)
+    bottom_list = Bottom.objects.filter(author=request.user)
+    shoes_list = Shoes.objects.filter(author=request.user)
+    acc_list = Acc.objects.filter(author=request.user)
     
-    # self.fields['outer'].queryset = Outer.objects.filter(author=user)
-    # self.fields['top'].queryset = Top.objects.filter(author=user)
-    # self.fields['bottom'].queryset = Bottom.objects.filter(author=user)
-    # self.fields['shoes'].queryset = Shoes.objects.filter(author=user)
-    # self.fields['acc'].queryset = Acc.objects.filter(author=user)
-    # self.fields['outer'].queryset = Outer.objects.filter(author=author)
-    #         self.fields['top'].queryset = Top.objects.filter(author=user)
-    #         self.fields['bottom'].queryset = Bottom.objects.filter(author=user)
-    #         self.fields['shoes'].queryset = Shoes.objects.filter(author=user)
-    #         self.fields['acc'].queryset = Acc.objects.filter(author=user)
-    def get_queryset(self):
-    #     super(PostCreate, self).__init__(*args, **kwargs)
-        # self.fields['outer'].queryset = Outer.objects.filter(author=self.request.user)
-        # self.fields['top'].queryset = Top.objects.filter(author=user)
-        # self.fields['bottom'].queryset = Bottom.objects.filter(author=user)
-        # self.fields['shoes'].queryset = Shoes.objects.filter(author=user)
-        # self.fields['acc'].queryset = Acc.objects.filter(author=user)
-        queryset = super ().get_queryset()
-        return queryset.filter (author=self.request.user)
-
-    def test_func(self):
-        return self.request.user
-
-    def form_valid(self, form):
-        current_user = self.request.user
-        if current_user.is_authenticated:
-            form.instance.author = current_user
-            return super(PostCreate, self).form_valid(form)
-        else:
-            return redirect('closet:closet_all')
+    if request.method == "POST":
+        int_outer = list(map(int, request.POST.getlist('outer')))
+        int_top = list(map(int, request.POST.getlist('top')))
+        int_bottom = list(map(int, request.POST.getlist('bottom')))
+        int_shoes = list(map(int, request.POST.getlist('shoes')))
+        int_acc = list(map(int, request.POST.getlist('acc')))
+        new_post = Post.objects.create(
+            title=request.POST["title"],
+            main_img=request.FILES.get("image"),
+            author=request.user,
+            open=request.POST["open"],
+        )
+        for i in int_outer:
+            new_post.outer.add(i)
+        for i in int_top:
+            new_post.top.add(i)   
+        for i in int_bottom:
+            new_post.bottom.add(i)
+        for i in int_shoes:
+            new_post.shoes.add(i)
+        for i in int_acc:
+            new_post.acc.add(i)
+        new_post.save()
+        return redirect('closet:closet_main')
+    
+    context = {
+        'outer_list' : outer_list,
+        'top_list' : top_list,
+        'bottom_list' : bottom_list,
+        'shoes_list' : shoes_list,
+        'acc_list' : acc_list,
+    }
+    
+    return render(request, "community/post_create.html", context=context)
 
 def post_detail(request, pk, *args, **kwargs):
     post = Post.objects.get(pk=pk)
@@ -84,50 +92,16 @@ def delete_pcomment(request, pk, *args, **kwargs):
         PermissionDenied
 
 class PostUpdate(LoginRequiredMixin,UpdateView):
-    model = Post
-    fields = ['main_img', 'title', 'open', 'top', 'bottom', 'acc', 'outer', 'shoes']
-    
-    template_name = 'community/post_update.html'
+  model = Post
+  fields = ['main_img', 'title', 'open', 'top', 'bottom', 'acc', 'outer', 'shoes']
+  
+  template_name = 'community/post_update.html'
 
-    def dispatch(self, request, *args, **kwargs):
+  def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated and request.user == self.get_object().author:
             return super(PostUpdate, self).dispatch(request, *args, **kwargs)
         else:
             raise PermissionDenied
-        
-def post_create(request, *args, **kwargs):
-    outer_list = Outer.objects.filter(author=request.user)
-    top_list = Top.objects.filter(author=request.user)
-    bottom_list = Bottom.objects.filter(author=request.user)
-    shoes_list = Shoes.objects.filter(author=request.user)
-    acc_list = Acc.objects.filter(author=request.user)
-    
-    if request.method == "POST":
-        # outer_str = request.POST.getlist('outer')
-        # outer_map = map(int, outer_str)
-        # outer_int = list(outer_map)
-        Post.objects.create(
-            title=request.POST["title"],
-            main_img=request.FILES.get("image"),
-            author=request.user,
-            # outer=self.course_set.set([request.POST.getlist('outer')]),
-            # top=request.POST.getlist('top'),
-            # bottom=request.POST.getlist('bottom'),
-            # shoes=request.POST.getlist('shoes'),
-            # acc=request.POST.getlist('acc'),
-            open=request.POST["open"],
-        )
-        return redirect('community:post_create')
-    
-    context = {
-        'outer_list' : outer_list,
-        'top_list' : top_list,
-        'bottom_list' : bottom_list,
-        'shoes_list' : shoes_list,
-        'acc_list' : acc_list,
-    }
-    
-    return render(request, "community/post_create.html", context=context)
         
 def post_delete(request:HttpRequest, pk, *args, **kwargs):
     if request.method == "POST":
@@ -199,7 +173,7 @@ def comment_talk_ajax(request, *args, **kwargs):
 
 def delete_tcomment(request, pk, *args, **kwargs):
     tcomment = get_object_or_404(TalkComment, pk=pk)
-    talk = tcomment.post
+    talk = tcomment.talk
     if request.user.is_authenticated and request.user == tcomment.author:
         tcomment.delete()
         return redirect('community:talk_detail', talk.pk)
@@ -209,7 +183,7 @@ def delete_tcomment(request, pk, *args, **kwargs):
 class TalkUpdate(LoginRequiredMixin,UpdateView):
     model = Talk
     fields = ['category', 'img', 'title', 'content']
-    template_name = 'community/post_update.html'
+    template_name = 'community/update.html'
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated and request.user == self.get_object().author:
@@ -238,14 +212,27 @@ def talk_likes(request, pk, *args, **kwargs):
 
 
 # -----------------------------------------------------------
+#페이지네이션 코드
+def paginations(request,talk_list):
+    page=request.GET.get('page')
+    paginator=Paginator(talk_list,5) #5개씩 보기
+    try:
+        page_obj=paginator.page(page)
+    except PageNotAnInteger:
+        page=1
+        page_obj=paginator.page(page)
+    except EmptyPage:
+        page=paginator.num_pages
+        page_obj=paginator.page(page)
+    return page_obj ,paginator
 
-def community_main(request, *args, **kwargs):
-    talk_list = Talk.objects.all()
-    t_comments = TalkComment.objects.all()
-    title = "모든 게시물" 
+#댓글 수 세기 코드
+def count_comments(talk_list,t_comments):
     if talk_list:
+        talk_pk=0
         for i in talk_list:
-            talk_pk = i.pk
+            if talk_pk<i.pk:
+                talk_pk = i.pk
     else:
         talk_pk = 0
     comments_count=[0 for i in range(talk_pk)]
@@ -254,46 +241,80 @@ def community_main(request, *args, **kwargs):
         for talk in talk_list:
             if talk.pk == t_comment.talk.pk:
                 comments_count[talk.pk]+=1
-            print(talk.pk)
-    context={
-        'talk_list' : talk_list,
-        'title' : title,
-        'comments_count' : comments_count,
-        }   
     print(comments_count)
+    return talk_list,comments_count
+
+#정렬 코드
+def sorting(request):
+    sort_option = request.GET.get('sort')
+    print(sort_option)
+    if sort_option:
+        if sort_option=='byname':
+            talk_list=Talk.objects.order_by('title') #제목순
+        elif sort_option=='newest':
+            talk_list=Talk.objects.order_by('-create_date') #최신순
+        elif sort_option=='comment': 
+            talk_list=Talk.objects.order_by('-create_date') #댓글 순
+        elif sort_option=='likes': 
+            talk_list=Talk.objects.order_by('-create_date') #좋아요 순        
+    else:
+        talk_list=Talk.objects.all() #생성순,기본
+    return talk_list
+
+def community_main(request:HttpRequest, *args, **kwargs):
+    title = "모든 게시물" 
+    # talk_list = Talk.objects.all()
+    sort_option = request.GET.get('sort')
+    print(sort_option)
+    if sort_option:
+        if sort_option=='byname':
+            talk_list=Talk.objects.order_by('title') #제목순
+        elif sort_option=='newest':
+            talk_list=Talk.objects.order_by('-create_date') #최신순
+        elif sort_option=='comment': 
+            talk_list=Talk.objects.order_by('-create_date') #댓글 순
+        elif sort_option=='likes': 
+            talk_list=Talk.objects.order_by('-create_date') #좋아요 순        
+    else:
+        talk_list=Talk.objects.all() #생성순,기본
+    t_comments=TalkComment.objects.all()
+    # talk_list=sorting(request)
+    talk_list,comments_count = count_comments(talk_list,t_comments)
+    page_obj ,paginator = paginations(request,talk_list)
+    context={
+        'talk_list' : talk_list,'title' : title,'comments_count' : comments_count,'page_obj':page_obj,'paginator':paginator,
+        }   
     return render(request,'community/community.html',context=context)
 
-# def community_kind(request, category, *args, **kwargs):
-#     talk_list = Talk.objects.filter(category=category)
-#     context={
-#         'talk_list' : talk_list,
-#         'category' : category,
-#     }   
-#     return render(request,'community/community.html',context=context)
-
 def openrun(request,*args, **kwargs):
-    talk_list = Talk.objects.filter(category='오픈런')
+    talk_list = Talk.objects.filter(category="오픈런")
     title = "오픈런"
+    t_comments=TalkComment.objects.all()
+    page_obj ,paginator = paginations(request,talk_list)
+    comments_count = count_comments(talk_list,t_comments)
     context={
-        'talk_list' : talk_list,
-        'title' : title,
+        'talk_list' : talk_list,'title' : title,'comments_count' : comments_count,'page_obj':page_obj,'paginator':paginator,
         }   
     return render(request,'community/community.html',context=context)
 
 def other(request,*args, **kwargs):
     talk_list = Talk.objects.filter(category='잡담방')
     title = "잡담방"
+    t_comments=TalkComment.objects.all()
+    page_obj ,paginator = paginations(request,talk_list)
+    comments_count = count_comments(talk_list,t_comments)
     context={
-        'talk_list' : talk_list,
-        'title' : title,
+        'talk_list' : talk_list,'title' : title,'comments_count' : comments_count,'page_obj':page_obj,'paginator':paginator,
         }   
     return render(request,'community/community.html',context=context)
 
 def buying(request,*args, **kwargs):
     talk_list = Talk.objects.filter(category='공동 구매')
-    title = "공구방"
+    title = "공동 구매"
+    t_comments=TalkComment.objects.all()
+    page_obj ,paginator = paginations(request,talk_list)
+    comments_count = count_comments(talk_list,t_comments)
     context={
-        'talk_list' : talk_list,
-        'title' : title,
+        'talk_list' : talk_list,'title' : title,'comments_count' : comments_count,'page_obj':page_obj,'paginator':paginator,
         }   
     return render(request,'community/community.html',context=context)
