@@ -25,6 +25,13 @@
       <a href="{% url 'community:other' %}">잡담방</a>
     </div>
 
+      <select id="sort-select" onchange="location=this.value">
+        <option class="sort-pk" value="/">--정렬기준--</option>
+        <option class="sort-new" value="?sort=new">최신순</option>
+        <option class="sort-old" value="?sort=old">오래된순</option>
+        <option class="sort-like" value="?sort=like">인기순</option>
+      </select>
+
     <div class="px-4">
       <table>
         <thead>
@@ -62,7 +69,6 @@
         </tbody>    
       </table>
     </div>
-
   </div>
 
   <div class="board-pagination">
@@ -80,17 +86,17 @@
       {{page.number}}
       {% if page_number == page_obj.number %}
       <li class="page-item active" aria-current="page">
-        <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+        <a class="page-link" href="?page={{ page_number }}&sort={{ sort }}">{{ page_number }}</a>
       </li>
       {% else %}
       <li class="page-item">
-        <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+        <a class="page-link" href="?page={{ page_number }}&sort={{ sort }}">{{ page_number }}</a>
       </li>
       {% endif %}
       {% endfor %}
       {% if page_obj.has_next %}
       <li class="page-item">
-        <a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+        <a class="page-link" href="?page={{ page_obj.next_page_number }}&sort={{ sort }}">&raquo;</a>
       </li>
       {% else %}
       <li class="page-item disabled">
@@ -99,6 +105,6 @@
       {% endif %}
     </ul>
   </div>
-</div>
 
+</body>
 {% endblock %}

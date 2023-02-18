@@ -1,0 +1,90 @@
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="#">About</a>
+    <a href="#">Services</a>
+    <a href="#">Clients</a>
+    <a href="#">Contact</a>
+</div>
+
+<!-- Use any element to open the sidenav -->
+<span onclick="openNav()">open</span>
+
+<!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
+<div id="main">
+    이상의 싸인 착목한는 때문이다. 지혜는 같은 피가 사막이다. 시들어 위하여서, 따뜻한 무엇을 청춘의 청춘에서만 역사를 인간의 그러므로 아니다. 따뜻한 가슴에 우리의 인생에 얼마나 고동을 그리하였는가? 것은
+    기쁘며, 살 부패뿐이다. 생의 웅대한 있으며, 기관과 길을 원질이 사막이다. 미인을 이상은 위하여, 운다. 바이며, 실현에 그것을 더운지라 피에 위하여서. 쓸쓸한 꽃이 발휘하기 대고, 찾아 쓸쓸하랴? 얼마나
+    미인을 따뜻한 것이다. 영원히 사라지지 가진 그들의 봄바람이다.
+
+    되는 살 가는 전인 청춘의 있는가? 같지 새 온갖 가치를 끓는다. 인간은 작고 그것을 앞이 같은 거선의 맺어, 일월과 끓는 것이다. 수 청춘을 이것을 때에, 구하기 듣는다. 우는 아니더면, 역사를 이상이
+    고동을 듣는다. 실로 그것은 뜨고, 그들의 그들은 모래뿐일 이것이다. 얼음과 든 충분히 인간이 같이 무엇이 발휘하기 보라. 되는 위하여, 밝은 반짝이는 뭇 이것이다. 원질이 눈에 보는 불러 곳이 석가는 희망의
+    할지라도 황금시대의 이것이다.
+
+    온갖 있는 얼마나 대고, 미묘한 긴지라 속에서 붙잡아 아름다우냐? 품고 원질이 가치를 커다란 목숨이 뼈 우리 것이다. 앞이 구하지 불어 이는 가지에 바이며, 창공에 위하여 수 위하여서. 풍부하게 않는 열락의
+    굳세게 따뜻한 돋고, 얼마나 수 그리하였는가? 것은 위하여 웅대한 갑 그들의 사막이다. 돋고, 뭇 구할 피고 이상의 온갖 고동을 낙원을 얼마나 아름다우냐? 청춘을 새 붙잡아 피다. 따뜻한 들어 두기 대한
+    사라지지 고동을 목숨을 가는 뼈 뿐이다. 사랑의 인생의 얼음이 봄바람이다.
+</div>
+
+<style>
+    /* The side navigation menu */
+.sidenav {
+  height: 100%; /* 100% Full-height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  background-color: #111; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
+/* The navigation menu links */
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+  transition: margin-left .5s;
+  padding: 20px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+</style>
+
+<script>
+function openNav() {
+  document.getElementById("mySidenav").style.width = "135px";
+  document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+}
+
+/* Set the width of the side navigation to 0 and the left margin of the page content to 0, and the background color of body to white */
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+  document.body.style.backgroundColor = "white";
+}
+</script>

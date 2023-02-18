@@ -10,6 +10,7 @@ from django.http.request import HttpRequest
 from django.views.generic import CreateView, UpdateView
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.db.models import Count
 
 # Create your views here.
 def post_create(request, *args, **kwargs):
@@ -245,76 +246,72 @@ def count_comments(talk_list,t_comments):
     return talk_list,comments_count
 
 #정렬 코드
-def sorting(request):
-    sort_option = request.GET.get('sort')
-    print(sort_option)
-    if sort_option:
-        if sort_option=='byname':
-            talk_list=Talk.objects.order_by('title') #제목순
-        elif sort_option=='newest':
-            talk_list=Talk.objects.order_by('-create_date') #최신순
-        elif sort_option=='comment': 
-            talk_list=Talk.objects.order_by('-create_date') #댓글 순
-        elif sort_option=='likes': 
-            talk_list=Talk.objects.order_by('-create_date') #좋아요 순        
+def sorting(request:HttpRequest,title):
+    sort = request.GET.get('sort','')
+    if title:
+        if sort == 'new':
+            talk_list = Talk.objects.filter(category=title).order_by("-pk")
+        elif sort == 'old':
+            talk_list = Talk.objects.filter(category=title).order_by("pk")
+        elif sort == 'like':
+            talk_list= Talk.objects.filter(category=title).annotate(likes_count=Count('likes')).order_by('-likes_count')
+        else:
+            talk_list = Talk.objects.filter(category=title).order_by("-pk")
     else:
-        talk_list=Talk.objects.all() #생성순,기본
-    return talk_list
+        if sort == 'new':
+            talk_list = Talk.objects.all().order_by("-pk")
+        elif sort == 'old':
+            talk_list = Talk.objects.all().order_by("pk")
+        elif sort == 'like':
+            talk_list= Talk.objects.all().annotate(likes_count=Count('likes')).order_by('-likes_count')
+        else:
+            talk_list = Talk.objects.all().order_by("-pk")        
+    return talk_list,sort
 
 def community_main(request:HttpRequest, *args, **kwargs):
-    title = "모든 게시물" 
-    # talk_list = Talk.objects.all()
-    sort_option = request.GET.get('sort')
-    print(sort_option)
-    if sort_option:
-        if sort_option=='byname':
-            talk_list=Talk.objects.order_by('title') #제목순
-        elif sort_option=='newest':
-            talk_list=Talk.objects.order_by('-create_date') #최신순
-        elif sort_option=='comment': 
-            talk_list=Talk.objects.order_by('-create_date') #댓글 순
-        elif sort_option=='likes': 
-            talk_list=Talk.objects.order_by('-create_date') #좋아요 순        
-    else:
-        talk_list=Talk.objects.all() #생성순,기본
+    title = "모든 게시물"
     t_comments=TalkComment.objects.all()
     # talk_list=sorting(request)
+    talk_list,sort=sorting(request,None)
     talk_list,comments_count = count_comments(talk_list,t_comments)
     page_obj ,paginator = paginations(request,talk_list)
     context={
-        'talk_list' : talk_list,'title' : title,'comments_count' : comments_count,'page_obj':page_obj,'paginator':paginator,
+        'talk_list' : talk_list,'title' : title,'comments_count' : comments_count,'page_obj':page_obj,'paginator':paginator,'sort':sort,
         }   
     return render(request,'community/community.html',context=context)
 
-def openrun(request,*args, **kwargs):
+def openrun(request:HttpRequest,*args, **kwargs):
     talk_list = Talk.objects.filter(category="오픈런")
     title = "오픈런"
     t_comments=TalkComment.objects.all()
+    talk_list,sort=sorting(request,title)
     page_obj ,paginator = paginations(request,talk_list)
     comments_count = count_comments(talk_list,t_comments)
     context={
-        'talk_list' : talk_list,'title' : title,'comments_count' : comments_count,'page_obj':page_obj,'paginator':paginator,
+        'talk_list' : talk_list,'title' : title,'comments_count' : comments_count,'page_obj':page_obj,'paginator':paginator,'sort':sort,
         }   
     return render(request,'community/community.html',context=context)
 
-def other(request,*args, **kwargs):
+def other(request:HttpRequest,*args, **kwargs):
     talk_list = Talk.objects.filter(category='잡담방')
     title = "잡담방"
     t_comments=TalkComment.objects.all()
+    talk_list,sort=sorting(request,title)
     page_obj ,paginator = paginations(request,talk_list)
     comments_count = count_comments(talk_list,t_comments)
     context={
-        'talk_list' : talk_list,'title' : title,'comments_count' : comments_count,'page_obj':page_obj,'paginator':paginator,
+        'talk_list' : talk_list,'title' : title,'comments_count' : comments_count,'page_obj':page_obj,'paginator':paginator,'sort':sort,
         }   
     return render(request,'community/community.html',context=context)
 
-def buying(request,*args, **kwargs):
+def buying(request:HttpRequest,*args, **kwargs):
     talk_list = Talk.objects.filter(category='공동 구매')
     title = "공동 구매"
     t_comments=TalkComment.objects.all()
+    talk_list,sort=sorting(request,title)
     page_obj ,paginator = paginations(request,talk_list)
     comments_count = count_comments(talk_list,t_comments)
     context={
-        'talk_list' : talk_list,'title' : title,'comments_count' : comments_count,'page_obj':page_obj,'paginator':paginator,
+        'talk_list' : talk_list,'title' : title,'comments_count' : comments_count,'page_obj':page_obj,'paginator':paginator,'sort':sort,
         }   
     return render(request,'community/community.html',context=context)

@@ -8,33 +8,33 @@
     margin-bottom: 20px;
 }
 
-.post_all > a{
-    float: right;
+.post_all > a {
+  float: right;
 }
 
-.com_list{
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 1rem;
-    background-color: #f1f1f1;
+.com_list {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1rem;
+  background-color: #f1f1f1;
 }
 
-.new_post{
-    float: right;
-    font-size: 16px;
-    margin-top: 20px;
+.new_post {
+  float: right;
+  font-size: 16px;
+  margin-top: 20px;
 }
 
-.new_post > a{
-    margin-left: 4px;
+.new_post > a {
+  margin-left: 4px;
 }
 
-.compost_list{
-    display: flex;
-    flex-wrap: wrap;
-    text-align: center;
-    gap: 1rem;
-    margin-bottom: 80px;
+.compost_list {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  gap: 1rem;
+  margin-bottom: 80px;
 }
 
 .commain_title{
