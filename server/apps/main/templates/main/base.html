@@ -67,6 +67,19 @@
             <li class="nav-item">
               <a class="nav-link text-secondary" href="{% url 'community:community_main' %}">커뮤니티</a>
             </li>
+            {% else %}
+            {% comment %} <li class="nav-item">
+              <a class="nav-link text-secondary" href="{% url 'user:signup' %}">회원가입</a>
+            </li> {% endcomment %}
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+      <div class="col-4 title text-center">오늘 뭐입지?</div>
+      <div class="col-4">
+        <div class="dn">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 right-nav">
+          {% if user.is_authenticated %}
             <li class="nav-item">
               <a class="nav-link text-secondary" aria-current="page" href="{% url 'user:mypage' %}">마이페이지</a>
             </li>
@@ -80,15 +93,10 @@
             <li class="nav-item">
               <a class="nav-link text-secondary" href="{% url 'user:login' %}">로그인</a>
             </li>
-            {% endif %}
-          </ul>
+          {% endif %}
+        </ul>
         </div>
       </div>
-      <div class="col-4 title text-center">오늘 뭐입지?</div>
-      <form class="col-4 d-flex">
-        {% comment %} <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-secondary" type="submit">Search</button> {% endcomment %}
-      </form>
     </div>
   </nav>
   <hr>
