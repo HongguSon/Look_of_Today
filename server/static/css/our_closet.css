@@ -1,7 +1,7 @@
 #banner {
     height: 6.375rem;
     text-align: center;
-    margin-bottom: 87px;
+    margin-bottom: 50px;
   }
   
 .right {
@@ -14,7 +14,7 @@
 }
 
 .ourcloset_title{
-  padding-left: 3rem !important;
+  padding-left: 3rem;
 }
   
 .ourcloset_title > p{
@@ -83,9 +83,6 @@
   width: 12.5rem;
 }
   
-.ootd {
-  padding-right: 1.25rem;
-}
   
 .com-title {
   padding-top: 1.25rem;
@@ -113,12 +110,12 @@
   
 .content{
     padding-top: 1.875rem;
-    padding-left: 5.9rem;
     padding-bottom: 3.125rem;
     text-align:start;
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
-    gap: 6rem;
+    gap: 12rem;
 }
 
 .post_info > p {

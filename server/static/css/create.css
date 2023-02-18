@@ -36,12 +36,6 @@
 .our_closet_create{
     text-align: center;
 }
-.our_closet_create > select{
-    width: 300px !important;
-}
-.our_closet_create > p{
-    margin-top: 35px;
-}
 .opc_title{
     margin-right: 42px;
 }
@@ -68,4 +62,19 @@
 .clothes_list_box img {
     height: 10rem;
     width: 8rem;
+}
+.com_create{
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.id_img{
+    margin-left: 147px;
+}
+
+.com_create > p{
+    margin-top: 45px;
+}
+#id_content{
+    resize: none;
 }
