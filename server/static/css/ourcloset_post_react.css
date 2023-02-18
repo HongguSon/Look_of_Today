@@ -1,90 +1,93 @@
-@media screen and (max-width: 375px){
-    .post_title{
-        font-size: 1.5rem !important;
-        padding-left: 1.5rem !important;
+/* @media all and (min-width: 1024px){
+    .post_title {
+        font-size: 2rem;
+        padding-left: 4.25rem;
+        padding-top: 1.5rem;
+        padding-right: 700px;
     }
-    .post_author{
+    .post_author {
+        font-size: 1.5rem;
+        padding-left: 4.4rem;
+    }
+}
+*/
+
+@media all and (max-width: 767px){
+    .post_title {
         font-size: 1rem;
-        padding-left: 1.7rem;
+        padding-left: 1.25rem;
+        padding-top: 1.5rem;
+        padding-right: 6rem;
     }
-    .button-box > button{
-        font-size: 13px;
+    .post_author {
+        font-size: 1rem;
+        padding-left: 1.4rem;
     }
-    .postimgs > img{
-        height: 18rem;
-        width: 18rem;
+    .postimgs > img {
+        height: 15rem;
+        width: 15rem;
     }
-    .cody_title{
-        font-size: 15px;
+    .cody_title {
+        font-size: 14px;
+    }
+    .cody_detail > * > img {
+        width: 130px;
+    }
+    .cody_detail{
+        gap: 4rem;
+    }
+    .comment-input{
+        margin:auto;
+        width: 180px;
+        justify-content: none !important;
+    }
+    .postbtn{
+        margin-left: 0px;
+        margin-right: 0px;
     }
     .comment-sum{
         margin-left: 0px;
     }
-    .comment-sum > hr{
-        width: 280px! important;
-        margin-left: 3rem !important;
-    }
-    .comment-list{
-        margin-left: 2rem !important;
-        margin-bottom: 3rem;
-    }
-    form svg{
-        margin-top: 15px;
-        width: 20px;
-        height: 20px;
-        margin-left: 1.875rem;
-    }
-    #user_comment_list{
-        padding-left: 3px !important;
-    }
-    .user_comment > p{
-        margin-right: 70px !important;
-    }
-    .d-flex{
-        padding-left: 3px !important;
-        padding-top: 35px;
-        padding-bottom: 40px;
+    .del_list > hr {
+        width: 300px;
+        margin: 0px auto;
     }
     .content_other{
-        width: 224px !important;
+        width: 200px;
     }
-    .comment_other_hr{
-        width: 228px;
-        margin-left: 39px !important;
-    }
-    #like{
-        padding-left: 8px !important;
-    }
-    .delbtn2{
-        font-size: 11px;
-        margin-right: 80px;
+    .user_comment > p{
+        margin-right: 50px;
     }
     #comment-con{
-        margin-left: 5.5rem !important;
+        margin-right: 0px;
+        margin-left: 42px;
     }
-    .comment-input{
-        width: 197px;
-        margin-left: 0rem;
+    .delbtn2{
+        margin-left: 30px;
     }
-    .del_list > hr{
-        width: 230px;
-    }
-    .d-flex > hr{
-        width: 230px;
-    }
-    .cody_detail {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 4rem;
-        margin-bottom: 130px;
-        margin-top: 70px;
-    }
-    .cody_detail > img{
-        width: 110px;
-    }
-    .comment_author_other{
-        font-size: 20px;
+    .comment-btn{
+        padding-right: 0px !important;
     }
 }
+
+@media screen and (min-width: 768px) and (max-width:1024px){
+    .delbtn2{
+        margin-left: 45px;
+    }
+    .comment-input{
+        width: 500px;
+        margin-left: 285px;
+    }
+    .post_title{
+        padding-left: 2.25rem;
+        padding-right: 140px;
+    }
+    .post_author{
+        padding-left: 2.563rem;
+    }
+    .user_comment > p{
+        margin-right: 50px;
+    }
+}
+
 

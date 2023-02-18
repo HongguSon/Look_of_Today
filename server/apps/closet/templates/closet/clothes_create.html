@@ -1,37 +1,87 @@
 {% extends 'main/base.html'%}
 {% load static %}
 {% block extrahead %}
-    <link rel="stylesheet" href="{% static 'css/create.css' %}">
-    <title>new clothes</title>
+  <link rel="stylesheet" href="{% static 'css/create.css' %}">
+  <title>new clothes</title>
 {% endblock %}
 {% block content %}
 
 <div class="clothes_create">
-<form action="{% url 'closet:clothes_create' %}" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <div class="filebox">
-        <label for="file" >당신의 패션 아이템을 올려주세요!</label> 
-        <br />
-        <br />
-        <input type="file" name="image" id="file">
-    </div>
-    <br />
-    <br />
-    <p class="clothes_create_p1">Item 이름: <input name="title" /></p>
-    <br/>
-    <p class="clothes_create_p2">구매 링크: <input name="buying" /></p>
-    <div class="clothes_type">
-    <input type="radio" name="clothes" value="outer">Outer
-    <input type="radio" name="clothes" value="top">Top
-    <input type="radio" name="clothes" value="bottom">Bottom
-    <input type="radio" name="clothes" value="shoes">Shoes
-    <input type="radio" name="clothes" value="acc">Acc
-    </div>
-    <br />
-    {% if error %}
-        <p>{{error}}</p>
-    {% endif %}
-    <button type="submit" class="btn btn-primary float-right" id="subbtn">Submit</button>
+<form action="{% url 'closet:clothes_create' %}" id="uploadForm" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="fs-5">당신의 패션 아이템을 올려주세요!</div>
+  <br>
+  <img id="pro_img" style="width:200px; height:200px; border: 1px solid gray">
+  <br/>
+  <br/>
+  <div class="clothbox">
+    <label for="cloth" class="btn btn-light">사진 업로드</label>
+    <input type="file" name="cloth" onchange="clothUpload({{ user.id }})" id="cloth">
+  </div>
+  <br/>
+  <div class="clothes_type">
+  <input type="radio" name="clothes" value="outer">Outer
+  <input type="radio" name="clothes" value="top">Top
+  <input type="radio" name="clothes" value="bottom">Bottom
+  <input type="radio" name="clothes" value="shoes">Shoes
+  <input type="radio" name="clothes" value="acc">Acc
+  </div>
+  <br />
+  {% if error %}
+      <p>{{error}}</p>
+  {% endif %}
+  <button type="submit" class="my-2 btn btn-secondary float-right" style="width:100%" id="clothUploadBtn">저장</button>
+  <button class="my-2 btn btn-secondary" id="clothUploadLoadingBar" style="width:100%" type="button" disabled>
+    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+    배경 제거 후 저장 중입니다! 잠시만 기다려주세요 ...
+  </button>
 </form>
 </div>
+<script>
+  const strip = (string) => {
+    return string.replace(/^\s+|\s+$/g, "");
+    };
+  const requestUploadCloth = new XMLHttpRequest();
+  const clothUpload = (id) => {
+    console.log('hi')
+    const url = "/closet/create/clothes/img/" + id;
+    requestUploadCloth.open("POST", url, true)
+    requestUploadCloth.setRequestHeader(
+      "Content-Type",
+      "application/x-www-form-urlencoded"
+    );
+    requestUploadCloth.send(JSON.stringify({id: id}));
+  };
+
+  requestUploadCloth.onreadystatechange = () => {
+    if (requestUploadCloth.readyState === XMLHttpRequest.DONE) {
+      if (requestUploadCloth.status < 400) {
+        const { id } = JSON.parse(requestUploadCloth.response);
+        const clothName = document.getElementById(`cloth`);
+        const cReader = new FileReader();
+        cReader.readAsDataURL(clothName.files[0]);
+        cReader.onloadend = function(event){
+          const img = document.getElementById(`pro_img`);
+          img.src = event.target.result;
+        }
+      };
+    };
+  };
+
+  const clothUploadBtn = document.querySelector('#clothUploadBtn')
+  const clothUploadLoadingBar = document.querySelector('#clothUploadLoadingBar')
+
+  document.addEventListener("DOMContentLoaded", (e) => {
+    clothUploadBtn.style.display = 'block'
+    clothUploadLoadingBar.style.display = 'none'
+  })
+
+  clothUploadBtn.addEventListener('click', (event) => {
+    event.preventDefault()
+    clothUploadBtn.type = "hidden";
+    document.getElementById('uploadForm').submit();
+    clothUploadBtn.style.display = 'none'
+    clothUploadLoadingBar.style.display = 'block'
+  })
+</script>
 {% endblock %}

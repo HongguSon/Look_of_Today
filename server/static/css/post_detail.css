@@ -2,6 +2,7 @@
     font-size: 2.5rem;
     padding-left: 6.25rem;
     padding-top: 2.5rem;
+    padding-right: 6.25rem;
 }
 
 .post_img{
@@ -44,6 +45,7 @@
     font-size: 1.25rem;
     padding-left: 6.563rem;
 }
+
 
 .post_time{
     color:#b4b4b4;
@@ -94,6 +96,21 @@
 .delbtn:hover{
     background-color: #E0E0E0;
 }
+.postbtn{
+background-color: white;
+border: 2px solid black;
+border-radius: 0.625rem;
+font-size: 0.938rem;
+margin-left: 0.625rem;
+margin-right: 0.625rem;
+margin-top: 0.125rem;
+transition: 0.2s;
+}
+
+.postbtn:hover{
+    background-color: #E0E0E0;
+}
+
 
 .delbtn2{
     background-color: white;
@@ -102,11 +119,9 @@
     font-size: 11px;
     width: 36px;
     height: 22px;
-    float: right;
-    margin-left: 0.188rem;
-    margin-right: 280px;
     margin-top: 0.125rem;
     margin-bottom: 15px;
+    margin-left: 20px;
     transition: 0.2s;
 }
 
@@ -115,26 +130,21 @@
 }
 
 .del_list{
-    margin-left: 39px;
+    margin-left:auto;
 }
 
-.del_list > hr{
+/*.del_list > hr{
     width: 840px;
-}
+}*/
 
 
 .comment-list{
     margin-bottom: 5rem;
-    margin-left: 6rem;
 }
 
-.comment_other_hr{
-    width: 838px;
-    margin-left: 39px !important;
-}
 
 #comment-con{
-    margin-left: 0px !important;
+    margin-left: 0px;
     margin-right: 12.5rem;
     margin-bottom: 3.125rem;
 }
@@ -147,9 +157,6 @@
     margin-left: 320px;
 }
 
-.comment-sum{
-    margin-left: 12.25rem;
-}
 
 .comment-sum > hr{
     width: 1026px;
@@ -208,11 +215,21 @@ form svg{
     margin-bottom: 130px;
 }
 
-.cody_detail > img{
+.cody_detail > * > img{
     width: 200px;
 }
 
 .cody_title{
     text-align: center;
     font-size: 19px;
+}
+
+.item__container {
+    position: relative;
+}
+
+.cody_detail > .item__container > .like_icon_position{
+    position: absolute;
+    top: 4px;
+    right: 4px;
 }

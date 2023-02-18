@@ -1,5 +1,8 @@
 {% extends "main/base.html" %}
 {% load static %}
+{% block extrahead %}
+  <link rel="stylesheet" href="{% static 'css/create.css' %}">
+{% endblock %}
 {% block content %}
 <div class="text-center my-1 fs-5">회원 정보🧢</div>
 <hr/>
@@ -16,7 +19,7 @@
           <input type="checkbox" name="check1" />
           <br>
           <div class="filebox">
-            <label for="file" >프로필사진 업로드</label> 
+            <label for="file" class="btn btn-light">프로필사진 업로드</label> 
             <input type="file" name="image" onchange="fileUpload({{ user.id }})" id="file">
           </div>
         </div>
@@ -27,7 +30,7 @@
           <div class="my-1 fs-3">{{user}}</div>
           <br>
           <div class="filebox">
-            <label for="file">프로필사진 업로드</label> 
+            <label for="file" class="btn btn-light">프로필사진 업로드</label> 
             <input type="file" name="image" onchange="fileUpload({{ user.id }})" id="file" />
           </div>
         </div>

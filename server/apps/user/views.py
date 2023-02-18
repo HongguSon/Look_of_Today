@@ -16,6 +16,12 @@ from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 def signup(request, *args, **kwargs):
   if request.method == 'POST':
+    if not request.POST['username'] or not request.POST['password1'] or not request.POST['email']:
+      error = '에러'
+      context = {
+        'error1': error,
+      }
+      return render(request, 'user/signup.html', context=context)
     if request.POST['password1'] == request.POST['password2']:
       user = User.objects.create_user(
         username=request.POST['username'],
@@ -164,9 +170,6 @@ def profile_update(request, *args, **kwargs):
 
 @csrf_exempt
 def profile_img_mod(request, pk):
-  user = request.user
   req = json.loads(request.body)
   id = req['id']
-  print(id)
-  # user.profile.save()
   return JsonResponse({'id' : id})

@@ -5,6 +5,16 @@ from django.views.generic import CreateView, UpdateView
 from django.views.decorators.http import require_POST
 from itertools import chain
 from django.utils.datastructures import MultiValueDictKeyError
+from django.views.decorators.csrf import csrf_exempt
+import json
+from django.http import JsonResponse
+from GoogleSearch import Search
+import selenium
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from django.core.paginator import Paginator, PageNotAnInteger , EmptyPage
 from django.db.models import Count
 
@@ -107,7 +117,7 @@ def our_closet(request, *args, **kwargs):
   return render(request,'closet/our_closet.html',context=context)
 
 def create_clothes(request, *args, **kwargs):
-  error = '아직 입력하지 않은 값이 있습니다.'
+  error = '아직 입력하지 않은 항목이 있습니다.'
   context={
     'error' : error,
     }
@@ -128,32 +138,51 @@ def create_clothes(request, *args, **kwargs):
       kind = Acc
     author = request.user
     kind.objects.create(
-      title=request.POST["title"],
-      img=request.FILES["image"],
-      buying=request.POST["buying"],
+      img=request.FILES["cloth"],
       author=author,
     )
     return redirect('closet:closet_main')
   return render(request, "closet/clothes_create.html") 
 
-@require_POST
+@csrf_exempt
+def create_clothes_img(request, pk):
+  req = json.loads(request.body)
+  id = req['id']
+  return JsonResponse({'id' : id})
+
+@csrf_exempt
 def clothes_likes(request, pk, *args, **kwargs):
-  if request.user.is_authenticated:
+  user = request.user
+  if user.is_authenticated:
+    req = json.loads(request.body)
     clothes = get_object_or_404(Clothes, pk=pk)
-    users = clothes.likes.all()
-    if users.filter(pk=request.user.pk).exists():
-      clothes.likes.remove(request.user)
+    clothes_id = req['id']
+    btnType = req['btnType']
+    imgUrl = req['imgUrl']
+    if btnType == 'like':
+      clothes.likes.add(user)
     else:
-      clothes.likes.add(request.user)
-    return redirect('closet:closet_main')
-    # return redirect('accouts:login')위에거 대신 이거 떠야함! 나중에 로그인 합치고!!
-  return render(request, 'closet/our_closet.html')
+      clothes.likes.remove(user)
+    context = {'id' : clothes_id, 'btnType': btnType, 'imgUrl':imgUrl}
+    return JsonResponse(context)
+  # if request.user.is_authenticated:
+  #   clothes = get_object_or_404(Clothes, pk=pk)
+  #   users = clothes.likes.all()
+  #   if users.filter(pk=request.user.pk).exists():
+  #     clothes.likes.remove(request.user)
+  #   else:
+  #     clothes.likes.add(request.user)
+  #   return redirect('closet:closet_main')
+  #   # return redirect('accouts:login')위에거 대신 이거 떠야함! 나중에 로그인 합치고!!
+  # return render(request, 'closet/our_closet.html')
+  
 
 def clothes_like_list(request, *args, **kwargs):
   user = User.objects.get(username=request.user)
   clothes_list = Clothes.objects.filter(likes=user)
   context={
     'clothes_list': clothes_list,
+    'buylink_flag' : True,
   }   
   return render(request,'closet/closet_main.html',context=context)
   
@@ -165,3 +194,57 @@ def post_like_list(request, *args, **kwargs):
   }   
   return render(request,'closet/closet_main.html',context=context)
   
+def buylink(request, pk, *args, **kwargs):
+  cloth = Clothes.objects.filter(id=pk)
+  context = {
+    'cloth' : cloth[0],
+    'fastflag' : False,
+    'exactflag' : False,
+  }
+  if request.method == "POST":
+    print(request.POST)
+    choice = list(request.POST.values())[-1]
+
+    if choice == '빠른 검색':
+      output = Search(file_path=cloth[0].img.path)
+      link = output['similar']
+      context['link']=link
+      context['fastflag'] = True
+    elif choice == '정확한 검색':
+      options = Options()
+      options.add_argument('--headless')
+      options.add_argument("window-size=1400,850")
+      driver = webdriver.Chrome('/usr/local/bin/chromedriver',options=options)
+      driver.get('http://www.google.hr/imghp')
+      driver.implicitly_wait(20)
+      elem = driver.find_element(By.CLASS_NAME, 'Gdd5U')
+      elem.click()
+      driver.find_element(By.NAME, 'encoded_image').send_keys(cloth[0].img.path)
+      # items = driver.find_element(By.CSS_SELECTOR, 'div.Vd9M6.abDdKd.xuQ19b')
+      titles_finder = WebDriverWait(driver, 20).until(EC.visibility_of_all_elements_located((By.CSS_SELECTOR, 'div.Vd9M6.abDdKd.xuQ19b')))
+      
+      search_informations_list = []
+      for num, title in enumerate(titles_finder):
+        search_info_list = []
+        text_info = title.text.split('\n')
+        for element in text_info:
+          if '₩' in element:
+            search_info_list.append(element)
+            break
+        else:
+          search_info_list.append('가격정보없음')
+          
+        a_tag_finder = title.find_element(By.XPATH, ".//a")
+        img_tag_finder = a_tag_finder.find_element(By.XPATH, ".//div[1]/div[1]/div[1]/img")
+        exact_url = a_tag_finder.get_dom_attribute('href')
+        exact_src = img_tag_finder.get_dom_attribute('src')
+        
+        search_info_list.append(exact_url)
+        search_info_list.append(exact_src)
+        search_informations_list.append(search_info_list)
+        #리스트 요소는 각각 리스트 : [가격, 구매링크, 이미지src] 로 구성되어있음
+        if num >= 3:
+          break
+      context['search_informations_list']=search_informations_list
+      context['exactflag'] = True
+  return render(request,'closet/buylink.html', context=context)

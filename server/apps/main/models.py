@@ -14,13 +14,8 @@ import sys
 class Clothes(models.Model):
   author = models.ForeignKey(User, on_delete=models.CASCADE)
   img = models.ImageField(upload_to='main/images/clothes/%Y/%m/%d')
-  title = models.CharField(max_length=100, unique=True)
   likes = models.ManyToManyField(User, related_name = "%(class)sLike", blank=True)
-  buying = models.TextField(null=True, blank=True)
   rem_img = models.ImageField(upload_to='main/images/remclothes/%Y/%m/%d', null=True, blank=True)
-  
-  def __str__(self):
-    return f'{self.title}'
   
   def get_absolute_url(self):
     return f'/closet/'
