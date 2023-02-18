@@ -21,9 +21,21 @@
 
 .filebox > input{
     margin-left: 124px;
+    opacity: 0;
+    display: none;
 }
 
-#subbtn{
+.clothbox > label{
+    font-size: 18px;
+}
+
+.clothbox > input{
+    margin-left: 124px;
+    opacity: 0;
+    display: none;
+}
+
+#clothUploadBtn {
     margin: auto;
     display: block;
 }
