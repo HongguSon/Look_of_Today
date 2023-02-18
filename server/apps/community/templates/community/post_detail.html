@@ -109,22 +109,22 @@
     <div id="comment-list-{{post.pk}}" class="comment-list">
       <div class="comm">
         {% for comment in comments %}
-            <div class="d-flex align-items-center m-0" id="user_comment_list">
-                <i class="fa-solid fa-user m-3"></i>  
-                <div class="user_comment">
-                    <div class="comment_author">{{comment.author.username}}</div>
-                    <p style="margin-right: 275px;">{{comment.content}}</p>
-                </div>
+          <div class="d-flex align-items-center m-0" id="user_comment_list">
+              <i class="fa-solid fa-user m-3"></i>  
+              <div class="user_comment">
+                <div class="comment_author">{{comment.author.username}}</div>
+                <p>{{comment.content}}</p>
+              </div>
             </div>
-                {% if user == comment.author %}
+              {% if user == comment.author %}
                 <form action="{% url 'community:delete_comment' comment.pk %}" method="post" class="comment_detail">
                   {% csrf_token %}
                   <div class="del_list">
-                  <input type="submit", value="삭제", class="delbtn2" />
-                  <hr />
+                    <input type="submit", value="삭제", class="delbtn2"/>
                   </div>
                 </form>
-                {% endif %}
+              {% endif %}
+          <hr />
         {% endfor %}
       </div>
     </div>
@@ -150,13 +150,13 @@
     </button>
     {% endif %}
   </form>
-<div id="comment-con" class="d-flex justify-content-between align-items-center">
+<div id="comment-con" class="d-flex justify-content-center align-items-center">
     <form>
       <textarea rows="4" cols="100" id="comment-input-{{post.pk}}" class="comment-input" type="text"
         placeholder="댓글 달기..."></textarea>
     </form>
     <div class="comment-btn btn" id="comment-btn-{{post.pk}}" onclick="onClickCommenet({{post.id}})">
-      <input type="submit" , value="게시" , class="delbtn" />
+      <input type="submit" , value="게시" , class="postbtn" />
     </div>
   </div>
   {% else %}

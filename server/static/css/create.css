@@ -45,6 +45,26 @@
     margin-right: 5px;
 }
 
+.our_closet_create{
+    text-align: center;
+}
+.opc_title{
+    margin-right: 42px;
+}
+.opc_img{
+    margin-left: 73px;
+}
+.opc_privstat{
+    font-size: 15px;
+}
+.opc_privstat > input{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.opc_submit{
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
 .clothes_list_box {
     overflow:auto; 
     height:15rem;
@@ -54,4 +74,19 @@
 .clothes_list_box img {
     height: 10rem;
     width: 8rem;
+}
+.com_create{
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.id_img{
+    margin-left: 147px;
+}
+
+.com_create > p{
+    margin-top: 45px;
+}
+#id_content{
+    resize: none;
 }
