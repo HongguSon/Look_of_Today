@@ -14,12 +14,12 @@
     </table>
     <button type="submit" class="btn btn-primary float-right" id="subbtn">Submit</button>
 </form> {% endcomment %}
-<form action="{% url 'community:post_create' %}" method="post" enctype="multipart/form-data">
+<form action="{% url 'community:post_create' %}" method="post" enctype="multipart/form-data" class="our_closet_create">
     {% csrf_token %}
-    <p>title :</p>
-    <input name="title" />
-    <p>Main img :</p>
-    <input type="file" name="image" />
+    <p class="opc_title">Title :
+    <input name="title" /> </p>
+    <p class="opc_img">Main img :
+    <input type="file" name="image" /> </p>
     
     <p>Outer :</p>
     <select name="outer" id="outer" multiple="" style="width:200px;">
@@ -53,10 +53,10 @@
         <option value="{{ acc.id }}" name="acc">{{ acc.title }}</option>
         {% endfor %}
     </select>
-    <p>
-        public<input type="radio" name="open" value="True" checked="checked">
-        private<input type="radio" name="open" value="False">
+    <p class="opc_privstat">
+        Public<input type="radio" name="open" value="True" checked="checked">
+        Private<input type="radio" name="open" value="False">
     </p>
-    <input type="submit", value="저장하기" class="btn btn-secondary" />
+    <input type="submit", value="저장하기" class="opc_submit btn btn-secondary"/>
 </form>
 {% endblock %}
