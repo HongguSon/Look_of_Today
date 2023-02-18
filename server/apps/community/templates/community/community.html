@@ -11,58 +11,66 @@
 
 <div id="vh">
   <div class="main">
-    <div class="post_all px-5">{{title}}
-      <p class="new_post">
-        <a href="{% url 'community:talk_create' %}">게시글 작성</a>
-        <a href="{% url 'community:talk_create' %}"><i class="fa-regular fa-pen-to-square"></i></a>
-      </p>
-    </div>
+    <div class="post-all">
+      <div class="post_all px-5">{{title}}
+        <p class="new_post">
+          <a href="{% url 'community:talk_create' %}">게시글 작성</a>
+          <a href="{% url 'community:talk_create' %}"><i class="fa-regular fa-pen-to-square"></i></a>
+        </p>
+      </div>
+      <div class="com_list px-5">
+        <a href="{% url 'community:community_main' %}">ALL</a>
+        <a href="{% url 'community:buying' %}">공구해요</a>
+        <a href="{% url 'community:openrun' %}">오픈런</a>
+        <a href="{% url 'community:other' %}">잡담방</a>
+      </div>
 
-    <div class="com_list px-5">
-      <a href="{% url 'community:community_main' %}">ALL</a>
-      <a href="{% url 'community:buying' %}">공구해요</a>
-      <a href="{% url 'community:openrun' %}">오픈런</a>
-      <a href="{% url 'community:other' %}">잡담방</a>
-    </div>
+      <select id="sort-select" onchange="location=this.value">
+        <option class="sort-pk" value="/">--정렬기준--</option>
+        <option class="sort-new" value="?sort=new">최신순</option>
+        <option class="sort-old" value="?sort=old">오래된순</option>
+        <option class="sort-like" value="?sort=like">인기순</option>
+      </select>
 
-    <div class="px-4">
-      <table>
-        <thead>
-          <tr>
-            <td>게시판</td>
-            <td>제목</td>
-            <td>작성일</td>
-            <td><i class="fa-regular fa-heart" id></i></td>
-          </tr>
-        </thead> 
-
-        <tbody>
+      <div>
+        <div class="post-box">
+          <div id="post_menu">
+            <span>게시판</span>
+            <span>제목</span>
+            <span>작성일</span>
+            <span><i class="fa-regular fa-heart" id></i></span>
+          </div>
+        </div>
+        <hr>
         {%for talk in page_obj%}
-        <tr>
-          <td id="talk_category">{{talk.category}}</td>
-          <td id="talk_title">
-            <a href="{% url 'community:talk_detail' talk.pk %}">{{talk.title}}</a>
-            <span id="talk_comment">
-              <i class="fa-regular fa-comment"></i>
-              {%for count in comments_count%}
-              {%if forloop.counter0 == talk.pk %}
-              {{count}}
-              {%endif%}
-              {%endfor%}
-            </span>
-          </td>
-          {% if talk.created_string == False %}
-          <td id="talk_date">{{ talk.create_date|date:'m월 d일' }}</td>
-          {% else %}
-          <td id="talk_date">{{ talk.created_string }}</td>
-          {% endif %}
-          <td id="talk_like">{{talk.total_likes}}</td>
-        </tr>
-        {%endfor%}
-        </tbody>    
-      </table>
+        <div class="commain_title px-4">
+          <table>
+            <tr>
+              <td id="talk_category">{{talk.category}}</td>
+              <td id="talk_title">
+                <a href="{% url 'community:talk_detail' talk.pk %}">{{talk.title}}</a>
+                <span id="talk_comment">
+                  <i class="fa-regular fa-comment"></i>
+                  {%for count in comments_count%}
+                  {%if forloop.counter0 == talk.pk %}
+                  {{count}}
+                  {%endif%}
+                  {%endfor%}
+                </span>
+              </td>
+              {% if talk.created_string == False %}
+              <td id="talk_date">{{ talk.create_date|date:'m월 d일' }}</td>
+              {% else %}
+              <td id="talk_date">{{ talk.created_string }}</td>
+              {% endif %}
+              <td id="talk_like">{{talk.total_likes}}</td>
+            </tr>
+          </table>
+        </div>
+        <hr>
+      </div>
+      {%endfor%}
     </div>
-
   </div>
 
   <div class="board-pagination">
@@ -80,17 +88,17 @@
       {{page.number}}
       {% if page_number == page_obj.number %}
       <li class="page-item active" aria-current="page">
-        <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+        <a class="page-link" href="?page={{ page_number }}&sort={{ sort }}">{{ page_number }}</a>
       </li>
       {% else %}
       <li class="page-item">
-        <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+        <a class="page-link" href="?page={{ page_number }}&sort={{ sort }}">{{ page_number }}</a>
       </li>
       {% endif %}
       {% endfor %}
       {% if page_obj.has_next %}
       <li class="page-item">
-        <a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+        <a class="page-link" href="?page={{ page_obj.next_page_number }}&sort={{ sort }}">&raquo;</a>
       </li>
       {% else %}
       <li class="page-item disabled">
@@ -99,6 +107,6 @@
       {% endif %}
     </ul>
   </div>
-</div>
 
+</body>
 {% endblock %}
