@@ -174,11 +174,11 @@ requestLike.onreadystatechange = () => {
             if (originHTML.includes('fa-solid')) {
               elementLike.innerHTML = `<img src="${imgUrl}" class="post_img1">
               <div class="post__like like_icon_position" onclick="onClickLike(${id}, 'like', '${imgUrl}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>`;
-              console.log(elementLike)
+              
             } else {
               elementLike.innerHTML = `<img src="${imgUrl}" class="post_img1">
               <div class="post__dislike like_icon_position" onclick="onClickLike(${id}, 'dislike', '${imgUrl}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>`;
-              console.log(elementLike)
+              
             };
         }
     }

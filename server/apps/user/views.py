@@ -164,9 +164,6 @@ def profile_update(request, *args, **kwargs):
 
 @csrf_exempt
 def profile_img_mod(request, pk):
-  user = request.user
   req = json.loads(request.body)
   id = req['id']
-  print(id)
-  # user.profile.save()
   return JsonResponse({'id' : id})

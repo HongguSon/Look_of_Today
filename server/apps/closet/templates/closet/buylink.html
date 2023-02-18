@@ -25,12 +25,22 @@
   {% else %}
   <img src="{{cloth.img.url}}">
   {% endif %}
-  <form action="{% url 'closet:buylink' cloth.id %}" method="post" enctype="multipart/form-data">
+  <form action="{% url 'closet:buylink' cloth.id %}" id="searchForm" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    <input type="submit" class="my-2 btn btn-secondary" style="width:100%" value="빠른 검색" name="fast" />
-    <input type="submit" class="my-2 btn btn-secondary" style="width:100%" value="정확한 검색" name="exact" />
+    <input type="button" class="my-2 btn btn-secondary" id="fastSearchBtn" style="width:100%" value="빠른 검색" name="fast" />
+    <!-- <input type="hidden" class="my-2 btn btn-secondary" id="fastSearchBtn" style="width:100%" value="빠른 검색" name="fast" /> -->
+    <button class="my-2 btn btn-secondary" id="fastSearchLoadingBar" style="width:100%" type="button" disabled>
+      <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+      빠른 검색중입니다. 잠시만 기다려주세요 ...
+    </button>
+    <input type="button" class="my-2 btn btn-secondary" id="exactSearchBtn" style="width:100%" value="정확한 검색" name="exact" />
+    <!-- <input type="hidden" class="my-2 btn btn-secondary" id="exactSearchBtn" style="width:100%" value="정확한 검색" name="exact" /> -->
+    <button class="my-2 btn btn-secondary" id="exactSearchLoadingBar" style="width:100%" type="button" disabled>
+      <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+      정확한 검색중입니다. 잠시만 기다려주세요 ...
+    </button>
     {% if fastflag %}
-      <a class="my-1 btn btn-primary" id="new_url" style="width:100%" href="{{link}}" target="_blank" clicked>다시 열기</a>
+      <a class="btn btn-primary" id="new_url" style="width:100%" href="{{link}}" target="_blank" clicked>다시 열기</a>
     {% endif %}
     {% if exactflag %}
       <div class="exact_search_container">
@@ -43,12 +53,39 @@
         {% endfor %}
       </div>
     {% endif %}
-
-    
   </form>
   <br>
 </div>
 <script>
-  document.getElementById('new_url').click();
+  const fastSearchBtn = document.querySelector('#fastSearchBtn')
+  const exactSearchBtn = document.querySelector('#exactSearchBtn')
+  const exactSearchLoadingBar = document.querySelector('#exactSearchLoadingBar')
+
+  if (document.querySelector(`#new_url`) !== null ) {
+    document.getElementById('new_url').click();
+  }
+
+  document.addEventListener("DOMContentLoaded", (e) => {
+    fastSearchBtn.style.display = 'block'
+    exactSearchBtn.style.display = 'block'
+    fastSearchLoadingBar.style.display = 'none'
+    exactSearchLoadingBar.style.display = 'none'
+  });
+
+  fastSearchBtn.addEventListener('click', (event) => {
+    event.preventDefault()
+    fastSearchBtn.type = "hidden";
+    document.getElementById('searchForm').submit();
+    fastSearchBtn.style.display = 'none'
+    fastSearchLoadingBar.style.display = 'block'
+  })
+
+  exactSearchBtn.addEventListener('click', (event) => {
+    event.preventDefault()
+    exactSearchBtn.type = "hidden";
+    document.getElementById('searchForm').submit();
+    exactSearchBtn.style.display = 'none'
+    exactSearchLoadingBar.style.display = 'block'
+  })
 </script>
 {% endblock %}

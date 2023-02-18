@@ -111,7 +111,7 @@ def our_closet(request, *args, **kwargs):
   return render(request,'closet/our_closet.html',context=context)
 
 def create_clothes(request, *args, **kwargs):
-  error = '아직 입력하지 않은 값이 있습니다.'
+  error = '아직 입력하지 않은 항목이 있습니다.'
   context={
     'error' : error,
     }
@@ -132,15 +132,18 @@ def create_clothes(request, *args, **kwargs):
       kind = Acc
     author = request.user
     kind.objects.create(
-      title=request.POST["title"],
-      img=request.FILES["image"],
-      buying=request.POST["buying"],
+      img=request.FILES["cloth"],
       author=author,
     )
     return redirect('closet:closet_main')
   return render(request, "closet/clothes_create.html") 
 
-@require_POST
+@csrf_exempt
+def create_clothes_img(request, pk):
+  req = json.loads(request.body)
+  id = req['id']
+  return JsonResponse({'id' : id})
+
 @csrf_exempt
 def clothes_likes(request, pk, *args, **kwargs):
   user = request.user
@@ -152,12 +155,10 @@ def clothes_likes(request, pk, *args, **kwargs):
     imgUrl = req['imgUrl']
     if btnType == 'like':
       clothes.likes.add(user)
-      print(clothes.likes.all())
     else:
       clothes.likes.remove(user)
-      print(clothes.likes.all())
-    clothes.save()
-    return JsonResponse({'id' : clothes_id, 'btnType': btnType, 'imgUrl':imgUrl})
+    context = {'id' : clothes_id, 'btnType': btnType, 'imgUrl':imgUrl}
+    return JsonResponse(context)
   # if request.user.is_authenticated:
   #   clothes = get_object_or_404(Clothes, pk=pk)
   #   users = clothes.likes.all()
@@ -195,7 +196,9 @@ def buylink(request, pk, *args, **kwargs):
     'exactflag' : False,
   }
   if request.method == "POST":
+    print(request.POST)
     choice = list(request.POST.values())[-1]
+
     if choice == '빠른 검색':
       output = Search(file_path=cloth[0].img.path)
       link = output['similar']
@@ -207,12 +210,12 @@ def buylink(request, pk, *args, **kwargs):
       options.add_argument("window-size=1400,850")
       driver = webdriver.Chrome('/usr/local/bin/chromedriver',options=options)
       driver.get('http://www.google.hr/imghp')
-      driver.implicitly_wait(10)
+      driver.implicitly_wait(20)
       elem = driver.find_element(By.CLASS_NAME, 'Gdd5U')
       elem.click()
       driver.find_element(By.NAME, 'encoded_image').send_keys(cloth[0].img.path)
       # items = driver.find_element(By.CSS_SELECTOR, 'div.Vd9M6.abDdKd.xuQ19b')
-      titles_finder = WebDriverWait(driver, 10).until(EC.visibility_of_all_elements_located((By.CSS_SELECTOR, 'div.Vd9M6.abDdKd.xuQ19b')))
+      titles_finder = WebDriverWait(driver, 20).until(EC.visibility_of_all_elements_located((By.CSS_SELECTOR, 'div.Vd9M6.abDdKd.xuQ19b')))
       
       search_informations_list = []
       for num, title in enumerate(titles_finder):
