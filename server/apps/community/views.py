@@ -25,6 +25,18 @@ def post_create(request, *args, **kwargs):
         int_bottom = list(map(int, request.POST.getlist('bottom')))
         int_shoes = list(map(int, request.POST.getlist('shoes')))
         int_acc = list(map(int, request.POST.getlist('acc')))
+        if not request.POST["title"] or not request.FILES.get("image"):
+            error = '에러'
+            context = {
+                'outer_list' : outer_list,
+                'top_list' : top_list,
+                'bottom_list' : bottom_list,
+                'shoes_list' : shoes_list,
+                'acc_list' : acc_list,
+                'error' : error,
+            }
+            
+            return render(request, "community/post_create.html", context=context)
         new_post = Post.objects.create(
             title=request.POST["title"],
             main_img=request.FILES.get("image"),

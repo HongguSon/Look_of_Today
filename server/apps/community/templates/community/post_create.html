@@ -7,6 +7,11 @@
 {% block content %}
 <form action="{% url 'community:post_create' %}" method="post" enctype="multipart/form-data" class="our_closet_create">
     {% csrf_token %}
+    {% if error %}
+        <br>
+        <p style="color:red">아직 입력하지 않은 항목이 있습니다.</p>
+    {% endif %}
+    <br>
     <p>title :</p>
     <input name="title" />
     <p>Main img :</p>
