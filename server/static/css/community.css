@@ -1,75 +1,82 @@
-.post_all{
-    font-size: 35px;
-    margin-top: 30px;
-    margin-bottom: 20px;
+.post_all {
+  font-size: 35px;
+  margin-top: 30px;
+  margin-bottom: 20px;
 }
 
-.post_all > a{
-    float: right;
+.post_all > a {
+  float: right;
 }
 
-.com_list{
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 1rem;
-    background-color: #f1f1f1;
+.com_list {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1rem;
+  background-color: #f1f1f1;
 }
 
-.new_post{
-    float: right;
-    font-size: 16px;
-    margin-top: 20px;
+.new_post {
+  float: right;
+  font-size: 16px;
+  margin-top: 20px;
 }
 
-.new_post > a{
-    margin-left: 4px;
+.new_post > a {
+  margin-left: 4px;
 }
 
-.compost_list{
-    display: flex;
-    flex-wrap: wrap;
-    text-align: center;
-    gap: 1rem;
-    margin-bottom: 80px;
+.compost_list {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  gap: 1rem;
+  margin-bottom: 80px;
 }
 
-.post-box{
-    width: 100%;
+.post-box {
+  width: 100%;
 }
 
-.commain_title{
-    display: flex;
-    align-items: center;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    justify-content: space-between;
+.commain_title {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
-tr td{
-    height: 28px;
-    padding: 4px 7px;
-    /*border-bottom: 1px solid #f2f2f2;*/
+tr td {
+  padding: 4px 7px;
+  box-sizing: border-box;
+  /*border-bottom: 1px solid #f2f2f2;*/
 }
 
-#talk_title{
-    display: flex;
-    align-items: center;
+#talk_title {
+  display: flex;
+  align-items: center;
+  width: 6rem;
 }
 
-#talk_comment{
-    margin-left: 2px;
-    margin-top: 2px;
-    font-size: 10px;
+#talk_category {
+  padding-right: 1rem;
+  width: 6rem;
 }
 
-#talk_date{
-    font-size: 12px;
+#talk_comment {
+  margin-left: 2px;
+  margin-top: 2px;
+  font-size: 10px;
 }
 
-#post_menu{
-    font-size: 20px;
-    display: flex;
-    justify-content: space-around;
-    font-weight: 600;
-    margin-bottom: 10px;
+#talk_date {
+  width: 6rem;
+}
+
+#talk_like {
+  padding-left: 2rem;
+}
+
+#post_menu {
+  font-size: 20px;
+  display: flex;
+  justify-content: space-around;
+  font-weight: 600;
+  margin-bottom: 10px;
 }
