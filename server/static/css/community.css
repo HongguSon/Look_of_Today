@@ -1,3 +1,7 @@
+#vh{
+    height: 90vh;
+}
+
 .post_all{
     font-size: 35px;
     margin-top: 30px;
@@ -33,27 +37,45 @@
     margin-bottom: 80px;
 }
 
-.post-box{
+.commain_title{
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+table{
     width: 100%;
 }
 
-.commain_title{
-    display: flex;
-    align-items: center;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    justify-content: space-between;
+thead tr{
+    text-align: center;
+    font-weight: 600;
+    border-bottom: 1px solid black;
+}
+
+tbody tr{
+    border-bottom: 1px solid #c9c9c9;
+    height: 3rem;
+}
+
+tbody{
+    font-size: 0.8rem;
 }
 
 tr td{
-    height: 28px;
     padding: 4px 7px;
-    /*border-bottom: 1px solid #f2f2f2;*/
+    box-sizing: border-box;
+    vertical-align : middle;
 }
 
 #talk_title{
-    display: flex;
-    align-items: center;
+    font-size: 1rem;
+    width: 52%;
+}
+
+#talk_category{
+    width: 23%;
+    padding-right: 1rem;
+    text-align: center;
 }
 
 #talk_comment{
@@ -62,8 +84,14 @@ tr td{
     font-size: 10px;
 }
 
-#talk_date{
-    font-size: 12px;
+#talk_date {
+    width: 19%;
+    text-align: center;
+}
+
+#talk_like{
+    width: 6%;
+    text-align: center;
 }
 
 #post_menu{
@@ -72,4 +100,13 @@ tr td{
     justify-content: space-around;
     font-weight: 600;
     margin-bottom: 10px;
+}
+
+.board-pagination{
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
 }
