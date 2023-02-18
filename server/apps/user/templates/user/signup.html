@@ -9,7 +9,7 @@
       아이디<br>
       <input name="username" type="text" placeholder="ID">
       {% if error3 %}
-        <p>이미 존재하는 아이디입니다. 다른 아이디를 입력해주세요</p>
+        <p class="error-color m-0">이미 존재하는 아이디입니다. 다른 아이디를 입력해주세요</p>
       {% endif %}
       <br>
       비밀번호<br>
@@ -22,10 +22,10 @@
       <input name="email" type="email" placeholder="EMAIL">
       <br><br>
       {% if error1 %}
-        <p>전체 항목을 입력해주세요.</p>
+        <p class="error-color">전체 항목을 입력해주세요.</p>
       {% endif %}
       {% if error2 %}
-        <p>입력하신 두 개의 비밀번호가 일치하지 않습니다.</p>
+        <p class="error-color">입력하신 두 개의 비밀번호가 일치하지 않습니다.</p>
       {% endif %}
       <input type="submit" class="btn btn-primary" value="Sign Up">
       <br>

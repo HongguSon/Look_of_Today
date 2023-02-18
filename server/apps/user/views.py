@@ -23,9 +23,9 @@ def signup(request, *args, **kwargs):
         'error1': error,
       }
       return render(request, 'user/signup.html', context=context)
-    try:
-      username=request.POST['username']
-    except IntegrityError:
+
+    username=request.POST['username']
+    if User.objects.filter(username=username):
       error = '에러'
       context = {
         'error3': error,
