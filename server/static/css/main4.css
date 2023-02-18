@@ -17,13 +17,13 @@ footer {
 
 .title {
   color: black;
-  font-size: 2rem;
+  font-size: 1.375rem;
   text-decoration: none;
 }
 
 @media screen and (max-width: 768px){
   .title {
-    font-size: 1.5rem;
+    font-size: 0.9rem;
   }
 }
 
@@ -39,23 +39,65 @@ footer {
   color: var(--gray) !important;
 }
 
-.filebox label {
-  display: inline-block;
-  padding: 10px 20px;
-  color: #fff;
-  vertical-align: middle;
-  background-color: #999999;
-  cursor: pointer;
-  height: 40px;
-  margin-left: 10px;
-  border-radius: 20px;
+#mini-menu{
+  font-size: 0.875rem;
 }
 
-.filebox input[type="file"] {
+.sidenav {
+  height: 100%; 
+  width: 0; 
+  position: fixed; 
+  z-index: 1500; 
+  top: 0; 
+  left: 0;
+  background-color: #fff; 
+  overflow-x: hidden; 
+  padding-top: 60px; 
+  transition: 0.5s;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  color: #111;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #818181;
+}
+
+.sidenav .closebtn {
   position: absolute;
-  width: 0;
-  height: 0;
-  padding: 0;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+#main {
+  transition: margin-left .5s;
+  padding: 20px;
+}
+
+#backdiv{
+  background: #000;
+  opacity: .6;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1100;
+}
+
+.no-scroll {
   overflow: hidden;
-  border: 0;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
 }

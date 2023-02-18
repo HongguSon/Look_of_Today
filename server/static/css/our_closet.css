@@ -1,0 +1,153 @@
+#banner {
+    height: 6.375rem;
+    text-align: center;
+    margin-bottom: 87px;
+  }
+  
+.right {
+  border-right: 1px solid black;
+  height: 100%;
+}
+  
+.col-3 {
+  border-left: 5rem;
+}
+
+.ourcloset_title{
+  padding-left: 3rem !important;
+}
+  
+.ourcloset_title > p{
+  margin-top: 2rem !important;
+  text-align: left;
+  font-size: 35px;
+}
+
+.ourcloset_title > h5{
+  text-align: left;
+  font-size: 14px;
+  margin-left: 4px;
+}
+
+.ourcloset_newpost1{
+  float: right;
+  font-size: 16px;
+  margin-right: 45px;
+  margin-top: 14px;
+}
+
+.ourcloset_newpost2{
+  float: right;
+  font-size: 16px;
+  margin-right: 8px;
+  margin-top: 14px;
+}
+
+
+.con {
+  border: 0.125rem;
+  width: 12.5rem;
+  padding: 0.5rem;
+  margin-top: 0.125rem;
+  border-radius: 0.625rem;
+}
+
+.con > div{
+  margin-top: 0.6rem;
+}
+
+.post_count{
+  margin-left: 1.25rem;
+}
+
+.comment_count{
+  margin-left: 0.5rem;
+}
+
+  
+#user-img {
+  width: 6.25rem;
+  height: 6.25rem;
+}
+  
+.menu {
+  margin-top: 1.875rem;
+}
+  
+.menu div {
+  margin-left: 0.5rem;
+  margin-top: 1rem;
+}
+  
+.menu hr {
+  width: 12.5rem;
+}
+  
+.ootd {
+  padding-right: 1.25rem;
+}
+  
+.com-title {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  font-size: 3.125rem;
+  margin-left: 1.25rem;
+}
+  
+.content img {
+  border-radius: 0.938rem;
+  width: 15.625rem;
+  height: 16.625rem;
+  opacity: 1;
+  -webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: .2s ease-in-out;
+	transition: .2s ease-in-out;
+}
+
+.content img:hover{
+  -webkit-transform: scale(1.02);
+	transform: scale(1.02);
+  opacity: .75;
+}
+  
+.content{
+    padding-top: 1.875rem;
+    padding-left: 5.9rem;
+    padding-bottom: 3.125rem;
+    text-align:start;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6rem;
+}
+
+.post_info > p {
+  margin-top: 0.5rem !important;
+  margin-bottom: 0 !important;
+}
+
+
+.content div{
+    margin-left: 0;
+}
+
+.com-title {
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+    font-size: 3.125rem;
+    margin-left: 1.25rem;
+  }
+
+textarea{
+  resize: none;
+}
+
+.post_all{
+  font-size: x-large;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.post-box{
+  margin-top: 1rem;
+}

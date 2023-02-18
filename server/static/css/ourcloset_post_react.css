@@ -1,0 +1,89 @@
+@media screen and (max-width: 375px){
+    .post_title{
+        font-size: 1.5rem !important;
+        padding-left: 1.5rem !important;
+    }
+    .post_author{
+        font-size: 1rem;
+        padding-left: 1.7rem;
+    }
+    .button-box > button{
+        font-size: 13px;
+    }
+    .postimgs > img{
+        height: 18rem;
+        width: 18rem;
+    }
+    .cody_title{
+        font-size: 15px;
+    }
+    .comment-sum{
+        margin-left: 0px;
+    }
+    .comment-sum > hr{
+        width: 280px! important;
+        margin-left: 3rem !important;
+    }
+    .comment-list{
+        margin-left: 2rem !important;
+    }
+    form svg{
+        margin-top: 15px;
+        width: 20px;
+        height: 20px;
+        margin-left: 1.875rem;
+    }
+    #user_comment_list{
+        padding-left: 3px !important;
+    }
+    .user_comment > p{
+        margin-right: 70px !important;
+    }
+    .d-flex{
+        padding-left: 3px !important;
+        padding-top: 35px;
+        padding-bottom: 40px;
+    }
+    .content_other{
+        width: 224px !important;
+    }
+    .comment_other_hr{
+        width: 228px;
+        margin-left: 39px !important;
+    }
+    #like{
+        padding-left: 8px !important;
+    }
+    .delbtn2{
+        font-size: 11px;
+        margin-right: 80px;
+    }
+    #comment-con{
+        margin-left: 5.5rem !important;
+    }
+    .comment-input{
+        width: 197px;
+        margin-left: 0rem;
+    }
+    .del_list > hr{
+        width: 230px;
+    }
+    .d-flex > hr{
+        width: 230px;
+    }
+    .cody_detail {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 4rem;
+        margin-bottom: 130px;
+        margin-top: 70px;
+    }
+    .cody_detail > .item__container > img{
+        width: 110px;
+    }
+    .comment_author_other{
+        font-size: 20px;
+    }
+}
+

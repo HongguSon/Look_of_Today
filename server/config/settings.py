@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.naver',
     'allauth.socialaccount.providers.google',
     'phonenumber_field',
+    'rembg',
 ]
 
 MIDDLEWARE = [
@@ -131,6 +132,8 @@ STATIC_URL = "static/"
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+
+
 
 MEDIA_URL = 'media/'
 
