@@ -50,6 +50,9 @@ img:hover{
   justify-content: space-evenly;
 }
 
+.closet_post_title{
+  width: 200px;
+}
 
 
 @media screen and (max-width: 480px){
@@ -75,9 +78,15 @@ img:hover{
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: start;
-    gap: 3rem;
+    gap: 10rem;
   }
 }
+
+.fa-solid {
+  font-weight: 550;
+  font-size: 14px;
+}
+
 
 .accordion{
   margin: auto;
