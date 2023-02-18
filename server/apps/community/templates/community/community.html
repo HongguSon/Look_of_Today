@@ -18,20 +18,20 @@
       </p>
     </div>
 
-    <div class="com_list px-5">
+    <div class="com_list px-5 py-2">
       <a href="{% url 'community:community_main' %}">ALL</a>
       <a href="{% url 'community:buying' %}">공구해요</a>
       <a href="{% url 'community:openrun' %}">오픈런</a>
       <a href="{% url 'community:other' %}">잡담방</a>
     </div>
-
-      <select id="sort-select" onchange="location=this.value">
-        <option class="sort-pk" value="/">--정렬기준--</option>
-        <option class="sort-new" value="?sort=new">최신순</option>
-        <option class="sort-old" value="?sort=old">오래된순</option>
-        <option class="sort-like" value="?sort=like">인기순</option>
-      </select>
-
+    
+    <select id="sort-select" onchange="location=this.value">
+      <option class="sort-pk" value="/">--정렬기준--</option>
+      <option class="sort-new" value="?sort=new">최신순</option>
+      <option class="sort-old" value="?sort=old">오래된순</option>
+      <option class="sort-like" value="?sort=like">인기순</option>
+    </select>
+    
     <div class="px-4">
       <table>
         <thead>
@@ -41,32 +41,32 @@
             <td>작성일</td>
             <td><i class="fa-regular fa-heart" id></i></td>
           </tr>
-        </thead> 
-
+        </thead>
+    
         <tbody>
-        {%for talk in page_obj%}
-        <tr>
-          <td id="talk_category">{{talk.category}}</td>
-          <td id="talk_title">
-            <a href="{% url 'community:talk_detail' talk.pk %}">{{talk.title}}</a>
-            <span id="talk_comment">
-              <i class="fa-regular fa-comment"></i>
-              {%for count in comments_count%}
-              {%if forloop.counter0 == talk.pk %}
-              {{count}}
-              {%endif%}
-              {%endfor%}
-            </span>
-          </td>
-          {% if talk.created_string == False %}
-          <td id="talk_date">{{ talk.create_date|date:'m월 d일' }}</td>
-          {% else %}
-          <td id="talk_date">{{ talk.created_string }}</td>
-          {% endif %}
-          <td id="talk_like">{{talk.total_likes}}</td>
-        </tr>
-        {%endfor%}
-        </tbody>    
+          {%for talk in page_obj%}
+          <tr>
+            <td id="talk_category">{{talk.category}}</td>
+            <td id="talk_title">
+              <a href="{% url 'community:talk_detail' talk.pk %}">{{talk.title}}</a>
+              <span id="talk_comment">
+                <i class="fa-regular fa-comment"></i>
+                {%for count in comments_count%}
+                {%if forloop.counter0 == talk.pk %}
+                {{count}}
+                {%endif%}
+                {%endfor%}
+              </span>
+            </td>
+            {% if talk.created_string == False %}
+            <td id="talk_date">{{ talk.create_date|date:'m월 d일' }}</td>
+            {% else %}
+            <td id="talk_date">{{ talk.created_string }}</td>
+            {% endif %}
+            <td id="talk_like">{{talk.total_likes}}</td>
+          </tr>
+          {%endfor%}
+        </tbody>
       </table>
     </div>
   </div>

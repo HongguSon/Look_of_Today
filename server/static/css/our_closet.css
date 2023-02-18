@@ -14,7 +14,8 @@
 }
 
 .ourcloset_title{
-  padding-left: 3rem !important;
+  padding-left: 2rem !important;
+  /*웹은 3rem으로 하기*/
 }
   
 .ourcloset_title > p{
@@ -23,10 +24,11 @@
   font-size: 35px;
 }
 
-.ourcloset_title > h5{
+.ourcloset_title > div > h5{
   text-align: left;
   font-size: 14px;
-  margin-left: 4px;
+  margin-top: 6px;
+  /*웹은 margin-left: 4px;*/
 }
 
 .ourcloset_newpost1{
@@ -150,4 +152,23 @@ textarea{
 
 .post-box{
   margin-top: 1rem;
+}
+
+.board-pagination{
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  width: 100%;
+  position: relative;
+  bottom: 0;
+}
+
+.h-select{
+  display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#sort-select{
+  margin-right: 2rem;
 }
