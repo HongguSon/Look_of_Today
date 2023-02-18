@@ -170,6 +170,38 @@
 </div>
 
 <script>
+  const strip = (string) => {
+    return string.replace(/^\s+|\s+$/g, "");
+  };
+  const requestLike = new XMLHttpRequest();
+  const onClickLike = (id, btnType, imgUrl) => {
+    const url = "/closet/clothes-likes/" + id;
+    requestLike.open("POST", url, true)
+    requestLike.setRequestHeader(
+      "Content-Type",
+      "application/x-www-form-urlencoded"
+    );
+    requestLike.send(JSON.stringify({id: id, btnType: btnType, imgUrl: imgUrl}));
+  };
+
+  requestLike.onreadystatechange = () => {
+    if (requestLike.readyState === XMLHttpRequest.DONE) {
+      if (requestLike.status < 400) {
+        const { id, btnType, imgUrl } = JSON.parse(requestLike.response);
+        const elementLike = document.querySelector(`.cloth-id-${id}`);
+        const originHTML = strip(elementLike.innerHTML);
+        if (originHTML.includes('fa-solid')) {
+          elementLike.innerHTML = `<img src="${imgUrl}" class="post_img1">
+          <div class="post__like like_icon_position" onclick="onClickLike(${id}, 'like', '${imgUrl}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>`;
+          
+        } else {
+          elementLike.innerHTML = `<img src="${imgUrl}" class="post_img1">
+          <div class="post__dislike like_icon_position" onclick="onClickLike(${id}, 'dislike', '${imgUrl}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>`;
+          
+        };
+      }
+    }
+  };
   const requestComment = new XMLHttpRequest();
 
   const onClickCommenet = (id) => {
@@ -206,39 +238,5 @@
       }
     }
   }
-
-
-  const strip = (string) => {
-    return string.replace(/^\s+|\s+$/g, "");
-  };
-  const requestLike = new XMLHttpRequest();
-  const onClickLike = (id, btnType, imgUrl) => {
-    const url = "/closet/clothes-likes/" + id;
-    requestLike.open("POST", url, true)
-    requestLike.setRequestHeader(
-      "Content-Type",
-      "application/x-www-form-urlencoded"
-    );
-    requestLike.send(JSON.stringify({id: id, btnType: btnType, imgUrl: imgUrl}));
-  };
-
-  requestLike.onreadystatechange = () => {
-      if (requestLike.readyState === XMLHttpRequest.DONE) {
-          if (requestLike.status < 400) {
-              const { id, btnType, imgUrl } = JSON.parse(requestLike.response);
-              const elementLike = document.querySelector(`.cloth-id-${id}`);
-              const originHTML = strip(elementLike.innerHTML);
-              if (originHTML.includes('fa-solid')) {
-                elementLike.innerHTML = `<img src="${imgUrl}" class="post_img1">
-                <div class="post__like like_icon_position" onclick="onClickLike(${id}, 'like', '${imgUrl}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>`;
-                console.log(elementLike)
-              } else {
-                elementLike.innerHTML = `<img src="${imgUrl}" class="post_img1">
-                <div class="post__dislike like_icon_position" onclick="onClickLike(${id}, 'dislike', '${imgUrl}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>`;
-                console.log(elementLike)
-              };
-          }
-      }
-  };
 </script>
 {% endblock %}
