@@ -140,7 +140,6 @@ def create_clothes(request, *args, **kwargs):
     return redirect('closet:closet_main')
   return render(request, "closet/clothes_create.html") 
 
-@require_POST
 @csrf_exempt
 def clothes_likes(request, pk, *args, **kwargs):
   user = request.user
@@ -152,12 +151,10 @@ def clothes_likes(request, pk, *args, **kwargs):
     imgUrl = req['imgUrl']
     if btnType == 'like':
       clothes.likes.add(user)
-      print(clothes.likes.all())
     else:
       clothes.likes.remove(user)
-      print(clothes.likes.all())
-    clothes.save()
-    return JsonResponse({'id' : clothes_id, 'btnType': btnType, 'imgUrl':imgUrl})
+    context = {'id' : clothes_id, 'btnType': btnType, 'imgUrl':imgUrl}
+    return JsonResponse(context)
   # if request.user.is_authenticated:
   #   clothes = get_object_or_404(Clothes, pk=pk)
   #   users = clothes.likes.all()
@@ -195,7 +192,9 @@ def buylink(request, pk, *args, **kwargs):
     'exactflag' : False,
   }
   if request.method == "POST":
+    print(request.POST)
     choice = list(request.POST.values())[-1]
+
     if choice == '빠른 검색':
       output = Search(file_path=cloth[0].img.path)
       link = output['similar']
