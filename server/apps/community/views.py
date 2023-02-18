@@ -24,7 +24,7 @@ def post_create(request, *args, **kwargs):
         int_acc = list(map(int, request.POST.getlist('acc')))
         new_post = Post.objects.create(
             title=request.POST["title"],
-            main_img=request.FILES.get("image"),
+            main_img=request.FILES.get("look"),
             author=request.user,
             open=request.POST["open"],
         )
@@ -39,7 +39,7 @@ def post_create(request, *args, **kwargs):
         for i in int_acc:
             new_post.acc.add(i)
         new_post.save()
-        return redirect('closet:closet_main')
+        return redirect('closet:our_closet')
     
     context = {
         'outer_list' : outer_list,
@@ -50,6 +50,12 @@ def post_create(request, *args, **kwargs):
     }
     
     return render(request, "community/post_create.html", context=context)
+
+@csrf_exempt
+def post_create_img(request, pk):
+  req = json.loads(request.body)
+  id = req['id']
+  return JsonResponse({'id' : id})
 
 def post_detail(request, pk, *args, **kwargs):
     post = Post.objects.get(pk=pk)

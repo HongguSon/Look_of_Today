@@ -12,6 +12,7 @@ urlpatterns = [
   path("buying/", views.buying, name='buying'),
   
   path("create/",views.post_create,name="post_create"),
+  path("create/<int:pk>",views.post_create_img,name="post_create_img"),
   path("detail/<int:pk>/",views.post_detail,name="post_detail"),
   path('comment/', views.comment_ajax, name='comment'),
   path('delete-comment/<int:pk>/', views.delete_pcomment, name='delete_comment'),
