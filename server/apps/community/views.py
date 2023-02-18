@@ -12,7 +12,6 @@ from django.core.exceptions import PermissionDenied
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models import Count
 
-# Create your views here.
 def post_create(request, *args, **kwargs):
     outer_list = Outer.objects.filter(author=request.user)
     top_list = Top.objects.filter(author=request.user)
@@ -104,6 +103,54 @@ class PostUpdate(LoginRequiredMixin,UpdateView):
         else:
             raise PermissionDenied
         
+def post_update(request, pk, *args, **kwargs):
+    post = Post.objects.get(pk=pk)
+    outer_list = Outer.objects.filter(author=request.user)
+    top_list = Top.objects.filter(author=request.user)
+    bottom_list = Bottom.objects.filter(author=request.user)
+    shoes_list = Shoes.objects.filter(author=request.user)
+    acc_list = Acc.objects.filter(author=request.user)
+    
+    context = {
+        'post': post,
+        'outer_list' : outer_list,
+        'top_list' : top_list,
+        'bottom_list' : bottom_list,
+        'shoes_list' : shoes_list,
+        'acc_list' : acc_list,
+    }
+    
+    if request.method == "POST":
+        post.title=request.POST["title"]
+        if request.FILES.get("image"):
+            post.main_img=request.FILES.get("image")
+        post.author=request.user 
+        post.open=request.POST["open"]
+        int_outer = list(map(int, request.POST.getlist('outer')))
+        int_top = list(map(int, request.POST.getlist('top')))
+        int_bottom = list(map(int, request.POST.getlist('bottom')))
+        int_shoes = list(map(int, request.POST.getlist('shoes')))
+        int_acc = list(map(int, request.POST.getlist('acc')))
+        post.outer.clear()
+        post.top.clear()
+        post.bottom.clear()
+        post.shoes.clear()
+        post.acc.clear()
+        for i in int_outer:
+            post.outer.add(i)
+        for i in int_top:
+            post.top.add(i)   
+        for i in int_bottom:
+            post.bottom.add(i)
+        for i in int_shoes:
+            post.shoes.add(i)
+        for i in int_acc:
+            post.acc.add(i)
+        post.save()
+        return redirect("community:post_detail", pk)
+    
+    return render(request, "community/post_update.html", context=context)
+    
 def post_delete(request:HttpRequest, pk, *args, **kwargs):
     if request.method == "POST":
         post = Post.objects.get(pk=pk)

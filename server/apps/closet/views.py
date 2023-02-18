@@ -5,6 +5,16 @@ from django.views.generic import CreateView, UpdateView
 from django.views.decorators.http import require_POST
 from itertools import chain
 from django.utils.datastructures import MultiValueDictKeyError
+from django.views.decorators.csrf import csrf_exempt
+import json
+from django.http import JsonResponse
+from GoogleSearch import Search
+import selenium
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from django.core.paginator import Paginator, PageNotAnInteger , EmptyPage
 from django.db.models import Count
 

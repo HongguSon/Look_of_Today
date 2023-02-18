@@ -17,9 +17,6 @@ class Clothes(models.Model):
   likes = models.ManyToManyField(User, related_name = "%(class)sLike", blank=True)
   rem_img = models.ImageField(upload_to='main/images/remclothes/%Y/%m/%d', null=True, blank=True)
   
-  def __str__(self):
-    return f'{self.title}'
-  
   def get_absolute_url(self):
     return f'/closet/'
   

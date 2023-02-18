@@ -18,6 +18,9 @@
       이메일<br>
       <input name="email" type="email" placeholder="EMAIL">
       <br><br>
+      {% if error1 %}
+        <p>전체 항목을 입력해주세요.</p>
+      {% endif %}
       <input type="submit" class="btn btn-primary" value="Sign Up">
       <br>
     </div>

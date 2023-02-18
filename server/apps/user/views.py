@@ -16,6 +16,12 @@ from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 def signup(request, *args, **kwargs):
   if request.method == 'POST':
+    if not request.POST['username'] or not request.POST['password1'] or not request.POST['email']:
+      error = '에러'
+      context = {
+        'error1': error,
+      }
+      return render(request, 'user/signup.html', context=context)
     if request.POST['password1'] == request.POST['password2']:
       user = User.objects.create_user(
         username=request.POST['username'],

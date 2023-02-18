@@ -20,15 +20,17 @@
         <a href="{% url 'community:post_create' %}" class="ourcloset_newpost2">착장 추가</a>
         {% endif %}
       </p>
-      <h5>당신만의 착장을 공유해주세요!</h5>
+      <div class="h-select">
+        <h5>당신만의 착장을 공유해주세요!</h5>
+  
+        <select id="sort-select" onchange="location=this.value">
+          <option class="sort-pk" value="/">--정렬기준--</option>
+          <option class="sort-new" value="?sort=new">최신순</option>
+          <option class="sort-old" value="?sort=old">오래된순</option>
+          <option class="sort-like" value="?sort=like">인기순</option>
+        </select>
+      </div>
     </div>
-
-    <select id="sort-select" onchange="location=this.value">
-      <option class="sort-pk" value="/">--정렬기준--</option>
-      <option class="sort-new" value="?sort=new">최신순</option>
-      <option class="sort-old" value="?sort=old">오래된순</option>
-      <option class="sort-like" value="?sort=like">인기순</option>
-    </select>
 
     <div class="ootd">
       <div class="">
@@ -36,7 +38,9 @@
           {%for post in page_obj%}
           <div class="post_info">
             <a href="{% url 'community:post_detail' post.pk%}">
+
               <img src="{{post.main_img.url}}" class="img-fluid">
+
             </a>
             <p><a href="{% url 'community:post_detail' post.pk %}">{{post.title |truncatechars:11 }}</a></p>
             <div class="postauthor">{{post.author}}</div>
