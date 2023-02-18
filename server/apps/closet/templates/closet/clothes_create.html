@@ -2,7 +2,7 @@
 {% load static %}
 {% block extrahead %}
   <link rel="stylesheet" href="{% static 'css/create.css' %}">
-  <title>new clothes</title>
+  <title>옷 등록</title>
 {% endblock %}
 {% block content %}
 
@@ -20,7 +20,7 @@
   </div>
   <br/>
   <div class="clothes_type">
-  <input type="radio" name="clothes" value="outer">Outer
+  <input type="radio" name="clothes" value="outer" checked>Outer
   <input type="radio" name="clothes" value="top">Top
   <input type="radio" name="clothes" value="bottom">Bottom
   <input type="radio" name="clothes" value="shoes">Shoes
@@ -28,12 +28,12 @@
   </div>
   <br />
   {% if error %}
-      <p>{{error}}</p>
+      <p class="error-color">{{error}}</p>
   {% endif %}
   <button type="submit" class="my-2 btn btn-secondary float-right" style="width:100%" id="clothUploadBtn">저장</button>
   <button class="my-2 btn btn-secondary" id="clothUploadLoadingBar" style="width:100%" type="button" disabled>
     <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-    배경 제거 후 저장 중입니다! 잠시만 기다려주세요 ...
+    배경 제거 후 저장 중입니다...
   </button>
 </form>
 </div>

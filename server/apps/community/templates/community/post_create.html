@@ -2,88 +2,161 @@
 {% load static %}
 {% block extrahead %}
 <link rel="stylesheet" href="{% static 'css/create.css' %}">
-<title>new community</title>
+<title>착장 작성</title>
 {% endblock %}
 {% block content %}
-<form action="{% url 'community:post_create' %}" method="post" enctype="multipart/form-data" class="our_closet_create">
+<div class="look_create">
+  <form action="{% url 'community:post_create' %}" class="look_create_form" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {% if error %}
-        <br>
-        <p class="error-color">아직 입력하지 않은 항목이 있습니다.</p>
-    {% endif %}
+    <br><br>
+    <div class="fs-5">당신의 착장을 올려주세요!</div>
     <br>
-    <p>title :</p>
-    <input name="title" />
-    <p>Main img :</p>
-    <input type="file" name="image" />
-    <div class="aaa">
-    <div class="clothes_list_box">
-        <p>Outer: </p>
-        <br />
-        {% for outer in outer_list %}
-            <div class="m-3">
-                <input type="checkbox" value="{{outer.pk}}" id="{{outer.title}}" name="outer">
-                <label for="{{outer.title}}" class="d-flex flex-column">
-                    <img src="{{outer.rem_img.url}}" alt="{{outer.title}}">
-                    <span class="text-center">{{outer.title}}</span>
-                </label>
-            </div>
-        {% endfor %}
+    {% if error %}
+      <p class="error-color">전체 항목을 입력해주세요.</p>
+    {% endif %}
+    <img id="rep_look_img" style="width:200px; height:200px; border: 1px solid gray">
+    <br/>
+    <div class="lookbox">
+      <label for="look" class="btn btn-light">착장 업로드</label>
+      <input type="file" name="look" onchange="lookUpload({{ user.id }})" id="look">
     </div>
-    <div class="clothes_list_box">
-        <p>Top: </p>
-        {% for top in top_list %}
-        <br />
-            <div class="m-3">
-                <input type="checkbox" value="{{top.pk}}" id="{{top.title}}" name="top">
-                <label for="{{top.title}}" class="d-flex flex-column">
-                    <img src="{{top.rem_img.url}}" alt="{{top.title}}">
-                    <span class="text-center">{{top.title}}</span>
-                </label>
-            </div>
-        {% endfor %}
-    </div>
-    <div class="clothes_list_box">
-        <p>Bottom: </p>
-        {% for bottom in bottom_list %}
-            <div class="m-3">
-                <input type="checkbox" value="{{bottom.pk}}" id="{{bottom.title}}" name="bottom">
-                <label for="{{bottom.title}}" class="d-flex flex-column">
-                    <img src="{{bottom.rem_img.url}}" alt="{{bottom.title}}">
-                    <span class="text-center">{{bottom.title}}</span>
-                </label>
-            </div>
-        {% endfor %}
-    </div>
-    <div class="clothes_list_box">
-        <p>Shoes: </p>
-        {% for shoes in shoes_list %}
-            <div class="m-3">
-                <input type="checkbox" value="{{shoes.pk}}" id="{{shoes.title}}" name="shoes">
-                <label for="{{shoes.title}}" class="d-flex flex-column">
-                    <img src="{{shoes.rem_img.url}}" alt="{{shoes.title}}">
-                    <span class="text-center">{{shoes.title}}</span>
-                </label>
-            </div>
-        {% endfor %}
-    </div>
-    <div class="clothes_list_box">
-        <p>Acc: </p>
-        {% for acc in acc_list %}
-            <div class="m-3">
-                <input type="checkbox" value="{{acc.pk}}" id="{{acc.title}}" name="acc">
-                <label for="{{acc.title}}" class="d-flex flex-column">
-                    <img src="{{acc.rem_img.url}}" alt="{{acc.title}}">
-                    <span class="text-center">{{acc.title}}</span>
-                </label>
-            </div>
-        {% endfor %}
-    </div>
-</div>
+    <br>
+    <input name="title" placeholder="착장 제목을 입력해주세요!" style="width: 100%"/>
+    <br>
+    <div>착장을 공개여부를 결정해주세요</div>
     <p>
-        public<input type="radio" name="open" value="True" checked="checked">
-        private<input type="radio" name="open" value="False">
+      공개<input class="mx-2" type="radio" name="open" value="True" checked="checked">
+      비공개<input class="mx-2" type="radio" name="open" value="False">
     </p>
-    <input type="submit", value="저장하기" class="opc_submit btn btn-secondary"/>
-</form>
+    <p class="fs-5 my-2">아우터</p>
+    <div class="clothes_list_box">
+      {% if outer_list %}
+        {% for outer in outer_list %}
+          <div class="m-3">
+            <input type="checkbox" value="{{outer.pk}}" id="{{outer.title}}" name="outer" />
+            <label for="{{outer.title}}" class="d-flex flex-column" />
+              <img src="{{outer.rem_img.url}}" alt="{{outer.title}}" />
+              <span class="text-center">{{outer.title}}</span>
+            </label>
+          </div>
+        {% endfor %}
+      {% else %}
+      <div class="nocloth">
+        <div>아우터를 등록하고 이용해주세요!</div>
+      </div>
+      {% endif %}
+      <br>
+    </div>
+    <p class="fs-5 my-2">상의</p>
+    <div class="clothes_list_box"> 
+      {% if top_list %}
+        {% for top in top_list %}
+          <div class="m-3">
+            <input type="checkbox" value="{{top.pk}}" id="{{top.title}}" name="top">
+            <label for="{{top.title}}" class="d-flex flex-column">
+              <img src="{{top.rem_img.url}}" alt="{{top.title}}">
+              <span class="text-center">{{top.title}}</span>
+            </label>
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="nocloth">
+          <div>상의를 등록하고 이용해주세요!</div>
+        </div>
+      {% endif %}
+    </div>
+
+
+    <p class="fs-5 my-2">하의</p>
+    <div class="clothes_list_box">
+      {% if bottom_list %}
+        {% for bottom in bottom_list %}
+          <div class="m-3">
+            <input type="checkbox" value="{{bottom.pk}}" id="{{bottom.title}}" name="bottom">
+            <label for="{{bottom.title}}" class="d-flex flex-column">
+              <img src="{{bottom.rem_img.url}}" alt="{{bottom.title}}">
+              <span class="text-center">{{bottom.title}}</span>
+            </label>
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="nocloth">
+          <div>하의를 등록하고 이용해주세요!</div>
+        </div>
+      {% endif %}
+    </div>
+
+
+    <p class="fs-5 my-2">신발</p>
+    <div class="clothes_list_box">
+      {% if shoes_list %}
+        {% for shoes in shoes_list %}
+          <div class="m-3">
+            <input type="checkbox" value="{{shoes.pk}}" id="{{shoes.title}}" name="shoes">
+            <label for="{{shoes.title}}" class="d-flex flex-column">
+              <img src="{{shoes.rem_img.url}}" alt="{{shoes.title}}">
+              <span class="text-center">{{shoes.title}}</span>
+            </label>
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="nocloth">
+          <div>신발을 등록하고 이용해주세요!</div>
+        </div>
+      {% endif %}
+    </div>
+
+    <p class="fs-5 my-2">액세서리</p>
+    <div class="clothes_list_box">
+      {% if acc_list %}
+        {% for acc in acc_list %}
+          <div class="m-3">
+            <input type="checkbox" value="{{acc.pk}}" id="{{acc.title}}" name="acc">
+            <label for="{{acc.title}}" class="d-flex flex-column">
+              <img src="{{acc.rem_img.url}}" alt="{{acc.title}}">
+              <span class="text-center">{{acc.title}}</span>
+            </label>
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="nocloth">
+          <div>액세서리를 등록하고 이용해주세요!</div>
+        </div>
+      {% endif %}
+    </div>
+    <br>
+    <input type="submit", value="저장하기" class="btn btn-secondary" />
+    <br>
+  </form>
+</div>
+<script>
+  const strip = (string) => {
+    return string.replace(/^\s+|\s+$/g, "");
+    };
+  const requestUploadLook = new XMLHttpRequest();
+  const lookUpload = (id) => {
+    const url = "/closet/create/clothes/img/" + id;
+    requestUploadLook.open("POST", url, true)
+    requestUploadLook.setRequestHeader(
+      "Content-Type",
+      "application/x-www-form-urlencoded"
+    );
+    requestUploadLook.send(JSON.stringify({id: id}));
+  };
+
+  requestUploadLook.onreadystatechange = () => {
+    if (requestUploadLook.readyState === XMLHttpRequest.DONE) {
+      if (requestUploadLook.status < 400) {
+        const { id } = JSON.parse(requestUploadLook.response);
+        const lookName = document.getElementById(`look`);
+        const lReader = new FileReader();
+        lReader.readAsDataURL(lookName.files[0]);
+        lReader.onloadend = function(event){
+          const img = document.getElementById(`rep_look_img`);
+          img.src = event.target.result;
+        }
+      };
+    };
+  };
+</script>
 {% endblock %}
