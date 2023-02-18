@@ -17,6 +17,8 @@
     justify-content: space-around;
     margin-bottom: 1rem;
     background-color: #f1f1f1;
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem
 }
 
 .new_post {
