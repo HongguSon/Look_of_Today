@@ -6,22 +6,32 @@
 {% endblock %}
 {% block content %}
 
+<div class="clothes_create">
 <form action="{% url 'closet:clothes_create' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    <p>등록하실 옷의 종류를 구분해주세요?!?! 멘트 모르겠다</p>
+    <div class="filebox">
+        <label for="file" >당신의 패션 아이템을 올려주세요!</label> 
+        <br />
+        <br />
+        <input type="file" name="image" id="file">
+    </div>
+    <br />
+    <br />
+    <p class="clothes_create_p1">Item 이름: <input name="title" /></p>
+    <br/>
+    <p class="clothes_create_p2">구매 링크: <input name="buying" /></p>
+    <div class="clothes_type">
     <input type="radio" name="clothes" value="outer">Outer
     <input type="radio" name="clothes" value="top">Top
     <input type="radio" name="clothes" value="bottom">Bottom
     <input type="radio" name="clothes" value="shoes">Shoes
     <input type="radio" name="clothes" value="acc">Acc
-    <hr />
-    <div class="filebox">
-        <label for="file" >img</label> 
-        <input type="file" name="image" id="file">
     </div>
-    <p>title: <input name="title" /></p>
-    <p>buying: <textarea name="buying" cols="70" rows="5"></textarea></p>
+    <br />
+    {% if error %}
+        <p>{{error}}</p>
+    {% endif %}
     <button type="submit" class="btn btn-primary float-right" id="subbtn">Submit</button>
 </form>
-
+</div>
 {% endblock %}

@@ -2,6 +2,7 @@
 {% load static %}
 {% block extrahead %}
 <link rel="stylesheet" href="{% static 'css/community.css' %}">
+<link rel="stylesheet" href="{% static 'css/community_react.css' %}">
 <title>community</title>
 {% endblock %}
 
@@ -10,83 +11,93 @@
 
 <body>
   <div class="main">
-    <div class="post-all px-5">
-      <div class="post_all">{{title}}</div>
-      <a href="{% url 'community:talk_create' %}">글 작성</a>
-
-      <a href="{% url 'community:community_main' %}">모든 게시판</a>
-      <a href="{% url 'community:buying' %}">공동구매</a>
+    <div class="post-all">
+      <div class="post_all px-5">{{title}}
+        <p class="new_post">  
+        <a href="{% url 'community:talk_create' %}">게시글 작성</a>
+        <a href="{% url 'community:talk_create' %}"><i class="fa-regular fa-pen-to-square"></i></a>
+        </p>
+      </div>
+      <div class="com_list px-5">
+      <a href="{% url 'community:community_main' %}">ALL</a>
+      <a href="{% url 'community:buying' %}">공구해요</a>
       <a href="{% url 'community:openrun' %}">오픈런</a>
       <a href="{% url 'community:other' %}">잡담방</a>
-
-      {%for talk in page_obj%}
-      <div class="post-box">
-        <div> 커뮤니티 종류 : {{talk.category}} </div>
-        <div> 게시글 이름 : <a href="{% url 'community:talk_detail' talk.pk %}">{{talk.title}} </a> </div>
-        <div> 댓글 수: {%for count in comments_count%}
-          {%if forloop.counter0 == talk.pk %} {{count}}
-          {%endif%}{%endfor%} </div>
-        <div>생성일 :
-          {% if talk.created_string == False %}
-          <td>{{ talk.create_date|date:'m월 d일' }}</td>
-          {% else %}
-          <td>{{ talk.created_string }}</td>
-          {% endif %}
+      </div>
+      <div>
+        <div class="post-box">
+          <div id="post_menu">
+            <span>게시판</span>
+            <span>제목</span>
+            <span>작성일</span>
+            <span><i class="fa-regular fa-heart" id></i></span>
+          </div>
         </div>
-        <div> 좋아요 수: {{talk.total_likes}}</div>
+        <hr>
+      {%for talk in page_obj%}
+        <div  class="commain_title px-4">
+          <table>
+            <tr>
+            <td id="talk_category">{{talk.category}}</td>
+            <td id="talk_title">
+              <a href="{% url 'community:talk_detail' talk.pk %}">{{talk.title}}</a>
+              <span id="talk_comment">
+                <i class="fa-regular fa-comment"></i>
+                {%for count in comments_count%}
+                {%if forloop.counter0 == talk.pk %}
+                {{count}}
+                {%endif%}
+                {%endfor%}
+              </span></td>
+            <td id="talk_date">{% if talk.created_string == False %}
+              <td>{{ talk.create_date|date:'m월 d일' }}</td>
+              {% else %}
+              <td>{{ talk.created_string }}</td>
+              {% endif %}</td>
+            <td id="talk_like">{{talk.total_likes}}</td>
+          </tr>
+          </table>
+        </div>
         <hr>
       </div>
       {%endfor%}
     </div>
-  </div>
-  <!-- <div class="paginator">
-    <ul style="display: flex; list-style: none;">
-      {%for page in paginator.page_range%}
-      <li style="margin: 3px;"><a style="text-decoration: none; color:blue;"
-          herf="community:talk_detail?page={{page}}">{{page}}</a></li>
-      {%endfor%}
-    </ul>
-  </div> -->
+    </div>
 
-  <div class="board-pagination">
-    <ul class="pagination">
-      <!-- 이전페이지 -->
-      {% if page_obj.has_previous %}
-      <!-- //이전페이지가 있으면 연결 -->
-      <li class="page-item">
-        <a class="page-link" tabindex="-1" href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
-      </li>
-      {% else %}
-      <li class="page-item disabled">
-        <a class="page-link" href="#">&laquo;</a>
-      </li>
-      {% endif %}
-      <!-- 페이지리스트 -->
-      {% for page_number in page_obj.paginator.page_range %}
-
-      {{page.number}}
-
-      {% if page_number == page_obj.number %}
-      <li class="page-item active" aria-current="page">
-        <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
-      </li>
-      {% else %}
-      <li class="page-item">
-        <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
-      </li>
-      {% endif %}
-      {% endfor %}
-
-      {% if page_obj.has_next %}
-      <li class="page-item">
-        <a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a>
-      </li>
-      {% else %}
-      <li class="page-item disabled">
-        <a class="page-link" tabindex="-1" href="#">&raquo;</a>
-      </li>
-      {% endif %}
-    </ul>
-  </div>
+    <div class="board-pagination">
+      <ul class="pagination">
+        {% if page_obj.has_previous %}
+        <li class="page-item">
+          <a class="page-link" tabindex="-1" href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+          <a class="page-link" href="#">&laquo;</a>
+        </li>
+        {% endif %}
+        {% for page_number in page_obj.paginator.page_range %}
+        {{page.number}}
+        {% if page_number == page_obj.number %}
+        <li class="page-item active" aria-current="page">
+          <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+        </li>
+        {% else %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+          <a class="page-link" tabindex="-1" href="#">&raquo;</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  
 </body>
 {% endblock %}

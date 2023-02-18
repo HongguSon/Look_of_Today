@@ -12,21 +12,47 @@ from django.core.exceptions import PermissionDenied
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 # Create your views here.
-class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
-    model = Post
-    fields = ['main_img', 'title', 'open', 'top', 'bottom', 'acc', 'outer', 'shoes']
-    template_name = 'community/post_create.html'
-
-    def test_func(self):
-        return self.request.user
-
-    def form_valid(self, form):
-        current_user = self.request.user
-        if current_user.is_authenticated:
-            form.instance.author = current_user
-            return super(PostCreate, self).form_valid(form)
-        else:
-            return redirect('closet:closet_all')
+def post_create(request, *args, **kwargs):
+    outer_list = Outer.objects.filter(author=request.user)
+    top_list = Top.objects.filter(author=request.user)
+    bottom_list = Bottom.objects.filter(author=request.user)
+    shoes_list = Shoes.objects.filter(author=request.user)
+    acc_list = Acc.objects.filter(author=request.user)
+    
+    if request.method == "POST":
+        int_outer = list(map(int, request.POST.getlist('outer')))
+        int_top = list(map(int, request.POST.getlist('top')))
+        int_bottom = list(map(int, request.POST.getlist('bottom')))
+        int_shoes = list(map(int, request.POST.getlist('shoes')))
+        int_acc = list(map(int, request.POST.getlist('acc')))
+        new_post = Post.objects.create(
+            title=request.POST["title"],
+            main_img=request.FILES.get("image"),
+            author=request.user,
+            open=request.POST["open"],
+        )
+        for i in int_outer:
+            new_post.outer.add(i)
+        for i in int_top:
+            new_post.top.add(i)   
+        for i in int_bottom:
+            new_post.bottom.add(i)
+        for i in int_shoes:
+            new_post.shoes.add(i)
+        for i in int_acc:
+            new_post.acc.add(i)
+        new_post.save()
+        return redirect('closet:closet_main')
+    
+    context = {
+        'outer_list' : outer_list,
+        'top_list' : top_list,
+        'bottom_list' : bottom_list,
+        'shoes_list' : shoes_list,
+        'acc_list' : acc_list,
+    }
+    
+    return render(request, "community/post_create.html", context=context)
 
 def post_detail(request, pk, *args, **kwargs):
     post = Post.objects.get(pk=pk)
@@ -103,7 +129,7 @@ def post_likes(request, pk, *args, **kwargs):
 class TalkCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Talk
     fields = ['category', 'img', 'title', 'content']
-    template_name = 'community/post_create.html'
+    template_name = 'community/talk_create.html'
 
     def test_func(self):
         return self.request.user
@@ -189,7 +215,7 @@ def talk_likes(request, pk, *args, **kwargs):
 #페이지네이션 코드
 def paginations(request,talk_list):
     page=request.GET.get('page')
-    paginator=Paginator(talk_list,2) #2개씩 보기
+    paginator=Paginator(talk_list,5) #5개씩 보기
     try:
         page_obj=paginator.page(page)
     except PageNotAnInteger:
@@ -202,22 +228,59 @@ def paginations(request,talk_list):
 
 #댓글 수 세기 코드
 def count_comments(talk_list,t_comments):
-    for i in talk_list:
-        talk_pk=i.pk
+    if talk_list:
+        talk_pk=0
+        for i in talk_list:
+            if talk_pk<i.pk:
+                talk_pk = i.pk
+    else:
+        talk_pk = 0
     comments_count=[0 for i in range(talk_pk)]
     comments_count.append(0)
     for t_comment in t_comments:
         for talk in talk_list:
             if talk.pk == t_comment.talk.pk:
                 comments_count[talk.pk]+=1
-    return comments_count
+    print(comments_count)
+    return talk_list,comments_count
 
-def community_main(request, *args, **kwargs):
+#정렬 코드
+def sorting(request):
+    sort_option = request.GET.get('sort')
+    print(sort_option)
+    if sort_option:
+        if sort_option=='byname':
+            talk_list=Talk.objects.order_by('title') #제목순
+        elif sort_option=='newest':
+            talk_list=Talk.objects.order_by('-create_date') #최신순
+        elif sort_option=='comment': 
+            talk_list=Talk.objects.order_by('-create_date') #댓글 순
+        elif sort_option=='likes': 
+            talk_list=Talk.objects.order_by('-create_date') #좋아요 순        
+    else:
+        talk_list=Talk.objects.all() #생성순,기본
+    return talk_list
+
+def community_main(request:HttpRequest, *args, **kwargs):
     title = "모든 게시물" 
-    talk_list = Talk.objects.all()
+    # talk_list = Talk.objects.all()
+    sort_option = request.GET.get('sort')
+    print(sort_option)
+    if sort_option:
+        if sort_option=='byname':
+            talk_list=Talk.objects.order_by('title') #제목순
+        elif sort_option=='newest':
+            talk_list=Talk.objects.order_by('-create_date') #최신순
+        elif sort_option=='comment': 
+            talk_list=Talk.objects.order_by('-create_date') #댓글 순
+        elif sort_option=='likes': 
+            talk_list=Talk.objects.order_by('-create_date') #좋아요 순        
+    else:
+        talk_list=Talk.objects.all() #생성순,기본
     t_comments=TalkComment.objects.all()
+    # talk_list=sorting(request)
+    talk_list,comments_count = count_comments(talk_list,t_comments)
     page_obj ,paginator = paginations(request,talk_list)
-    comments_count = count_comments(talk_list,t_comments)
     context={
         'talk_list' : talk_list,'title' : title,'comments_count' : comments_count,'page_obj':page_obj,'paginator':paginator,
         }   

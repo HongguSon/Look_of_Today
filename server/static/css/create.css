@@ -1,15 +1,70 @@
-label{
-    padding-left: 36.25rem;
-    padding-right: 0.938rem;
-    padding-top: 3.125rem;
-    padding-bottom: 3.125rem;
+.clothes_create{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 70px;
+    margin-top: 50px;
+}
+
+.clothes_create_p1{
+    text-align: center;
+    margin-right: 71px;
+}
+
+.clothes_create_p2{
+    text-align: center;
+    margin-right: 65px;
+}
+
+.filebox{
+    text-align: center;
+}
+
+.filebox > label{
+    font-size: 18px;
+}
+
+.filebox > input{
+    margin-left: 124px;
 }
 
 #subbtn{
-    margin-left: 42.813rem;
-    margin-bottom: 1.875rem;
+    margin: auto;
+    display: block;
 }
 
-#id_clothes{
-    width: 10.313rem;
+.clothes_type{
+    text-align: center;
+}
+
+.clothes_type > input{
+    margin-left: 10px;
+    margin-right: 5px;
+}
+
+.our_closet_create{
+    text-align: center;
+}
+.our_closet_create > select{
+    width: 300px !important;
+}
+.our_closet_create > p{
+    margin-top: 35px;
+}
+.opc_title{
+    margin-right: 42px;
+}
+.opc_img{
+    margin-left: 73px;
+}
+.opc_privstat{
+    font-size: 15px;
+}
+.opc_privstat > input{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.opc_submit{
+    margin-top: 20px;
+    margin-bottom: 50px;
 }
