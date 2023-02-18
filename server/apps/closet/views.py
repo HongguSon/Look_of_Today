@@ -15,9 +15,24 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from django.core.paginator import Paginator, PageNotAnInteger , EmptyPage
+from django.db.models import Count
+
+#페이지네이션 코드
+def paginations(request,post_list):
+    page=request.GET.get('page')
+    paginator=Paginator(post_list,6) #6개씩 보기
+    try:
+        page_obj=paginator.page(page)
+    except PageNotAnInteger:
+        page=1
+        page_obj=paginator.page(page)
+    except EmptyPage:
+        page=paginator.num_pages
+        page_obj=paginator.page(page)
+    return page_obj ,paginator
 
 
-# Create your views here.
 # REVIEW : mysql 파일 삭제 요망
 def closet_main(request, *args, **kwargs):
   clothes_list = Clothes.objects.filter(author=request.user)
@@ -83,30 +98,21 @@ def acc_list(request, *args, **kwargs):
   return render(request,'closet/closet_main.html',context=context)
 
 def our_closet(request, *args, **kwargs):  
-  # sort = request.GET.get('sort','')
-  
-  # if sort == 'new':
-  #   post_list = Post.objects.filter(open=True).order_by("-pk")
-  # elif sort == 'old':
-  #   post_list = Post.objects.filter(open=True).order_by("pk")
-  # elif sort == 'like':
-  #   post_list = Post.objects.filter(open=True).order_by("")
-  # else:
-  #   post_list = Post.objects.filter(open=True).order_by("-pk")
-    
-  # page = request.GET.get('page', 1)
-  # paginator = Paginator(post_li, 4)
-  
-  # try:
-  #   posts = paginator.page(page)
-  # except PageNotAnInteger:
-  #   posts = paginator.page(1)
-  # except EmptyPage:
-  #   posts = paginator.page(paginator.num_pages)
-  post_list = Post.objects.filter(open=True).order_by("-pk")
-
+  sort = request.GET.get('sort','')
+  if sort == 'new':
+    post_list = Post.objects.filter(open=True).order_by("-pk")
+  elif sort == 'old':
+    post_list = Post.objects.filter(open=True).order_by("pk")
+  elif sort == 'like':
+    post_list= Post.objects.filter(open=True).annotate(likes_count=Count('likes')).order_by('-likes_count')
+  else:
+    post_list = Post.objects.filter(open=True).order_by("-pk")
+  page_obj ,paginator= paginations(request,post_list)
   context={
       'post_list' : post_list,
+      'page_obj': page_obj,
+      'paginator' : paginator,
+      'sort': sort
       }
   return render(request,'closet/our_closet.html',context=context)
 

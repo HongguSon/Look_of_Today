@@ -6,7 +6,9 @@
         font-size: 0.8rem;
     }
     .com_list{
-        display: grid;
+        width: 375px;
+        padding-top: 10px;
+        gap: 2rem;
     }
     .com_list > a{
         margin-bottom: 10px;
