@@ -272,7 +272,6 @@ def count_comments(talk_list,t_comments):
         for talk in talk_list:
             if talk.pk == t_comment.talk.pk:
                 comments_count[talk.pk]+=1
-    print(comments_count)
     return talk_list,comments_count
 
 #정렬 코드
