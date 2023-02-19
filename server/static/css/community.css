@@ -86,6 +86,10 @@ tr td{
     font-size: 10px;
 }
 
+#talk_img{
+    font-size: 11px;
+}
+
 #talk_date {
     width: 19%;
     text-align: center;
