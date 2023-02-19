@@ -18,7 +18,7 @@
       </p>
     </div>
 
-    <div class="com_list px-5 py-2">
+    <div class="com_list px-5">
       <a href="{% url 'community:community_main' %}">ALL</a>
       <a href="{% url 'community:buying' %}">공구해요</a>
       <a href="{% url 'community:openrun' %}">오픈런</a>
@@ -49,6 +49,11 @@
             <td id="talk_category">{{talk.category}}</td>
             <td id="talk_title">
               <a href="{% url 'community:talk_detail' talk.pk %}">{{talk.title}}</a>
+              <span id="talk_img">
+                {%if talk.img %}
+                  <i class="fa-regular fa-image"></i>
+                {%endif%}
+              </span> 
               <span id="talk_comment">
                 <i class="fa-regular fa-comment"></i>
                 {%for count in comments_count%}
@@ -58,6 +63,7 @@
                 {%endfor%}
               </span>
             </td>
+            
             {% if talk.created_string == False %}
             <td id="talk_date">{{ talk.create_date|date:'m월 d일' }}</td>
             {% else %}
