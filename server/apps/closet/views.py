@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from config.apps.main.models import *
+from server.apps.main.models import *
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import CreateView, UpdateView
 from django.views.decorators.http import require_POST

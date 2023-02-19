@@ -31,10 +31,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "config.apps.closet",
-    "config.apps.community",
-    "config.apps.main",
-    "config.apps.user",
+    "server.apps.closet",
+    "server.apps.community",
+    "server.apps.main",
+    "server.apps.user",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
