@@ -38,10 +38,12 @@
   {% if outer.rem_img %}
   <div class="item__container cloth-id-{{outer.id}}">
     <img src="{{outer.rem_img.url}}" class="post_img1">
-    {% if user in outer.likes.all %}
-      <div class="post__dislike like_icon_position" onclick="onClickLike({{ outer.pk }}, 'dislike', '{{outer.rem_img.url}}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>
-    {% else %}
-      <div class="post__like like_icon_position" onclick="onClickLike({{ outer.pk }}, 'like', '{{outer.rem_img.url}}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>
+    {% if user.is_authenticated %}
+      {% if user in outer.likes.all %}
+        <div class="post__dislike like_icon_position" onclick="onClickLike({{ outer.pk }}, 'dislike', '{{outer.rem_img.url}}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>
+      {% else %}
+        <div class="post__like like_icon_position" onclick="onClickLike({{ outer.pk }}, 'like', '{{outer.rem_img.url}}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>
+      {% endif %}
     {% endif %}
   </div>
   {% endif %}
@@ -52,10 +54,12 @@
   {% if top.rem_img %}
   <div class="item__container cloth-id-{{top.id}}">
     <img src="{{top.rem_img.url}}" class="post_img1">
-    {% if user in top.likes.all %}
-      <div class="post__dislike like_icon_position" onclick="onClickLike({{ top.pk }}, 'dislike', '{{top.rem_img.url}}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>
-    {% else %}
-      <div class="post__like like_icon_position" onclick="onClickLike({{ top.pk }}, 'like', '{{top.rem_img.url}}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>
+    {% if user.is_authenticated %}
+      {% if user in top.likes.all %}
+        <div class="post__dislike like_icon_position" onclick="onClickLike({{ top.pk }}, 'dislike', '{{top.rem_img.url}}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>
+      {% else %}
+        <div class="post__like like_icon_position" onclick="onClickLike({{ top.pk }}, 'like', '{{top.rem_img.url}}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>
+      {% endif %}
     {% endif %}
   </div>
   {% endif %}
@@ -66,10 +70,12 @@
     {% if bottom.rem_img %}
     <div class="item__container cloth-id-{{bottom.id}}">
       <img src="{{bottom.rem_img.url}}" class="post_img1">
-      {% if user in bottom.likes.all %}
-        <div class="post__dislike like_icon_position" onclick="onClickLike({{ bottom.pk }}, 'dislike', '{{bottom.rem_img.url}}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>
-      {% else %}
-        <div class="post__like like_icon_position" onclick="onClickLike({{ bottom.pk }}, 'like', '{{bottom.rem_img.url}}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>
+      {% if user.is_authenticated %}
+        {% if user in bottom.likes.all %}
+          <div class="post__dislike like_icon_position" onclick="onClickLike({{ bottom.pk }}, 'dislike', '{{bottom.rem_img.url}}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>
+        {% else %}
+          <div class="post__like like_icon_position" onclick="onClickLike({{ bottom.pk }}, 'like', '{{bottom.rem_img.url}}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>
+        {% endif %}
       {% endif %}
     </div>
     {% endif %}
@@ -80,10 +86,12 @@
     {% if shoes.rem_img %}
     <div class="item__container cloth-id-{{shoes.id}}">
       <img src="{{shoes.rem_img.url}}" class="post_img1">
-      {% if user in shoes.likes.all %}
-        <div class="post__dislike like_icon_position" onclick="onClickLike({{ shoes.pk }}, 'dislike', '{{shoes.rem_img.url}}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>
-      {% else %}
-        <div class="post__like like_icon_position" onclick="onClickLike({{ shoes.pk }}, 'like', '{{shoes.rem_img.url}}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>
+      {% if user.is_authenticated %}
+        {% if user in shoes.likes.all %}
+          <div class="post__dislike like_icon_position" onclick="onClickLike({{ shoes.pk }}, 'dislike', '{{shoes.rem_img.url}}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>
+        {% else %}
+          <div class="post__like like_icon_position" onclick="onClickLike({{ shoes.pk }}, 'like', '{{shoes.rem_img.url}}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>
+        {% endif %}
       {% endif %}
     </div>
     {% endif %}
@@ -94,10 +102,12 @@
     {% if acc.rem_img %}
     <div class="item__container cloth-id-{{acc.id}}">
       <img src="{{acc.rem_img.url}}" class="post_img1">
-      {% if user in acc.likes.all %}
-        <div class="post__dislike like_icon_position" onclick="onClickLike({{ acc.pk }}, 'dislike', '{{acc.rem_img.url}}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>
-      {% else %}
-        <div class="post__like like_icon_position" onclick="onClickLike({{ acc.pk }}, 'like', '{{acc.rem_img.url}}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>
+      {% if user.is_authenticated %}
+        {% if user in acc.likes.all %}
+          <div class="post__dislike like_icon_position" onclick="onClickLike({{ acc.pk }}, 'dislike', '{{acc.rem_img.url}}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>
+        {% else %}
+          <div class="post__like like_icon_position" onclick="onClickLike({{ acc.pk }}, 'like', '{{acc.rem_img.url}}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>
+        {% endif %}
       {% endif %}
     </div>
     {% endif %}

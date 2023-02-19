@@ -122,6 +122,8 @@ def create_clothes(request, *args, **kwargs):
     'error' : error,
     }
   if request.method == "POST":
+    clothes = request.POST["clothes"]
+    
     if not request.FILES.get("cloth"):
       return render(request, "closet/clothes_create.html", context=context)
     if clothes == 'top':
