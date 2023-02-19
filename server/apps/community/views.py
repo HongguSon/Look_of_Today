@@ -116,7 +116,7 @@ def post_delete(request:HttpRequest, pk, *args, **kwargs):
     if request.method == "POST":
         post = Post.objects.get(pk=pk)
         post.delete()
-    return redirect("closet:our_closet")
+    return redirect("/")
 
 @require_POST
 def post_likes(request, pk, *args, **kwargs):
@@ -272,7 +272,6 @@ def count_comments(talk_list,t_comments):
         for talk in talk_list:
             if talk.pk == t_comment.talk.pk:
                 comments_count[talk.pk]+=1
-    print(comments_count)
     return talk_list,comments_count
 
 #정렬 코드

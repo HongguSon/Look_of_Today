@@ -35,8 +35,8 @@
     {% csrf_token %}
     {% if user in post.likes.all %}
     <button class="btn btn-link text-danger">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-suit-heart-fill m-0"
-        viewBox="0 0 16 16">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+        class="bi bi-suit-heart-fill m-0" viewBox="0 0 16 16">
         <path
           d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z" />
       </svg>
@@ -58,9 +58,6 @@
 
 <div class="button-box">
   {% if user == post.author %}
-  <button>
-    <a href="{% url 'community:update' post.pk %}" style="color:black; text-decoration:none;">수정하기</a>
-  </button>
   <button type="button" class="delbtn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_post_modal">
     삭제하기
   </button>
@@ -77,7 +74,9 @@
 <div class="postimgs">
   <img src="{{post.main_img.url}}" class="post_img1"> <br />
 </div>
+
 <p class="cody_title">어떤 아이템을 사용했나요?</p>
+
 <div class="cody_detail">
   {% for outer in post.outer.iterator %}
   {% if outer.rem_img %}
@@ -108,41 +107,28 @@
 
 <hr>
 <div class="comment-sum">
-    <div id="comment-list-{{post.pk}}" class="comment-list">
-      <div class="comm">
-
-        {% for comment in comments %}
-          <div class="d-flex justify-content-between align-items-center mx-2">
-            <div class="d-flex">
-              <i class="fa-solid fa-user m-3"></i>  
-              <div class="comment_other">
-                <div class="comment_author">{{comment.author.username}}</div>
-                <div class="content_other">{{comment.content}}</div>
-              </div>
-            </div>
-          
-          {% if user == comment.author %}
-            <form action="{% url 'community:delete_comment' comment.pk %}" method="post" class="comment_detail">
-              {% csrf_token %}
-              <div class="del_list">
-                <input type="submit", value="삭제", class="delbtn2"/>
-              </div>
-            </form>
-          {% endif %}
-         </div>
-         <hr/>
-        {% endfor %}
-      </div>
-      {% if user == comment.author %}
-      <form action="{% url 'community:delete_comment' comment.pk %}" method="post" class="comment_detail">
-        {% csrf_token %}
-        <div class="del_list">
-          <input type="submit" , value="삭제" , class="delbtn2" />
-
-          <hr />
+  <div id="comment-list-{{post.pk}}" class="comment-list">
+    <div class="comm">
+      {% for comment in comments %}
+      <div class="d-flex justify-content-between align-items-center mx-2">
+        <div class="d-flex">
+          <i class="fa-solid fa-user m-3"></i>
+          <div class="comment_other">
+            <div class="comment_author">{{comment.author.username}}</div>
+            <div class="content_other">{{comment.content}}</div>
+          </div>
         </div>
-      </form>
-      {% endif %}
+
+        {% if user == comment.author %}
+        <form action="{% url 'community:delete_comment' comment.pk %}" method="post" class="comment_detail">
+          {% csrf_token %}
+          <div class="del_list">
+            <input type="submit" , value="삭제" , class="delbtn2" />
+          </div>
+        </form>
+        {% endif %}
+      </div>
+      <hr />
       {% endfor %}
     </div>
   </div>
@@ -166,32 +152,32 @@
   </div>
   {% endif %}
 
-<script>
-  const requestComment = new XMLHttpRequest();
+  <script>
+    const requestComment = new XMLHttpRequest();
 
-  const onClickCommenet = (id) => {
-    const url = "/community/comment/";
-    requestComment.open("POST", url, true);
-    requestComment.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    let content = document.querySelector(`#comment-input-${id}`).value;
-    let data = {
-      user: '{{user.username}}',
-      post_id: id,
-      content: content,
+    const onClickCommenet = (id) => {
+      const url = "/community/comment/";
+      requestComment.open("POST", url, true);
+      requestComment.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      let content = document.querySelector(`#comment-input-${id}`).value;
+      let data = {
+        user: '{{user.username}}',
+        post_id: id,
+        content: content,
+      }
+      requestComment.send(JSON.stringify(data));
     }
-    requestComment.send(JSON.stringify(data));
-  }
 
-  requestComment.onreadystatechange = () => {
-    if (requestComment.readyState === XMLHttpRequest.DONE) {
-      if (requestComment.status < 400) {
-        const { author, post_id, content, comment_id } = JSON.parse(requestComment.response);
-        document.querySelector(`#comment-input-${post_id}`).value = "";
-        const element = document.querySelector(`#comment-list-${post_id}`);
-        const comm = document.querySelector(`.comm`);
-        const newComment = document.createElement('div');
-        newComment.className = "d-flex justify-content-between align-items-center mx-2";
-        newComment.innerHTML = `<div class="d-flex"><i class="fa-solid fa-user m-3"></i>
+    requestComment.onreadystatechange = () => {
+      if (requestComment.readyState === XMLHttpRequest.DONE) {
+        if (requestComment.status < 400) {
+          const { author, post_id, content, comment_id } = JSON.parse(requestComment.response);
+          document.querySelector(`#comment-input-${post_id}`).value = "";
+          const element = document.querySelector(`#comment-list-${post_id}`);
+          const comm = document.querySelector(`.comm`);
+          const newComment = document.createElement('div');
+          newComment.className = "d-flex justify-content-between align-items-center mx-2";
+          newComment.innerHTML = `<div class="d-flex"><i class="fa-solid fa-user m-3"></i>
                 <div class="comment_other">
                   <div class="comment_author_other">${author}</div>
                   <div class="content_other">${content}</div>
@@ -202,12 +188,12 @@
                     <input type="submit", value="삭제", class="delbtn2" />
                   </div>
                 </form>`
-        comm.appendChild(newComment);
-        let h= document.createElement("hr");
-        comm.appendChild(h);
+          comm.appendChild(newComment);
+          let h = document.createElement("hr");
+          comm.appendChild(h);
+        }
       }
     }
-  }
 
   // var myModal = document.getElementById('myModal')
   // var myInput = document.getElementById('myInput')
@@ -215,5 +201,5 @@
   // myModal.addEventListener('shown.bs.modal', function () {
   //   myInput.focus()
   // })
-</script>
-{% endblock %}
+  </script>
+  {% endblock %}
