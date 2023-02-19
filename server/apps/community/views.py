@@ -11,6 +11,7 @@ from django.views.generic import CreateView, UpdateView
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models import Count
+from server.apps.user.models import Profile
 
 def post_create(request, *args, **kwargs):
     outer_list = Outer.objects.filter(author=request.user)
@@ -85,6 +86,7 @@ def post_detail(request, pk, *args, **kwargs):
 def comment_ajax(request, *args, **kwargs):
     data = json.loads(request.body)
     post = Post.objects.get(id=data["post_id"])
+    pro = Profile.objects.all()
     
     comment = PostComment.objects.create(
         post = post,
@@ -93,6 +95,7 @@ def comment_ajax(request, *args, **kwargs):
     comment.save()
 
     context = {
+        'user_img' : Profile.profile_image,
         'author' : str(comment.author),
         'post_id' : post.id,
         'content' : comment.content,
@@ -109,66 +112,6 @@ def delete_pcomment(request, pk, *args, **kwargs):
     else:
         PermissionDenied
 
-class PostUpdate(LoginRequiredMixin,UpdateView):
-  model = Post
-  fields = ['main_img', 'title', 'open', 'top', 'bottom', 'acc', 'outer', 'shoes']
-  
-  template_name = 'community/post_update.html'
-
-  def dispatch(self, request, *args, **kwargs):
-        if request.user.is_authenticated and request.user == self.get_object().author:
-            return super(PostUpdate, self).dispatch(request, *args, **kwargs)
-        else:
-            raise PermissionDenied
-        
-def post_update(request, pk, *args, **kwargs):
-    post = Post.objects.get(pk=pk)
-    outer_list = Outer.objects.filter(author=request.user)
-    top_list = Top.objects.filter(author=request.user)
-    bottom_list = Bottom.objects.filter(author=request.user)
-    shoes_list = Shoes.objects.filter(author=request.user)
-    acc_list = Acc.objects.filter(author=request.user)
-    
-    context = {
-        'post': post,
-        'outer_list' : outer_list,
-        'top_list' : top_list,
-        'bottom_list' : bottom_list,
-        'shoes_list' : shoes_list,
-        'acc_list' : acc_list,
-    }
-    
-    if request.method == "POST":
-        post.title=request.POST["title"]
-        if request.FILES.get("image"):
-            post.main_img=request.FILES.get("image")
-        post.author=request.user 
-        post.open=request.POST["open"]
-        int_outer = list(map(int, request.POST.getlist('outer')))
-        int_top = list(map(int, request.POST.getlist('top')))
-        int_bottom = list(map(int, request.POST.getlist('bottom')))
-        int_shoes = list(map(int, request.POST.getlist('shoes')))
-        int_acc = list(map(int, request.POST.getlist('acc')))
-        post.outer.clear()
-        post.top.clear()
-        post.bottom.clear()
-        post.shoes.clear()
-        post.acc.clear()
-        for i in int_outer:
-            post.outer.add(i)
-        for i in int_top:
-            post.top.add(i)   
-        for i in int_bottom:
-            post.bottom.add(i)
-        for i in int_shoes:
-            post.shoes.add(i)
-        for i in int_acc:
-            post.acc.add(i)
-        post.save()
-        return redirect("community:post_detail", pk)
-    
-    return render(request, "community/post_update.html", context=context)
-    
 def post_delete(request:HttpRequest, pk, *args, **kwargs):
     if request.method == "POST":
         post = Post.objects.get(pk=pk)
@@ -185,41 +128,34 @@ def post_likes(request, pk, *args, **kwargs):
         else:
             article.likes.add(request.user)
         return redirect('community:post_detail',pk)
-        # return redirect('accouts:login')위에거 대신 이거 떠야함! 나중에 로그인 합치고!!
     return render(request, 'community/post_detail.html')
 
 
 # 여기까지가 옷장이고
 # 여기서부터가 커뮤니티
 
-# class TalkCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
-#     model = Talk
-#     fields = ['category', 'img', 'title', 'content']
-#     template_name = 'community/talk_create.html'
-
-#     def test_func(self):
-#         return self.request.user
-
-#     def form_valid(self, form):
-#         current_user = self.request.user
-#         if current_user.is_authenticated:
-#             form.instance.author = current_user
-#             return super(TalkCreate, self).form_valid(form)
-#         else:
-#             return redirect('community:community_main')
 def talk_create(request, *args, **kwargs):
-    user = request.user
-    context = {'user':user}
-    if request.method == "POST":
-        Talk.objects.create(
-            author = User.objects.get(username=user),
-            category = request.POST['category'],
-            content = request.POST['content'],
-            img = request.FILES.get("image"),
-            title = request.POST['title'],
-        )
-        return redirect("community:community_main")
-    return render(request, "community/talk_create.html", context=context)
+  user = request.user
+  context = {
+    'user': user,
+  }
+  if request.method == "POST":
+    if not request.POST['category'] or not request.POST['content'] or not request.POST['title']:
+      error = '에러'
+      context = {
+        'user': user,
+        'error': error,
+      }
+      return render(request, "community/talk_create.html", context=context)
+    Talk.objects.create(
+      author = User.objects.get(username=user),
+      category = request.POST['category'],
+      content = request.POST['content'],
+      img = request.FILES.get("image"),
+      title = request.POST['title'],
+    )
+    return redirect("community:community_main")
+  return render(request, "community/talk_create.html", context=context)
 
 @csrf_exempt
 def talk_create_img(request, pk, *args, **kwargs):
@@ -265,31 +201,26 @@ def delete_tcomment(request, pk, *args, **kwargs):
     else:
         PermissionDenied
 
-# class TalkUpdate(LoginRequiredMixin,UpdateView):
-#     model = Talk
-#     fields = ['category', 'img', 'title', 'content']
-#     template_name = 'community/update.html'
-
-#     def dispatch(self, request, *args, **kwargs):
-#         if request.user.is_authenticated and request.user == self.get_object().author:
-#             return super(TalkUpdate, self).dispatch(request, *args, **kwargs)
-#         else:
-#             raise PermissionDenied
 def talk_update(request, pk, *args, **kwargs):
-    talk = Talk.objects.get(id=pk)
-    context = {
+  talk = Talk.objects.get(id=pk)
+  context = {
+    'talk' : talk,
+  }
+  if request.method == "POST":
+    if not request.POST['category'] or not request.POST['content'] or not request.POST['title']:
+      error = '에러'
+      context = {
         'talk' : talk,
-    }
-    if request.method == "POST":
-        talk.title=request.POST["title"]
-        talk.category=request.POST["category"]
-        talk.content=request.POST["content"]
-        talk.img = request.FILES.get("image")
-        talk.save()
-        return redirect(f"/community/talk-detail/{talk.id}")
-
-    
-    return render(request, "community/talk_update.html", context=context)
+        'error': error,
+      }
+      return render(request, "community/talk_update.html", context=context)
+    talk.title=request.POST["title"]
+    talk.category=request.POST["category"]
+    talk.content=request.POST["content"]
+    talk.img = request.FILES.get("image")
+    talk.save()
+    return redirect(f"/community/talk-detail/{talk.id}")
+  return render(request, "community/talk_update.html", context=context)
         
 def talk_delete(request:HttpRequest, pk, *args, **kwargs):
     if request.method == "POST":

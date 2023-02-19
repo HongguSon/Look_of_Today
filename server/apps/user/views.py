@@ -2,8 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import auth
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
-from .models import Profile
-from server.apps.main.models import *
+from server.apps.user.models import Profile
 from django.contrib.auth.decorators import login_required
 from .forms import ProfileUpdateForm
 from .forms import DateUpdateForm
@@ -96,9 +95,9 @@ def mypage(request, *args, **kwargs):
 def mypage_update(request, *args, **kwargs):
   user = request.user
   profile_image = user.profile.profile_image
-  phone_num = user.profile.phone_num
   height = user.profile.height
   weight = user.profile.weight
+  phone_num = user.profile.phone_num
   birth_date = user.profile.birth_date
   if birth_date:
     year = birth_date.year
@@ -111,28 +110,102 @@ def mypage_update(request, *args, **kwargs):
     initial_date = None
   gender = user.profile.gender
   date_form = DateUpdateForm()
+  
+  # if not weight_str.isdigit():
+  #   error = '에러'
+  #   context = {'user':user,
+  #           'profile_image':profile_image,
+  #           'phone_num':phone_num,
+  #           'height':height,
+  #           'birth_date':birth_date,
+  #           'date_form':date_form,
+  #           'initial_date':initial_date,
+  #           'gender': gender,
+  #           'error2' : error,
+  #           }
+  #   return render(request, "user/mypage_update.html",context=context)
   context = {'user':user,
-             'profile_image':profile_image,
-             'phone_num':phone_num,
-             'height':height,
-             'weight':weight,
-             'birth_date':birth_date,
-             'date_form':date_form,
-             'initial_date':initial_date,
-             'gender': gender,}
+            'profile_image':profile_image,
+            'phone_num':phone_num,
+            'height':height,
+            'weight':weight,
+            'birth_date':birth_date,
+            'date_form':date_form,
+            'initial_date':initial_date,
+            'gender': gender,}
   
   if request.method == "POST":
     if request.FILES.get("image"):
       user.profile.profile_image=request.FILES["image"]
     if request.POST.get("check1"):
       user.profile.profile_image = None
-      
-      
+    # re_phone_num = request.POST["phone_num"]
+    # if type(re_phone_num) == int:
+    #   pass
+    # else:
+    #   if re_phone_num == '':
+    #     pass
+    #   else:
+    #     error = '에러'
+    #     context = {
+    #       'user':user,
+    #       'profile_image':profile_image,
+    #       'height':height,
+    #       'weight':weight,
+    #       'birth_date':birth_date,
+    #       'date_form':date_form,
+    #       'initial_date':initial_date,
+    #       'gender': gender,
+    #       'error3': error,
+    #       }
+    #     return render(request, "user/mypage_update.html",context=context)
     user.profile.phone_num = request.POST["phone_num"]
+    re_height = request.POST["height"]
+    if type(re_height) == int or type(re_height) == float:
+      pass
+    else:
+      if re_height == '':
+        pass
+      else:
+        error = '에러'
+        context = {
+          'user':user,
+          'profile_image':profile_image,
+          'phone_num':phone_num,
+          'weight':weight,
+          'birth_date':birth_date,
+          'date_form':date_form,
+          'initial_date':initial_date,
+          'gender': gender,
+          'error1' : error,
+          }
+        return render(request, "user/mypage_update.html",context=context)
+    
     user.profile.height = request.POST["height"]
     if user.profile.height == '':
       user.profile.height = None
-      
+    
+    re_weight = request.POST["weight"]
+    if type(re_weight) == int or type(re_weight) == float:
+      pass
+    else:
+      if re_weight == '':
+        pass
+      else:
+        error = '에러'
+        context = {
+          'user':user,
+          'profile_image':profile_image,
+          'phone_num':phone_num,
+          'weight':weight,
+          'birth_date':birth_date,
+          'date_form':date_form,
+          'initial_date':initial_date,
+          'gender': gender,
+          'error2' : error,
+          }
+        return render(request, "user/mypage_update.html",context=context)
+        
     user.profile.weight = request.POST["weight"]
     if user.profile.weight == '':
       user.profile.weight = None
