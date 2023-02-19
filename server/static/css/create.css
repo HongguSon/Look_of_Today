@@ -90,6 +90,10 @@
     resize: none;
 }
 
+#look{
+    display: none;
+}
+
 .look_create {
     display: flex;
     flex-direction: column;
@@ -117,4 +121,9 @@
     display: flex;
     justify-content: center;
     width: 100%;
+}
+
+.lookopen{
+    font-size: 0.8rem;
+    color: gray;
 }
