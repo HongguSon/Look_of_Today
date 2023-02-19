@@ -81,7 +81,10 @@
         <input name="height" placeholder="키" value="" />
         {% endif %}
       </div>
-  
+      {% if error1 %}
+      <p class="error-color m-0">올바르지 않은 값입니다.</p>
+      {% endif %}
+
       <div class="d-flex align-items-center">
         <div class="mx-2">몸무게 : </div>
         {% if weight %}
@@ -90,6 +93,9 @@
         <input name="weight" placeholder="몸무게" value="" />
         {% endif %}
       </div>
+      {% if error2 %}
+      <p class="error-color m-0">올바르지 않은 값입니다.</p>
+      {% endif %}
   
       {% for field in date_form %}
       <div class="form-group d-flex align-items-center">
