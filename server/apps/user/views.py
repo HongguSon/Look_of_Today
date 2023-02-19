@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import auth
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
-from .models import Profile
+from server.apps.user.models import Profile
 from django.contrib.auth.decorators import login_required
 from .forms import ProfileUpdateForm
 from .forms import DateUpdateForm

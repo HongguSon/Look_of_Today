@@ -246,8 +246,6 @@ form svg{
 }
 
 @media screen and (max-width: 576px) {
-    .comment-input{margin-left: 1rem;}
-
     .postimgs > img {max-width: 80%; height: auto;}
 
     .post_category {padding-left: 1.5rem; padding-right: 1.5rem;}
