@@ -5,11 +5,11 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('', include("server.apps.main.urls")),
-    path('user/', include("server.apps.user.urls")),
-    path('community/', include("server.apps.community.urls")),
+    path('', include("config.apps.main.urls")),
+    path('user/', include("config.apps.user.urls")),
+    path('community/', include("config.apps.community.urls")),
     path('accounts/', include('allauth.urls')),
-    path('closet/', include("server.apps.closet.urls")),
+    path('closet/', include("config.apps.closet.urls")),
 ]
 
 

@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from server.apps.closet.views import *
+from config.apps.closet.views import *
 
 app_name = "community"
 

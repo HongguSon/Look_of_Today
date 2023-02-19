@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-# from server.apps.main.models import Comment
+# from config.apps.main.models import Comment
 
 # class CommentAdmin(admin.ModelAdmin):
 #     list_display = (

@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class ClosetConfig(AppConfig):
+class UserConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "server.apps.closet"
+    name = "config.apps.user"
