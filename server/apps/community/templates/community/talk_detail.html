@@ -66,8 +66,8 @@
   <div id="comment-list-{{talk.pk}}" class="comment-list">
     <div class="comm">
       {% for comment in t_comments %}
-      <div class="d-flex align-items-center m-0 p-4">
-        <i class="fa-solid fa-user m-3"></i>
+      <div class="d-flex m-0 p-4">
+        <img src="{{comment.author.profile.profile_image.url}}" alt="user_profile" style="width:2rem; height:2rem; margin-top: 0.5rem;">
         <div>
           <div>{{comment.author.username}}</div>
           <div>{{comment.content}}</div>
@@ -134,8 +134,30 @@
         comm.appendChild(newComment);
         let h = document.createElement("hr");
         comm.appendChild(h);
-      }
-    }
-  }
+      };
+    };
+  };
+  
+  const requestDelete = new XMLHttpRequest();
+    const onClickDelete = (post_id, comment_id) => {
+        const url = "/insta/comment/" + post_id + "/delete";
+        requestDelete.open("POST", url, true)
+        requestDelete.setRequestHeader(
+            "Content-Type",
+            "application/x-www-form-urlencoded"
+        );
+        requestDelete.send(JSON.stringify({post_id: post_id, comment_id: comment_id}));
+    };
+
+    requestDelete.onreadystatechange = () => {
+        if (requestDelete.readyState === XMLHttpRequest.DONE) {
+            if (requestDelete.status < 400) {
+                const { post_id, comment_id } = JSON.parse(requestDelete.response);
+                const targetContainer = document.querySelector(`#container`);
+                const target = document.getElementById(`${comment_id}`);
+                targetContainer.removeChild(target);
+            }
+        }
+    };
 </script>
 {% endblock %}

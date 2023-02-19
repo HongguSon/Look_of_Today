@@ -4,13 +4,74 @@
   <div class="nopost">
   <img src="{% static 'img/clothes.png' %}" id="main_icon" alt="" class="img-fluid">
   <div class="postex">
-      <span class="post_text">당신만의 멋진 착장을 등록해주세요!</span> <br>
-      <button class="startbtn"> 시작하기 </button>
+      <span class="post_text">오늘 뭐입지? 는 나만의 옷장을 꾸미고
+        <br /> 
+        모두의 옷장에 공유하는 서비스 입니다.
+      </span> <br>
+      <p class="main_start">
+      <button class="startbtn"> 오늘 뭐입지? 시작하기!</button>
+      <a href="#main2"><button class="morebtn"> 더 알아볼래요! </button></a>
+      </p>
   </div>
   </div>
-  <br>
-<div class="vote">
-  <span class="vote_text">착장 더 보러가기</span>
-  <button class="votebtn"> 여기를 누르세요! </button>
-</div>
+  <br />
+  <div class="main2_container">
+    <div class="main2" id="main2">
+      <p>
+        옷을 종류별로 업로드 해보세요! 
+        <br />
+        오늘 뭐입지? 에서는 업로드 시 자동으로 누끼를 따드려요!
+      </p>
+      <br />
+      <div class="main2_img">
+      <img src="{% static 'img/before_rbg.jpeg' %}" id="main2_before_rbg" alt="" class="img-fluid">
+      <img src="{% static 'img/arrow_right.png' %}" id="main2_arrow" alt="" class="img-fluid">
+      <img src="{% static 'img/after_rbg.webp' %}" id="main2_after_rbg" alt="" class="img-fluid">
+      </div>
+      <a href="#main3"><button class="morebtn2"> 또 무엇을 할 수 있나요?  </button></a>
+    </div>
+  </div>
+  <br />
+  <div class="main3" id="main3">
+    <p>
+      업로드한 옷들을 조합해 '모두의 옷장' 에 등록해보세요! <br />
+      <br />
+      당신의 멋진 착장을 공개로 등록해 다른 유저들과 의견을 나눌 수 있고,  <br />
+      <br />
+      비공개로 등록해 당신만의 착장을 기록할 수 있어요!
+    </p>
+    <br />
+    <div class="main3_img">
+    <img src="{% static 'img/main3_ex.png' %}" id="main3_ex" alt="" class="img-fluid">
+    </div>
+    <a href="#main4"><button class="morebtn3"> 다른 사람의 착장 중 마음에 드는게 너무 많아요!  </button></a>
+  </div>
+
+  <div class="main4" id="main4">
+    <p>
+      걱정 마세요! 오늘 뭐입지? 는 찜하기 기능이 있어요 !<br />
+      <br />
+      모두의 옷장에서 마음에 드는 다른 사람의 착장이나 옷이 있다면 찜하기를 통해 나만의 옷장으로 가져오세요!
+    </p>
+    <br />
+    <div class="main4_img">
+    <img src="{% static 'img/main4_ex.png' %}" id="main4_ex" alt="" class="img-fluid">
+    </div>
+    <a href="#main5"><button class="morebtn4"> 마음에 드는 착장이 있는데 옷 정보를 모르겠어요..  </button></a>
+  </div>
+
+  <div class="main5" id="main5">
+    <p>
+      오늘 뭐입지? 에서는 Google Lens를 통한 이미지 검색을 지원해요! <br />
+      <br />
+      마음에 드는 옷을 찜하고 평소 사고싶지만 정보를 모르던 옷들도 오늘 뭐입지? 에서 찾아보세요!
+    </p>
+    <br />
+    <div class="main5_img">
+    <img src="{% static 'img/main5_ex.png' %}" id="main4_ex" alt="" class="img-fluid">
+    </div>
+    <button class="morebtn5"> 이제 오늘 뭐입지? 를 시작해보세요!  </button>
+  </div>
+
+
 {% endblock %}

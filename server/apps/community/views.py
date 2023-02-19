@@ -11,6 +11,7 @@ from django.views.generic import CreateView, UpdateView
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models import Count
+from server.apps.user.models import Profile
 
 def post_create(request, *args, **kwargs):
     outer_list = Outer.objects.filter(author=request.user)
@@ -85,6 +86,7 @@ def post_detail(request, pk, *args, **kwargs):
 def comment_ajax(request, *args, **kwargs):
     data = json.loads(request.body)
     post = Post.objects.get(id=data["post_id"])
+    pro = Profile.objects.all()
     
     comment = PostComment.objects.create(
         post = post,
@@ -93,6 +95,7 @@ def comment_ajax(request, *args, **kwargs):
     comment.save()
 
     context = {
+        'user_img' : Profile.profile_image,
         'author' : str(comment.author),
         'post_id' : post.id,
         'content' : comment.content,
