@@ -7,16 +7,39 @@
 {% endblock %}
 
 {% block content %}
+<!-- Modal -->
+<div class="modal fade" id="delete_post_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">착장을 삭제하시겠습니까?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+        <form action="{% url 'community:delete' post.pk%}" method="post">
+          {% csrf_token %}
+          <input type="submit" , value="삭제하기" , class="btn btn-primary" />
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <div class="post_title">{{post.title}}</div>
 <div class="post_author">{{post.author}}</div>
 <div class="post_time">{{post.create_date}}</div>
 
 <div class="button-box">
   {% if user == post.author %}
-  <form action="{% url 'community:delete' post.pk%}" method="post">
-    {% csrf_token %}
-    <input type="submit" , value="삭제하기" , class="delbtn" />
-  </form>
+  <button>
+    <a href="{% url 'community:update' post.pk %}" style="color:black; text-decoration:none;">수정하기</a>
+  </button>
+  <button type="button" class="delbtn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_post_modal">
+    삭제하기
+  </button>
   {% endif %}
   <button id="listbtn">
     <a href="{% url 'community:community_main' %}" style="color:black; text-decoration:none;">목록</a>
@@ -25,190 +48,104 @@
 <br /><br />
 <div class="post_content">
   {{post.content}}
-  </div> <br />  
+</div> <br />
 
 <div class="postimgs">
   <img src="{{post.main_img.url}}" class="post_img1"> <br />
 </div>
 <p class="cody_title">어떤 아이템을 사용했나요?</p>
 <div class="cody_detail">
-
-
   {% for outer in post.outer.iterator %}
   {% if outer.rem_img %}
-  <div class="item__container cloth-id-{{outer.id}}">
-    <img src="{{outer.rem_img.url}}" class="post_img1">
-    {% if user.is_authenticated %}
-      {% if user in outer.likes.all %}
-        <div class="post__dislike like_icon_position" onclick="onClickLike({{ outer.pk }}, 'dislike', '{{outer.rem_img.url}}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>
-      {% else %}
-        <div class="post__like like_icon_position" onclick="onClickLike({{ outer.pk }}, 'like', '{{outer.rem_img.url}}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>
-      {% endif %}
-    {% endif %}
-  </div>
+  <img src="{{outer.rem_img.url}}" class="post_img1">
   {% endif %}
   {% endfor %}
-
-
   {% for top in post.top.iterator %}
   {% if top.rem_img %}
-  <div class="item__container cloth-id-{{top.id}}">
-    <img src="{{top.rem_img.url}}" class="post_img1">
-    {% if user.is_authenticated %}
-      {% if user in top.likes.all %}
-        <div class="post__dislike like_icon_position" onclick="onClickLike({{ top.pk }}, 'dislike', '{{top.rem_img.url}}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>
-      {% else %}
-        <div class="post__like like_icon_position" onclick="onClickLike({{ top.pk }}, 'like', '{{top.rem_img.url}}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>
-      {% endif %}
-    {% endif %}
-  </div>
+  <img src="{{top.rem_img.url}}" class="post_img1">
   {% endif %}
   {% endfor %}
-
-
   {% for bottom in post.bottom.iterator %}
-    {% if bottom.rem_img %}
-    <div class="item__container cloth-id-{{bottom.id}}">
-      <img src="{{bottom.rem_img.url}}" class="post_img1">
-      {% if user.is_authenticated %}
-        {% if user in bottom.likes.all %}
-          <div class="post__dislike like_icon_position" onclick="onClickLike({{ bottom.pk }}, 'dislike', '{{bottom.rem_img.url}}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>
-        {% else %}
-          <div class="post__like like_icon_position" onclick="onClickLike({{ bottom.pk }}, 'like', '{{bottom.rem_img.url}}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>
-        {% endif %}
-      {% endif %}
-    </div>
-    {% endif %}
+  {% if bottom.rem_img %}
+  <img src="{{bottom.rem_img.url}}" class="post_img1">
+  {% endif %}
   {% endfor %}
-
-
   {% for shoes in post.shoes.iterator %}
-    {% if shoes.rem_img %}
-    <div class="item__container cloth-id-{{shoes.id}}">
-      <img src="{{shoes.rem_img.url}}" class="post_img1">
-      {% if user.is_authenticated %}
-        {% if user in shoes.likes.all %}
-          <div class="post__dislike like_icon_position" onclick="onClickLike({{ shoes.pk }}, 'dislike', '{{shoes.rem_img.url}}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>
-        {% else %}
-          <div class="post__like like_icon_position" onclick="onClickLike({{ shoes.pk }}, 'like', '{{shoes.rem_img.url}}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>
-        {% endif %}
-      {% endif %}
-    </div>
-    {% endif %}
+  {% if shoes.rem_img %}
+  <img src="{{shoes.rem_img.url}}" class="post_img1">
+  {% endif %}
   {% endfor %}
-
-
   {% for acc in post.acc.iterator %}
-    {% if acc.rem_img %}
-    <div class="item__container cloth-id-{{acc.id}}">
-      <img src="{{acc.rem_img.url}}" class="post_img1">
-      {% if user.is_authenticated %}
-        {% if user in acc.likes.all %}
-          <div class="post__dislike like_icon_position" onclick="onClickLike({{ acc.pk }}, 'dislike', '{{acc.rem_img.url}}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>
-        {% else %}
-          <div class="post__like like_icon_position" onclick="onClickLike({{ acc.pk }}, 'like', '{{acc.rem_img.url}}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>
-        {% endif %}
-      {% endif %}
-    </div>
-    {% endif %}
+  {% if acc.rem_img %}
+  <img src="{{acc.rem_img.url}}" class="post_img1">
+  {% endif %}
   {% endfor %}
 </div>
 
 <hr>
 <div class="comment-sum">
-    <div id="comment-list-{{post.pk}}" class="comment-list">
-      <div class="comm">
-        {% for comment in comments %}
-          <div class="d-flex align-items-center m-0" id="user_comment_list">
-              <i class="fa-solid fa-user m-3"></i>  
-              <div class="user_comment">
-                <div class="comment_author">{{comment.author.username}}</div>
-                <p>{{comment.content}}</p>
-              </div>
-            </div>
-              {% if user == comment.author %}
-                <form action="{% url 'community:delete_comment' comment.pk %}" method="post" class="comment_detail">
-                  {% csrf_token %}
-                  <div class="del_list">
-                    <input type="submit", value="삭제", class="delbtn2"/>
-                  </div>
-                </form>
-              {% endif %}
-          <hr />
-        {% endfor %}
+  <div id="comment-list-{{post.pk}}" class="comment-list">
+    <div class="comm">
+      {% for comment in comments %}
+      <div class="d-flex align-items-center m-0" id="user_comment_list">
+        <i class="fa-solid fa-user m-3"></i>
+        <div class="user_comment">
+          <div class="comment_author">{{comment.author.username}}</div>
+          <p style="margin-right: 275px;">{{comment.content}}</p>
+        </div>
       </div>
+      {% if user == comment.author %}
+      <form action="{% url 'community:delete_comment' comment.pk %}" method="post" class="comment_detail">
+        {% csrf_token %}
+        <div class="del_list">
+          <input type="submit" , value="삭제" , class="delbtn2" />
+
+          <hr />
+        </div>
+      </form>
+      {% endif %}
+      {% endfor %}
     </div>
   </div>
-  {% if user.is_authenticated %}
-  <form action="{% url 'community:likes' post.pk %}" method='POST'>
-    {% csrf_token %}
-    {% if user in post.likes.all %}
-    <button class="btn btn-link text-danger" id="like">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-suit-heart-fill"
-        viewBox="0 0 16 16">
-        <path
-          d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z" />
-      </svg>
-    </button>
-    {% else %}
-    <button class="btn btn-link text-danger">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-suit-heart"
-        viewBox="0 0 16 16">
-        <path id="postlike"
-          d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595L8 6.236zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.55 7.55 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
-      </svg>
-    </button>
-    {% endif %}
-  </form>
-<div id="comment-con" class="d-flex justify-content-center align-items-center">
-    <form>
-      <textarea rows="4" cols="100" id="comment-input-{{post.pk}}" class="comment-input" type="text"
-        placeholder="댓글 달기..."></textarea>
-    </form>
-    <div class="comment-btn btn" id="comment-btn-{{post.pk}}" onclick="onClickCommenet({{post.id}})">
-      <input type="submit" , value="게시" , class="postbtn" />
-    </div>
-  </div>
+</div>
+{% if user.is_authenticated %}
+<form action="{% url 'community:likes' post.pk %}" method='POST'>
+  {% csrf_token %}
+  {% if user in post.likes.all %}
+  <button class="btn btn-link text-danger" id="like">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-suit-heart-fill"
+      viewBox="0 0 16 16">
+      <path
+        d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z" />
+    </svg>
+  </button>
   {% else %}
-  <div>댓글을 작성하려면 로그인어쩌구 잘 꾸며주세요 프론트 쏘리...
-    누르면 그 로그인 하라는거 뜨도록 하면 좋을거 같기도하고 모르겠따
-  </div>
+  <button class="btn btn-link text-danger">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-suit-heart"
+      viewBox="0 0 16 16">
+      <path id="postlike"
+        d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595L8 6.236zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.55 7.55 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+    </svg>
+  </button>
   {% endif %}
+</form>
+<div id="comment-con" class="d-flex justify-content-between align-items-center">
+  <form>
+    <textarea rows="4" cols="100" id="comment-input-{{post.pk}}" class="comment-input" type="text"
+      placeholder="댓글 달기..."></textarea>
+  </form>
+  <div class="comment-btn btn" id="comment-btn-{{post.pk}}" onclick="onClickCommenet({{post.id}})">
+    <input type="submit" , value="게시" , class="delbtn" />
+  </div>
+</div>
+{% else %}
+<div>댓글을 작성하려면 로그인어쩌구 잘 꾸며주세요 프론트 쏘리...
+  누르면 그 로그인 하라는거 뜨도록 하면 좋을거 같기도하고 모르겠따
+</div>
+{% endif %}
 </div>
 
 <script>
-  const strip = (string) => {
-    return string.replace(/^\s+|\s+$/g, "");
-  };
-  const requestLike = new XMLHttpRequest();
-  const onClickLike = (id, btnType, imgUrl) => {
-    const url = "/closet/clothes-likes/" + id;
-    requestLike.open("POST", url, true)
-    requestLike.setRequestHeader(
-      "Content-Type",
-      "application/x-www-form-urlencoded"
-    );
-    requestLike.send(JSON.stringify({id: id, btnType: btnType, imgUrl: imgUrl}));
-  };
-
-  requestLike.onreadystatechange = () => {
-    if (requestLike.readyState === XMLHttpRequest.DONE) {
-      if (requestLike.status < 400) {
-        const { id, btnType, imgUrl } = JSON.parse(requestLike.response);
-        const elementLike = document.querySelector(`.cloth-id-${id}`);
-        const originHTML = strip(elementLike.innerHTML);
-        if (originHTML.includes('fa-solid')) {
-          elementLike.innerHTML = `<img src="${imgUrl}" class="post_img1">
-          <div class="post__like like_icon_position" onclick="onClickLike(${id}, 'like', '${imgUrl}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>`;
-          
-        } else {
-          elementLike.innerHTML = `<img src="${imgUrl}" class="post_img1">
-          <div class="post__dislike like_icon_position" onclick="onClickLike(${id}, 'dislike', '${imgUrl}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>`;
-          
-        };
-      }
-    }
-  };
   const requestComment = new XMLHttpRequest();
 
   const onClickCommenet = (id) => {
@@ -237,17 +174,20 @@
                 <div class="comment_other" style="margin-right:280px;">
                     <div class="comment_author_other">${author}</div>
                     <div class="content_other">${content}</div>
-                </div>
-                  <div class="del_list">
-                  <input type="submit", value="삭제", class="delbtn2" />
-                  <hr />
-                  </div>`;
+                </div>`;
         comm.appendChild(newComment);
-        let h= document.createElement("hr");
-        h.className="comment_other_hr" 
+        let h = document.createElement("hr");
+        h.className = "comment_other_hr"
         comm.appendChild(h);
       }
     }
   }
+
+  // var myModal = document.getElementById('myModal')
+  // var myInput = document.getElementById('myInput')
+
+  // myModal.addEventListener('shown.bs.modal', function () {
+  //   myInput.focus()
+  // })
 </script>
 {% endblock %}

@@ -8,7 +8,7 @@ from django.utils.datastructures import MultiValueDictKeyError
 from django.views.decorators.csrf import csrf_exempt
 import json
 from django.http import JsonResponse
-from GoogleSearch import Search
+from googlesearch import search
 import selenium
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -17,6 +17,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from django.core.paginator import Paginator, PageNotAnInteger , EmptyPage
 from django.db.models import Count
+from django.http.request import HttpRequest
 
 #페이지네이션 코드
 def paginations(request,post_list):
@@ -165,17 +166,14 @@ def clothes_likes(request, pk, *args, **kwargs):
       clothes.likes.remove(user)
     context = {'id' : clothes_id, 'btnType': btnType, 'imgUrl':imgUrl}
     return JsonResponse(context)
-  # if request.user.is_authenticated:
-  #   clothes = get_object_or_404(Clothes, pk=pk)
-  #   users = clothes.likes.all()
-  #   if users.filter(pk=request.user.pk).exists():
-  #     clothes.likes.remove(request.user)
-  #   else:
-  #     clothes.likes.add(request.user)
-  #   return redirect('closet:closet_main')
-  #   # return redirect('accouts:login')위에거 대신 이거 떠야함! 나중에 로그인 합치고!!
-  # return render(request, 'closet/our_closet.html')
+
   
+def clothes_delete(request:HttpRequest, pk, *args, **kwargs):
+    if request.method == "POST":
+        clothes_delete = Clothes.objects.get(pk=pk)
+        clothes_delete.delete()
+    return redirect("closet:closet_main")
+
 
 def clothes_like_list(request, *args, **kwargs):
   user = User.objects.get(username=request.user)
@@ -206,7 +204,7 @@ def buylink(request, pk, *args, **kwargs):
     choice = list(request.POST.values())[-1]
 
     if choice == '빠른 검색':
-      output = Search(file_path=cloth[0].img.path)
+      output = search(file_path=cloth[0].img.path)
       link = output['similar']
       context['link']=link
       context['fastflag'] = True

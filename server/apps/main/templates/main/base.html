@@ -19,6 +19,7 @@
     integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap');
+
     body {
       font-family: 'IBM Plex Sans KR', sans-serif;
     }
@@ -26,8 +27,10 @@
   <title class="base_title">오늘 뭐입지?</title>
 </head>
 
+
+
 <body>
-  <hr />  
+  <hr />
   <div id="mySidenav" class="sidenav">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <a aria-current="page" href="{% url 'main:main' %}">Home</a>
@@ -48,7 +51,8 @@
   <nav class="navbar navbar-expand-lg navbar-light text-white">
     <div class="container-fluid justify-content-space-between">
       <div class="col-4 dropend" id="mini-menu">
-        <button class="navbar-toggler" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" aria-controls="navbarTogglerDemo03" aria-expanded="false"
+          aria-label="Toggle navigation">
           <span class="navbar-toggler-icon" onclick="openNav()"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
@@ -59,7 +63,7 @@
             <li class="nav-item">
               <a class="nav-link text-secondary" href="{% url 'closet:our_closet' %}">모두의 옷장</a>
             </li>
-            
+
             {% if user.is_authenticated %}
             <li class="nav-item">
               <a class="nav-link text-secondary" href="{% url 'closet:closet_main' %}">나만의 옷장</a>
@@ -78,8 +82,8 @@
       <div class="col-4 title text-center">오늘 뭐입지?</div>
       <div class="col-4">
         <div class="dn">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0 right-nav">
-          {% if user.is_authenticated %}
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 right-nav">
+            {% if user.is_authenticated %}
             <li class="nav-item">
               <a class="nav-link text-secondary" aria-current="page" href="{% url 'user:mypage' %}">마이페이지</a>
             </li>
@@ -93,8 +97,8 @@
             <li class="nav-item">
               <a class="nav-link text-secondary" href="{% url 'user:login' %}">로그인</a>
             </li>
-          {% endif %}
-        </ul>
+            {% endif %}
+          </ul>
         </div>
       </div>
     </div>
@@ -111,13 +115,12 @@
   </footer>
   <hr />
 
-  
+
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-    crossorigin="anonymous">
-  </script>  
-  <script>
+  integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
+  </script>
+<script>
   function openNav() {
     document.getElementById("mySidenav").style.width = "140px";
 
@@ -126,7 +129,7 @@
     document.body.prepend(backdiv);
     document.body.classList.add('no-scroll');
   }
-  
+
   /* Set the width of the side navigation to 0 and the left margin of the page content to 0, and the background color of body to white */
   function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
@@ -136,5 +139,4 @@
 
     document.body.classList.remove('no-scroll');
   }
-  </script>
-
+</script>
