@@ -67,7 +67,11 @@
     <div class="comm">
       {% for comment in t_comments %}
       <div class="d-flex m-0 p-4">
-        <img src="{{comment.author.profile.profile_image.url}}" alt="user_profile" style="width:2rem; height:2rem; margin-top: 0.5rem;">
+        {% if comment.author.profile.profile_image %}
+          <img src="{{comment.author.profile.profile_image.url}}" alt="user_profile" style="width:2rem; height:2rem; margin-top: 0.5rem;">
+        {% else %}
+          <i class="fa-solid fa-user m-3"></i>
+        {% endif %}
         <div>
           <div>{{comment.author.username}}</div>
           <div>{{comment.content}}</div>
