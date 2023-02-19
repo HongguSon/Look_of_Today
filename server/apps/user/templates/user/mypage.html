@@ -89,35 +89,7 @@
     <br>
     <div class="fs-5">소셜활동정보</div>
     <br>
-
-    <div class="d-flex">
-      <div class="mx-2">팔로잉 : </div>
-      {% if str_following != 'auth.User.None' %}
-      {{following}}
-      {% else %}
-      <div>팔로잉을 아직 아무도 하지 않았어요!</div>
-      {% endif %}
-    </div>
-
-    <div class="d-flex">
-      <div class="mx-2">댓글관리 : </div>
-      <!-- {% if str_following != 'auth.User.None' %}
-      {{following}}
-      {% else %}
-      <div>팔로잉을 아직 아무도 하지 않았어요!</div>
-      {% endif %} -->
-    </div>
-
-    <div class="d-flex">
-      <div class="mx-2">좋아요관리 : </div>
-      <!-- {% if str_following != 'auth.User.None' %}
-      {{following}}
-      {% else %}
-      <div>팔로잉을 아직 아무도 하지 않았어요!</div>
-      {% endif %} -->
-    </div>
-    <br>
-    <a class="btn btn-secondary" href="{% url 'user:mypage_update' %}">소셜활동정보 관리</a>
+    <a class="btn btn-secondary" href="{% url 'user:mypage_update_social' %}">소셜활동정보 관리</a>
   </div>
   <br>
 </div>
