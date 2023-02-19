@@ -160,7 +160,7 @@
     </button>
     {% endif %}
   </form>
-<div id="comment-con" class="d-flex justify-content-center align-items-center">
+  <div id="comment-con" class="d-flex justify-content-center align-items-center">
     <form>
       <textarea rows="4" cols="100" id="comment-input-{{post.pk}}" class="comment-input" type="text"
         placeholder="댓글 달기..."></textarea>
@@ -170,8 +170,14 @@
     </div>
   </div>
   {% else %}
-  <div>댓글을 작성하려면 로그인어쩌구 잘 꾸며주세요 프론트 쏘리...
-    누르면 그 로그인 하라는거 뜨도록 하면 좋을거 같기도하고 모르겠따
+  <div id="comment-con" class="d-flex justify-content-center align-items-center">
+    <form>
+      <textarea rows="4" cols="100" id="comment-input-{{post.pk}}" class="comment-input" type="text"
+        placeholder="댓글 달기..."></textarea>
+    </form>
+    <div class="comment-btn btn" id="comment-btn-{{post.pk}}" onclick="onClickCommenet({{post.id}})">
+      <input type="submit" , value="게시" , class="postbtn" />
+    </div>
   </div>
   {% endif %}
 </div>

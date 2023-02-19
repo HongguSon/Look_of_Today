@@ -13,7 +13,6 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.db import IntegrityError
 
-
 # Create your views here.
 def signup(request, *args, **kwargs):
   if request.method == 'POST':
@@ -154,17 +153,33 @@ def mypage_update(request, *args, **kwargs):
   
   return render(request, "user/mypage_update.html",context=context)
 
-# class PostUpdate(LoginRequiredMixin, UpdateView):
-#   model = Profile
-#   fields = ['profile_image', 'phone_num', 'height', 'weight', 'age', 'birth_date']
-
-#   template_name = 'user/profile_update.html'
-
-#   def dispatch(self, request, *args, **kwargs):
-#     if request.user.is_authenticated:
-#       return super(PostUpdate, self).dispatch(request, *args, **kwargs)
-#     else:
-#       raise PermissionDenied
+def mypage_update_social(request, *arg, **kwargs):
+  user = request.user
+  all_talks = user.talk_user.all()
+  all_likes = Talk.objects.all().filter(likes=user)
+  talk_comments = TalkComment.objects.filter(author=user)
+  post_comments = PostComment.objects.filter(author=user)
+  
+  talk_comments_list = []
+  for comment in talk_comments:
+    if comment.talk not in talk_comments_list:
+      talk_comments_list.append(comment.talk)
+      
+  post_comments_list = []
+  for comment in post_comments:
+    if comment.post not in post_comments_list:
+      post_comments_list.append(comment.post)
+      
+  context = {
+    'all_talks': all_talks,
+    'all_likes': all_likes,
+    'talk_comments_list': talk_comments_list,
+    'post_comments_list': post_comments_list,
+    }
+  if request.method == "POST":
+    return redirect("user:mypage")
+  return render(request, "user/mypage_update_social.html",context=context)
+  
 
 def profile_update(request, *args, **kwargs):
   if request.method == 'POST':
