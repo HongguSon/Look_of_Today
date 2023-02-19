@@ -11,7 +11,7 @@
     <input name="password" type="password" style="width:100%;">
     <br>
     {% if msg %}
-    {{ msg }}
+      <p class="error-color text-start">로그인 정보가 맞지 않습니다!<br>아이디 또는 비밀번호를 확인해주세요.</p>
     {% endif %}
     <input type="submit" class="btn btn-primary" style="width:100%;" value="Log In">
     <div>아직 계정이 없으신가요?</div>

@@ -2,6 +2,7 @@
 {% load static %}
 {% block extrahead %}
 <link rel="stylesheet" href="{% static 'css/closet.css' %}">
+<link rel="stylesheet" href="{% static 'css/closet_main_react.css' %}">
 {% endblock %}
 {% block content %}
 <br />
@@ -71,9 +72,9 @@
     {% for clothes in clothes_list %}
     <div class="mycloset_img item__container cloth-id-{{clothes.id}}">
       {% if clothes.rem_img %}
-      <img src="{{clothes.rem_img.url}}">
+      <img src="{{clothes.rem_img.url}}" class="img-fluid">
       {% else %}
-      <img src="{{clothes.img.url}}">
+      <img src="{{clothes.img.url}}" class="img-fluid">
       {% endif %}
       {% comment %} <form action="{% url 'closet:clothes_likes' clothes.pk %}" method='POST' class="mycloset_form">
         {{clothes.title}}
@@ -115,13 +116,14 @@
     {% for post in post_list %}
     <div class="mycloset_img">
       <a href="{% url 'community:post_detail' post.pk %}">
-        <img class="width:200px; height:200px;" src="{{post.main_img.url}}">
+        <img class="img-fluid" id="closet_all_img" src="{{post.main_img.url}}">
       </a>
-      {{post.title}}
+      <br />
+      <p class="closet_post_title">{{post.title |truncatechars:6}}</p>
       {% if post.open %}
-        <i class="fa-solid fa-lock-open">전체공개</i>
+        <i class="fa-solid fa-lock-open" id="post_status">전체공개</i>
       {% else %}
-        <i class="fa-solid fa-lock">비공개</i>
+        <i class="fa-solid fa-lock" id="post_status">비공개</i>
       {% endif %}
 
       {% comment %} <form action="{% url 'community:likes' post.pk %}" method='POST' class="mycloset_form">
@@ -174,11 +176,11 @@ requestLike.onreadystatechange = () => {
             if (originHTML.includes('fa-solid')) {
               elementLike.innerHTML = `<img src="${imgUrl}" class="post_img1">
               <div class="post__like like_icon_position" onclick="onClickLike(${id}, 'like', '${imgUrl}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>`;
-              
+              console.log(elementLike)
             } else {
               elementLike.innerHTML = `<img src="${imgUrl}" class="post_img1">
               <div class="post__dislike like_icon_position" onclick="onClickLike(${id}, 'dislike', '${imgUrl}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>`;
-              
+              console.log(elementLike)
             };
         }
     }

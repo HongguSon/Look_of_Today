@@ -13,9 +13,6 @@
 
 <div class="button-box">
   {% if user == post.author %}
-  <button>
-    <a href="{% url 'community:update' post.pk %}" style="color:black; text-decoration:none;">수정하기</a>
-  </button>
   <form action="{% url 'community:delete' post.pk%}" method="post">
     {% csrf_token %}
     <input type="submit" , value="삭제하기" , class="delbtn" />
@@ -41,10 +38,12 @@
   {% if outer.rem_img %}
   <div class="item__container cloth-id-{{outer.id}}">
     <img src="{{outer.rem_img.url}}" class="post_img1">
-    {% if user in outer.likes.all %}
-      <div class="post__dislike like_icon_position" onclick="onClickLike({{ outer.pk }}, 'dislike', '{{outer.rem_img.url}}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>
-    {% else %}
-      <div class="post__like like_icon_position" onclick="onClickLike({{ outer.pk }}, 'like', '{{outer.rem_img.url}}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>
+    {% if user.is_authenticated %}
+      {% if user in outer.likes.all %}
+        <div class="post__dislike like_icon_position" onclick="onClickLike({{ outer.pk }}, 'dislike', '{{outer.rem_img.url}}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>
+      {% else %}
+        <div class="post__like like_icon_position" onclick="onClickLike({{ outer.pk }}, 'like', '{{outer.rem_img.url}}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>
+      {% endif %}
     {% endif %}
   </div>
   {% endif %}
@@ -55,10 +54,12 @@
   {% if top.rem_img %}
   <div class="item__container cloth-id-{{top.id}}">
     <img src="{{top.rem_img.url}}" class="post_img1">
-    {% if user in top.likes.all %}
-      <div class="post__dislike like_icon_position" onclick="onClickLike({{ top.pk }}, 'dislike', '{{top.rem_img.url}}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>
-    {% else %}
-      <div class="post__like like_icon_position" onclick="onClickLike({{ top.pk }}, 'like', '{{top.rem_img.url}}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>
+    {% if user.is_authenticated %}
+      {% if user in top.likes.all %}
+        <div class="post__dislike like_icon_position" onclick="onClickLike({{ top.pk }}, 'dislike', '{{top.rem_img.url}}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>
+      {% else %}
+        <div class="post__like like_icon_position" onclick="onClickLike({{ top.pk }}, 'like', '{{top.rem_img.url}}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>
+      {% endif %}
     {% endif %}
   </div>
   {% endif %}
@@ -69,10 +70,12 @@
     {% if bottom.rem_img %}
     <div class="item__container cloth-id-{{bottom.id}}">
       <img src="{{bottom.rem_img.url}}" class="post_img1">
-      {% if user in bottom.likes.all %}
-        <div class="post__dislike like_icon_position" onclick="onClickLike({{ bottom.pk }}, 'dislike', '{{bottom.rem_img.url}}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>
-      {% else %}
-        <div class="post__like like_icon_position" onclick="onClickLike({{ bottom.pk }}, 'like', '{{bottom.rem_img.url}}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>
+      {% if user.is_authenticated %}
+        {% if user in bottom.likes.all %}
+          <div class="post__dislike like_icon_position" onclick="onClickLike({{ bottom.pk }}, 'dislike', '{{bottom.rem_img.url}}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>
+        {% else %}
+          <div class="post__like like_icon_position" onclick="onClickLike({{ bottom.pk }}, 'like', '{{bottom.rem_img.url}}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>
+        {% endif %}
       {% endif %}
     </div>
     {% endif %}
@@ -83,10 +86,12 @@
     {% if shoes.rem_img %}
     <div class="item__container cloth-id-{{shoes.id}}">
       <img src="{{shoes.rem_img.url}}" class="post_img1">
-      {% if user in shoes.likes.all %}
-        <div class="post__dislike like_icon_position" onclick="onClickLike({{ shoes.pk }}, 'dislike', '{{shoes.rem_img.url}}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>
-      {% else %}
-        <div class="post__like like_icon_position" onclick="onClickLike({{ shoes.pk }}, 'like', '{{shoes.rem_img.url}}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>
+      {% if user.is_authenticated %}
+        {% if user in shoes.likes.all %}
+          <div class="post__dislike like_icon_position" onclick="onClickLike({{ shoes.pk }}, 'dislike', '{{shoes.rem_img.url}}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>
+        {% else %}
+          <div class="post__like like_icon_position" onclick="onClickLike({{ shoes.pk }}, 'like', '{{shoes.rem_img.url}}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>
+        {% endif %}
       {% endif %}
     </div>
     {% endif %}
@@ -97,10 +102,12 @@
     {% if acc.rem_img %}
     <div class="item__container cloth-id-{{acc.id}}">
       <img src="{{acc.rem_img.url}}" class="post_img1">
-      {% if user in acc.likes.all %}
-        <div class="post__dislike like_icon_position" onclick="onClickLike({{ acc.pk }}, 'dislike', '{{acc.rem_img.url}}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>
-      {% else %}
-        <div class="post__like like_icon_position" onclick="onClickLike({{ acc.pk }}, 'like', '{{acc.rem_img.url}}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>
+      {% if user.is_authenticated %}
+        {% if user in acc.likes.all %}
+          <div class="post__dislike like_icon_position" onclick="onClickLike({{ acc.pk }}, 'dislike', '{{acc.rem_img.url}}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>
+        {% else %}
+          <div class="post__like like_icon_position" onclick="onClickLike({{ acc.pk }}, 'like', '{{acc.rem_img.url}}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>
+        {% endif %}
       {% endif %}
     </div>
     {% endif %}
@@ -112,22 +119,22 @@
     <div id="comment-list-{{post.pk}}" class="comment-list">
       <div class="comm">
         {% for comment in comments %}
-            <div class="d-flex align-items-center m-0" id="user_comment_list">
-                <i class="fa-solid fa-user m-3"></i>  
-                <div class="user_comment">
-                    <div class="comment_author">{{comment.author.username}}</div>
-                    <p style="margin-right: 275px;">{{comment.content}}</p>
-                </div>
+          <div class="d-flex align-items-center m-0" id="user_comment_list">
+              <i class="fa-solid fa-user m-3"></i>  
+              <div class="user_comment">
+                <div class="comment_author">{{comment.author.username}}</div>
+                <p>{{comment.content}}</p>
+              </div>
             </div>
-                {% if user == comment.author %}
+              {% if user == comment.author %}
                 <form action="{% url 'community:delete_comment' comment.pk %}" method="post" class="comment_detail">
                   {% csrf_token %}
                   <div class="del_list">
-                  <input type="submit", value="삭제", class="delbtn2" />
-                  <hr />
+                    <input type="submit", value="삭제", class="delbtn2"/>
                   </div>
                 </form>
-                {% endif %}
+              {% endif %}
+          <hr />
         {% endfor %}
       </div>
     </div>
@@ -153,13 +160,13 @@
     </button>
     {% endif %}
   </form>
-<div id="comment-con" class="d-flex justify-content-between align-items-center">
+<div id="comment-con" class="d-flex justify-content-center align-items-center">
     <form>
       <textarea rows="4" cols="100" id="comment-input-{{post.pk}}" class="comment-input" type="text"
         placeholder="댓글 달기..."></textarea>
     </form>
     <div class="comment-btn btn" id="comment-btn-{{post.pk}}" onclick="onClickCommenet({{post.id}})">
-      <input type="submit" , value="게시" , class="delbtn" />
+      <input type="submit" , value="게시" , class="postbtn" />
     </div>
   </div>
   {% else %}
@@ -230,7 +237,11 @@
                 <div class="comment_other" style="margin-right:280px;">
                     <div class="comment_author_other">${author}</div>
                     <div class="content_other">${content}</div>
-                </div>`;
+                </div>
+                  <div class="del_list">
+                  <input type="submit", value="삭제", class="delbtn2" />
+                  <hr />
+                  </div>`;
         comm.appendChild(newComment);
         let h= document.createElement("hr");
         h.className="comment_other_hr" 

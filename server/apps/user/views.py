@@ -11,22 +11,41 @@ from datetime import datetime, date
 import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.db import IntegrityError
 
 
 # Create your views here.
 def signup(request, *args, **kwargs):
   if request.method == 'POST':
+    if not request.POST['username'] or not request.POST['password1'] or not request.POST['email']:
+      error = '에러'
+      context = {
+        'error1': error,
+      }
+      return render(request, 'user/signup.html', context=context)
+
+    username=request.POST['username']
+    if User.objects.filter(username=username):
+      error = '에러'
+      context = {
+        'error3': error,
+      }
+      return render(request, 'user/signup.html', context=context)
     if request.POST['password1'] == request.POST['password2']:
       user = User.objects.create_user(
-        username=request.POST['username'],
+        username=username,
         password=request.POST['password1'],
         email=request.POST['email'],
       )
       auth.login(request, user, backend='django.contrib.auth.backends.ModelBackend')
       return redirect('user:mypage')
     #이거 나중에 프로필 생성화면으로 가야함
-    
-    return render(request, 'user/signup.html')
+    else:
+      error = '에러'
+      context = {
+        'error2': error,
+      }
+      return render(request, 'user/signup.html', context=context)
   return render(request, 'user/signup.html')
 
 def logout(request, *args, **kwargs):

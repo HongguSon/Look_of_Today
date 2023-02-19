@@ -59,7 +59,6 @@
       {% endfor %}
     </div>
   </div>
-  <hr>
 </div>
 {% if user.is_authenticated %}
 <form action="{% url 'community:talk_likes' talk.pk %}" method='POST'>

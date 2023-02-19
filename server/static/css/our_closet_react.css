@@ -1,39 +1,74 @@
-@media screen and (max-width: 375px){
-    #banner{
-        margin-bottom: 35px !important;
-    }
-    .ourcloset_title{
-        padding-left: 1.6rem !important;
-    }
-    .ourcloset_title > p{
-        font-size: 1.5rem !important;
-    }
-    .ourcloset_newpost1{
-        font-size: 0.8rem;
-    }
-    .ourcloset_newpost2{
-        font-size: 0.8rem;
-    }
-    .ourcloset_title > h5{
-        font-size: 0.688rem;
-        margin-left: 0.125rem !important;
-    }
+@media all and (max-width: 768px){
     .content{
-        display: inline-flex !important;
-        flex-wrap: wrap !important;
-        gap: 1.8rem;
-        padding-left: 1.5rem !important;
+        gap: 1.6rem;
     }
     .content img{
-        width: 90px !important;
-        height: 95px !important;
+        width: 6rem;
+        height: 6rem;
     }
-    .post_info > p{
-        font-size: 10px;
+}
+@media screen and (min-width: 768px){
+    .content{
+        gap: 4rem;
     }
-    .postauthor{
-        font-size: 12px;
+    .content img{
+        width: 12rem;
+        height: 12rem;
+    }
+    .ourcloset_title {
+        padding-left: 1.5rem;
     }
 }
 
+@media screen and (max-width: 280px){
+    #banner{
+        margin-bottom: 0px;
+    }
+    .content{
+        gap: 1rem;
+    }
+    .content img{
+        width: 4rem;
+        height: 4rem;
+    }
+    .ourcloset_title {
+        padding-left: 1.5rem;
+    }
+    .ourcloset_title > p {
+        margin-top: 2rem !important;
+        text-align: left;
+        font-size: 20px;
+    }
+    .ourcloset_newpost1 {
+        font-size: 14px;
+        margin-right: 20px;
+        margin-top: 6px;
+    }
+    .ourcloset_newpost2 {
+        float: right;
+        font-size: 13px;
+        margin-right: 8px;
+        margin-top: 6px;
+    }
+    .ourcloset_title > h5 {
+        text-align: left;
+        font-size: 12px;
+        margin-left: 3px;
+    }    
+    .post_info > p{
+        font-size: 13px;
+    }
+}
 
+@media all and (min-width: 1024px){
+    .content{
+        gap: 8rem;
+    }
+    .content img{
+        width: 12rem;
+        height: 12rem;
+    }
+    .ourcloset_title {
+        padding-left: 1.5rem;
+    }
+}
