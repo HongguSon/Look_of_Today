@@ -122,10 +122,10 @@ def create_clothes(request, *args, **kwargs):
     'error' : error,
     }
   if request.method == "POST":
-    try:
-      clothes = request.POST["clothes"]
-    except MultiValueDictKeyError:
-      return render(request, "closet/clothes_create.html", context=context) 
+    clothes = request.POST["clothes"]
+    
+    if not request.FILES.get("cloth"):
+      return render(request, "closet/clothes_create.html", context=context)
     if clothes == 'top':
       kind = Top
     elif clothes == 'bottom':

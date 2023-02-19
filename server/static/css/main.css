@@ -151,3 +151,7 @@
 .best2:hover{
     color: black;
 }
+
+.error-color {
+    color: red;
+}
