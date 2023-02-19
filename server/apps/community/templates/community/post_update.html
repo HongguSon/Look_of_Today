@@ -6,15 +6,6 @@
 {% endblock %}
 
 {% block content %}
-
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <table>
-        {{ form.media }}
-        {{ form.as_p }}
-    </table>
-    <button type="submit" class="btn btn-primary float-right" id="subbtn">Submit</button>
-</form>
 <!-- 
 <form action="{% url 'community:update' post.pk %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
@@ -89,4 +80,88 @@
     </p>
     <input type="submit", value="저장하기" class="btn btn-secondary" />
 </form> -->
+
+<form action="{% url 'community:post_create' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p>title :</p>
+    <input name="title" value="{{post.title}}" />
+    <p>Main img :</p>
+    <input type="file" name="image" value="{{post.main_img.url}}" />
+    <div class="clothes_list_box">
+        <p>Outer: </p>
+        {% for outer in outer_list %}
+            <div class="m-3">
+                <!-- {% if post.outer.title != outer.title %}
+                <input type="checkbox" value="{{outer.pk}}" id="{{outer.title}}" name="outer">
+                {% else %}
+                <input type="checkbox" value="{{outer.pk}}" id="{{outer.title}}" name="outer" checked>
+                {% endif %} -->
+                <input type="checkbox" value="{{outer.pk}}" id="{{outer.title}}" name="outer">
+                <label for="{{outer.title}}" class="d-flex flex-column p-1">
+                    <img src="{{outer.rem_img.url}}" alt="{{outer.title}}">
+                    <span class="text-center">{{outer.title}}</span>
+                </label>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="clothes_list_box">
+        <p>Top: </p>
+        {% for top in top_list %}
+            <div class="m-3">
+                <input type="checkbox" value="{{top.pk}}" id="{{top.title}}" name="top">
+                <label for="{{top.title}}" class="d-flex flex-column p-1">
+                    <img src="{{top.rem_img.url}}" alt="{{top.title}}">
+                    <span class="text-center">{{top.title}}</span>
+                </label>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="clothes_list_box">
+        <p>Bottom: </p>
+        {% for bottom in bottom_list %}
+            <div class="m-3">
+                <input type="checkbox" value="{{bottom.pk}}" id="{{bottom.title}}" name="bottom">
+                <label for="{{bottom.title}}" class="d-flex flex-column p-1">
+                    <img src="{{bottom.rem_img.url}}" alt="{{bottom.title}}">
+                    <span class="text-center">{{bottom.title}}</span>
+                </label>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="clothes_list_box">
+        <p>Shoes: </p>
+        {% for shoes in shoes_list %}
+            <div class="m-3">
+                <input type="checkbox" value="{{shoes.pk}}" id="{{shoes.title}}" name="shoes">
+                <label for="{{shoes.title}}" class="d-flex flex-column p-1">
+                    <img src="{{shoes.rem_img.url}}" alt="{{shoes.title}}">
+                    <span class="text-center">{{shoes.title}}</span>
+                </label>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="clothes_list_box">
+        <p>Acc: </p>
+        {% for acc in acc_list %}
+            <div class="m-3">
+                <input type="checkbox" value="{{acc.pk}}" id="{{acc.title}}" name="acc">
+                <label for="{{acc.title}}" class="d-flex flex-column p-1">
+                    <img src="{{acc.rem_img.url}}" alt="{{acc.title}}">
+                    <span class="text-center">{{acc.title}}</span>
+                </label>
+            </div>
+        {% endfor %}
+    </div>
+    <p>
+        {% if post.open %}
+            public<input type="radio" name="open" value="True" checked="checked">
+            private<input type="radio" name="open" value="False">
+        {% else %}
+            public<input type="radio" name="open" value="True">
+            private<input type="radio" name="open" value="False" checked="checked">
+        {% endif %}
+    </p>
+    <input type="submit", value="저장하기" class="btn btn-secondary" />
+</form>
+
 {% endblock %}

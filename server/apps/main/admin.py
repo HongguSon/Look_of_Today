@@ -22,7 +22,7 @@ class ClothesAdmin(admin.ModelAdmin):
   def thumbnail(self, object):
     return format_html('<img src="{}" width="30">'.format(object.rem_img.url))
   thumbnail.short_description = "rem_img"
-  list_display = ('title', 'author', 'thumbnail', 'buying', 'img')
+  list_display = ('author', 'thumbnail', 'img')
 
 admin.site.register(Clothes, ClothesAdmin)
 admin.site.register(Top)
