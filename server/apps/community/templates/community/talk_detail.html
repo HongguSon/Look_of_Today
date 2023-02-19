@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="post_title">{{talk.category}}</div>
+<div class="post_category">{{talk.category}}</div>
 <div class="post_title">{{talk.title}}</div>
 <div class="post_author">{{talk.author}}</div>
 <div class="post_time">{{talk.create_date}}</div>
@@ -42,7 +42,7 @@
   <div id="comment-list-{{talk.pk}}" class="comment-list">
     <div class="comm">
       {% for comment in t_comments %}
-      <div class="d-flex align-items-center m-0 p-4">
+      <div class="d-flex m-0 p-4">
         <i class="fa-solid fa-user m-3"></i>
         <div>
           <div>{{comment.author.username}}</div>
