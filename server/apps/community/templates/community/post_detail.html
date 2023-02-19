@@ -142,23 +142,27 @@
 <div class="comment-sum">
     <div id="comment-list-{{post.pk}}" class="comment-list">
       <div class="comm">
+
         {% for comment in comments %}
-          <div class="d-flex align-items-center m-0" id="user_comment_list">
+          <div class="d-flex justify-content-between align-items-center mx-2">
+            <div class="d-flex">
               <i class="fa-solid fa-user m-3"></i>  
-              <div class="user_comment">
+              <div class="comment_other">
                 <div class="comment_author">{{comment.author.username}}</div>
-                <p>{{comment.content}}</p>
+                <div class="content_other">{{comment.content}}</div>
               </div>
             </div>
-              {% if user == comment.author %}
-                <form action="{% url 'community:delete_comment' comment.pk %}" method="post" class="comment_detail">
-                  {% csrf_token %}
-                  <div class="del_list">
-                    <input type="submit", value="삭제", class="delbtn2"/>
-                  </div>
-                </form>
-              {% endif %}
-          <hr />
+          
+          {% if user == comment.author %}
+            <form action="{% url 'community:delete_comment' comment.pk %}" method="post" class="comment_detail">
+              {% csrf_token %}
+              <div class="del_list">
+                <input type="submit", value="삭제", class="delbtn2"/>
+              </div>
+            </form>
+          {% endif %}
+         </div>
+         <hr/>
         {% endfor %}
       </div>
     </div>
@@ -174,8 +178,12 @@
     </div>
   </div>
   {% else %}
-  <div>
-    <p>로그인 후 이용해주세요!</p>
+  <div id="comment-con" class="d-flex justify-content-center align-items-center">
+    <form>
+      <textarea rows="4" cols="100" id="comment-input-{{post.pk}}" class="comment-input" type="text"
+        placeholder="로그인 후 이용해주세요" readonly></textarea>
+    </form>
+    <a class="mx-1 btn btn-secondary" href="{% url 'user:login' %}">로그인</a>
   </div>
   {% endif %}
 
@@ -235,19 +243,20 @@
         const element = document.querySelector(`#comment-list-${post_id}`);
         const comm = document.querySelector(`.comm`);
         const newComment = document.createElement('div');
-        newComment.className = "d-flex align-items-center m-0";
-        newComment.innerHTML = `<i class="fa-solid fa-user m-3"></i>  
-                <div class="comment_other" style="margin-right:280px;">
-                    <div class="comment_author_other">${author}</div>
-                    <div class="content_other">${content}</div>
-                </div>
+        newComment.className = "d-flex justify-content-between align-items-center mx-2";
+        newComment.innerHTML = `<div class="d-flex"><i class="fa-solid fa-user m-3"></i>
+                <div class="comment_other">
+                  <div class="comment_author_other">${author}</div>
+                  <div class="content_other">${content}</div>
+                </div></div>
+                <form action="/community/delete-comment/${comment_id}/" method="post" class="comment_detail">
+                  {% csrf_token %}
                   <div class="del_list">
-                  <input type="submit", value="삭제", class="delbtn2" />
-                  <hr />
-                  </div>`;
+                    <input type="submit", value="삭제", class="delbtn2" />
+                  </div>
+                </form>`
         comm.appendChild(newComment);
         let h= document.createElement("hr");
-        h.className="comment_other_hr" 
         comm.appendChild(h);
       }
     }
