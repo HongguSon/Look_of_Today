@@ -62,24 +62,32 @@
 
 <hr>
 <div class="comment-sum">
-
   <div id="comment-list-{{talk.pk}}" class="comment-list">
     <div class="comm">
+
       {% for comment in t_comments %}
-      <div class="d-flex m-0 p-4">
-        <img src="{{comment.author.profile.profile_image.url}}" alt="user_profile" style="width:2rem; height:2rem; margin-top: 0.5rem;">
-        <div>
-          <div>{{comment.author.username}}</div>
-          <div>{{comment.content}}</div>
-          {% if user == comment.author %}
-          <form action="{% url 'community:delete_tcomment' comment.pk %}" method="post">
+        <div class="d-flex justify-content-between align-items-center mx-2">
+          <div class="d-flex">
+        {% if comment.author.profile.profile_image %}
+          <img src="{{comment.author.profile.profile_image.url}}" alt="user_profile" style="width:2rem; height:2rem; margin-top: 0.5rem;">
+        {% else %}
+          <i class="fa-solid fa-user m-3"></i>
+        {% endif %}
+            <div class="comment_other">
+              <div class="comment_author">{{comment.author.username}}</div>
+              <div class="content_other">{{comment.content}}</div>
+            </div>
+          </div>
+        {% if user == comment.author %}
+          <form action="{% url 'community:delete_tcomment' comment.pk %}" method="post" class="comment_detail">
             {% csrf_token %}
-            <input type="submit" , value="삭제하기" , class="delbtn" />
+            <div class="del_list">
+              <input type="submit", value="삭제", class="delbtn2"/>
+            </div>
           </form>
-          {% endif %}
-        </div>
-      </div>
-      <hr>
+        {% endif %}
+       </div>
+       <hr/>
       {% endfor %}
     </div>
   </div>
@@ -95,8 +103,12 @@
   </div>
 </div>
 {% else %}
-<div>댓글을 작성하려면 로그인어쩌구 잘 꾸며주세요 프론트 쏘리...
-  누르면 그 로그인 하라는거 뜨도록 하면 좋을거 같기도하고 모르겠따
+<div id="comment-con" class="d-flex justify-content-center align-items-center">
+  <form>
+    <textarea rows="4" cols="100" id="comment-input-{{post.pk}}" class="comment-input" type="text"
+      placeholder="로그인 후 이용해주세요" readonly></textarea>
+  </form>
+  <a class="mx-1 btn btn-secondary" href="{% url 'user:login' %}">로그인</a>
 </div>
 {% endif %}
 </div>
@@ -125,12 +137,18 @@
         const element = document.querySelector(`#comment-list-${talk_id}`);
         const comm = document.querySelector(`.comm`);
         const newComment = document.createElement('div');
-        newComment.className = "d-flex align-items-center m-0 p-4";
-        newComment.innerHTML = `<i class="fa-solid fa-user m-3"></i>  
-                <div>
-                    <div>${author}</div>
-                    <div>${content}</div>
-                </div>`;
+        newComment.className = "d-flex justify-content-between align-items-center mx-2";
+        newComment.innerHTML = `<div class="d-flex"><i class="fa-solid fa-user m-3"></i>
+          <div class="comment_other">
+            <div class="comment_author_other">${author}</div>
+            <div class="content_other">${content}</div>
+          </div></div>
+          <form action="/community/delete-tcomment/${comment_id}/" method="post" class="comment_detail">
+            {% csrf_token %}
+            <div class="del_list">
+              <input type="submit", value="삭제", class="delbtn2" />
+            </div>
+          </form>`;
         comm.appendChild(newComment);
         let h = document.createElement("hr");
         comm.appendChild(h);
