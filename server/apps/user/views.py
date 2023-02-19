@@ -140,8 +140,26 @@ def mypage_update(request, *args, **kwargs):
       user.profile.profile_image=request.FILES["image"]
     if request.POST.get("check1"):
       user.profile.profile_image = None
-      
-      
+    # re_phone_num = request.POST["phone_num"]
+    # if type(re_phone_num) == int:
+    #   pass
+    # else:
+    #   if re_phone_num == '':
+    #     pass
+    #   else:
+    #     error = '에러'
+    #     context = {
+    #       'user':user,
+    #       'profile_image':profile_image,
+    #       'height':height,
+    #       'weight':weight,
+    #       'birth_date':birth_date,
+    #       'date_form':date_form,
+    #       'initial_date':initial_date,
+    #       'gender': gender,
+    #       'error3': error,
+    #       }
+    #     return render(request, "user/mypage_update.html",context=context)
     user.profile.phone_num = request.POST["phone_num"]
     re_height = request.POST["height"]
     if type(re_height) == int or type(re_height) == float:
