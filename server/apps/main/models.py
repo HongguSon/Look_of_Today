@@ -89,7 +89,7 @@ class Talk(models.Model):
   img = models.ImageField(upload_to='main/images/commu/%Y/%m/%d', null=True, blank=True)
   title = models.CharField(max_length=100)
   content = models.TextField()
-  author = models.ForeignKey(User, on_delete=models.CASCADE)
+  author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="talk_user")
   create_date = models.DateTimeField(auto_now_add=True)
   # update_date = models.DateTimeField(auto_now=True)
   likes = models.ManyToManyField(User, related_name='Talk_Likes', blank=True)

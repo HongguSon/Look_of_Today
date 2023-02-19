@@ -1,5 +1,12 @@
-.post_title{
+.post_category{
     font-size: 2.5rem;
+    padding-left: 6.25rem;
+    padding-top: 2.5rem;
+    padding-right: 6.25rem;
+}
+
+.post_title{
+    font-size: 2rem;
     padding-left: 6.25rem;
     padding-top: 2.5rem;
     padding-right: 6.25rem;
@@ -23,12 +30,12 @@
 }
 
 .postimgs > img{
-    height: 35rem;
-    width: 33rem;
+    max-width: 50%;
+    height: auto;
+    display: block;
     border-radius: 0.938rem;
     margin: auto;
-    display: block;
-    margin-bottom: 70px;
+    margin-bottom: 6rem;
 }
 
 .cody_list{
@@ -54,6 +61,7 @@
 }
 
 .post_content{
+    margin-top: 4rem; 
     font-size: 1.05rem;
     padding-left: 6.563rem;
     padding-bottom: 2rem;
@@ -119,9 +127,6 @@ transition: 0.2s;
     font-size: 11px;
     width: 36px;
     height: 22px;
-    margin-top: 0.125rem;
-    margin-bottom: 15px;
-    margin-left: 20px;
     transition: 0.2s;
 }
 
@@ -144,17 +149,16 @@ transition: 0.2s;
 
 
 #comment-con{
-    margin-left: 0px;
-    margin-right: 12.5rem;
+    margin-left: 1rem;
     margin-bottom: 3.125rem;
 }
 
 .comment-input{
+    width: 100%;
     border: 2px solid black;
     border-radius: 0.625rem;
     transition: 0.2s;
     resize: none;
-    margin-left: 320px;
 }
 
 
@@ -164,12 +168,6 @@ transition: 0.2s;
 
 .comment_author{
     font-size:20px;
-}
-
-.d-flex{
-    padding-left: 3px !important;
-    padding-top: 35px;
-    padding-bottom: 20px !important;
 }
 
 .d-flex > hr{
@@ -232,4 +230,24 @@ form svg{
     position: absolute;
     top: 4px;
     right: 4px;
+}
+
+@media screen and (max-width: 768px) {
+
+}
+
+@media screen and (max-width: 576px) {
+    .comment-input{margin-left: 1rem;}
+
+    .postimgs > img {max-width: 80%; height: auto;}
+
+    .post_category {padding-left: 1.5rem; padding-right: 1.5rem;}
+
+    .post_title {padding-top: 1rem; padding-bottom: 1rem; padding-left: 1.5rem; padding-right: 1.5rem;}
+
+    .post_author {padding-left: 1.5rem;}
+
+    .post_time {padding-left: 1.5rem; margin-bottom: 1rem;}
+
+    .post_content {padding-left: 1.5rem;}
 }
