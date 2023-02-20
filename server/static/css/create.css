@@ -86,6 +86,10 @@
     resize: none;
 }
 
+#content{
+    width: 80% !important;
+}
+
 
 #look{
     display: none;
@@ -127,7 +131,6 @@
 
 @media all and (max-width: 767px){
     #id_content{
-        width: 11.25rem;
-        height: 11.875rem;
+        width: 80%;
     }
 }
