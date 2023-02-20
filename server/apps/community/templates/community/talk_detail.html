@@ -79,12 +79,12 @@
           </div>
         </div>
         {% if user == comment.author %}
-        <form action="{% url 'community:delete_tcomment' comment.pk %}" method="post" class="comment_detail">
-          {% csrf_token %}
-          <div class="del_list">
+        <div class="del_list">
+          <form action="{% url 'community:delete_tcomment' comment.pk %}" method="post" class="comment_detail">
+            {% csrf_token %}
             <input type="submit" , value="삭제" , class="delbtn2" />
-          </div>
-        </form>
+          </form>
+        </div>
         {% endif %}
       </div>
       <hr />
@@ -144,12 +144,12 @@
               <div class="comment_author_other">${author}</div>
               <div class="content_other">${content}</div>
             </div></div>
-            <form action="/community/delete-tcomment/${comment_id}/" method="post" class="comment_detail">
-              {% csrf_token %}
               <div class="del_list">
-                <input type="submit", value="삭제", class="delbtn2" />
-              </div>
-            </form>`;
+                <form action="/community/delete-tcomment/${comment_id}/" method="post" class="comment_detail">
+                  {% csrf_token %}
+                  <input type="submit", value="삭제", class="delbtn2" />
+                </form>
+              </div>`;
         }
         else {
           newComment.innerHTML = `<div class="d-flex">
@@ -158,12 +158,12 @@
               <div class="comment_author_other">${author}</div>
               <div class="content_other">${content}</div>
             </div></div>
-            <form action="/community/delete-tcomment/${comment_id}/" method="post" class="comment_detail">
-              {% csrf_token %}
               <div class="del_list">
-                <input type="submit", value="삭제", class="delbtn2" />
-              </div>
-            </form>`;
+                <form action="/community/delete-tcomment/${comment_id}/" method="post" class="comment_detail">
+                  {% csrf_token %}
+                  <input type="submit", value="삭제", class="delbtn2" />
+                </form>
+              </div>`;
         }
         comm.appendChild(newComment);
         let h = document.createElement("hr");
