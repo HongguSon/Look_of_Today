@@ -21,7 +21,7 @@
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
         <form action="{% url 'community:delete' post.pk%}" method="post">
           {% csrf_token %}
-          <input type="submit" , value="삭제하기" , class="btn btn-primary" />
+          <input type="submit" , value="삭제" , class="btn btn-primary" />
         </form>
       </div>
     </div>
@@ -59,7 +59,7 @@
 <div class="button-box">
   {% if user == post.author %}
   <button type="button" class="delbtn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_post_modal">
-    삭제하기
+    삭제
   </button>
   {% endif %}
   <button id="listbtn">
@@ -176,6 +176,7 @@
           </div>
         </div>
         {% if user == comment.author %}
+        
         <div class="modal fade" id="delete_comment_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -187,7 +188,7 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
                 <form action="{% url 'community:delete_comment' comment.pk %}" method="post" class="comment_detail">
                   {% csrf_token %}
-                  <input type="submit" , value="삭제하기" , class="btn btn-primary" />
+                  <input type="submit" , value="삭제" , class="btn btn-primary" />
                 </form>
               </div>
             </div>
@@ -198,7 +199,7 @@
           {% csrf_token %}
           <div class="del_list">
             <button type="button" class="delbtn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_comment_modal">
-              삭제하기
+              삭제
             </button>
           </div>
         </form>
@@ -298,7 +299,9 @@
             <form action="/community/delete-comment/${comment_id}/" method="post" class="comment_detail">
               {% csrf_token %}
               <div class="del_list">
-                <input type="submit", value="삭제", class="delbtn2" />
+                <button type="button" class="delbtn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_comment_modal">
+                  삭제
+                </button>
               </div>
             </form>`
           }
@@ -312,7 +315,9 @@
                 <form action="/community/delete-comment/${post_id}/" method="post" class="comment_detail">
                   {% csrf_token %}
                   <div class="del_list">
-                    <input type="submit", value="삭제", class="delbtn2" />
+                    <button type="button" class="delbtn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_comment_modal">
+                      삭제
+                    </button>
                   </div>
                 </form>`
               }

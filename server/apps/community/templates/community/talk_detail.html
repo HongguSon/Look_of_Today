@@ -19,7 +19,7 @@
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
         <form action="{% url 'community:talk_delete' talk.pk%}" method="post">
           {% csrf_token %}
-          <input type="submit" , value="삭제하기" , class="btn btn-primary" />
+          <input type="submit" , value="삭제" , class="btn btn-primary" />
         </form>
       </div>
     </div>
@@ -63,7 +63,7 @@
   <form action="{% url 'community:talk_delete' talk.pk%}" method="post">
     {% csrf_token %}
     <button type="button" class="delbtn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_talk_modal">
-      삭제하기
+      삭제
     </button>
   </form>
   {% endif %}
@@ -111,7 +111,7 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
                 <form action="{% url 'community:delete_tcomment' comment.pk %}" method="post" class="comment_detail">
                   {% csrf_token %}
-                  <input type="submit" , value="삭제하기" , class="btn btn-primary" />
+                  <input type="submit" , value="삭제" , class="btn btn-primary" />
                 </form>
               </div>
             </div>
@@ -122,7 +122,7 @@
           {% csrf_token %}
           <div class="del_list">
             <button type="button" class="delbtn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_tcomment_modal">
-              삭제하기
+              삭제
             </button>
           </div>
         </form>
@@ -189,7 +189,7 @@
               {% csrf_token %}
               <div class="del_list">
                 <button type="button" class="delbtn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_tcomment_modal">
-                  삭제하기
+                  삭제
                 </button>
               </div>
             </form>`;
@@ -205,7 +205,7 @@
               {% csrf_token %}
               <div class="del_list">
                 <button type="button" class="delbtn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_tcomment_modal">
-                  삭제하기
+                  삭제
                 </button>
               </div>
             </form>`;
