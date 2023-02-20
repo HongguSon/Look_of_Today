@@ -3,31 +3,36 @@
   height: 24vw !important;
 }
 
+.clothes_delete {
+  position: absolute;
+  top: 0.2rem;
+  bottom: 0.2rem;
+}
+
 .img_container {
   display: flex;
   /* justify-content: center; */
   flex-wrap: wrap;
 }
 
-.post_icon{
+.post_icon {
   width: 25vw !important;
   height: 25vw !important;
   border-radius: 0.938rem;
   opacity: 1;
   -webkit-transform: scale(1);
-	transform: scale(1);
-	-webkit-transition: .2s ease-in-out;
-	transition: .2s ease-in-out;
+  transform: scale(1);
+  -webkit-transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
 }
 
-img:hover{
+img:hover {
   -webkit-transform: scale(1.03);
-	transform: scale(1.03);
-  opacity: .8;
-
+  transform: scale(1.03);
+  opacity: 0.8;
 }
 
-.closet_list{
+.closet_list {
   display: flex;
   margin-top: 2.5rem;
   margin-left: 8.5rem;
@@ -38,7 +43,7 @@ img:hover{
   gap: 3rem;
 }
 
-.closet_icon{
+.closet_icon {
   margin-top: 0.625rem;
   margin-bottom: 0.625rem;
   width: 3.125rem !important;
@@ -50,18 +55,19 @@ img:hover{
   justify-content: space-evenly;
 }
 
-.closet_post_title{
+.closet_post_title {
   width: 200px;
 }
 
-
-@media screen and (max-width: 480px){
-  .img_container{ max-width: 475px;}
+@media screen and (max-width: 480px) {
+  .img_container {
+    max-width: 475px;
+  }
   .clothes {
     width: 45vw;
     height: 45vw !important;
   }
-  .closet_icon{
+  .closet_icon {
     width: 55vw !important;
     height: 35vw !important;
     border-radius: 0.938rem;
@@ -70,7 +76,7 @@ img:hover{
     width: 2rem !important;
     height: 2rem !important;
   }
-  .closet_list{
+  .closet_list {
     display: flex;
     margin-top: 1.5rem;
     margin-left: 2.5rem;
@@ -87,8 +93,7 @@ img:hover{
   font-size: 14px;
 }
 
-
-.accordion{
+.accordion {
   margin: auto;
   display: block;
   background-color: white;
@@ -96,42 +101,42 @@ img:hover{
   width: 17.188rem;
 }
 
-
-.accmain{
+.accmain {
   margin-left: 5.625rem;
 }
 
-.accmain1{
+.accmain1 {
   margin-left: 6.313rem;
 }
 
-.accmain2{
+.accmain2 {
   text-align: center;
 }
 
-.accmain2 > a{
+.accmain2 > a {
   font-size: 1rem;
   margin-left: 0.719rem;
 }
 
-.accmain2 > a:link, .accmain2 > a:hover, .accmain2 > a {
+.accmain2 > a:link,
+.accmain2 > a:hover,
+.accmain2 > a {
   text-decoration: none;
   color: black;
-
 }
 
-.accmain2> hr{
+.accmain2 > hr {
   width: 17.125rem;
 }
 
-.acccody{
+.acccody {
   display: flex;
   justify-content: space-evenly;
   margin-top: 0.4rem;
   font-size: 1.125rem;
 }
 
-.mycloset_list{
+.mycloset_list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -140,39 +145,40 @@ img:hover{
   margin-bottom: 70px;
 }
 
-.mycloset_img > img, .mycloset_img > * > img{
+.mycloset_img > img,
+.mycloset_img > * > img {
   width: 200px;
   border-radius: 15px;
 }
 
-.mycloset_form{
+.mycloset_form {
   display: block;
   text-align: center;
   padding-top: 15px;
 }
 
-#mycloset_like{
+#mycloset_like {
   padding-top: 1px;
   padding-left: 5px;
   padding-right: 0;
 }
 
-#mypostlike{
+#mypostlike {
   width: 18px !important;
   height: 20px !important;
 }
 
 .item__container {
-  position: relative ;
+  position: relative;
 }
 
-.item__container > .like_icon_position{
-  position: absolute ;
-  top: 4px;
-  right: 4px;
+.item__container > .like_icon_position {
+  position: absolute;
+  top: 0.2rem;
+  right: 0.2rem;
 }
 
-.buylink_container{
+.buylink_container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -188,14 +194,14 @@ img:hover{
   width: 40%;
 }
 
-.buylink_title{
+.buylink_title {
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
 }
 
-@media screen and (max-width: 375px){
+@media screen and (max-width: 375px) {
   .buylink_container > img {
     width: 200px;
     height: 200px;
@@ -205,88 +211,88 @@ img:hover{
   }
 }
 
-.help-tip{
-	position: absolute;
-	top: 5px;
-	right: -22px;
-	text-align: center;
-	background-color: white;
-	/* border-radius: 50%;
+.help-tip {
+  position: absolute;
+  top: 5px;
+  right: -22px;
+  text-align: center;
+  background-color: white;
+  /* border-radius: 50%;
   border: 2px solid black; */
-	width: 24px;
-	height: 24px;
-	font-size: 14px;
-	line-height: 26px;
-	cursor: default;
+  width: 24px;
+  height: 24px;
+  font-size: 14px;
+  line-height: 26px;
+  cursor: default;
 }
 
-.help-tip:before{
+.help-tip:before {
   content: "\f059";
   font-family: "Font Awesome 5 Free";
   font-size: 23px;
 }
 
-.help-tip:hover p{
-	display:block;
-	transform-origin: 100% 0%;
-	-webkit-animation: fadeIn 0.1s ease-in-out;
-	animation: fadeIn 0.1s ease-in-out;
+.help-tip:hover p {
+  display: block;
+  transform-origin: 100% 0%;
+  -webkit-animation: fadeIn 0.1s ease-in-out;
+  animation: fadeIn 0.1s ease-in-out;
 }
 
-.help-tip p{
-	display: none;
-	text-align: left;
-	background-color: #1E2021;
-	padding: 20px;
-	width: 15rem;
-	position: absolute;
-	border-radius: 3px;
-	box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+.help-tip p {
+  display: none;
+  text-align: left;
+  background-color: #1e2021;
+  padding: 20px;
+  width: 15rem;
+  position: absolute;
+  border-radius: 3px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
   top: 38px;
-	right: -50px;
-	color: #FFF;
-	font-size: 13px;
-	line-height: 1.4;
+  right: -50px;
+  color: #fff;
+  font-size: 13px;
+  line-height: 1.4;
 }
 
-.help-tip p:before{
-	position: absolute;
-	content: '';
-	width:0;
-	height: 0;
-	border:6px solid transparent;
-	border-bottom-color:#1E2021;
-	right:56px;
-	top:-12px;
+.help-tip p:before {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-bottom-color: #1e2021;
+  right: 56px;
+  top: -12px;
 }
 
-.help-tip p:after{
-	width:100%;
-	height:40px;
-	content:'';
-	position: absolute;
-	top:-20px;
-	left:0;
+.help-tip p:after {
+  width: 100%;
+  height: 40px;
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 0;
 }
 
 @-webkit-keyframes fadeIn {
-	0% { 
-		opacity:0; 
-		transform: scale(0.6);
-	}
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
 
-	100% {
-		opacity: 100%;
-		transform: scale(1);
-	}
+  100% {
+    opacity: 100%;
+    transform: scale(1);
+  }
 }
 
 @keyframes fadeIn {
-	0% { 
-    opacity:0; 
+  0% {
+    opacity: 0;
   }
-	100% {
-    opacity:100%;
+  100% {
+    opacity: 100%;
   }
 }
 

@@ -259,3 +259,7 @@
         transform: translatey(-15px);
     }
 }
+
+.error-color {
+    color: red;
+}

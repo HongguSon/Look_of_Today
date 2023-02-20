@@ -1,5 +1,12 @@
-.post_title{
+.post_category{
     font-size: 2.5rem;
+    padding-left: 6.25rem;
+    padding-top: 2.5rem;
+    padding-right: 6.25rem;
+}
+
+.post_title{
+    font-size: 2rem;
     padding-left: 6.25rem;
     padding-top: 2.5rem;
     padding-right: 6.25rem;
@@ -23,12 +30,12 @@
 }
 
 .postimgs > img{
-    height: 35rem;
-    width: 33rem;
+    max-width: 50%;
+    height: auto;
+    display: block;
     border-radius: 0.938rem;
     margin: auto;
-    display: block;
-    margin-bottom: 70px;
+    margin-bottom: 6rem;
 }
 
 .cody_list{
@@ -54,8 +61,10 @@
 }
 
 .post_content{
+    margin-top: 4rem; 
     font-size: 1.05rem;
     padding-left: 6.563rem;
+    padding-right: 6.563rem;
     padding-bottom: 2rem;
 }
 
@@ -64,7 +73,7 @@
     flex-direction: row;
     justify-content: space-around;
     float: right;
-    padding-right: 1.25rem;
+    padding-right: 1.5rem;
 }
 
 .button-box > button {
@@ -119,9 +128,6 @@ transition: 0.2s;
     font-size: 11px;
     width: 36px;
     height: 22px;
-    margin-top: 0.125rem;
-    margin-bottom: 15px;
-    margin-left: 20px;
     transition: 0.2s;
 }
 
@@ -144,17 +150,17 @@ transition: 0.2s;
 
 
 #comment-con{
-    margin-left: 0px;
-    margin-right: 12.5rem;
+    margin-left: 5.9rem;
+    margin-right: 4.3rem;
     margin-bottom: 3.125rem;
 }
 
 .comment-input{
+    width: 100%;
     border: 2px solid black;
     border-radius: 0.625rem;
     transition: 0.2s;
     resize: none;
-    margin-left: 320px;
 }
 
 
@@ -164,12 +170,6 @@ transition: 0.2s;
 
 .comment_author{
     font-size:20px;
-}
-
-.d-flex{
-    padding-left: 3px !important;
-    padding-top: 35px;
-    padding-bottom: 20px !important;
 }
 
 .d-flex > hr{
@@ -232,4 +232,15 @@ form svg{
     position: absolute;
     top: 4px;
     right: 4px;
+}
+
+.user_profile{
+    width:2rem; 
+    height:2rem; 
+    margin-top: 0.5rem; 
+}
+
+.cp{
+    padding-left: 5.9rem; 
+    padding-right: 6.1rem;
 }

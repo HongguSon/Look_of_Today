@@ -2,12 +2,37 @@
 {% load static %}
 {% block extrahead %}
 <link rel="stylesheet" href="{% static 'css/post_detail.css' %}">
+<link rel="stylesheet" href="{% static 'css/post_detail_react.css' %}">
 <title>community</title>
 {% endblock %}
 
 {% block content %}
-<div class="post_title">{{talk.category}}</div>
-<div class="post_title">{{talk.title}}</div>
+<div class="post_category">{{talk.category}}</div>
+<div class="post_title">
+  {{talk.title}}
+  {% if user.is_authenticated %}
+  <form action="{% url 'community:talk_likes' talk.pk %}" method='POST' class="d-inline-block">
+    {% csrf_token %}
+    {% if user in talk.likes.all %}
+    <button class="btn btn-link text-danger">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-suit-heart-fill m-0"
+        viewBox="0 0 16 16">
+        <path
+          d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z" />
+      </svg>
+    </button>
+    {% else %}
+    <button class="btn btn-link text-danger">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-suit-heart m-0"
+        viewBox="0 0 16 16">
+        <path
+          d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595L8 6.236zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.55 7.55 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
+      </svg>
+    </button>
+    {% endif %}
+  </form>
+  {% endif %}
+</div>
 <div class="post_author">{{talk.author}}</div>
 <div class="post_time">{{talk.create_date}}</div>
 
@@ -38,50 +63,38 @@
 
 <hr>
 <div class="comment-sum">
-
   <div id="comment-list-{{talk.pk}}" class="comment-list">
     <div class="comm">
       {% for comment in t_comments %}
-      <div class="d-flex align-items-center m-0 p-4">
-        <i class="fa-solid fa-user m-3"></i>
-        <div>
-          <div>{{comment.author.username}}</div>
-          <div>{{comment.content}}</div>
-          {% if user == comment.author %}
-          <form action="{% url 'community:delete_tcomment' comment.pk %}" method="post">
-            {% csrf_token %}
-            <input type="submit" , value="삭제하기" , class="delbtn" />
-          </form>
+      <div class="d-flex justify-content-between align-items-center cp">
+        <div class="d-flex">
+          {% if comment.author.profile.profile_image %}
+          <img src="{{comment.author.profile.profile_image.url}}" class="user_profile mx-2">
+          {% else %}
+          <i class="fa-solid fa-user m-3"></i>
           {% endif %}
+          <div class="comment_other">
+            <div class="comment_author">{{comment.author.username}}</div>
+            <div class="content_other">{{comment.content}}</div>
+          </div>
         </div>
+        {% if user == comment.author %}
+        <form action="{% url 'community:delete_tcomment' comment.pk %}" method="post" class="comment_detail">
+          {% csrf_token %}
+          <div class="del_list">
+            <input type="submit" , value="삭제" , class="delbtn2" />
+          </div>
+        </form>
+        {% endif %}
       </div>
-      <hr>
+      <hr />
       {% endfor %}
     </div>
   </div>
 </div>
+
 {% if user.is_authenticated %}
-<form action="{% url 'community:talk_likes' talk.pk %}" method='POST'>
-  {% csrf_token %}
-  {% if user in talk.likes.all %}
-  <button class="btn btn-link text-danger" id="like">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-suit-heart-fill"
-      viewBox="0 0 16 16">
-      <path
-        d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z" />
-    </svg>
-  </button>
-  {% else %}
-  <button class="btn btn-link text-danger">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-suit-heart"
-      viewBox="0 0 16 16">
-      <path id="postlike"
-        d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595L8 6.236zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.55 7.55 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z" />
-    </svg>
-  </button>
-  {% endif %}
-</form>
-<div id="comment-con" class="d-flex justify-content-between align-items-center">
+<div id="comment-con" class="d-flex justify-content-center align-items-center">
   <form>
     <textarea rows="4" cols="100" id="comment-input-{{talk.pk}}" class="comment-input" type="text"
       placeholder="댓글 달기..."></textarea>
@@ -91,8 +104,12 @@
   </div>
 </div>
 {% else %}
-<div>댓글을 작성하려면 로그인어쩌구 잘 꾸며주세요 프론트 쏘리...
-  누르면 그 로그인 하라는거 뜨도록 하면 좋을거 같기도하고 모르겠따
+<div id="comment-con" class="d-flex justify-content-center align-items-center">
+  <form>
+    <textarea rows="4" cols="100" id="comment-input-{{post.pk}}" class="comment-input" type="text"
+      placeholder="로그인 후 이용해주세요" readonly></textarea>
+  </form>
+  <a class="mx-1 btn btn-secondary" href="{% url 'user:login' %}">로그인</a>
 </div>
 {% endif %}
 </div>
@@ -116,22 +133,66 @@
   requestComment.onreadystatechange = () => {
     if (requestComment.readyState === XMLHttpRequest.DONE) {
       if (requestComment.status < 400) {
-        const { author, talk_id, content, comment_id } = JSON.parse(requestComment.response);
+        const { user_img_url, author, talk_id, content, comment_id } = JSON.parse(requestComment.response);
         document.querySelector(`#comment-input-${talk_id}`).value = "";
         const element = document.querySelector(`#comment-list-${talk_id}`);
         const comm = document.querySelector(`.comm`);
         const newComment = document.createElement('div');
-        newComment.className = "d-flex align-items-center m-0 p-4";
-        newComment.innerHTML = `<i class="fa-solid fa-user m-3"></i>  
-                <div>
-                    <div>${author}</div>
-                    <div>${content}</div>
-                </div>`;
+        newComment.className = "d-flex justify-content-between align-items-center cp";
+        if (user_img_url == 0) {
+          newComment.innerHTML = `<div class="d-flex"><i class="fa-solid fa-user m-3"></i>
+            <div class="comment_other">
+              <div class="comment_author_other">${author}</div>
+              <div class="content_other">${content}</div>
+            </div></div>
+            <form action="/community/delete-tcomment/${comment_id}/" method="post" class="comment_detail">
+              {% csrf_token %}
+              <div class="del_list">
+                <input type="submit", value="삭제", class="delbtn2" />
+              </div>
+            </form>`;
+        }
+        else {
+          newComment.innerHTML = `<div class="d-flex">
+            <img src="${user_img_url}" class="user_profile mx-2">
+            <div class="comment_other">
+              <div class="comment_author_other">${author}</div>
+              <div class="content_other">${content}</div>
+            </div></div>
+            <form action="/community/delete-tcomment/${comment_id}/" method="post" class="comment_detail">
+              {% csrf_token %}
+              <div class="del_list">
+                <input type="submit", value="삭제", class="delbtn2" />
+              </div>
+            </form>`;
+        }
         comm.appendChild(newComment);
         let h = document.createElement("hr");
         comm.appendChild(h);
-      }
-    }
-  }
+      };
+    };
+  };
+  
+  const requestDelete = new XMLHttpRequest();
+    const onClickDelete = (post_id, comment_id) => {
+        const url = "/insta/comment/" + post_id + "/delete";
+        requestDelete.open("POST", url, true)
+        requestDelete.setRequestHeader(
+            "Content-Type",
+            "application/x-www-form-urlencoded"
+        );
+        requestDelete.send(JSON.stringify({post_id: post_id, comment_id: comment_id}));
+    };
+
+    requestDelete.onreadystatechange = () => {
+        if (requestDelete.readyState === XMLHttpRequest.DONE) {
+            if (requestDelete.status < 400) {
+                const { post_id, comment_id } = JSON.parse(requestDelete.response);
+                const targetContainer = document.querySelector(`#container`);
+                const target = document.getElementById(`${comment_id}`);
+                targetContainer.removeChild(target);
+            }
+        }
+    };
 </script>
 {% endblock %}
