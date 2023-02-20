@@ -2,31 +2,31 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    margin-bottom: 70px;
-    margin-top: 50px;
+    margin-bottom: 4.375rem;
+    margin-top: 3.125rem;
     text-align: center;
 }
 
 .clothes_create_p1{
-    margin-right: 71px;
+    margin-right: 4.438rem;
 }
 
 .clothes_create_p2{
-    margin-right: 65px;
+    margin-right: 4.063rem;
 }
 
 .filebox > label{
-    font-size: 18px;
+    font-size: 1.125rem;
 }
 
 .filebox > input{
-    margin-left: 124px;
+    margin-left: 7.75rem;
     opacity: 0;
     display: none;
 }
 
 .clothbox > label{
-    font-size: 18px;
+    font-size: 1.125rem;
 }
 
 .clothbox > input{
@@ -40,29 +40,29 @@
 }
 
 .clothes_type > input{
-    margin-left: 10px;
-    margin-right: 5px;
+    margin-left: 0.625rem;
+    margin-right: 0.313rem;
 }
 
 .our_closet_create{
     text-align: center;
 }
 .opc_title{
-    margin-right: 42px;
+    margin-right: 2.625rem;
 }
 .opc_img{
-    margin-left: 73px;
+    margin-left: 4.563rem;
 }
 .opc_privstat{
-    font-size: 15px;
+    font-size: 0.938rem;
 }
 .opc_privstat > input{
-    margin-left: 5px;
-    margin-right: 5px;
+    margin-left: 0.313rem;
+    margin-right: 0.313rem;
 }
 .opc_submit{
-    margin-top: 20px;
-    margin-bottom: 50px;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
 }
 .clothes_list_box {
     overflow-x :auto;
@@ -76,11 +76,11 @@
 }
 
 .id_img{
-    margin-left: 147px;
+    margin-left: 9.188rem;
 }
 
 .com_create > p{
-    margin-top: 45px;
+    margin-top: 2.813rem;
 }
 #id_content{
     resize: none;
@@ -105,7 +105,7 @@
 }
 
 .lookbox > label{
-    font-size: 18px;
+    font-size: 1.125rem;
 }
 
 .lookbox > input{

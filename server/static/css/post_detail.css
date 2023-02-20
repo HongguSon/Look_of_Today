@@ -125,9 +125,9 @@ transition: 0.2s;
     background-color: white;
     border: 2px solid black;
     border-radius: 0.4rem;
-    font-size: 11px;
-    width: 36px;
-    height: 22px;
+    font-size: 0.688rem;
+    width: 2.25rem;
+    height: 1.375rem;
     transition: 0.2s;
 }
 
@@ -165,28 +165,28 @@ transition: 0.2s;
 
 
 .comment-sum > hr{
-    width: 1026px;
+    width: 64.125rem;
 }
 
 .comment_author{
-    font-size:20px;
+    font-size:1.25rem;
 }
 
 .d-flex > hr{
-    width: 830px !important;
+    width: 51.875rem !important;
 }
 
 #like {
-    padding-left: 50px !important;
-    padding-right: 45px;
+    padding-left: 3.125rem !important;
+    padding-right: 2.813rem;
 }
 #user_comment_list{
-    padding-top: 35px;
-    padding-bottom: 2px !important;
+    padding-top: 2.188rem;
+    padding-bottom: 0.125rem !important;
 }
 
 .comment_author_other{
-    font-size: 20px;
+    font-size: 1.25rem;
 }
 
 form svg{
@@ -196,7 +196,7 @@ form svg{
 }
 
 #listbtn{
-    margin-top: 1px;
+    margin-top: 0.063rem;
     height: 1.875rem;
     transition: 0.2s;
 }
@@ -212,16 +212,16 @@ form svg{
     flex-wrap: wrap;
     justify-content: center;
     gap: 7rem;
-    margin-bottom: 130px;
+    margin-bottom: 8.125rem;
 }
 
 .cody_detail > * > img{
-    width: 200px;
+    width: 12.5rem;
 }
 
 .cody_title{
     text-align: center;
-    font-size: 19px;
+    font-size: 1.188rem;
 }
 
 .item__container {
@@ -230,8 +230,8 @@ form svg{
 
 .cody_detail > .item__container > .like_icon_position{
     position: absolute;
-    top: 4px;
-    right: 4px;
+    top: 0.25rem;
+    right: 0.25rem;
 }
 
 .user_profile{

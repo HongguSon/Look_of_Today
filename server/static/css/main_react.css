@@ -15,7 +15,7 @@
         height: 80vh;
     }
     .main2{
-        font-size: 11px;
+        font-size: 0.688rem;
     }
     .main2_img{
         gap: 1rem;
@@ -27,7 +27,7 @@
     #main2_arrow {
         width: 5rem;
         height: 5rem;
-        top: 130px;
+        top: 8.125rem;
     }
     #main2_after_rbg {
         width: 8rem;
@@ -40,7 +40,7 @@
         height: 80vh;
     }
     .main3{
-        font-size: 11px;
+        font-size: 0.688rem;
     }
     .main3_img{
         width: 15rem;
@@ -52,7 +52,7 @@
         height: 80vh;
     }
     .main4{
-        font-size: 11px;
+        font-size: 0.688rem;
     }
     .main4_img{
         width: 15rem;
@@ -64,7 +64,7 @@
         height: 80vh;
     }
     .main5{
-        font-size: 11px;
+        font-size: 0.688rem;
     }
     .main5_img{
         width: 15rem;

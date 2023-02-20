@@ -23,10 +23,10 @@
     .postimgs > img {max-width: 80%; height: auto;}
     
     .cody_title {
-        font-size: 14px;
+        font-size: 0.875rem;
     }
     .cody_detail > * > img {
-        width: 130px;
+        width: 8.125rem;
     }
     .cody_detail{
         gap: 4rem;
@@ -39,14 +39,14 @@
         margin-left: 0px;
     }
     .del_list > hr {
-        width: 300px;
+        width: 18.75rem;
         margin: 0px auto;
     }
     .content_other{
-        width: 200px;
+        width: 12.5rem;
     }
     .user_comment > p{
-        margin-right: 50px;
+        margin-right: 3.125rem;
     }
     #comment-con{
         margin-left: 1.5rem;
@@ -54,26 +54,26 @@
         margin-bottom: 3.125rem;
     }
     .delbtn2{
-        margin-left: 30px;
+        margin-left: 1.875rem;
     }
 }
 
 @media screen and (min-width: 768px) and (max-width:1024px){
     .delbtn2{
-        margin-left: 45px;
+        margin-left: 2.813rem;
     }
     .comment-input{
-        width: 500px;
+        width: 31.25rem;
     }
     .post_title{
         padding-left: 2.25rem;
-        padding-right: 140px;
+        padding-right: 8.75rem;
     }
     .post_author{
         padding-left: 2.563rem;
     }
     .user_comment > p{
-        margin-right: 50px;
+        margin-right: 3.125rem;
     }
 }
 

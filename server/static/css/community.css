@@ -3,9 +3,9 @@
 }
 
 .post_all {
-    font-size: 35px;
-    margin-top: 30px;
-    margin-bottom: 20px;
+    font-size: 2.188rem;
+    margin-top: 1.875rem;
+    margin-bottom: 1.25rem;
 }
 
 .post_all>a {
@@ -23,12 +23,12 @@
 
 .new_post {
     float: right;
-    font-size: 16px;
-    margin-top: 20px;
+    font-size: 1rem;
+    margin-top: 1.25rem;
 }
 
 .new_post>a {
-    margin-left: 4px;
+    margin-left: 0.25rem;
 }
 
 .compost_list {
@@ -36,7 +36,7 @@
     flex-wrap: wrap;
     text-align: center;
     gap: 1rem;
-    margin-bottom: 80px;
+    margin-bottom: 5rem;
 }
 
 .commain_title {
@@ -64,7 +64,7 @@ tbody{
 }
 
 tr td{
-    padding: 4px 7px;
+    padding: 0.25rem 0.438rem;
     box-sizing: border-box;
     vertical-align : middle;
 }
@@ -81,13 +81,13 @@ tr td{
 }
 
 #talk_comment{
-    margin-left: 2px;
-    margin-top: 2px;
-    font-size: 10px;
+    margin-left: 0.125rem;
+    margin-top: 0.125rem;
+    font-size: 0.625rem;
 }
 
 #talk_img{
-    font-size: 11px;
+    font-size: 0.688rem;
 }
 
 #talk_date {
@@ -101,11 +101,11 @@ tr td{
 }
 
 #post_menu{
-    font-size: 20px;
+    font-size: 1.25rem;
     display: flex;
     justify-content: space-around;
     font-weight: 600;
-    margin-bottom: 10px;
+    margin-bottom: 0.625rem;
 }
 
 .board-pagination{

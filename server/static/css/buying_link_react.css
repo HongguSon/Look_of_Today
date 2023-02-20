@@ -1,13 +1,13 @@
 @media all and (max-width: 767px){
     .exact_search_container {gap: 3rem;}
     
-    .exact_search_result > img{width: 130px; height: 140px;}
+    .exact_search_result > img{width: 8.125rem; height: 8.75rem;}
 
 }
 @media screen and (min-width: 768px) and (max-width:1024px){
     .exact_search_container {gap: 2.5rem;}
     
-    .exact_search_result > img{width: 130px; height: 140px;}
+    .exact_search_result > img{width: 8.125rem; height: 8.75rem;}
 
     .buylink_container > form {width: 75% !important;}
 }

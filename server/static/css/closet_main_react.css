@@ -17,10 +17,10 @@
         width: 6.25rem;
     }
     .closet_post_title {
-        width: 95px;
+        width: 5.938rem;
     }
     #status_all {
-        font-size: 11px;
+        font-size: 0.688rem;
         margin: auto;
         display: table;
     }
@@ -28,7 +28,7 @@
         margin-bottom: 0.2rem;
     }
     #post_status{
-        font-size: 12px;
+        font-size: 0.75rem;
     }
 }
 

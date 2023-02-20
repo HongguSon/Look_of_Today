@@ -25,7 +25,7 @@
     border-radius: 0.625rem;
     margin-top: 1.25rem;
     transition: all 0.5s;
-    margin-right: 10px;
+    margin-right: 0.625rem;
 }
 
 .startbtn:hover{
@@ -39,7 +39,7 @@
     border-radius: 0.625rem;
     margin-top: 1.25rem;
     transition: all 0.5s;
-    margin-right: 10px;
+    margin-right: 0.625rem;
 }
 
 .morebtn:hover{
@@ -73,7 +73,7 @@
 
 
 #start_arrow{
-    width: 30px;
+    width: 1.875rem;
 }
 
 .main2_container{
@@ -87,7 +87,7 @@
 
 .main2{
     text-align: center;
-    font-size: 22px;
+    font-size: 1.375rem;
 }
 
 .main2_img{
@@ -102,14 +102,14 @@
 #main2_before_rbg{
     width: 16rem;
     height: 25rem;
-    border-radius: 10px;
+    border-radius: 0.625rem;
     animation: up-down 1.4s infinite ease-in-out alternate;
 }
 
 #main2_after_rbg{
     width: 16rem;
     height: 23rem;
-    border-radius: 10px;
+    border-radius: 0.625rem;
     animation: up-down 1.4s infinite ease-in-out alternate;
 }
 
@@ -128,7 +128,7 @@
     border-radius: 0.625rem;
     margin-top: 1.25rem;
     transition: all 0.5s;
-    font-size: 18px;
+    font-size: 1.125rem;
 }
 
 .morebtn2:hover{
@@ -145,7 +145,7 @@
 
 .main3{
     text-align: center;
-    font-size: 20px;
+    font-size: 1.25rem;
 }
 
 .main3_img{
@@ -161,7 +161,7 @@
     border-radius: 0.625rem;
     margin-top: 1.25rem;
     transition: all 0.5s;
-    font-size: 18px;
+    font-size: 1.125rem;
 }
 
 .morebtn3:hover{
@@ -178,7 +178,7 @@
 
 .main4{
     text-align: center;
-    font-size: 22px;
+    font-size: 1.375rem;
 }
 
 .main4_img{
@@ -194,7 +194,7 @@
     border-radius: 0.625rem;
     margin-top: 1.25rem;
     transition: all 0.5s;
-    font-size: 18px;
+    font-size: 1.125rem;
 }
 
 .morebtn4:hover{
@@ -211,7 +211,7 @@
 
 .main5{
     text-align: center;
-    font-size: 22px;
+    font-size: 1.375rem;
 }
 
 .main5_img{
@@ -227,7 +227,7 @@
     border-radius: 0.625rem;
     margin-top: 1.25rem;
     transition: all 0.5s;
-    font-size: 18px;
+    font-size: 1.125rem;
 }
 
 .morebtn5:hover{
@@ -237,7 +237,7 @@
 
 .floating {
     position: fixed; 
-    width: 30px;
+    width: 1.875rem;
     right: 2.5%; 
     bottom: 5%;
     text-align:right;
@@ -245,8 +245,8 @@
 }
 
 #main_top{
-    width: 50px;
-    height: 30px;
+    width: 3.125rem;
+    height: 1.875rem;
     transition: all 0.5s;
 }
 

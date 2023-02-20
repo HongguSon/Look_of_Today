@@ -56,12 +56,12 @@ footer {
   left: 0;
   background-color: #fff; 
   overflow-x: hidden; 
-  padding-top: 60px; 
+  padding-top: 3.75rem; 
   transition: 0.5s;
 }
 
 .sidenav a {
-  padding: 8px 8px 8px 32px;
+  padding: 0.5rem 0.5rem 0.5rem 2rem;
   text-decoration: none;
   font-size: 0.9rem;
   color: #111;
@@ -76,14 +76,14 @@ footer {
 .sidenav .closebtn {
   position: absolute;
   top: 0;
-  right: 25px;
-  font-size: 36px;
-  margin-left: 50px;
+  right: 1.563rem;
+  font-size: 2.25rem;
+  margin-left: 3.125rem;
 }
 
 #main {
   transition: margin-left .5s;
-  padding: 20px;
+  padding: 1.25rem;
 }
 
 #backdiv{
@@ -102,8 +102,8 @@ footer {
 }
 
 @media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
+  .sidenav {padding-top: 0.938rem;}
+  .sidenav a {font-size: 1.125rem;}
 }
 
 @media screen and (max-width: 992px) {
