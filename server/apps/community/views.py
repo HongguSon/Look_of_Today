@@ -26,6 +26,11 @@ def post_create(request, *args, **kwargs):
         int_bottom = list(map(int, request.POST.getlist('bottom')))
         int_shoes = list(map(int, request.POST.getlist('shoes')))
         int_acc = list(map(int, request.POST.getlist('acc')))
+        print(int_outer)
+        print(int_top)
+        print(int_bottom)
+        print(int_shoes)
+        print(int_acc)
         if not request.POST["title"] or not request.FILES.get("look"):
             error = '에러'
             context = {
