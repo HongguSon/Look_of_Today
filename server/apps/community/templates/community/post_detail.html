@@ -60,9 +60,11 @@
 
 <div class="button-box">
   {% if user == post.author %}
-  <button type="button" class="delbtn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_post_modal">
-    삭제하기
-  </button>
+  <form>
+    <button type="button" class="delbtn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_post_modal">
+      삭제하기
+    </button>
+  </form>
   {% endif %}
 
   <button id="listbtn">
@@ -183,6 +185,17 @@
       {% for comment in comments %}
       {% if user == comment.author %}
 
+      <!--댓글 삭제 모달창-->
+      <section class="modal modal-section type-confirm">
+        <div class="enroll_box">
+          <p class="menu_msg"></p>
+        </div>
+        <div class="enroll_btn">
+          <button class="btn btn-primary btn_ok" onclick="comment_delete();">삭제</button>
+          <button class="btn gray_btn modal_close">취소</button>
+        </div>
+      </section>
+
       <div class="d-flex justify-content-between align-items-center mx-2">
         <div class="d-flex">
           <i class="fa-solid fa-user m-3"></i>
@@ -191,12 +204,8 @@
             <div class="content_other">{{comment.content}}</div>
           </div>
         </div>
-        <form action="{% url 'community:delete_comment' comment.pk %}" method="post" class="comment_detail">
-          {% csrf_token %}
-          <div class="del_list">
-            <input type="submit" , value="삭제" , class="delbtn2" />
-          </div>
-        </form>
+        <button class="postbtn" data-comment-id="{{id}}" onclick="comment_delete();">삭제</button>
+
         {% endif %}
       </div>
       <hr />
@@ -309,11 +318,9 @@
                   <div class="comment_author_other">${author}</div>
                   <div class="content_other">${content}</div>
                 </div></div>
-                <form action="/community/delete-comment/${comment_id}/" method="post" class="comment_detail">
-                  {% csrf_token %}
-                  <div class="del_list">
-                    <input type="submit", value="삭제", class="delbtn2" />
-                  </div>
+                <button type="button" class="delbtn btn-primary" data-bs-toggle="modal" data-bs-target=".delete_comment_modal">
+          삭제하기
+        </button>
                 </form>`
         comm.appendChild(newComment);
         let h = document.createElement("hr");
@@ -321,5 +328,21 @@
       }
     }
   }
+
+  // 댓글 삭제용 모달
+  function comment_delete() {
+    var retVal = confirm("댓글을 삭제 할까요?");
+    if (retVal == true) {
+      const commentDeleteBtn = event.target;
+      // 삭제 댓글 id 가져오기
+      const commentId = commentDeleteBtn.getAttribute("data-comment-id");
+      console.log(`삭제 버튼 클릭: ${commentId}번 댓글`);
+      //댓글 삭제 함수 작성 필요
+      return true;
+    }
+  }
+
+
+
 </script>
 {% endblock %}
