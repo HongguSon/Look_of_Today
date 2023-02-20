@@ -87,7 +87,6 @@ def comment_ajax(request, *args, **kwargs):
     data = json.loads(request.body)
     post = Post.objects.get(id=data["post_id"])
     profile = Profile.objects.get(user=request.user)
-    
     comment = PostComment.objects.create(
         post = post,
         author = request.user,
