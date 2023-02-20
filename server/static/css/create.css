@@ -86,6 +86,7 @@
     resize: none;
 }
 
+
 #look{
     display: none;
 }
@@ -122,4 +123,11 @@
 .lookopen{
     font-size: 0.8rem;
     color: gray;
+}
+
+@media all and (max-width: 767px){
+    #id_content{
+        width: 11.25rem;
+        height: 11.875rem;
+    }
 }
