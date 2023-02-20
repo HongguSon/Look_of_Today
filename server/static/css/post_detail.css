@@ -62,7 +62,7 @@
 
 .post_content{
     margin-top: 4rem; 
-    font-size: 1.05rem;
+    font-size: 1.5rem;
     padding-left: 6.563rem;
     padding-right: 6.563rem;
     padding-bottom: 2rem;
@@ -243,4 +243,8 @@ form svg{
 .cp{
     padding-left: 5.9rem; 
     padding-right: 6.1rem;
+}
+
+#com_detail_btn {
+    padding-left: 0.188rem; padding-bottom: 0.563rem;
 }

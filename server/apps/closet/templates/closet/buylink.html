@@ -3,6 +3,7 @@
 {% block extrahead %}
 <link rel="stylesheet" href="{% static 'css/post_detail.css' %}">
 <link rel="stylesheet" href="{% static 'css/ourcloset_post_react.css' %}">
+<link rel="stylesheet" href="{% static 'css/buying_link_react.css' %}">
 <link rel="stylesheet" href="{% static 'css/closet.css' %}">
 <title>구매링크</title>
 {% endblock %}
@@ -46,7 +47,7 @@
       <div class="exact_search_container">
         {% for cost, url, src in search_informations_list %}
         <div class="exact_search_result">
-          <img src="{{ src }}" style="width:200px; height:200px;" alt="">
+          <img src="{{ src }}" alt="">
           <div>{{ cost }}</div>
           <a href="{{ url }}" target="_blank">구매링크</a>
         </div>

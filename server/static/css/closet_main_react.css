@@ -3,14 +3,16 @@
         gap: 1.3rem;
     }
     .mycloset_img > img {
-        width: 100px;
+        width: 6rem;
+        height: 6rem;
     }
     .fa-2x {
         font-size: 1.3em;
     }
     #closet_all_img{
-        width: 90px;
-    }
+        width: 6rem;
+        height: 6rem;
+        }
     .mycloset_img{
         width: 100px;
     }
