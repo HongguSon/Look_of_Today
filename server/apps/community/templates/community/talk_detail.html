@@ -7,6 +7,25 @@
 {% endblock %}
 
 {% block content %}
+<div class="modal fade" id="delete_talk_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">착장을 삭제하시겠습니까?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+        <form action="{% url 'community:talk_delete' talk.pk%}" method="post">
+          {% csrf_token %}
+          <input type="submit" , value="삭제하기" , class="btn btn-primary" />
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="post_category">{{talk.category}}</div>
 <div class="post_title">
   {{talk.title}}
@@ -43,7 +62,9 @@
   </button>
   <form action="{% url 'community:talk_delete' talk.pk%}" method="post">
     {% csrf_token %}
-    <input type="submit" , value="삭제하기" , class="delbtn" />
+    <button type="button" class="delbtn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_talk_modal">
+      삭제하기
+    </button>
   </form>
   {% endif %}
   <button id="listbtn">
@@ -79,10 +100,30 @@
           </div>
         </div>
         {% if user == comment.author %}
+        <div class="modal fade" id="delete_tcomment_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">댓글을 삭제하시겠습니까?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                <form action="{% url 'community:delete_tcomment' comment.pk %}" method="post" class="comment_detail">
+                  {% csrf_token %}
+                  <input type="submit" , value="삭제하기" , class="btn btn-primary" />
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <form action="{% url 'community:delete_tcomment' comment.pk %}" method="post" class="comment_detail">
           {% csrf_token %}
           <div class="del_list">
-            <input type="submit" , value="삭제" , class="delbtn2" />
+            <button type="button" class="delbtn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_tcomment_modal">
+              삭제하기
+            </button>
           </div>
         </form>
         {% endif %}
@@ -148,7 +189,9 @@
             <form action="/community/delete-tcomment/${comment_id}/" method="post" class="comment_detail">
               {% csrf_token %}
               <div class="del_list">
-                <input type="submit", value="삭제", class="delbtn2" />
+                <button type="button" class="delbtn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_tcomment_modal">
+                  삭제하기
+                </button>
               </div>
             </form>`;
         }
@@ -162,7 +205,9 @@
             <form action="/community/delete-tcomment/${comment_id}/" method="post" class="comment_detail">
               {% csrf_token %}
               <div class="del_list">
-                <input type="submit", value="삭제", class="delbtn2" />
+                <button type="button" class="delbtn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_tcomment_modal">
+                  삭제하기
+                </button>
               </div>
             </form>`;
         }

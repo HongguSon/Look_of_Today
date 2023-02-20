@@ -27,7 +27,6 @@
   </div>
 </div>
 
-
 <div class="post_title">
   {{post.title}}
   {% if user.is_authenticated %}
@@ -163,6 +162,7 @@
   <div id="comment-list-{{post.pk}}" class="comment-list">
     <div class="comm">
       {% for comment in comments %}
+      
       <div class="d-flex justify-content-between align-items-center mx-2">
         <div class="d-flex">
           {% if comment.author.profile.profile_image %}
@@ -177,10 +177,30 @@
         </div>
 
         {% if user == comment.author %}
+        <div class="modal fade" id="delete_comment_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">댓글을 삭제하시겠습니까?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                <form action="{% url 'community:delete_comment' comment.pk %}" method="post" class="comment_detail">
+                  {% csrf_token %}
+                  <input type="submit" , value="삭제하기" , class="btn btn-primary" />
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <form action="{% url 'community:delete_comment' comment.pk %}" method="post" class="comment_detail">
           {% csrf_token %}
           <div class="del_list">
-            <input type="submit" , value="삭제" , class="delbtn2" />
+            <button type="button" class="delbtn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_comment_modal">
+              삭제하기
+            </button>
           </div>
         </form>
         {% endif %}
@@ -189,6 +209,7 @@
       {% endfor %}
     </div>
   </div>
+</div>
   {% if user.is_authenticated %}
   <div id="comment-con" class="d-flex justify-content-center align-items-center">
     <form>
@@ -277,7 +298,9 @@
               <form action="/community/delete-comment/${comment_id}/" method="post" class="comment_detail">
                 {% csrf_token %}
                 <div class="del_list">
-                  <input type="submit", value="삭제", class="delbtn2" />
+                  <button type="button" class="delbtn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_comment_modal">
+                    삭제
+                  </button>
                 </div>
               </form>`
             }
@@ -291,7 +314,9 @@
                   <form action="/community/delete-comment/${comment_id}/" method="post" class="comment_detail">
                     {% csrf_token %}
                     <div class="del_list">
-                      <input type="submit", value="삭제", class="delbtn2" />
+                      <button type="button" class="delbtn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_comment_modal">
+                        삭제
+                      </button>
                     </div>
                   </form>`
                 }

@@ -55,10 +55,10 @@
       <div class="accmain2">
         <div class="acccody">
           <a href="{% url 'closet:closet_all' %}">
-            <span>My Cody</span>
+            <span>내 착장</span>
           </a>
           <a href="{% url 'closet:post_like_list' %}">
-            <span>My List</span>
+            <span>찜한 착장</span>
           </a>
         </div>
       </div>
@@ -70,6 +70,24 @@
 {% if clothes_list %}
 <div class="mycloset_list">
   {% for clothes in clothes_list %}
+  <div class="modal fade" id="delete_cloth_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">옷을 삭제하시겠습니까?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+          <form action="{% url 'closet:clothes_delete' clothes.pk%}" method="post">
+            {% csrf_token %}
+            <input type="submit" , value="삭제하기" , class="btn btn-primary" />
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="mycloset_img item__container cloth-id-{{clothes.id}}">
     {% if clothes.rem_img %}
     <img src="{{clothes.rem_img.url}}" class="img-fluid">
@@ -92,7 +110,7 @@
     <form action="{% url 'closet:clothes_delete' clothes.pk%}" method="post">
       {% csrf_token %}
       <div class="clothes_delete">
-        <button type="submit" , value="삭제하기" , class="delbtn" , style="all:unset"><i
+        <button type="button" class="delbtn btn-primary" style="all:unset; cursor:pointer" data-bs-toggle="modal" data-bs-target="#delete_cloth_modal"><i
             class="fa-solid fa-xmark "></i></button>
       </div>
     </form>
