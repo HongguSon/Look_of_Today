@@ -52,6 +52,7 @@
       {% if error3 %}
       <p class="error-color m-0">올바르지 않은 값입니다.</p>
       {% endif %}
+    </br>
   
       <div class="d-flex align-items-center">
         <div class="mx-2">성별 : </div>
@@ -75,6 +76,7 @@
           <input type="radio" name="gender" value="nochoice" checked>선택안함</input>
         {% endif %}
       </div>
+      <br />
   
       <div class="d-flex align-items-center">
         <div class="mx-2">키 : </div>
@@ -87,6 +89,7 @@
       {% if error1 %}
       <p class="error-color m-0">올바르지 않은 값입니다.</p>
       {% endif %}
+      <br />
 
       <div class="d-flex align-items-center">
         <div class="mx-2">몸무게 : </div>
@@ -99,6 +102,7 @@
       {% if error2 %}
       <p class="error-color m-0">올바르지 않은 값입니다.</p>
       {% endif %}
+      <br />
   
       {% for field in date_form %}
       <div class="form-group d-flex align-items-center">
@@ -109,6 +113,7 @@
           name="birth_date"
           value="{{ initial_date }}"/>
       </div>
+      <br />
       <div></div>
       {% endfor %}
       <br>

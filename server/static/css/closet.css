@@ -147,8 +147,9 @@ img:hover {
 
 .mycloset_img > img,
 .mycloset_img > * > img {
-  width: 12.5rem;
-  border-radius: 0.9rem;
+	width: 12.5rem;
+	height: 12.5rem;
+  border-radius: 15px;
 }
 
 .mycloset_form {
@@ -301,6 +302,7 @@ img:hover {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  gap: 2.5rem;
 }
 
 .exact_search_result {

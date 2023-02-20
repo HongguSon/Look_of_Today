@@ -55,6 +55,7 @@
       {% if post_comments_list %}
       {% for comment in post_comments_list %}
         <li><a href="{% url 'community:talk_detail' comment.id %}">{{ comment.title }}</a></li>
+        <br />
       {% endfor %}
       {% else %}
         <div>아직 작성한 댓글이 없습니다!</div>

@@ -246,7 +246,7 @@
 
 #main_top{
     width: 50px;
-    height: 32px;
+    height: 30px;
     transition: all 0.5s;
 }
 
@@ -261,4 +261,8 @@
     to{
         transform: translatey(-15px);
     }
+}
+
+.error-color {
+    color: red;
 }
