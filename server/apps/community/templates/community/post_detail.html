@@ -177,7 +177,7 @@
           </div>
         </div>
         {% if user == comment.author %}
-        <form action="{% url 'community:delete_tcomment' comment.pk %}" method="post" class="comment_detail">
+        <form action="{% url 'community:delete_comment' comment.pk %}" method="post" class="comment_detail">
           {% csrf_token %}
           <div class="del_list">
             <input type="submit" , value="삭제" , class="delbtn2" />
@@ -243,8 +243,7 @@
           };
         }
       }
-    }
-  };
+    };
 
   const requestComment = new XMLHttpRequest();
 
