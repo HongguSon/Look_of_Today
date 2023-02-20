@@ -116,7 +116,6 @@ def comment_ajax(request, *args, **kwargs):
     'content' : content,
     'comment_id' : comment_id,
   }
-  
   return JsonResponse(context)
 
 def delete_pcomment(request, pk, *args, **kwargs):
