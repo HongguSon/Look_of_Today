@@ -86,7 +86,7 @@ def post_detail(request, pk, *args, **kwargs):
 def comment_ajax(request, *args, **kwargs):
     data = json.loads(request.body)
     post = Post.objects.get(id=data["post_id"])
-    pro = Profile.objects.all()
+
     
     comment = PostComment.objects.create(
         post = post,
@@ -95,7 +95,7 @@ def comment_ajax(request, *args, **kwargs):
     comment.save()
 
     context = {
-        'user_img' : Profile.profile_image,
+        # 'user_img' :  Profile.profile_image,
         'author' : str(comment.author),
         'post_id' : post.id,
         'content' : comment.content,
@@ -109,6 +109,7 @@ def delete_pcomment(request, pk, *args, **kwargs):
     if request.user.is_authenticated and request.user == comment.author:
         comment.delete()
         return redirect('community:post_detail', post.pk)
+        #return redirect(post.get_absolute_url())
     else:
         PermissionDenied
 
