@@ -221,21 +221,6 @@
         "Content-Type",
         "application/x-www-form-urlencoded"
       );
-      requestLike.send(JSON.stringify({ id: id, btnType: btnType, imgUrl: imgUrl }));
-    };
-
-  <script>
-    const strip = (string) => {
-      return string.replace(/^\s+|\s+$/g, "");
-    };
-    const requestLike = new XMLHttpRequest();
-    const onClickLike = (id, btnType, imgUrl) => {
-      const url = "/closet/clothes-likes/" + id;
-      requestLike.open("POST", url, true)
-      requestLike.setRequestHeader(
-        "Content-Type",
-        "application/x-www-form-urlencoded"
-      );
       requestLike.send(JSON.stringify({id: id, btnType: btnType, imgUrl: imgUrl}));
     };
   
