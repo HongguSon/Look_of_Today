@@ -3,16 +3,22 @@
         width: 6.625rem;
         height: 10rem;
     }
+    .nopost{
+        height: 80vh;
+    }
     .postex {
         padding-top: 6.25rem;
         padding-left: 1rem;
         font-size: 0.7rem;
     }
+    .main2_container{
+        height: 80vh;
+    }
     .main2{
         font-size: 11px;
     }
     .main2_img{
-        gap: 6rem;
+        gap: 1rem;
     }
     #main2_before_rbg {
         width: 7rem;
@@ -30,29 +36,38 @@
     .morebtn2{
         font-size: 0.7rem;
     }
+    .main3_container{
+        height: 80vh;
+    }
     .main3{
         font-size: 11px;
     }
     .main3_img{
-        width: 20rem;
+        width: 15rem;
     }
     .morebtn3{
         font-size: 0.7rem;
+    }
+    .main4_container{
+        height: 80vh;
     }
     .main4{
         font-size: 11px;
     }
     .main4_img{
-        width: 20rem;
+        width: 15rem;
     }
     .morebtn4{
         font-size: 0.7rem;
+    }
+    .main5_container{
+        height: 80vh;
     }
     .main5{
         font-size: 11px;
     }
     .main5_img{
-        width: 20rem;
+        width: 15rem;
     }
     .morebtn5{
         font-size: 0.7rem;
