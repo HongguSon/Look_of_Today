@@ -56,11 +56,7 @@
               </span> 
               <span id="talk_comment">
                 <i class="fa-regular fa-comment"></i>
-                {%for count in comments_count%}
-                {%if forloop.counter0 == talk.pk %}
-                {{count}}
-                {%endif%}
-                {%endfor%}
+                {{talk.talkcomments.count}}
               </span>
             </td>
             

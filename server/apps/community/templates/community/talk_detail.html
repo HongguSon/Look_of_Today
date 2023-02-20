@@ -7,6 +7,25 @@
 {% endblock %}
 
 {% block content %}
+<div class="modal fade" id="delete_talk_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">착장을 삭제하시겠습니까?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+        <form action="{% url 'community:talk_delete' talk.pk%}" method="post">
+          {% csrf_token %}
+          <input type="submit" , value="삭제" , class="btn btn-primary" />
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="post_category">{{talk.category}}</div>
 <div class="post_title">
   {{talk.title}}
@@ -43,7 +62,9 @@
   </button>
   <form action="{% url 'community:talk_delete' talk.pk%}" method="post">
     {% csrf_token %}
-    <input type="submit" , value="삭제하기" , class="delbtn" />
+    <button type="button" class="delbtn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_talk_modal">
+      삭제
+    </button>
   </form>
   {% endif %}
   <button id="listbtn">
@@ -52,7 +73,7 @@
 </div>
 <br /><br />
 <div class="post_content">
-  {{talk.content}}
+  {{talk.content|linebreaks}}
 </div> <br />
 
 <div class="postimgs">
@@ -69,9 +90,9 @@
       <div class="d-flex justify-content-between align-items-center cp">
         <div class="d-flex">
           {% if comment.author.profile.profile_image %}
-          <img src="{{comment.author.profile.profile_image.url}}" class="user_profile mx-2">
+          <img src="{{comment.author.profile.profile_image.url}}" class="user_profile me-2">
           {% else %}
-          <i class="fa-solid fa-user m-3"></i>
+          <i class="fa-solid fa-user my-3 me-3" style="margin-left: 0.62rem;"></i>
           {% endif %}
           <div class="comment_other">
             <div class="comment_author">{{comment.author.username}}</div>
@@ -79,12 +100,28 @@
           </div>
         </div>
         {% if user == comment.author %}
-        <form action="{% url 'community:delete_tcomment' comment.pk %}" method="post" class="comment_detail">
-          {% csrf_token %}
-          <div class="del_list">
-            <input type="submit" , value="삭제" , class="delbtn2" />
+        <div class="del_list">
+          <button type="button" class="delbtn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_tcomment_modal_{{comment.pk}}">
+            삭제
+          </button>
+        </div>
+        <div class="modal fade" id="delete_tcomment_modal_{{comment.pk}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">댓글을 삭제하시겠습니까?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                <form action="{% url 'community:delete_tcomment' comment.pk %}" method="post" class="comment_detail">
+                  {% csrf_token %}
+                  <input type="submit" , value="삭제" , class="btn btn-primary" />
+                </form>
+              </div>
+            </div>
           </div>
-        </form>
+        </div>
         {% endif %}
       </div>
       <hr />
@@ -94,25 +131,25 @@
 </div>
 
 {% if user.is_authenticated %}
+<p id="comment-non"></p>
 <div id="comment-con" class="d-flex justify-content-center align-items-center">
   <form>
     <textarea rows="4" cols="100" id="comment-input-{{talk.pk}}" class="comment-input" type="text"
       placeholder="댓글 달기..."></textarea>
   </form>
-  <div class="comment-btn btn" id="comment-btn-{{talk.pk}}" onclick="onClickCommenet({{talk.id}})">
+  <div class="comment-btn" id="comment-btn-{{talk.pk}}" onclick="onClickCommenet({{talk.id}})">
     <input type="submit" , value="게시" , class="delbtn" />
   </div>
 </div>
 {% else %}
 <div id="comment-con" class="d-flex justify-content-center align-items-center">
   <form>
-    <textarea rows="4" cols="100" id="comment-input-{{post.pk}}" class="comment-input" type="text"
+    <textarea rows="4" cols="100" id="comment-input-{{talk.pk}}" class="comment-input" type="text"
       placeholder="로그인 후 이용해주세요" readonly></textarea>
   </form>
   <a class="mx-1 btn btn-secondary" href="{% url 'user:login' %}">로그인</a>
 </div>
 {% endif %}
-</div>
 
 <script>
   const requestComment = new XMLHttpRequest();
@@ -138,37 +175,77 @@
         const element = document.querySelector(`#comment-list-${talk_id}`);
         const comm = document.querySelector(`.comm`);
         const newComment = document.createElement('div');
-        newComment.className = "d-flex justify-content-between align-items-center cp";
-        if (user_img_url == 0) {
-          newComment.innerHTML = `<div class="d-flex"><i class="fa-solid fa-user m-3"></i>
-            <div class="comment_other">
-              <div class="comment_author_other">${author}</div>
-              <div class="content_other">${content}</div>
-            </div></div>
-            <form action="/community/delete-tcomment/${comment_id}/" method="post" class="comment_detail">
-              {% csrf_token %}
-              <div class="del_list">
-                <input type="submit", value="삭제", class="delbtn2" />
-              </div>
-            </form>`;
+        const non_com = document.querySelector(`#comment-non`);
+        non_com.className = "error-color text-center";
+        if (content == 0) {
+          non_com.innerHTML = `내용을 입력해주세요.`;
         }
         else {
-          newComment.innerHTML = `<div class="d-flex">
-            <img src="${user_img_url}" class="user_profile mx-2">
-            <div class="comment_other">
-              <div class="comment_author_other">${author}</div>
-              <div class="content_other">${content}</div>
-            </div></div>
-            <form action="/community/delete-tcomment/${comment_id}/" method="post" class="comment_detail">
-              {% csrf_token %}
+          non_com.innerHTML = ``;        
+          newComment.className = "d-flex justify-content-between align-items-center cp";
+          if (user_img_url == 0) {
+            newComment.innerHTML = `<div class="d-flex"><i class="fa-solid fa-user my-3 me-3" style="margin-left: 0.62rem;"></i>
+              <div class="comment_other">
+                <div class="comment_author_other">${author}</div>
+                <div class="content_other">${content}</div>
+              </div></div>
               <div class="del_list">
-                <input type="submit", value="삭제", class="delbtn2" />
+                <button type="button" class="delbtn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_tcomment_modal_${comment_id}">
+                  삭제
+                </button>
               </div>
-            </form>`;
-        }
-        comm.appendChild(newComment);
-        let h = document.createElement("hr");
-        comm.appendChild(h);
+              <div class="modal fade" id="delete_tcomment_modal_${comment_id}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="staticBackdropLabel">댓글을 삭제하시겠습니까?</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                      <form action="/community/delete-tcomment/${comment_id}/" method="post" class="comment_detail">
+                        {% csrf_token %}
+                        <input type="submit" , value="삭제" , class="btn btn-primary" />
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>`;
+          }
+          else {
+            newComment.innerHTML = `<div class="d-flex">
+              <img src="${user_img_url}" class="user_profile me-2">
+              <div class="comment_other">
+                <div class="comment_author_other">${author}</div>
+                <div class="content_other">${content}</div>
+              </div></div>
+              <div class="del_list">
+                <button type="button" class="delbtn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_tcomment_modal_${comment_id}">
+                  삭제
+                </button>
+              </div>
+              <div class="modal fade" id="delete_tcomment_modal_${comment_id}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="staticBackdropLabel">댓글을 삭제하시겠습니까?</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                      <form action="/community/delete-tcomment/${comment_id}/" method="post" class="comment_detail">
+                        {% csrf_token %}
+                        <input type="submit" , value="삭제" , class="btn btn-primary" />
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>`;
+          }
+          comm.appendChild(newComment);
+          let h = document.createElement("hr");
+          comm.appendChild(h);
+        };
       };
     };
   };

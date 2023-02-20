@@ -250,6 +250,9 @@
     transition: all 0.5s;
 }
 
+.error-color {
+    color: red;
+}
 
 @keyframes up-down{
     from{
