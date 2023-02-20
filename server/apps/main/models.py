@@ -132,7 +132,7 @@ class PostComment(Comment):
     return f'({self.author}) {self.post.title} :  {self.content}'
 
 class TalkComment(Comment):
-  talk = models.ForeignKey(Talk, on_delete=models.CASCADE)
+  talk = models.ForeignKey(Talk, related_name="talkcomments" ,on_delete=models.CASCADE)
   
   def __str__(self):
     return f'({self.author}) {self.talk.title} :  {self.content}'

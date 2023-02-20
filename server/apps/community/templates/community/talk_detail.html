@@ -134,13 +134,14 @@
 </div>
 
 {% if user.is_authenticated %}
+<p id="comment-non"></p>
 <div id="comment-con" class="d-flex justify-content-center align-items-center">
   <form>
     <textarea rows="4" cols="100" id="comment-input-{{talk.pk}}" class="comment-input" type="text"
       placeholder="댓글 달기..."></textarea>
   </form>
-  <div class="comment-btn btn" id="comment-btn-{{talk.pk}}" onclick="onClickCommenet({{talk.id}})">
-    <input type="submit" , value="게시" , class="delbtn" />
+  <div class="comment-btn" id="comment-btn-{{talk.pk}}">
+    <input type="submit" , value="게시" , class="delbtn" onclick="onClickCommenet({{talk.id}})">
   </div>
 </div>
 {% else %}
@@ -177,41 +178,49 @@
         const element = document.querySelector(`#comment-list-${talk_id}`);
         const comm = document.querySelector(`.comm`);
         const newComment = document.createElement('div');
-        newComment.className = "d-flex justify-content-between align-items-center cp";
-        if (user_img_url == 0) {
-          newComment.innerHTML = `<div class="d-flex"><i class="fa-solid fa-user my-3 me-3" style="margin-left: 0.62rem;"></i>
-            <div class="comment_other">
-              <div class="comment_author_other">${author}</div>
-              <div class="content_other">${content}</div>
-            </div></div>
-              <div class="del_list">
-                <form action="/community/delete-tcomment/${comment_id}/" method="post" class="comment_detail">
-                  {% csrf_token %}
-                <button type="button" class="delbtn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_tcomment_modal">
-                  삭제
-                </button>
-                </form>
-              </div>`;
+        const non_com = document.querySelector(`#comment-non`);
+        non_com.className = "error-color text-center";
+        if (content == 0) {
+          non_com.innerHTML = `내용을 입력해주세요.`;
         }
         else {
-          newComment.innerHTML = `<div class="d-flex">
-            <img src="${user_img_url}" class="user_profile me-2">
-            <div class="comment_other">
-              <div class="comment_author_other">${author}</div>
-              <div class="content_other">${content}</div>
-            </div></div>
-              <div class="del_list">
-                <form action="/community/delete-tcomment/${comment_id}/" method="post" class="comment_detail">
-                  {% csrf_token %}
-                <button type="button" class="delbtn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_tcomment_modal">
-                  삭제
-                </button>
-                </form>
-              </div>`;
-        }
-        comm.appendChild(newComment);
-        let h = document.createElement("hr");
-        comm.appendChild(h);
+          non_com.innerHTML = ``;
+          newComment.className = "d-flex justify-content-between align-items-center cp";
+          if (user_img_url == 0) {
+            newComment.innerHTML = `<div class="d-flex"><i class="fa-solid fa-user my-3 me-3" style="margin-left: 0.62rem;"></i>
+              <div class="comment_other">
+                <div class="comment_author_other">${author}</div>
+                <div class="content_other">${content}</div>
+              </div></div>
+                <div class="del_list">
+                  <form action="/community/delete-tcomment/${comment_id}/" method="post" class="comment_detail">
+                    {% csrf_token %}
+                  <button type="button" class="delbtn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_tcomment_modal">
+                    삭제
+                  </button>
+                  </form>
+                </div>`;
+          }
+          else {
+            newComment.innerHTML = `<div class="d-flex">
+              <img src="${user_img_url}" class="user_profile me-2">
+              <div class="comment_other">
+                <div class="comment_author_other">${author}</div>
+                <div class="content_other">${content}</div>
+              </div></div>
+                <div class="del_list">
+                  <form action="/community/delete-tcomment/${comment_id}/" method="post" class="comment_detail">
+                    {% csrf_token %}
+                  <button type="button" class="delbtn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_tcomment_modal">
+                    삭제
+                  </button>
+                  </form>
+                </div>`;
+          }
+          comm.appendChild(newComment);
+          let h = document.createElement("hr");
+          comm.appendChild(h);
+        };
       };
     };
   };
