@@ -86,16 +86,21 @@ def post_detail(request, pk, *args, **kwargs):
 def comment_ajax(request, *args, **kwargs):
     data = json.loads(request.body)
     post = Post.objects.get(id=data["post_id"])
-    pro = Profile.objects.all()
+    profile = Profile.objects.get(user=request.user)
     
     comment = PostComment.objects.create(
         post = post,
         author = request.user,
         content = data.get('content'),)
     comment.save()
+    
+    if profile.profile_image:
+      user_img_url = profile.profile_image.url
+    else:
+      user_img_url = 0
 
     context = {
-        'user_img' : Profile.profile_image,
+        'user_img_url' : user_img_url,
         'author' : str(comment.author),
         'post_id' : post.id,
         'content' : comment.content,
@@ -174,23 +179,30 @@ def talk_detail(request, pk, *args, **kwargs):
 
 @csrf_exempt
 def comment_talk_ajax(request, *args, **kwargs):
-    data = json.loads(request.body)
-    talk = Talk.objects.get(id=data["talk_id"])
-    
-    comment = TalkComment.objects.create(
-        talk = talk,
-        author = request.user,
-        content = data.get('content'),)
-    comment.save()
+  data = json.loads(request.body)
+  talk = Talk.objects.get(id=data["talk_id"])
+  profile = Profile.objects.get(user=request.user)
+  
+  comment = TalkComment.objects.create(
+    talk = talk,
+    author = request.user,
+    content = data.get('content'),)
+  comment.save()
 
-    context = {
-        'author' : str(comment.author),
-        'talk_id' : talk.id,
-        'content' : comment.content,
-        'comment_id' : comment.id,
-    }
+  if profile.profile_image:
+    user_img_url = profile.profile_image.url
+  else:
+    user_img_url = 0
     
-    return JsonResponse(context)
+  context = {
+    'user_img_url' : user_img_url,
+    'author' : str(comment.author),
+    'talk_id' : talk.id,
+    'content' : comment.content,
+    'comment_id' : comment.id,
+  }
+    
+  return JsonResponse(context)
 
 def delete_tcomment(request, pk, *args, **kwargs):
     tcomment = get_object_or_404(TalkComment, pk=pk)
@@ -272,7 +284,6 @@ def count_comments(talk_list,t_comments):
         for talk in talk_list:
             if talk.pk == t_comment.talk.pk:
                 comments_count[talk.pk]+=1
-    print(comments_count)
     return talk_list,comments_count
 
 #정렬 코드

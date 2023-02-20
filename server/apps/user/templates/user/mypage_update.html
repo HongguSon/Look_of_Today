@@ -44,11 +44,14 @@
       <div class="d-flex align-items-center">
         <div class="mx-2">핸드폰 번호 : </div>
         {% if phone_num %}
-        <input name="phone_num" placeholder="핸드폰 번호" value="{{ phone_num }}" />
+        <input name="phone_num" placeholder="01012341234" value="{{ phone_num }}" />
         {% else %}
-        <input name="phone_num" placeholder="핸드폰 번호" value="" />
+        <input name="phone_num" placeholder="01012341234" value="" />
         {% endif %}
       </div>
+      {% if error3 %}
+      <p class="error-color m-0">올바르지 않은 값입니다.</p>
+      {% endif %}
   
       <div class="d-flex align-items-center">
         <div class="mx-2">성별 : </div>
@@ -76,9 +79,9 @@
       <div class="d-flex align-items-center">
         <div class="mx-2">키 : </div>
         {% if height %}
-        <input name="height" placeholder="키" value="{{ height }}" />
+        <input name="height" placeholder="정수를 입력해주세요" value="{{ height }}" />
         {% else %}
-        <input name="height" placeholder="키" value="" />
+        <input name="height" placeholder="정수를 입력해주세요" value="" />
         {% endif %}
       </div>
       {% if error1 %}
@@ -88,9 +91,9 @@
       <div class="d-flex align-items-center">
         <div class="mx-2">몸무게 : </div>
         {% if weight %}
-        <input name="weight" placeholder="몸무게" value="{{ weight }}" />
+        <input name="weight" placeholder="정수를 입력해주세요" value="{{ weight }}" />
         {% else %}
-        <input name="weight" placeholder="몸무게" value="" />
+        <input name="weight" placeholder="정수를 입력해주세요" value="" />
         {% endif %}
       </div>
       {% if error2 %}
@@ -111,20 +114,6 @@
       <br>
       <input class="btn btn-secondary modify_btn" type="submit", value="저장하기" />
     </div>
-
-    {% comment %} <div class="d-flex">
-      <div class="mx-2">팔로잉 : </div>
-      {% if str_following != 'auth.User.None' %}
-      <div>팔로잉 목록</div>
-      {% for follow in following %}
-      <div>{{ follow }}</div>
-      <small style="color:white">팔로우 취소</small>
-      <input type="checkbox" name="check2" />
-      {% endfor %}
-      {% else %}
-      <div>팔로잉을 아직 아무도 하지 않았어요!</div>
-      {% endif %}
-    </div> {% endcomment %}
     <br>
   </div>
 </form>

@@ -133,28 +133,39 @@
   requestComment.onreadystatechange = () => {
     if (requestComment.readyState === XMLHttpRequest.DONE) {
       if (requestComment.status < 400) {
-        const { author, talk_id, content, comment_id } = JSON.parse(requestComment.response);
+        const { user_img_url, author, talk_id, content, comment_id } = JSON.parse(requestComment.response);
         document.querySelector(`#comment-input-${talk_id}`).value = "";
         const element = document.querySelector(`#comment-list-${talk_id}`);
         const comm = document.querySelector(`.comm`);
         const newComment = document.createElement('div');
-        newComment.className = "d-flex justify-content-between align-items-center cp";
-        newComment.innerHTML = `<div class="d-flex">
-          {% if comment.author.profile.profile_image %}
-          <img src="{{comment.author.profile.profile_image.url}}" class="user_profile mx-2">
-          {% else %}
-          <i class="fa-solid fa-user m-3"></i>
-          {% endif %}
-          <div class="comment_other">
-            <div class="comment_author_other">${author}</div>
-            <div class="content_other">${content}</div>
-          </div></div>
-          <form action="/community/delete-tcomment/${comment_id}/" method="post" class="comment_detail">
-            {% csrf_token %}
-            <div class="del_list">
-              <input type="submit", value="삭제", class="delbtn2" />
-            </div>
-          </form>`;
+        newComment.className = "d-flex justify-content-between align-items-center mx-2";
+        if (user_img_url == 0) {
+          newComment.innerHTML = `<div class="d-flex"><i class="fa-solid fa-user m-3"></i>
+            <div class="comment_other">
+              <div class="comment_author_other">${author}</div>
+              <div class="content_other">${content}</div>
+            </div></div>
+            <form action="/community/delete-tcomment/${comment_id}/" method="post" class="comment_detail">
+              {% csrf_token %}
+              <div class="del_list">
+                <input type="submit", value="삭제", class="delbtn2" />
+              </div>
+            </form>`;
+        }
+        else {
+          newComment.innerHTML = `<div class="d-flex">
+            <img src="${user_img_url}" alt="user_profile" style="width:2rem; height:2rem; margin-top: 0.5rem;">
+            <div class="comment_other">
+              <div class="comment_author_other">${author}</div>
+              <div class="content_other">${content}</div>
+            </div></div>
+            <form action="/community/delete-tcomment/${comment_id}/" method="post" class="comment_detail">
+              {% csrf_token %}
+              <div class="del_list">
+                <input type="submit", value="삭제", class="delbtn2" />
+              </div>
+            </form>`;
+        }
         comm.appendChild(newComment);
         let h = document.createElement("hr");
         comm.appendChild(h);
