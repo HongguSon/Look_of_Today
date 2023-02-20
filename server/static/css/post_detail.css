@@ -62,8 +62,9 @@
 
 .post_content{
     margin-top: 4rem; 
-    font-size: 1.05rem;
+    font-size: 1.5rem;
     padding-left: 6.563rem;
+    padding-right: 6.563rem;
     padding-bottom: 2rem;
 }
 
@@ -72,7 +73,7 @@
     flex-direction: row;
     justify-content: space-around;
     float: right;
-    padding-right: 1.25rem;
+    padding-right: 1.5rem;
 }
 
 .button-box > button {
@@ -124,9 +125,9 @@ transition: 0.2s;
     background-color: white;
     border: 2px solid black;
     border-radius: 0.4rem;
-    font-size: 11px;
-    width: 36px;
-    height: 22px;
+    font-size: 0.688rem;
+    width: 2.25rem;
+    height: 1.375rem;
     transition: 0.2s;
 }
 
@@ -149,7 +150,8 @@ transition: 0.2s;
 
 
 #comment-con{
-    margin-left: 1rem;
+    margin-left: 5.9rem;
+    margin-right: 4.3rem;
     margin-bottom: 3.125rem;
 }
 
@@ -163,28 +165,28 @@ transition: 0.2s;
 
 
 .comment-sum > hr{
-    width: 1026px;
+    width: 64.125rem;
 }
 
 .comment_author{
-    font-size:20px;
+    font-size:1.25rem;
 }
 
 .d-flex > hr{
-    width: 830px !important;
+    width: 51.875rem !important;
 }
 
 #like {
-    padding-left: 50px !important;
-    padding-right: 45px;
+    padding-left: 3.125rem !important;
+    padding-right: 2.813rem;
 }
 #user_comment_list{
-    padding-top: 35px;
-    padding-bottom: 2px !important;
+    padding-top: 2.188rem;
+    padding-bottom: 0.125rem !important;
 }
 
 .comment_author_other{
-    font-size: 20px;
+    font-size: 1.25rem;
 }
 
 form svg{
@@ -194,7 +196,7 @@ form svg{
 }
 
 #listbtn{
-    margin-top: 1px;
+    margin-top: 0.063rem;
     height: 1.875rem;
     transition: 0.2s;
 }
@@ -210,16 +212,16 @@ form svg{
     flex-wrap: wrap;
     justify-content: center;
     gap: 7rem;
-    margin-bottom: 130px;
+    margin-bottom: 8.125rem;
 }
 
 .cody_detail > * > img{
-    width: 200px;
+    width: 12.5rem;
 }
 
 .cody_title{
     text-align: center;
-    font-size: 19px;
+    font-size: 1.188rem;
 }
 
 .item__container {
@@ -228,24 +230,21 @@ form svg{
 
 .cody_detail > .item__container > .like_icon_position{
     position: absolute;
-    top: 4px;
-    right: 4px;
+    top: 0.25rem;
+    right: 0.25rem;
 }
 
-@media screen and (max-width: 768px) {
-
+.user_profile{
+    width:2rem; 
+    height:2rem; 
+    margin-top: 0.5rem; 
 }
 
-@media screen and (max-width: 576px) {
-    .postimgs > img {max-width: 80%; height: auto;}
+.cp{
+    padding-left: 5.9rem; 
+    padding-right: 6.1rem;
+}
 
-    .post_category {padding-left: 1.5rem; padding-right: 1.5rem;}
-
-    .post_title {padding-top: 1rem; padding-bottom: 1rem; padding-left: 1.5rem; padding-right: 1.5rem;}
-
-    .post_author {padding-left: 1.5rem;}
-
-    .post_time {padding-left: 1.5rem; margin-bottom: 1rem;}
-
-    .post_content {padding-left: 1.5rem;}
+#com_detail_btn {
+    padding-left: 0.188rem; padding-bottom: 0.563rem;
 }

@@ -1,7 +1,7 @@
 #banner {
     height: 6.375rem;
     text-align: center;
-    margin-bottom: 50px;
+    margin-bottom: 3.125rem;
   }
   
 .right {
@@ -21,28 +21,28 @@
 .ourcloset_title > p{
   margin-top: 2rem !important;
   text-align: left;
-  font-size: 35px;
+  font-size: 2.188rem;
 }
 
 .ourcloset_title > div > h5{
   text-align: left;
-  font-size: 14px;
-  margin-top: 6px;
+  font-size: 0.875rem;
+  margin-top: 0.375rem;
   /*웹은 margin-left: 4px;*/
 }
 
 .ourcloset_newpost1{
   float: right;
-  font-size: 16px;
-  margin-right: 45px;
-  margin-top: 14px;
+  font-size: 1rem;
+  margin-right: 2.813rem;
+  margin-top: 0.875rem;
 }
 
 .ourcloset_newpost2{
   float: right;
-  font-size: 16px;
-  margin-right: 8px;
-  margin-top: 14px;
+  font-size: 1rem;
+  margin-right: 0.5rem;
+  margin-top: 0.875rem;
 }
 
 

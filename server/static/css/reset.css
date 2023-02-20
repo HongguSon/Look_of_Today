@@ -53,3 +53,7 @@ table {
 a, a:link{
 	text-decoration: none;
 }
+
+img{
+	object-fit: cover !important;
+}

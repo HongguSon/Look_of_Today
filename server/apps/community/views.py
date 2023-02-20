@@ -84,24 +84,39 @@ def post_detail(request, pk, *args, **kwargs):
 
 @csrf_exempt
 def comment_ajax(request, *args, **kwargs):
-    data = json.loads(request.body)
-    post = Post.objects.get(id=data["post_id"])
-    pro = Profile.objects.all()
-    
+  data = json.loads(request.body)
+  post = Post.objects.get(id=data["post_id"])
+  profile = Profile.objects.get(user=request.user)
+  
+  if data.get('content'):
     comment = PostComment.objects.create(
-        post = post,
-        author = request.user,
-        content = data.get('content'),)
+      post = post,
+      author = request.user,
+      content = data.get('content'),)
     comment.save()
+    
+    if profile.profile_image:
+      user_img_url = profile.profile_image.url
+    else:
+      user_img_url = 0
+      
+    author = str(comment.author)
+    content = comment.content
+    comment_id = comment.id
+  else:
+    author = 0
+    content = 0
+    comment_id = 0
+    user_img_url = 0
 
-    context = {
-        'user_img' : Profile.profile_image,
-        'author' : str(comment.author),
-        'post_id' : post.id,
-        'content' : comment.content,
-        'comment_id' : comment.id,
-    }
-    return JsonResponse(context)
+  context = {
+    'user_img_url' : user_img_url,
+    'author' : author,
+    'post_id' : post.id,
+    'content' : content,
+    'comment_id' : comment_id,
+  }
+  return JsonResponse(context)
 
 def delete_pcomment(request, pk, *args, **kwargs):
     comment = get_object_or_404(PostComment, pk=pk)
@@ -175,23 +190,40 @@ def talk_detail(request, pk, *args, **kwargs):
 
 @csrf_exempt
 def comment_talk_ajax(request, *args, **kwargs):
-    data = json.loads(request.body)
-    talk = Talk.objects.get(id=data["talk_id"])
-    
+  data = json.loads(request.body)
+  talk = Talk.objects.get(id=data["talk_id"])
+  profile = Profile.objects.get(user=request.user)
+  
+  if data.get('content'):
     comment = TalkComment.objects.create(
-        talk = talk,
-        author = request.user,
-        content = data.get('content'),)
+      talk = talk,
+      author = request.user,
+      content = data.get('content'),)
     comment.save()
 
-    context = {
-        'author' : str(comment.author),
-        'talk_id' : talk.id,
-        'content' : comment.content,
-        'comment_id' : comment.id,
-    }
+    if profile.profile_image:
+      user_img_url = profile.profile_image.url
+    else:
+      user_img_url = 0
+      
+    author = str(comment.author)
+    content = comment.content
+    comment_id = comment.id
+  else:
+    author = 0
+    content = 0
+    comment_id = 0
+    user_img_url = 0
     
-    return JsonResponse(context)
+  context = {
+    'user_img_url' : user_img_url,
+    'author' : author,
+    'talk_id' : talk.id,
+    'content' : content,
+    'comment_id' : comment_id,
+  }
+    
+  return JsonResponse(context)
 
 def delete_tcomment(request, pk, *args, **kwargs):
     tcomment = get_object_or_404(TalkComment, pk=pk)

@@ -3,6 +3,7 @@
 {% block extrahead %}
 <link rel="stylesheet" href="{% static 'css/post_detail.css' %}">
 <link rel="stylesheet" href="{% static 'css/ourcloset_post_react.css' %}">
+<link rel="stylesheet" href="{% static 'css/buying_link_react.css' %}">
 <link rel="stylesheet" href="{% static 'css/closet.css' %}">
 <title>구매링크</title>
 {% endblock %}
@@ -35,9 +36,9 @@
     </button>
     <input type="button" class="my-2 btn btn-secondary" id="exactSearchBtn" style="width:100%" value="정확한 검색" name="exact" />
     <!-- <input type="hidden" class="my-2 btn btn-secondary" id="exactSearchBtn" style="width:100%" value="정확한 검색" name="exact" /> -->
-    <button class="my-2 btn btn-secondary" id="exactSearchLoadingBar" style="width:100%" type="button" disabled>
+    <button class="my-2 btn btn-secondary" id="exactSearchLoadingBar" style="width:100%;" type="button" disabled>
       <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-      정확한 검색중입니다. 잠시만 기다려주세요 ...
+      정확한 검색중입니다.  잠시만 기다려주세요 ...
     </button>
     {% if fastflag %}
       <a class="btn btn-primary" id="new_url" style="width:100%" href="{{link}}" target="_blank" clicked>다시 열기</a>
@@ -46,7 +47,7 @@
       <div class="exact_search_container">
         {% for cost, url, src in search_informations_list %}
         <div class="exact_search_result">
-          <img src="{{ src }}" style="width:200px; height:200px;" alt="">
+          <img src="{{ src }}" alt="">
           <div>{{ cost }}</div>
           <a href="{{ url }}" target="_blank">구매링크</a>
         </div>

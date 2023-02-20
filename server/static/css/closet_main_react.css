@@ -3,22 +3,24 @@
         gap: 1.3rem;
     }
     .mycloset_img > img {
-        width: 100px;
+        width: 6rem;
+        height: 6rem;
     }
     .fa-2x {
         font-size: 1.3em;
     }
     #closet_all_img{
-        width: 90px;
-    }
+        width: 6rem;
+        height: 6rem;
+        }
     .mycloset_img{
-        width: 100px;
+        width: 6.25rem;
     }
     .closet_post_title {
-        width: 95px;
+        width: 5.938rem;
     }
     #status_all {
-        font-size: 11px;
+        font-size: 0.688rem;
         margin: auto;
         display: table;
     }
@@ -26,7 +28,7 @@
         margin-bottom: 0.2rem;
     }
     #post_status{
-        font-size: 12px;
+        font-size: 0.75rem;
     }
 }
 
