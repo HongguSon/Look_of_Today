@@ -22,4 +22,6 @@
     #com_detail_heart{width: 1.188rem; height: 1.563rem;}
 
     #com_detail_btn {padding-left: 0.188rem; padding-bottom: 0.563rem;}
+
+    .delbtn{color: black !important; text-decoration: none !important;}
 }
