@@ -100,7 +100,12 @@
           </div>
         </div>
         {% if user == comment.author %}
-        <div class="modal fade" id="delete_tcomment_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="del_list">
+          <button type="button" class="delbtn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_tcomment_modal_{{comment.pk}}">
+            삭제
+          </button>
+        </div>
+        <div class="modal fade" id="delete_tcomment_modal_{{comment.pk}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
@@ -117,15 +122,6 @@
             </div>
           </div>
         </div>
-
-        <form action="{% url 'community:delete_tcomment' comment.pk %}" method="post" class="comment_detail">
-          {% csrf_token %}
-          <div class="del_list">
-            <button type="button" class="delbtn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_tcomment_modal">
-              삭제
-            </button>
-          </div>
-        </form>
         {% endif %}
       </div>
       <hr />
@@ -185,14 +181,28 @@
               <div class="comment_author_other">${author}</div>
               <div class="content_other">${content}</div>
             </div></div>
-            <form action="/community/delete-tcomment/${comment_id}/" method="post" class="comment_detail">
-              {% csrf_token %}
-              <div class="del_list">
-                <button type="button" class="delbtn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_tcomment_modal">
-                  삭제
-                </button>
+            <div class="del_list">
+              <button type="button" class="delbtn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_tcomment_modal_${comment_id}">
+                삭제
+              </button>
+            </div>
+            <div class="modal fade" id="delete_tcomment_modal_${comment_id}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">댓글을 삭제하시겠습니까?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                    <form action="/community/delete-tcomment/${comment_id}/" method="post" class="comment_detail">
+                      {% csrf_token %}
+                      <input type="submit" , value="삭제" , class="btn btn-primary" />
+                    </form>
+                  </div>
+                </div>
               </div>
-            </form>`;
+            </div>`;
         }
         else {
           newComment.innerHTML = `<div class="d-flex">
@@ -201,14 +211,28 @@
               <div class="comment_author_other">${author}</div>
               <div class="content_other">${content}</div>
             </div></div>
-            <form action="/community/delete-tcomment/${comment_id}/" method="post" class="comment_detail">
-              {% csrf_token %}
-              <div class="del_list">
-                <button type="button" class="delbtn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_tcomment_modal">
-                  삭제
-                </button>
+            <div class="del_list">
+              <button type="button" class="delbtn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_tcomment_modal_${comment_id}">
+                삭제
+              </button>
+            </div>
+            <div class="modal fade" id="delete_tcomment_modal_${comment_id}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">댓글을 삭제하시겠습니까?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                    <form action="/community/delete-tcomment/${comment_id}/" method="post" class="comment_detail">
+                      {% csrf_token %}
+                      <input type="submit" , value="삭제" , class="btn btn-primary" />
+                    </form>
+                  </div>
+                </div>
               </div>
-            </form>`;
+            </div>`;
         }
         comm.appendChild(newComment);
         let h = document.createElement("hr");
