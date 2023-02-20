@@ -1,13 +1,14 @@
 {% extends 'main/base.html' %}
 {% load static %}
 {% block content %}
-  <div class="nopost">
+  <div class="nopost" id="nopost">
   <img src="{% static 'img/clothes.png' %}" id="main_icon" alt="" class="img-fluid">
   <div class="postex">
       <span class="post_text">오늘 뭐입지? 는 나만의 옷장을 꾸미고
         <br /> 
         모두의 옷장에 공유하는 서비스 입니다.
-      </span> <br>
+      </span> 
+      <br />
       <p class="main_start">
       <button class="startbtn"> 오늘 뭐입지? 시작하기!</button>
       <a href="#main2"><button class="morebtn"> 더 알아볼래요! </button></a>
@@ -51,7 +52,7 @@
     <p>
       걱정 마세요! 오늘 뭐입지? 는 찜하기 기능이 있어요 !<br />
       <br />
-      모두의 옷장에서 마음에 드는 다른 사람의 착장이나 옷이 있다면 찜하기를 통해 나만의 옷장으로 가져오세요!
+      마음에 드는 착장이나 옷이 있다면 찜하기를 통해 나만의 옷장으로 가져오세요!
     </p>
     <br />
     <div class="main4_img">
@@ -64,7 +65,7 @@
     <p>
       오늘 뭐입지? 에서는 Google Lens를 통한 이미지 검색을 지원해요! <br />
       <br />
-      마음에 드는 옷을 찜하고 평소 사고싶지만 정보를 모르던 옷들도 오늘 뭐입지? 에서 찾아보세요!
+      마음에 드는 옷을 찜하고 오늘 뭐입지? 에서 찾아보세요!
     </p>
     <br />
     <div class="main5_img">
@@ -73,5 +74,7 @@
     <button class="morebtn5"> 이제 오늘 뭐입지? 를 시작해보세요!  </button>
   </div>
 
-
+  <div class="floating">
+    <a href="#home_title"><img src="{% static 'img/main_top.png' %}" alt="" class="img-fluid" id="main_top"></a>
+  </div>
 {% endblock %}

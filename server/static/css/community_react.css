@@ -5,10 +5,10 @@
     .new_post > a{
         font-size: 0.8rem;
     }
-    .com_list{
-        width: 375px;
-        padding-top: 10px;
-        gap: 2rem;
+    .com_list {
+        width: 374px;
+        gap: 0.9rem;
+        font-size: 13px;
     }
 }
 
