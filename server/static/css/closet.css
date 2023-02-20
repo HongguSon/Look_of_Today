@@ -147,8 +147,8 @@ img:hover {
 
 .mycloset_img > img,
 .mycloset_img > * > img {
-  width: 200px;
-  border-radius: 15px;
+  width: 12.5rem;
+  border-radius: 0.9rem;
 }
 
 .mycloset_form {
