@@ -1,0 +1,21 @@
+@media screen and (max-width: 768px) {
+
+}
+
+@media screen and (max-width: 576px) {
+    .postimgs > img {max-width: 80%; height: auto;}
+
+    .post_category {padding-left: 1.5rem; padding-right: 1.5rem;}
+
+    .post_title {padding-top: 1rem; padding-bottom: 1rem; padding-left: 1.5rem; padding-right: 1.5rem;}
+
+    .post_author {padding-left: 1.5rem; padding-right: 1.5rem;}
+
+    .post_time {padding-left: 1.5rem; padding-right: 1.5rem; margin-bottom: 1rem;}
+
+    .post_content {padding-left: 1.5rem; padding-right: 1.5rem;}
+
+    .cp {padding-left: 1.5rem; padding-right: 1.5rem;}
+
+    #comment-con{margin-left: 1.5rem; margin-right: 0; margin-bottom: 3.125rem;}
+}

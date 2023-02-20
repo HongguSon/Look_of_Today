@@ -16,7 +16,6 @@ urlpatterns = [
   path("detail/<int:pk>/",views.post_detail,name="post_detail"),
   path('comment/', views.comment_ajax, name='comment'),
   path('delete-comment/<int:pk>/', views.delete_pcomment, name='delete_comment'),
-  path("update/<int:pk>/", views.post_update, name='update'),
   path("delete/<int:pk>/", views.post_delete,name='delete'),
   path("likes/<int:pk>/", views.post_likes, name='likes'),
   
@@ -27,6 +26,6 @@ urlpatterns = [
   path('delete-tcomment/<int:pk>/', views.delete_tcomment, name='delete_tcomment'),
   path("talk-update/<int:pk>/", views.talk_update, name='talk_update'),
   path("talk-delete/<int:pk>/", views.talk_delete,name='talk_delete'),
-  path("talk_likes/<int:pk>/", views.talk_likes, name='talk_likes'),
+  path("talk-likes/<int:pk>/", views.talk_likes, name='talk_likes'),
 
 ]

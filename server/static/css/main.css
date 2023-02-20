@@ -2,13 +2,24 @@
    display: flex;
    flex-direction: row;
    justify-content: center;
+   height: 100vh;
 }
 
 #main_icon{
-    width: 6.625rem;
+    width: 12.625rem;
     padding-top: 3.125rem;
-    height: 10rem;
+    height: 15rem;
+    animation: up-down 1.4s infinite ease-in-out alternate;
 }
+@keyframes up-down{
+    from{
+        transform: translatey(0px);
+    }
+    to{
+        transform: translatey(-20px);
+    }
+}
+
 
 .postex{
     padding-top: 6.25rem;
@@ -21,8 +32,8 @@
     border: 1px solid black;
     border-radius: 0.625rem;
     margin-top: 1.25rem;
-    margin-left: 4.375rem;
     transition: all 0.5s;
+    margin-right: 10px;
 }
 
 .startbtn:hover{
@@ -30,64 +41,26 @@
     color:white;
 }
 
-.best{
-    text-align: center;
-    font-size: 1.875rem;
-    padding-top: 12.5rem;
+.morebtn{
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 0.625rem;
+    margin-top: 1.25rem;
+    transition: all 0.5s;
+    margin-right: 10px;
 }
 
-.best > p{
-    font-size: 1.063rem;
+.morebtn:hover{
+    background-color:#4169E1;
+    color:white;
 }
 
-.model{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-}
 
-.model > img{
-    transition: all 0.2s linear;
-}
-
-.model1{
-    width: 18.75rem;
-    border-radius: 1.25rem;
-}
-
-.model > p{
-    text-align: center ;
-}
-
-.model2{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-}
-
-.model1{
-    width: 18.75rem;
-    border-radius: 1.25rem;
-}
-
-.model2 > p{
-    text-align: center ;
-}
 
 .vote{
     padding-top: 6.25rem;
     font-size: 1.25rem;
     text-align: center;
-}
-
-.hot{
-        text-align: center;
-        font-size: 1.875rem;
-        padding-top: 12.5rem;
-}
-
-.hot > p{
-    font-size: 1.063rem;
 }
 
 .vote{
@@ -106,50 +79,160 @@
     color: white;
 }
 
-.main_menu{
+
+#start_arrow{
+    width: 30px;
+}
+
+.main2_container{
+    position: relative;
+}
+
+.main2{
     text-align: center;
+    font-size: 22px;
+    height: 100vh;
+}
+
+.main2_img{
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    font-size: 1.563rem;
-    padding-right: 0.75rem;
-
+    flex-wrap: wrap;
+    gap: 12rem;
+    justify-content: center;
 }
 
-.content {
+
+#main2_before_rbg{
+    width: 16rem;
+    height: 25rem;
+    border-radius: 10px;
+    animation: up-down 1.4s infinite ease-in-out alternate;
+}
+
+#main2_after_rbg{
+    width: 16rem;
+    height: 23rem;
+    border-radius: 10px;
+    animation: up-down 1.4s infinite ease-in-out alternate;
+}
+
+#main2_arrow{
+    width: 8rem;
+    height: 8rem;
+    align-items: center;
+    position: absolute;
+    top: 232px;
+    animation: up-down 1.4s infinite ease-in-out alternate;
+}
+
+.morebtn2{
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 0.625rem;
+    margin-top: 1.25rem;
+    transition: all 0.5s;
+    font-size: 18px;
+}
+
+.morebtn2:hover{
+    background-color:#4169E1;
+    color:white;
+}
+
+.main3{
     text-align: center;
-  }
-  
-.main_menu > a{
-    text-decoration: none;
+    font-size: 20px;
+    height: 100vh;
 }
 
-.week{
-    border-bottom: 1px solid black;
-    width: 12.5rem;
+.main3_img{
+    width: 40rem;
+    margin: auto;
+    display: block;
+    animation: up-down 1.4s infinite ease-in-out alternate;
 }
 
-.hot2{
-    border-bottom: 1px solid black;
-    width: 12.5rem;
-    color: gray;
-    text-decoration: none;
+.morebtn3{
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 0.625rem;
+    margin-top: 1.25rem;
     transition: all 0.5s;
+    font-size: 18px;
 }
 
-.hot2:hover{
+.morebtn3:hover{
+    background-color:#4169E1;
+    color:white;
+}
+
+.main4{
+    text-align: center;
+    font-size: 22px;
+    height: 100vh;
+}
+
+.main4_img{
+    width: 40rem;
+    margin: auto;
+    display: block;
+    animation: up-down 1.4s infinite ease-in-out alternate;
+}
+
+.morebtn4{
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 0.625rem;
+    margin-top: 1.25rem;
+    transition: all 0.5s;
+    font-size: 18px;
+}
+
+.morebtn4:hover{
+    background-color:#4169E1;
+    color:white;
+}
+
+.main5{
+    text-align: center;
+    font-size: 22px;
+    height: 100vh;
+}
+
+.main5_img{
+    width: 40rem;
+    margin: auto;
+    display: block;
+    animation: up-down 1.4s infinite ease-in-out alternate;
+}
+
+.morebtn5{
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 0.625rem;
+    margin-top: 1.25rem;
+    transition: all 0.5s;
+    font-size: 18px;
+}
+
+.morebtn5:hover{
+    background-color:#4169E1;
+    color:white;
+}
+
+.floating {
+    position: fixed; 
+    width: 30px;
+    right: 2.5%; 
+    bottom: 5%;
+    text-align:right;
     color: black;
 }
 
-.best2{
-    border-bottom: 1px solid black;
-    width: 12.5rem;
-    color:gray;
+#main_top{
+    width: 50px;
+    height: 32px;
     transition: all 0.5s;
-}
-
-.best2:hover{
-    color: black;
 }
 
 .error-color {

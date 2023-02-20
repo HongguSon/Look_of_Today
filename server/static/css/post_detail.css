@@ -64,6 +64,7 @@
     margin-top: 4rem; 
     font-size: 1.05rem;
     padding-left: 6.563rem;
+    padding-right: 6.563rem;
     padding-bottom: 2rem;
 }
 
@@ -72,7 +73,7 @@
     flex-direction: row;
     justify-content: space-around;
     float: right;
-    padding-right: 1.25rem;
+    padding-right: 1.5rem;
 }
 
 .button-box > button {
@@ -149,7 +150,8 @@ transition: 0.2s;
 
 
 #comment-con{
-    margin-left: 1rem;
+    margin-left: 5.9rem;
+    margin-right: 4.3rem;
     margin-bottom: 3.125rem;
 }
 
@@ -232,22 +234,13 @@ form svg{
     right: 4px;
 }
 
-@media screen and (max-width: 768px) {
-
+.user_profile{
+    width:2rem; 
+    height:2rem; 
+    margin-top: 0.5rem; 
 }
 
-@media screen and (max-width: 576px) {
-    .comment-input{margin-left: 1rem;}
-
-    .postimgs > img {max-width: 80%; height: auto;}
-
-    .post_category {padding-left: 1.5rem; padding-right: 1.5rem;}
-
-    .post_title {padding-top: 1rem; padding-bottom: 1rem; padding-left: 1.5rem; padding-right: 1.5rem;}
-
-    .post_author {padding-left: 1.5rem;}
-
-    .post_time {padding-left: 1.5rem; margin-bottom: 1rem;}
-
-    .post_content {padding-left: 1.5rem;}
+.cp{
+    padding-left: 5.9rem; 
+    padding-right: 6.1rem;
 }

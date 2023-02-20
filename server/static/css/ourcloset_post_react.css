@@ -12,21 +12,25 @@
 }
 */
 
+@media screen and (max-width: 576px) {
+    .postimgs > img {max-width: 80%; height: auto;}
+
+    .post_title {padding-top: 1rem; padding-bottom: 1rem; padding-left: 1.5rem; padding-right: 1.5rem;}
+
+    .post_author {padding-left: 1.5rem;}
+
+    .post_time {padding-left: 1.5rem; margin-bottom: 1rem;}
+
+    .post_content {padding-left: 1.5rem;}
+}
+
 @media all and (max-width: 767px){
-    .post_title {
-        font-size: 1rem;
-        padding-left: 1.25rem;
-        padding-top: 1.5rem;
-        padding-right: 6rem;
-    }
-    .post_author {
-        font-size: 1rem;
-        padding-left: 1.4rem;
-    }
-    .postimgs > img {
-        height: 15rem;
-        width: 15rem;
-    }
+    .post_title {padding-top: 1rem; padding-bottom: 1rem; padding-left: 1.5rem; padding-right: 1.5rem;}
+
+    .post_author {padding-left: 1.5rem;}
+
+    .postimgs > img {max-width: 80%; height: auto;}
+    
     .cody_title {
         font-size: 14px;
     }
@@ -35,11 +39,6 @@
     }
     .cody_detail{
         gap: 4rem;
-    }
-    .comment-input{
-        margin:auto;
-        width: 180px;
-        justify-content: none !important;
     }
     .postbtn{
         margin-left: 0px;
@@ -59,14 +58,11 @@
         margin-right: 50px;
     }
     #comment-con{
-        margin-right: 0px;
-        margin-left: 42px;
+        margin-left: 1rem;
+        margin-bottom: 3.125rem;
     }
     .delbtn2{
         margin-left: 30px;
-    }
-    .comment-btn{
-        padding-right: 0px !important;
     }
 }
 
@@ -76,7 +72,6 @@
     }
     .comment-input{
         width: 500px;
-        margin-left: 285px;
     }
     .post_title{
         padding-left: 2.25rem;
