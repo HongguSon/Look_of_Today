@@ -2,9 +2,6 @@
     .mycloset_list{
         gap: 1.3rem;
     }
-    .mycloset_img > img {
-        width: 100px;
-    }
     .fa-2x {
         font-size: 1.3em;
     }
@@ -12,7 +9,7 @@
         width: 90px;
     }
     .mycloset_img{
-        width: 100px;
+        width: 6.25rem;
     }
     .closet_post_title {
         width: 95px;

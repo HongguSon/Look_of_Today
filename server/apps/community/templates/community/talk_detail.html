@@ -69,9 +69,9 @@
       <div class="d-flex justify-content-between align-items-center cp">
         <div class="d-flex">
           {% if comment.author.profile.profile_image %}
-          <img src="{{comment.author.profile.profile_image.url}}" class="user_profile mx-2">
+          <img src="{{comment.author.profile.profile_image.url}}" class="user_profile me-2">
           {% else %}
-          <i class="fa-solid fa-user m-3"></i>
+          <i class="fa-solid fa-user my-3 me-3" style="margin-left: 0.62rem;"></i>
           {% endif %}
           <div class="comment_other">
             <div class="comment_author">{{comment.author.username}}</div>
@@ -106,13 +106,12 @@
 {% else %}
 <div id="comment-con" class="d-flex justify-content-center align-items-center">
   <form>
-    <textarea rows="4" cols="100" id="comment-input-{{post.pk}}" class="comment-input" type="text"
+    <textarea rows="4" cols="100" id="comment-input-{{talk.pk}}" class="comment-input" type="text"
       placeholder="로그인 후 이용해주세요" readonly></textarea>
   </form>
   <a class="mx-1 btn btn-secondary" href="{% url 'user:login' %}">로그인</a>
 </div>
 {% endif %}
-</div>
 
 <script>
   const requestComment = new XMLHttpRequest();
@@ -140,7 +139,7 @@
         const newComment = document.createElement('div');
         newComment.className = "d-flex justify-content-between align-items-center cp";
         if (user_img_url == 0) {
-          newComment.innerHTML = `<div class="d-flex"><i class="fa-solid fa-user m-3"></i>
+          newComment.innerHTML = `<div class="d-flex"><i class="fa-solid fa-user my-3 me-3" style="margin-left: 0.62rem;"></i>
             <div class="comment_other">
               <div class="comment_author_other">${author}</div>
               <div class="content_other">${content}</div>
@@ -154,7 +153,7 @@
         }
         else {
           newComment.innerHTML = `<div class="d-flex">
-            <img src="${user_img_url}" class="user_profile mx-2">
+            <img src="${user_img_url}" class="user_profile me-2">
             <div class="comment_other">
               <div class="comment_author_other">${author}</div>
               <div class="content_other">${content}</div>
