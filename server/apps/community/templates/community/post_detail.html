@@ -139,30 +139,29 @@
 </div>
 
 <hr>
-<div class="comment-sum">
+  <div class="comment-sum">
     <div id="comment-list-{{post.pk}}" class="comment-list">
       <div class="comm">
-
+  
         {% for comment in comments %}
-          <div class="d-flex justify-content-between align-items-center mx-2">
-            <div class="d-flex">
-              <i class="fa-solid fa-user m-3"></i>  
-              <div class="comment_other">
-                <div class="comment_author">{{comment.author.username}}</div>
-                <div class="content_other">{{comment.content}}</div>
-              </div>
+        <div class="d-flex justify-content-between align-items-center mx-2">
+          <div class="d-flex">
+            <i class="fa-solid fa-user m-3"></i>
+            <div class="comment_other">
+              <div class="comment_author">{{comment.author.username}}</div>
+              <div class="content_other">{{comment.content}}</div>
             </div>
-          
+          </div>
           {% if user == comment.author %}
-            <form action="{% url 'community:delete_comment' comment.pk %}" method="post" class="comment_detail">
-              {% csrf_token %}
-              <div class="del_list">
-                <input type="submit", value="삭제", class="delbtn2"/>
-              </div>
-            </form>
+          <form action="{% url 'community:delete_comment' comment.pk %}" method="post" class="comment_detail">
+            {% csrf_token %}
+            <div class="del_list">
+              <input type="submit" , value="삭제" , class="delbtn2" />
+            </div>
+          </form>
           {% endif %}
-         </div>
-         <hr/>
+        </div>
+        <hr />
         {% endfor %}
       </div>
     </div>
@@ -186,80 +185,80 @@
     <a class="mx-1 btn btn-secondary" href="{% url 'user:login' %}">로그인</a>
   </div>
   {% endif %}
+  
+  <script>
+    const strip = (string) => {
+      return string.replace(/^\s+|\s+$/g, "");
+    };
+    const requestLike = new XMLHttpRequest();
+    const onClickLike = (id, btnType, imgUrl) => {
+      const url = "/closet/clothes-likes/" + id;
+      requestLike.open("POST", url, true)
+      requestLike.setRequestHeader(
+        "Content-Type",
+        "application/x-www-form-urlencoded"
+      );
+      requestLike.send(JSON.stringify({ id: id, btnType: btnType, imgUrl: imgUrl }));
+    };
 
-<script>
-  const strip = (string) => {
-    return string.replace(/^\s+|\s+$/g, "");
-  };
-  const requestLike = new XMLHttpRequest();
-  const onClickLike = (id, btnType, imgUrl) => {
-    const url = "/closet/clothes-likes/" + id;
-    requestLike.open("POST", url, true)
-    requestLike.setRequestHeader(
-      "Content-Type",
-      "application/x-www-form-urlencoded"
-    );
-    requestLike.send(JSON.stringify({id: id, btnType: btnType, imgUrl: imgUrl}));
-  };
+    requestLike.onreadystatechange = () => {
+      if (requestLike.readyState === XMLHttpRequest.DONE) {
+        if (requestLike.status < 400) {
+          const { id, btnType, imgUrl } = JSON.parse(requestLike.response);
+          const elementLike = document.querySelector(`.cloth-id-${id}`);
+          const originHTML = strip(elementLike.innerHTML);
+          if (originHTML.includes('fa-solid')) {
+            elementLike.innerHTML = `<img src="${imgUrl}" class="post_img1">
+            <div class="post__like like_icon_position" onclick="onClickLike(${id}, 'like', '${imgUrl}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>`;
 
-  requestLike.onreadystatechange = () => {
-    if (requestLike.readyState === XMLHttpRequest.DONE) {
-      if (requestLike.status < 400) {
-        const { id, btnType, imgUrl } = JSON.parse(requestLike.response);
-        const elementLike = document.querySelector(`.cloth-id-${id}`);
-        const originHTML = strip(elementLike.innerHTML);
-        if (originHTML.includes('fa-solid')) {
-          elementLike.innerHTML = `<img src="${imgUrl}" class="post_img1">
-          <div class="post__like like_icon_position" onclick="onClickLike(${id}, 'like', '${imgUrl}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>`;
-          
-        } else {
-          elementLike.innerHTML = `<img src="${imgUrl}" class="post_img1">
-          <div class="post__dislike like_icon_position" onclick="onClickLike(${id}, 'dislike', '${imgUrl}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>`;
-          
-        };
+          } else {
+            elementLike.innerHTML = `<img src="${imgUrl}" class="post_img1">
+            <div class="post__dislike like_icon_position" onclick="onClickLike(${id}, 'dislike', '${imgUrl}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>`;
+
+          };
+        }
+      }
+    };
+    const requestComment = new XMLHttpRequest();
+
+    const onClickCommenet = (id) => {
+      const url = "/community/comment/";
+      requestComment.open("POST", url, true);
+      requestComment.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      let content = document.querySelector(`#comment-input-${id}`).value;
+      let data = {
+        user: '{{user.username}}',
+        post_id: id,
+        content: content,
+      }
+      requestComment.send(JSON.stringify(data));
+    }
+
+    requestComment.onreadystatechange = () => {
+      if (requestComment.readyState === XMLHttpRequest.DONE) {
+        if (requestComment.status < 400) {
+          const { author, post_id, content, comment_id } = JSON.parse(requestComment.response);
+          document.querySelector(`#comment-input-${post_id}`).value = "";
+          const element = document.querySelector(`#comment-list-${post_id}`);
+          const comm = document.querySelector(`.comm`);
+          const newComment = document.createElement('div');
+          newComment.className = "d-flex justify-content-between align-items-center mx-2";
+          newComment.innerHTML = `<div class="d-flex"><i class="fa-solid fa-user m-3"></i>
+                  <div class="comment_other">
+                    <div class="comment_author_other">${author}</div>
+                    <div class="content_other">${content}</div>
+                  </div></div>
+                  <form action="/community/delete-comment/${comment_id}/" method="post" class="comment_detail">
+                    {% csrf_token %}
+                    <div class="del_list">
+                      <input type="submit", value="삭제", class="delbtn2" />
+                    </div>
+                  </form>`
+          comm.appendChild(newComment);
+          let h = document.createElement("hr");
+          comm.appendChild(h);
+        }
       }
     }
-  };
-  const requestComment = new XMLHttpRequest();
-
-  const onClickCommenet = (id) => {
-    const url = "/community/comment/";
-    requestComment.open("POST", url, true);
-    requestComment.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    let content = document.querySelector(`#comment-input-${id}`).value;
-    let data = {
-      user: '{{user.username}}',
-      post_id: id,
-      content: content,
-    }
-    requestComment.send(JSON.stringify(data));
-  }
-
-  requestComment.onreadystatechange = () => {
-    if (requestComment.readyState === XMLHttpRequest.DONE) {
-      if (requestComment.status < 400) {
-        const { author, post_id, content, comment_id } = JSON.parse(requestComment.response);
-        document.querySelector(`#comment-input-${post_id}`).value = "";
-        const element = document.querySelector(`#comment-list-${post_id}`);
-        const comm = document.querySelector(`.comm`);
-        const newComment = document.createElement('div');
-        newComment.className = "d-flex justify-content-between align-items-center mx-2";
-        newComment.innerHTML = `<div class="d-flex"><i class="fa-solid fa-user m-3"></i>
-                <div class="comment_other">
-                  <div class="comment_author_other">${author}</div>
-                  <div class="content_other">${content}</div>
-                </div></div>
-                <form action="/community/delete-comment/${comment_id}/" method="post" class="comment_detail">
-                  {% csrf_token %}
-                  <div class="del_list">
-                    <input type="submit", value="삭제", class="delbtn2" />
-                  </div>
-                </form>`
-        comm.appendChild(newComment);
-        let h= document.createElement("hr");
-        comm.appendChild(h);
-      }
-    }
-  }
-</script>
-{% endblock %}
+  </script>
+  {% endblock %}
