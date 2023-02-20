@@ -10,7 +10,7 @@
       </span> 
       <br />
       <p class="main_start">
-      <button class="startbtn"> 오늘 뭐입지? 시작하기!</button>
+      <a href="{% url 'closet:our_closet' %}"><button class="startbtn"> 오늘 뭐입지? 시작하기!</button></a>
       <a href="#main2_container"><button class="morebtn"> 더 알아볼래요! </button></a>
       </p>
   </div>
@@ -77,7 +77,7 @@
       <div class="main5_img">
       <img src="{% static 'img/main5_ex.png' %}" id="main4_ex" alt="" class="img-fluid">
       </div>
-      <button class="morebtn5"> 이제 오늘 뭐입지? 를 시작해보세요!  </button>
+      <a href="{% url 'closet:our_closet' %}"><button class="morebtn5">이제 오늘 뭐입지? 를 시작해보세요!</button></a>
     </div>
   </div>
   <div class="floating">
