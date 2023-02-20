@@ -8,7 +8,7 @@ from django.utils.datastructures import MultiValueDictKeyError
 from django.views.decorators.csrf import csrf_exempt
 import json
 from django.http import JsonResponse
-from GoogleSearch import Search
+from googlesearch import search
 import selenium
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -204,7 +204,7 @@ def buylink(request, pk, *args, **kwargs):
     choice = list(request.POST.values())[-1]
 
     if choice == '빠른 검색':
-      output = Search(file_path=cloth[0].img.path)
+      output = search(file_path=cloth[0].img.path)
       link = output['similar']
       context['link']=link
       context['fastflag'] = True

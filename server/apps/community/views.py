@@ -121,7 +121,7 @@ def post_delete(request:HttpRequest, pk, *args, **kwargs):
     if request.method == "POST":
         post = Post.objects.get(pk=pk)
         post.delete()
-    return redirect("/")
+    return redirect("closet:our_closet")
 
 @require_POST
 def post_likes(request, pk, *args, **kwargs):
