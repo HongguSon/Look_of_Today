@@ -80,28 +80,81 @@
 <div class="cody_detail">
   {% for outer in post.outer.iterator %}
   {% if outer.rem_img %}
-  <img src="{{outer.rem_img.url}}" class="post_img1">
+  <div class="item__container cloth-id-{{outer.id}}">
+    <img src="{{outer.rem_img.url}}" class="post_img1">
+    {% if user.is_authenticated %}
+      {% if user in outer.likes.all %}
+        <div class="post__dislike like_icon_position" onclick="onClickLike({{ outer.pk }}, 'dislike', '{{outer.rem_img.url}}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>
+      {% else %}
+        <div class="post__like like_icon_position" onclick="onClickLike({{ outer.pk }}, 'like', '{{outer.rem_img.url}}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>
+      {% endif %}
+    {% endif %}
+  </div>
   {% endif %}
   {% endfor %}
+
+
   {% for top in post.top.iterator %}
   {% if top.rem_img %}
-  <img src="{{top.rem_img.url}}" class="post_img1">
+  <div class="item__container cloth-id-{{top.id}}">
+    <img src="{{top.rem_img.url}}" class="post_img1">
+    {% if user.is_authenticated %}
+      {% if user in top.likes.all %}
+        <div class="post__dislike like_icon_position" onclick="onClickLike({{ top.pk }}, 'dislike', '{{top.rem_img.url}}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>
+      {% else %}
+        <div class="post__like like_icon_position" onclick="onClickLike({{ top.pk }}, 'like', '{{top.rem_img.url}}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>
+      {% endif %}
+    {% endif %}
+  </div>
   {% endif %}
   {% endfor %}
+
+
   {% for bottom in post.bottom.iterator %}
-  {% if bottom.rem_img %}
-  <img src="{{bottom.rem_img.url}}" class="post_img1">
-  {% endif %}
+    {% if bottom.rem_img %}
+    <div class="item__container cloth-id-{{bottom.id}}">
+      <img src="{{bottom.rem_img.url}}" class="post_img1">
+      {% if user.is_authenticated %}
+        {% if user in bottom.likes.all %}
+          <div class="post__dislike like_icon_position" onclick="onClickLike({{ bottom.pk }}, 'dislike', '{{bottom.rem_img.url}}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>
+        {% else %}
+          <div class="post__like like_icon_position" onclick="onClickLike({{ bottom.pk }}, 'like', '{{bottom.rem_img.url}}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>
+        {% endif %}
+      {% endif %}
+    </div>
+    {% endif %}
   {% endfor %}
+
+
   {% for shoes in post.shoes.iterator %}
-  {% if shoes.rem_img %}
-  <img src="{{shoes.rem_img.url}}" class="post_img1">
-  {% endif %}
+    {% if shoes.rem_img %}
+    <div class="item__container cloth-id-{{shoes.id}}">
+      <img src="{{shoes.rem_img.url}}" class="post_img1">
+      {% if user.is_authenticated %}
+        {% if user in shoes.likes.all %}
+          <div class="post__dislike like_icon_position" onclick="onClickLike({{ shoes.pk }}, 'dislike', '{{shoes.rem_img.url}}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>
+        {% else %}
+          <div class="post__like like_icon_position" onclick="onClickLike({{ shoes.pk }}, 'like', '{{shoes.rem_img.url}}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>
+        {% endif %}
+      {% endif %}
+    </div>
+    {% endif %}
   {% endfor %}
+
+
   {% for acc in post.acc.iterator %}
-  {% if acc.rem_img %}
-  <img src="{{acc.rem_img.url}}" class="post_img1">
-  {% endif %}
+    {% if acc.rem_img %}
+    <div class="item__container cloth-id-{{acc.id}}">
+      <img src="{{acc.rem_img.url}}" class="post_img1">
+      {% if user.is_authenticated %}
+        {% if user in acc.likes.all %}
+          <div class="post__dislike like_icon_position" onclick="onClickLike({{ acc.pk }}, 'dislike', '{{acc.rem_img.url}}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>
+        {% else %}
+          <div class="post__like like_icon_position" onclick="onClickLike({{ acc.pk }}, 'like', '{{acc.rem_img.url}}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>
+        {% endif %}
+      {% endif %}
+    </div>
+    {% endif %}
   {% endfor %}
 </div>
 
@@ -112,7 +165,11 @@
       {% for comment in comments %}
       <div class="d-flex justify-content-between align-items-center mx-2">
         <div class="d-flex">
-          <i class="fa-solid fa-user m-3"></i>
+          {% if comment.author.profile.profile_image %}
+            <img src="{{comment.author.profile.profile_image.url}}" alt="user_profile" style="width:2rem; height:2rem; margin-top: 0.5rem;">
+          {% else %}
+            <i class="fa-solid fa-user m-3"></i>
+          {% endif %}
           <div class="comment_other">
             <div class="comment_author">{{comment.author.username}}</div>
             <div class="content_other">{{comment.content}}</div>
@@ -153,6 +210,39 @@
   {% endif %}
 
   <script>
+    const strip = (string) => {
+      return string.replace(/^\s+|\s+$/g, "");
+    };
+    const requestLike = new XMLHttpRequest();
+    const onClickLike = (id, btnType, imgUrl) => {
+      const url = "/closet/clothes-likes/" + id;
+      requestLike.open("POST", url, true)
+      requestLike.setRequestHeader(
+        "Content-Type",
+        "application/x-www-form-urlencoded"
+      );
+      requestLike.send(JSON.stringify({id: id, btnType: btnType, imgUrl: imgUrl}));
+    };
+  
+    requestLike.onreadystatechange = () => {
+      if (requestLike.readyState === XMLHttpRequest.DONE) {
+        if (requestLike.status < 400) {
+          const { id, btnType, imgUrl } = JSON.parse(requestLike.response);
+          const elementLike = document.querySelector(`.cloth-id-${id}`);
+          const originHTML = strip(elementLike.innerHTML);
+          if (originHTML.includes('fa-solid')) {
+            elementLike.innerHTML = `<img src="${imgUrl}" class="post_img1">
+            <div class="post__like like_icon_position" onclick="onClickLike(${id}, 'like', '${imgUrl}')"><i class="fa-regular fa-heart fa-2x" style="color: #cb444a"></i></div>`;
+            
+          } else {
+            elementLike.innerHTML = `<img src="${imgUrl}" class="post_img1">
+            <div class="post__dislike like_icon_position" onclick="onClickLike(${id}, 'dislike', '${imgUrl}')"><i class="fa-solid fa-heart fa-2x" style="color: #cb444a"></i></div>`;
+            
+          };
+        }
+      }
+    };
+
     const requestComment = new XMLHttpRequest();
 
     const onClickCommenet = (id) => {
@@ -171,35 +261,45 @@
     requestComment.onreadystatechange = () => {
       if (requestComment.readyState === XMLHttpRequest.DONE) {
         if (requestComment.status < 400) {
-          const { author, post_id, content, comment_id } = JSON.parse(requestComment.response);
+          const { user_img_url, author, post_id, content, comment_id } = JSON.parse(requestComment.response);
           document.querySelector(`#comment-input-${post_id}`).value = "";
           const element = document.querySelector(`#comment-list-${post_id}`);
           const comm = document.querySelector(`.comm`);
           const newComment = document.createElement('div');
           newComment.className = "d-flex justify-content-between align-items-center mx-2";
-          newComment.innerHTML = `<div class="d-flex"><i class="fa-solid fa-user m-3"></i>
+          if (user_img_url == 0) {
+            newComment.innerHTML = `<div class="d-flex">
+              <i class="fa-solid fa-user m-3"></i>
                 <div class="comment_other">
-                  <div class="comment_author_other">${author}</div>
-                  <div class="content_other">${content}</div>
-                </div></div>
-                <form action="/community/delete-comment/${comment_id}/" method="post" class="comment_detail">
-                  {% csrf_token %}
-                  <div class="del_list">
-                    <input type="submit", value="삭제", class="delbtn2" />
-                  </div>
-                </form>`
+                <div class="comment_author_other">${author}</div>
+                <div class="content_other">${content}</div>
+              </div></div>
+              <form action="/community/delete-comment/${comment_id}/" method="post" class="comment_detail">
+                {% csrf_token %}
+                <div class="del_list">
+                  <input type="submit", value="삭제", class="delbtn2" />
+                </div>
+              </form>`
+            }
+          else {
+            newComment.innerHTML = `<div class="d-flex">
+              <img src="${user_img_url}" alt="user_profile" style="width:2rem; height:2rem; margin-top: 0.5rem;">
+                    <div class="comment_other">
+                    <div class="comment_author_other">${author}</div>
+                    <div class="content_other">${content}</div>
+                  </div></div>
+                  <form action="/community/delete-comment/${comment_id}/" method="post" class="comment_detail">
+                    {% csrf_token %}
+                    <div class="del_list">
+                      <input type="submit", value="삭제", class="delbtn2" />
+                    </div>
+                  </form>`
+                }
           comm.appendChild(newComment);
           let h = document.createElement("hr");
           comm.appendChild(h);
         }
       }
     }
-
-  // var myModal = document.getElementById('myModal')
-  // var myInput = document.getElementById('myInput')
-
-  // myModal.addEventListener('shown.bs.modal', function () {
-  //   myInput.focus()
-  // })
   </script>
   {% endblock %}
