@@ -245,15 +245,15 @@ img:hover {
   text-align: left;
   background-color: #1e2021;
   padding: 1.25rem;
-  width: 15rem;
+  width: 16rem;
   position: absolute;
   border-radius: 0.188rem;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
   top: 2.375rem;
   right: -50px;
   color: #fff;
-  font-size: 3.125rem;
-  line-height: 1.4;
+  font-size: 1.125rem;
+  line-height: 1.6;
 }
 
 .help-tip p:before {
