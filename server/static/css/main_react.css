@@ -1,410 +1,65 @@
-@media screen and (max-width: 375px){
-    .nopost{ 
-        max-width: 47.5rem; 
-    }
-
-    .postex{
-        padding-top: 2.25rem !important;
-        padding-left: 3.5rem !important;
-    }
-
+@media all and (max-width: 767px){
     #main_icon{
-      width: 18vw !important;
-      height: 18vw !important;
-      padding-top: 0 !important;
-      margin-left: 2rem !important;
-      margin-top: 1rem;
+        width: 6.625rem;
+        height: 10rem;
     }
-
-    .startbtn{
-        width: 20vw !important;
-        height: 7vw !important;
-        margin-left: -0.3rem !important;
-        font-size: 0.9rem;
-    }
-
-    .votebtn{
-        width: 33vw !important;
-        height: 8.5vw !important;
-        font-size: 0.938rem;
-    }
-
-    .main_menu{
-        margin-left: 0.75rem !important;
-        font-size: 1.2rem !important;
-    }
-
-    .week{
-        width: 5.313rem !important;
-    }
-
-    .hot2{
-        width: 5.313rem !important;
-    }
-
-    .best2{
-        width: 5.313rem !important;
-    }
-}
-
-@media screen and (max-width: 412px){
-    .nopost{ 
-        max-width: 47.5rem; 
-    }
-
-    .postex{
-        padding-top: 2.25rem !important;
-        padding-left: 3.5rem !important;
-    }
-
-    #main_icon{
-      width: 18vw !important;
-      height: 18vw !important;
-      padding-top: 0 !important;
-      margin-left: 2rem !important;
-      margin-top: 1rem;
-    }
-
-    .startbtn{
-        width: 20vw !important;
-        height: 7vw !important;
-        margin-left: -0.3rem !important;
-    }
-
-    .votebtn{
-        width: 33vw !important;
-        height: 8.5vw !important;
-        font-size: 0.938rem;
-    }
-
-    .main_menu{
-        margin-left: 0.75rem !important;
-        font-size: 1.2rem !important;
-    }
-
-    .week{
-        width: 5.313rem !important;
-    }
-
-    .hot2{
-        width: 5.313rem !important;
-    }
-
-    .best2{
-        width: 5.313rem !important;
-    }
-}
-
-@media screen and (max-width: 280px){
-    .nopost{ 
-        max-width: 47.5rem; 
-    }
-
-    .postex{
-        padding-top: 2.25rem !important;
-        padding-left: 2rem !important;
-    }
-
-    #main_icon{
-      width: 18vw !important;
-      height: 18vw !important;
-      padding-top: 0 !important;
-      margin-left: 3rem !important;
-      margin-top: 2rem;
-    }
-
-    .startbtn{
-        width: 23vw !important;
-        height: 17vw !important;
-        margin-left: -0.3rem !important;
+    .postex {
+        padding-top: 6.25rem;
+        padding-left: 1rem;
         font-size: 0.7rem;
     }
-
-    .votebtn{
-        width: 33vw !important;
-        height: 8.5vw !important;
-        font-size: 0.7rem !important;
+    .main2{
+        font-size: 11px;
     }
-
-    .main_menu{
-        margin-left: 0.75rem !important;
-        font-size: 0.9rem !important;
+    .main2_img{
+        gap: 6rem;
     }
-
-    .week{
-        width: 4rem !important;
+    #main2_before_rbg {
+        width: 7rem;
+        height: 10rem;
     }
-
-    .hot2{
-        width: 4rem !important;
+    #main2_arrow {
+        width: 4rem;
+        height: 5rem;
+        top: 130px;
     }
-
-    .best2{
-        width: 4rem !important;
+    #main2_after_rbg {
+        width: 8rem;
+        height: 10rem;
     }
-}
-
-@media screen and (max-width: 414px){
-    .nopost{ 
-        max-width: 47.5rem; 
+    .morebtn2{
+        font-size: 0.7rem;
     }
-
-    .postex{
-        padding-top: 2.25rem !important;
-        padding-left: 3.5rem !important;
+    .main3{
+        font-size: 11px;
     }
-
-    #main_icon{
-      width: 18vw !important;
-      height: 18vw !important;
-      padding-top: 0 !important;
-      margin-left: 2rem !important;
-      margin-top: 1rem;
+    .main3_img{
+        width: 20rem;
     }
-
-    .startbtn{
-        width: 20vw !important;
-        height: 7vw !important;
-        margin-left: -0.3rem !important;
+    .morebtn3{
+        font-size: 0.7rem;
     }
-
-    .votebtn{
-        width: 33vw !important;
-        height: 8.5vw !important;
-        font-size: 0.938rem;
+    .main4{
+        font-size: 11px;
     }
-
-    .main_menu{
-        margin-left: 0.75rem !important;
-        font-size: 1.2rem !important;
+    .main4_img{
+        width: 20rem;
     }
-
-    .week{
-        width: 5.313rem !important;
+    .morebtn4{
+        font-size: 0.7rem;
     }
-
-    .hot2{
-        width: 5.313rem !important;
+    .main5{
+        font-size: 11px;
     }
-
-    .best2{
-        width: 5.313rem !important;
+    .main5_img{
+        width: 20rem;
+    }
+    .morebtn5{
+        font-size: 0.7rem;
     }
 }
 
-@media screen and (max-width: 540px){
-    .nopost{ 
-        max-width: 47.5rem; 
-    }
-
-    .postex{
-        padding-top: 2.25rem !important;
-        padding-left: 3.5rem !important;
-    }
-
-    #main_icon{
-      width: 18vw !important;
-      height: 18vw !important;
-      padding-top: 0 !important;
-      margin-left: 2rem !important;
-      margin-top: 1rem;
-    }
-
-    .startbtn{
-        width: 18vw !important;
-        height: 7vw !important;
-        margin-left: -0.3rem !important;
-    }
-
-    .votebtn{
-        width: 33vw !important;
-        height: 8.5vw !important;
-        font-size: 0.938rem;
-    }
-
-    .main_menu{
-        margin-left: 0.75rem !important;
-        font-size: 1.2rem !important;
-    }
-
-    .week{
-        width: 5.313rem !important;
-    }
-
-    .hot2{
-        width: 5.313rem !important;
-    }
-
-    .best2{
-        width: 5.313rem !important;
-    }
+@media screen and (min-width: 768px) and (max-width:1024px){
 }
 
-@media screen and (max-width: 414px){
-    .nopost{ 
-        max-width: 47.5rem; 
-    }
-
-    .postex{
-        padding-top: 2.25rem !important;
-        padding-left: 3.5rem !important;
-    }
-
-    #main_icon{
-      width: 18vw !important;
-      height: 18vw !important;
-      padding-top: 0 !important;
-      margin-left: 2rem !important;
-      margin-top: 1rem;
-    }
-
-    .startbtn{
-        width: 20vw !important;
-        height: 7vw !important;
-        margin-left: -0.3rem !important;
-    }
-
-    .votebtn{
-        width: 33vw !important;
-        height: 8.5vw !important;
-        font-size: 0.938rem;
-    }
-
-    .main_menu{
-        margin-left: 0.75rem !important;
-        font-size: 1.2rem !important;
-    }
-
-    .week{
-        width: 5.313rem !important;
-    }
-
-    .hot2{
-        width: 5.313rem !important;
-    }
-
-    .best2{
-        width: 5.313rem !important;
-    }
-}
-
-@media screen and (max-width: 390px){
-    .nopost{ 
-        max-width: 47.5rem; 
-    }
-
-    .postex{
-        padding-top: 2.25rem !important;
-        padding-left: 3.5rem !important;
-    }
-
-    #main_icon{
-      width: 18vw !important;
-      height: 18vw !important;
-      padding-top: 0 !important;
-      margin-left: 2rem !important;
-      margin-top: 1rem;
-    }
-
-    .startbtn{
-        width: 18vw !important;
-        height: 7vw !important;
-        margin-left: -0.3rem !important;
-        font-size: 0.9rem;
-    }
-
-    .votebtn{
-        width: 33vw !important;
-        height: 8.5vw !important;
-        font-size: 0.938rem;
-    }
-
-    .main_menu{
-        margin-left: 0.75rem !important;
-        font-size: 1.2rem !important;
-    }
-
-    .week{
-        width: 5.313rem !important;
-    }
-
-    .hot2{
-        width: 5.313rem !important;
-    }
-
-    .best2{
-        width: 5.313rem !important;
-    }
-}
-
-
-@media screen and (max-width: 360px){
-    .nopost{ 
-        max-width: 47.5rem; 
-    }
-
-    .postex{
-        padding-top: 2.25rem !important;
-        padding-left: 3.5rem !important;
-    }
-
-    #main_icon{
-      width: 18vw !important;
-      height: 18vw !important;
-      padding-top: 0 !important;
-      margin-left: 2rem !important;
-      margin-top: 1rem;
-    }
-
-    .startbtn{
-        width: 25vw !important;
-        height: 8vw !important;
-        margin-left: -0.3rem !important;
-    }
-
-    .votebtn{
-        width: 33vw !important;
-        height: 8.5vw !important;
-        font-size: 0.938rem;
-    }
-
-    .main_menu{
-        margin-left: 0.75rem !important;
-        font-size: 1rem !important;
-    }
-
-    .week{
-        width: 4.5rem !important;
-    }
-
-    .hot2{
-        width: 4.5rem !important;
-    }
-
-    .best2{
-        width: 4.5rem !important;
-    }
-}
-
-
-
-
-
-:root {
-    --font-size-lg: 5vw;
-    --font-size-md: 3.7vw;
-    --font-size-sm: 3vw;
-  }
-
-@media (max-width: 48rem) {
-    .post_text{
-        font-size: var(--font-size-sm);
-    }
-
-    .vote_text{
-        font-size: var(--font-size-md); 
-    }
-
-}
-  
 
