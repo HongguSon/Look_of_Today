@@ -24,8 +24,8 @@
     #com_detail_btn {padding-left: 0.188rem; padding-bottom: 0.563rem;}
 
     .delbtn{color: black !important; text-decoration: none !important;}
-
-    .del_list{width: 36%;}
+    #com_del{width: 3rem;}
+    
     .comment_other{width: 75%;}
 }
 
