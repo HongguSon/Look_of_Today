@@ -1,9 +1,9 @@
 {% extends 'main/base.html'%}
 {% load static %}
 {% block extrahead %}
-<link rel="stylesheet" href="{% static 'css/post_detail.css?ver=1.0' %}">
-<link rel="stylesheet" href="{% static 'css/post_detail_react.css?ver=1.0' %}">
-<link rel="stylesheet" href="{% static 'css/ourcloset_post_react.css?ver=1.0' %}">
+<link rel="stylesheet" href="{% static 'css/post_detail.css'%}">
+<link rel="stylesheet" href="{% static 'css/post_detail_react.css'%}">
+<link rel="stylesheet" href="{% static 'css/ourcloset_post_react.css'%}">
 <title>community</title>
 {% endblock %}
 
@@ -224,7 +224,7 @@
     <textarea rows="4" cols="100" id="comment-input-{{post.pk}}" class="comment-input" type="text"
       placeholder="로그인 후 이용해주세요" readonly></textarea>
   </form>
-  <a class="mx-1 btn btn-secondary" href="{% url 'user:login' %}">로그인</a>
+  <a class="mx-1 btn btn-secondary" href="{% url 'user:login' %}" id="post_detail_login">로그인</a>
 </div>
 {% endif %}
   
