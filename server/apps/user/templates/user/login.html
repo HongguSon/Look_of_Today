@@ -47,18 +47,17 @@
       </a>  
     </div>
     
-    {% elif provider.name == "Google" %}
+    {% comment %} {% elif provider.name == "Google" %}
       <div class="pull-left">
         <a href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">
           <img src="{{ google_button }}" height="34">
         </a>
-      </div>
-        
+      </div>        
     {% else %}
       <div>
         <a title="{{provider.name}}" class="socialaccount_provider {{provider.id}}"
           href="{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}">{{provider.name}}</a>
-      </div>
+      </div> {% endcomment %}
     {% endif %}
   
   {% endfor %}
