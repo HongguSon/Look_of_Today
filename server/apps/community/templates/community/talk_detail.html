@@ -190,7 +190,7 @@
                 <div class="content_other">${content}</div>
               </div></div>
               <div class="del_list">
-                <button type="button" class="delbtn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_tcomment_modal_${comment_id}">
+                <button type="button" id="com_del" class="delbtn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_tcomment_modal_${comment_id}">
                   삭제
                 </button>
               </div>
@@ -205,7 +205,7 @@
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
                       <form action="/community/delete-tcomment/${comment_id}/" method="post" class="comment_detail">
                         {% csrf_token %}
-                        <input type="submit" , value="삭제" , class="btn btn-primary" />
+                        <input type="submit" , value="삭제" , class="btn btn-primary" id="com_del"/>
                       </form>
                     </div>
                   </div>
@@ -220,7 +220,7 @@
                 <div class="content_other">${content}</div>
               </div></div>
               <div class="del_list">
-                <button type="button" class="delbtn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_tcomment_modal_${comment_id}">
+                <button type="button" id="com_del" class="delbtn btn-primary" data-bs-toggle="modal" data-bs-target="#delete_tcomment_modal_${comment_id}">
                   삭제
                 </button>
               </div>
