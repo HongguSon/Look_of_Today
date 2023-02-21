@@ -24,4 +24,15 @@
     #com_detail_btn {padding-left: 0.188rem; padding-bottom: 0.563rem;}
 
     .delbtn{color: black !important; text-decoration: none !important;}
+
+    #com_del{width: 3rem;}
+
+    .comment_other{width: 75%;}
+}
+
+
+@media screen and (min-width: 768px) and (max-width:1024px){
+    #com_del{width: 3rem;}
+
+    .comment_other{width: 75%;}
 }
